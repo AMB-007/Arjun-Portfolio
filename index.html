@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Arjun M Babu | Full-Stack Developer</title>
+    <meta name="title" content="Arjun M Babu | Full-Stack Developer" />
+    <meta
+      name="description"
+      content="Professional portfolio of Arjun M Babu, showcasing software development projects, technical skills, education and current learning in Data Science, Machine Learning and AI."
+    />
+    <meta name="author" content="Arjun M Babu" />
+    <meta
+      name="keywords"
+      content="Arjun M Babu, Full Stack Developer, Python, React, Flask, Machine Learning, Data Science, MySQL, Toc H Institute, Software Engineer"
+    />
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://github.com/AMB-007" />
+    <meta property="og:title" content="Arjun M Babu | Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Professional portfolio of Arjun M Babu, showcasing software development projects, technical skills, education and current learning in Data Science, Machine Learning and AI."
+    />
+    <meta property="og:site_name" content="Arjun M Babu Developer Portfolio" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://github.com/AMB-007" />
+    <meta property="twitter:title" content="Arjun M Babu | Full-Stack Developer" />
+    <meta
+      property="twitter:description"
+      content="Professional portfolio of Arjun M Babu, showcasing software development projects, technical skills, education and current learning in Data Science, Machine Learning and AI."
+    />
+
+    <!-- Favicon & Brand Colors -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#FFFAF3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#091540" media="(prefers-color-scheme: dark)" />
+
+    <!-- Typography (Google Fonts) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Anti-Flash Theme Script -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var theme = saved || "system";
+          var effective = theme;
+          if (theme === "system") {
+            effective = prefersDark ? "dark" : "light";
+          }
+          document.documentElement.setAttribute("data-theme", effective);
+          if (effective === "dark") {
+            document.documentElement.classList.add("dark");
+            document.documentElement.classList.remove("light");
+          } else {
+            document.documentElement.classList.add("light");
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "light");
+        }
+      })();
+    </script>
+  </head>
+  <body class="font-sans antialiased min-h-screen selection:bg-[#1B2CC1]/20 selection:text-[#1B2CC1] dark:selection:bg-[#7692FF]/25 dark:selection:text-[#ABD2FA]">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
