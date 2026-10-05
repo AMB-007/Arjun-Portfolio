@@ -3,8 +3,17 @@ import { Camera } from "lucide-react";
 import { cn } from "@/utils/helpers";
 
 export function ProfilePortrait({ className = "" }) {
+  const [imgSrc, setImgSrc] = useState("/images/Profile.jpeg");
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleImageError = () => {
+    if (imgSrc !== "/images/arjun-profile.jpg") {
+      setImgSrc("/images/arjun-profile.jpg");
+    } else {
+      setImageError(true);
+    }
+  };
 
   return (
     <div
@@ -20,9 +29,9 @@ export function ProfilePortrait({ className = "" }) {
       {!imageError ? (
         <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#FBF8EF] dark:bg-[#101A3D]">
           <img
-            src="/images/arjun-profile.jpg"
+            src={imgSrc}
             alt="Arjun M Babu, Full-Stack Developer"
-            onError={() => setImageError(true)}
+            onError={handleImageError}
             className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
         </div>
