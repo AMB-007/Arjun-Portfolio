@@ -2,18 +2,29 @@ import React, { useState } from "react";
 import { Camera } from "lucide-react";
 import { cn } from "@/utils/helpers";
 
+const CANDIDATE_IMAGES = [
+  "/images/arjun-profile.jpeg",
+  "/images/arjun-profile.jpg",
+  "/images/Profile.jpeg",
+  "/images/Profile.jpg",
+  "/images/profile.jpeg",
+  "/images/profile.jpg",
+];
+
 export function ProfilePortrait({ className = "" }) {
-  const [imgSrc, setImgSrc] = useState("/images/Profile.jpeg");
+  const [candidateIndex, setCandidateIndex] = useState(0);
   const [imageError, setImageError] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
   const handleImageError = () => {
-    if (imgSrc !== "/images/arjun-profile.jpg") {
-      setImgSrc("/images/arjun-profile.jpg");
+    if (candidateIndex < CANDIDATE_IMAGES.length - 1) {
+      setCandidateIndex((prev) => prev + 1);
     } else {
       setImageError(true);
     }
   };
+
+  const currentSrc = CANDIDATE_IMAGES[candidateIndex];
 
   return (
     <div
@@ -29,7 +40,7 @@ export function ProfilePortrait({ className = "" }) {
       {!imageError ? (
         <div className="relative w-full aspect-[4/5] overflow-hidden bg-[#FBF8EF] dark:bg-[#101A3D]">
           <img
-            src={imgSrc}
+            src={currentSrc}
             alt="Arjun M Babu, Full-Stack Developer"
             onError={handleImageError}
             className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.02]"
