@@ -18,9 +18,9 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-transparent z-50 pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-50 pointer-events-none">
       <div
-        className="h-full bg-[#1B2CC1] dark:bg-[#7692FF] transition-all duration-100 ease-out"
+        className="h-full bg-black dark:bg-white transition-all duration-100 ease-out"
         style={{ width: `${scrollProgress}%` }}
       />
     </div>

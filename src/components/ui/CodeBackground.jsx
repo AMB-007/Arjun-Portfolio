@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-const CODE_SYMBOLS = [
-  { text: "{ }", x: "6%", y: "14%", size: "text-base", color: "text-[#1B2CC1]/10 dark:text-[#7692FF]/10" },
-  { text: "< />", x: "92%", y: "18%", size: "text-sm", color: "text-[#7692FF]/10 dark:text-[#ABD2FA]/10" },
-  { text: "() =>", x: "8%", y: "45%", size: "text-xs", color: "text-[#1B2CC1]/10 dark:text-[#7692FF]/10" },
-  { text: "[ ... ]", x: "90%", y: "52%", size: "text-xs", color: "text-[#78B3CE]/10 dark:text-[#78B3CE]/10" },
-  { text: "const", x: "4%", y: "75%", size: "text-xs", color: "text-[#1B2CC1]/10 dark:text-[#7692FF]/10" },
-  { text: "async / await", x: "86%", y: "78%", size: "text-xs", color: "text-[#7692FF]/10 dark:text-[#ABD2FA]/10" },
-  { text: "import React", x: "12%", y: "90%", size: "text-xs", color: "text-[#1B2CC1]/10 dark:text-[#7692FF]/10" },
-  { text: "SELECT * FROM", x: "82%", y: "35%", size: "text-xs", color: "text-[#84B179]/10 dark:text-[#A2CB8B]/10" },
-  { text: "Python", x: "18%", y: "28%", size: "text-xs", color: "text-[#1B2CC1]/10 dark:text-[#7692FF]/10" },
-  { text: "model.predict()", x: "84%", y: "65%", size: "text-xs", color: "text-[#84B179]/10 dark:text-[#A2CB8B]/10" },
+const DS_SYMBOLS = [
+  { text: "y = f(X) + ε", x: "6%", y: "14%" },
+  { text: "df.describe()", x: "90%", y: "18%" },
+  { text: "XGBClassifier()", x: "8%", y: "45%" },
+  { text: "precision / recall", x: "88%", y: "52%" },
+  { text: "SELECT * FROM features", x: "5%", y: "75%" },
+  { text: "CNN.forward()", x: "86%", y: "78%" },
+  { text: "import numpy as np", x: "12%", y: "90%" },
+  { text: "SHAP.TreeExplainer", x: "82%", y: "35%" },
+  { text: "pd.DataFrame()", x: "18%", y: "30%" },
+  { text: "confusion_matrix(y_true, y_pred)", x: "80%", y: "65%" },
 ];
 
 export function CodeBackground() {
@@ -24,8 +24,8 @@ export function CodeBackground() {
     }
 
     const handleMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 8;
-      const y = (e.clientY / window.innerHeight - 0.5) * 8;
+      const x = (e.clientX / window.innerWidth - 0.5) * 6;
+      const y = (e.clientY / window.innerHeight - 0.5) * 6;
       setMousePos({ x, y });
     };
 
@@ -38,10 +38,14 @@ export function CodeBackground() {
       aria-hidden="true"
       className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none font-mono"
     >
-      {CODE_SYMBOLS.map((item, idx) => (
+      {/* Subtle Dot Matrix Grid in Background */}
+      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] [background-image:radial-gradient(#000000_1px,transparent_1px)] dark:[background-image:radial-gradient(#ffffff_1px,transparent_1px)] [background-size:24px_24px]" />
+
+      {/* Subtle Data Science Math & Code Tokens */}
+      {DS_SYMBOLS.map((item, idx) => (
         <span
           key={idx}
-          className={`absolute ${item.size} font-semibold ${item.color} transition-transform duration-700 ease-out`}
+          className="absolute text-xs font-semibold text-black/[0.04] dark:text-white/[0.05] transition-transform duration-700 ease-out"
           style={{
             left: item.x,
             top: item.y,

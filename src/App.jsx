@@ -11,7 +11,7 @@ import { About } from "@/components/sections/About";
 import { FocusAreas } from "@/components/sections/FocusAreas";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
-import { LearningJourney } from "@/components/sections/LearningJourney";
+import { DataShowcase } from "@/components/sections/DataShowcase";
 import { Education } from "@/components/sections/Education";
 import { Certifications } from "@/components/sections/Certifications";
 import { GitHubSection } from "@/components/sections/GitHubSection";
@@ -24,7 +24,7 @@ const SECTION_IDS = [
   "focus",
   "skills",
   "projects",
-  "learning-journey",
+  "analytics",
   "education",
   "certifications",
   "github",
@@ -36,8 +36,8 @@ export function App() {
 
   return (
     <ThemeProvider>
-      <div className="relative min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors selection:bg-sky-500/20 selection:text-sky-600 dark:selection:text-sky-300">
-        {/* Subtle Background Syntax Particles */}
+      <div className="relative min-h-screen flex flex-col bg-white dark:bg-black text-black dark:text-white transition-colors selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+        {/* Subtle Background Monochrome Dot Grid & Syntax */}
         <CodeBackground />
 
         {/* Scroll Progress Bar */}
@@ -56,7 +56,7 @@ export function App() {
           <FocusAreas />
           <Skills />
           <Projects />
-          <LearningJourney />
+          <DataShowcase />
           <Education />
           <Certifications />
           <GitHubSection />

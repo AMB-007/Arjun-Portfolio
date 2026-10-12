@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Mail, Phone, Copy, Check, Send, CheckCircle2, AlertCircle, ChevronDown, ChevronUp, ArrowRight, ExternalLink } from "lucide-react";
+import { Mail, Copy, Check, Send, ExternalLink, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { Button } from "@/components/ui/Button";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
-import { copyToClipboard } from "@/utils/helpers";
+import { copyToClipboard, cn } from "@/utils/helpers";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -15,9 +15,8 @@ export function Contact() {
   });
 
   const [errors, setErrors] = useState({});
-  const [status, setStatus] = useState("idle");
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [showDirectDetails, setShowDirectDetails] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCopyEmail = () => {
     copyToClipboard(PERSONAL_INFO.email);
@@ -43,253 +42,233 @@ export function Contact() {
     e.preventDefault();
     if (!validate()) return;
 
-    setStatus("submitting");
+    setIsSubmitting(true);
+    const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
+      `[Data Science Portfolio Inquiry] ${formData.subject}`
+    )}&body=${encodeURIComponent(
+      `Hi Arjun,\n\n${formData.message}\n\nFrom: ${formData.name} (${formData.email})`
+    )}`;
 
+    window.location.href = mailtoUrl;
     setTimeout(() => {
-      const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
-        `[Portfolio Inquiry] ${formData.subject}`
-      )}&body=${encodeURIComponent(
-        `Hi Arjun,\n\n${formData.message}\n\nFrom: ${formData.name} (${formData.email})`
-      )}`;
-
-      window.location.href = mailtoUrl;
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 500);
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   return (
-    <section id="contact" className="py-20 md:py-32 border-t border-[#C9E6F0] dark:border-[#404258] bg-[#FBF8EF]/50 dark:bg-[#101A3D]/40">
+    <section id="contact" className="py-20 md:py-32 bg-white dark:bg-[#000000]">
       <div className="editorial-container">
         <SectionHeader
           number="09"
           tag="GET IN TOUCH"
-          title="Let's Connect"
-          description="Open to software development opportunities, technical collaborations and projects where I can build practical solutions."
+          title="Connect"
+          description="Interested in Data Science, Machine Learning, and data-driven problem-solving. Feel free to connect."
         />
 
         {/* Large Editorial Headline & Status */}
         <div className="mb-14 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#E8F5BD]/60 text-[#15803D] dark:bg-[#84B179]/20 dark:text-[#A2CB8B] border border-[#C7EABB] dark:border-[#50577A]">
-              <span className="w-2 h-2 rounded-full bg-[#84B179] dark:bg-[#A2CB8B] animate-pulse" />
-              <span>OPEN TO SOFTWARE DEVELOPMENT OPPORTUNITIES</span>
+            <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono font-bold bg-[#F5F5F5] dark:bg-[#141414] text-black dark:text-white border border-[#D4D4D4] dark:border-[#262626]">
+              <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
+              <span>OPEN TO DATA SCIENCE &amp; MACHINE LEARNING OPPORTUNITIES</span>
             </span>
           </div>
 
-          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#091540] dark:text-[#FFFAF3] font-sans uppercase">
-            LET&apos;S BUILD SOMETHING USEFUL.
+          <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-black dark:text-white font-sans uppercase">
+            LET&apos;S WORK WITH DATA.
           </h3>
-          <p className="text-sm sm:text-base text-[#404258] dark:text-[#C9E6F0] max-w-2xl font-sans">
-            Open to software development opportunities, technical collaborations and practical projects.
+          <p className="text-sm sm:text-base text-[#737373] dark:text-[#A3A3A3] max-w-2xl font-sans">
+            Interested in Data Science, Machine Learning, and data-driven problem-solving. Feel free to connect.
           </p>
-
-          {/* Network Data Sequence */}
-          <div className="pt-2 flex flex-wrap items-center gap-2 text-xs font-mono">
-            <span className="px-2.5 py-1 rounded bg-[#ABD2FA]/30 text-[#1B2CC1] dark:bg-[#7692FF]/20 dark:text-[#ABD2FA] border border-[#C9E6F0] dark:border-[#50577A] font-bold">
-              CODE
-            </span>
-            <span className="text-[#6B728E] dark:text-[#ABD2FA]">→</span>
-            <span className="px-2.5 py-1 rounded bg-[#C9E6F0]/40 text-[#091540] dark:bg-[#1A2752] dark:text-[#C9E6F0] border border-[#78B3CE] dark:border-[#50577A] font-bold">
-              BUILD
-            </span>
-            <span className="text-[#6B728E] dark:text-[#ABD2FA]">→</span>
-            <span className="px-2.5 py-1 rounded bg-[#FFE5BF]/70 text-[#C2410C] dark:bg-[#F96E2A]/20 dark:text-[#F96E2A] border border-[#FFE5BF] dark:border-[#50577A] font-bold">
-              LEARN
-            </span>
-            <span className="text-[#6B728E] dark:text-[#ABD2FA]">→</span>
-            <span className="px-2.5 py-1 rounded bg-[#E8F5BD]/60 text-[#15803D] dark:bg-[#84B179]/20 dark:text-[#A2CB8B] border border-[#C7EABB] dark:border-[#50577A] font-bold">
-              DEPLOY
-            </span>
-          </div>
         </div>
 
-        {/* 2-Column Contact Grid */}
+        {/* 2-Column Editorial Contact Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Direct Channels */}
+          {/* LEFT: Verified Direct Contact Channels */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-3 font-sans">
-              <div className="text-[11px] font-mono font-semibold uppercase text-[#6B728E] dark:text-[#ABD2FA]">
-                // Direct Communication:
-              </div>
+            <div className="space-y-4">
+              <span className="text-xs font-mono font-bold text-black dark:text-white uppercase tracking-wider block pb-2 border-b border-[#D4D4D4] dark:border-[#171717]">
+                // VERIFIED CONTACT CHANNELS
+              </span>
 
-              {/* Email Direct Row */}
-              <div className="p-4 rounded-xl bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] space-y-3 shadow-2xs">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <Mail className="w-4 h-4 text-[#1B2CC1] dark:text-[#7692FF]" />
-                    <span className="text-xs font-bold text-[#091540] dark:text-[#FFFAF3] font-mono">
-                      {PERSONAL_INFO.email}
-                    </span>
-                  </div>
-
+              {/* Direct Email Card */}
+              <div className="p-6 bg-[#F5F5F5] dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717] space-y-3">
+                <div className="flex items-center justify-between text-xs font-mono text-[#737373]">
+                  <span className="uppercase font-bold">Professional Email</span>
                   <button
                     onClick={handleCopyEmail}
-                    className="text-xs font-mono text-[#1B2CC1] dark:text-[#7692FF] hover:underline cursor-pointer flex items-center gap-1"
+                    className="flex items-center gap-1 hover:text-black dark:hover:text-white transition-colors cursor-pointer"
                   >
-                    {copiedEmail ? <Check className="w-3 h-3 text-[#84B179] dark:text-[#A2CB8B]" /> : <Copy className="w-3 h-3" />}
-                    <span>{copiedEmail ? "Copied" : "Copy"}</span>
+                    {copiedEmail ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" />
+                        <span>COPIED</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>COPY</span>
+                      </>
+                    )}
                   </button>
                 </div>
-
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold bg-[#1B2CC1] hover:bg-[#7692FF] text-white dark:bg-[#7692FF] dark:hover:bg-[#ABD2FA] dark:text-[#091540] transition-colors font-mono shadow-2xs"
+                  className="text-base sm:text-lg font-bold font-mono text-black dark:text-white hover:underline block break-all"
                 >
-                  <Send className="w-3.5 h-3.5" />
-                  <span>Open Email Composer</span>
+                  {PERSONAL_INFO.email}
                 </a>
               </div>
 
-              {/* Professional Links */}
-              <div className="space-y-2 pt-2">
+              {/* Social Channels */}
+              <div className="grid grid-cols-2 gap-3 font-mono text-xs">
+                {/* LinkedIn */}
                 <a
                   href={PERSONAL_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] hover:border-[#1B2CC1] dark:hover:border-[#7692FF] transition-colors group"
+                  className="p-4 bg-[#F5F5F5] dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717] hover:border-black dark:hover:border-white transition-all flex flex-col justify-between group"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <LinkedinIcon className="w-4 h-4 text-[#1B2CC1] dark:text-[#7692FF]" />
-                    <span className="text-xs font-bold text-[#091540] dark:text-[#FFFAF3]">
-                      LinkedIn Profile
-                    </span>
+                  <div className="flex items-center justify-between">
+                    <LinkedinIcon className="w-4 h-4 text-black dark:text-white" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#737373] group-hover:text-black dark:group-hover:text-white" />
                   </div>
-                  <span className="text-xs font-mono text-[#1B2CC1] dark:text-[#7692FF]">↗</span>
+                  <div className="pt-4">
+                    <span className="font-bold text-black dark:text-white block uppercase">LinkedIn</span>
+                    <span className="text-[10px] text-[#737373] block truncate">Arjun M Babu</span>
+                  </div>
                 </a>
 
+                {/* GitHub */}
                 <a
                   href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-lg bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] hover:border-[#1B2CC1] dark:hover:border-[#7692FF] transition-colors group"
+                  className="p-4 bg-[#F5F5F5] dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717] hover:border-black dark:hover:border-white transition-all flex flex-col justify-between group"
                 >
-                  <div className="flex items-center gap-2.5">
-                    <GithubIcon className="w-4 h-4 text-[#091540] dark:text-[#FFFAF3]" />
-                    <span className="text-xs font-bold text-[#091540] dark:text-[#FFFAF3]">
-                      GitHub Profile
-                    </span>
+                  <div className="flex items-center justify-between">
+                    <GithubIcon className="w-4 h-4 text-black dark:text-white" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#737373] group-hover:text-black dark:group-hover:text-white" />
                   </div>
-                  <span className="text-xs font-mono text-[#1B2CC1] dark:text-[#7692FF]">↗</span>
+                  <div className="pt-4">
+                    <span className="font-bold text-black dark:text-white block uppercase">GitHub</span>
+                    <span className="text-[10px] text-[#737373] block">@AMB-007</span>
+                  </div>
                 </a>
               </div>
+            </div>
 
-              {/* Expandable Phone Details */}
-              <div className="pt-2">
-                <button
-                  onClick={() => setShowDirectDetails(!showDirectDetails)}
-                  className="text-xs font-mono text-[#6B728E] hover:text-[#091540] dark:text-[#ABD2FA] dark:hover:text-white flex items-center justify-between w-full pt-2 border-t border-[#C9E6F0] dark:border-[#404258] cursor-pointer"
-                >
-                  <span>{showDirectDetails ? "Hide Phone & Location" : "View Phone & Location Details"}</span>
-                  {showDirectDetails ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-                </button>
-
-                {showDirectDetails && (
-                  <div className="mt-3 p-3 rounded bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] space-y-1.5 text-xs font-mono">
-                    <div className="flex items-center gap-2 text-[#091540] dark:text-[#FFFAF3]">
-                      <Phone className="w-3.5 h-3.5 text-[#1B2CC1] dark:text-[#7692FF]" />
-                      <span>{PERSONAL_INFO.phone}</span>
-                    </div>
-                    <div className="text-[11px] text-[#6B728E] dark:text-[#ABD2FA]">
-                      Location: {PERSONAL_INFO.location}
-                    </div>
-                  </div>
-                )}
-              </div>
+            {/* Academic Footnote */}
+            <div className="p-4 bg-[#F5F5F5] dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717] text-xs font-mono text-[#737373] space-y-1">
+              <span className="font-bold text-black dark:text-white uppercase block">Academic Affiliation:</span>
+              <p>Toc H Institute of Science and Technology • B.Tech CSE (2022–2026)</p>
+              <p className="text-[11px] text-[#737373]">Location: {PERSONAL_INFO.location}</p>
             </div>
           </div>
 
-          {/* Contact Message Form */}
+          {/* RIGHT: Direct Message Composition Form */}
           <div className="lg:col-span-7">
-            <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] shadow-2xs">
-              <h4 className="text-base font-bold text-[#091540] dark:text-[#FFFAF3] mb-1 font-sans">
-                Send a Message
-              </h4>
-              <p className="text-xs text-[#6B728E] dark:text-[#ABD2FA] mb-6 font-sans">
-                Fill in the details below to initiate a direct conversation.
-              </p>
+            <form
+              onSubmit={handleSubmit}
+              noValidate
+              className="p-6 sm:p-8 bg-white dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717] space-y-5"
+            >
+              <div className="space-y-1 pb-2 border-b border-[#D4D4D4] dark:border-[#171717]">
+                <h4 className="font-mono text-xs font-bold uppercase text-black dark:text-white tracking-wider">
+                  // COMPOSE DIRECT MESSAGE
+                </h4>
+                <p className="text-xs text-[#737373] font-sans">
+                  Submitting will open your default email client with your message pre-filled.
+                </p>
+              </div>
 
-              {status === "success" && (
-                <div className="mb-6 p-4 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-800 dark:text-emerald-400 shrink-0 mt-0.5" />
-                  <div className="text-xs text-emerald-950 dark:text-emerald-300 font-sans">
-                    <p className="font-bold">Message prepared!</p>
-                    <p className="mt-0.5">Your email client has been opened with your prefilled message.</p>
-                  </div>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-4 font-sans text-xs">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block font-medium text-[#091540] dark:text-[#FFFAF3] mb-1">
-                      Your Name <span className="text-rose-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="Alex Johnson"
-                      className="w-full px-3 py-2 rounded-lg bg-[#FBF8EF] dark:bg-[#101A3D] border border-[#C9E6F0] dark:border-[#404258] text-[#091540] dark:text-[#FFFAF3] focus:outline-none focus:ring-1 focus:ring-[#1B2CC1] dark:focus:ring-[#7692FF]"
-                    />
-                    {errors.name && <p className="mt-1 text-rose-500">{errors.name}</p>}
-                  </div>
-
-                  <div>
-                    <label className="block font-medium text-[#091540] dark:text-[#FFFAF3] mb-1">
-                      Your Email <span className="text-rose-500">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="alex@company.com"
-                      className="w-full px-3 py-2 rounded-lg bg-[#FBF8EF] dark:bg-[#101A3D] border border-[#C9E6F0] dark:border-[#404258] text-[#091540] dark:text-[#FFFAF3] focus:outline-none focus:ring-1 focus:ring-[#1B2CC1] dark:focus:ring-[#7692FF]"
-                    />
-                    {errors.email && <p className="mt-1 text-rose-500">{errors.email}</p>}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block font-medium text-[#091540] dark:text-[#FFFAF3] mb-1">
-                    Subject <span className="text-rose-500">*</span>
+              {/* Name & Email Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1 font-mono text-xs">
+                  <label htmlFor="contact-name" className="font-bold text-black dark:text-white uppercase">
+                    Your Name *
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    placeholder="Full-Stack / AI Opportunity"
-                    className="w-full px-3 py-2 rounded-lg bg-[#FBF8EF] dark:bg-[#101A3D] border border-[#C9E6F0] dark:border-[#404258] text-[#091540] dark:text-[#FFFAF3] focus:outline-none focus:ring-1 focus:ring-[#1B2CC1] dark:focus:ring-[#7692FF]"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="Jane Doe"
+                    className={cn(
+                      "w-full px-3 py-2.5 bg-[#F5F5F5] dark:bg-[#141414] border text-black dark:text-white outline-none transition-colors",
+                      errors.name ? "border-black dark:border-white font-bold" : "border-[#D4D4D4] dark:border-[#262626] focus:border-black dark:focus:border-white"
+                    )}
                   />
-                  {errors.subject && <p className="mt-1 text-rose-500">{errors.subject}</p>}
+                  {errors.name && <p className="text-[10px] text-black dark:text-white font-bold">{errors.name}</p>}
                 </div>
 
-                <div>
-                  <label className="block font-medium text-[#091540] dark:text-[#FFFAF3] mb-1">
-                    Message <span className="text-rose-500">*</span>
+                <div className="space-y-1 font-mono text-xs">
+                  <label htmlFor="contact-email" className="font-bold text-black dark:text-white uppercase">
+                    Your Email *
                   </label>
-                  <textarea
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Hi Arjun, I reviewed your projects and would like to discuss..."
-                    className="w-full px-3 py-2 rounded-lg bg-[#FBF8EF] dark:bg-[#101A3D] border border-[#C9E6F0] dark:border-[#404258] text-[#091540] dark:text-[#FFFAF3] focus:outline-none focus:ring-1 focus:ring-[#1B2CC1] dark:focus:ring-[#7692FF] resize-y"
+                  <input
+                    id="contact-email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="jane@example.com"
+                    className={cn(
+                      "w-full px-3 py-2.5 bg-[#F5F5F5] dark:bg-[#141414] border text-black dark:text-white outline-none transition-colors",
+                      errors.email ? "border-black dark:border-white font-bold" : "border-[#D4D4D4] dark:border-[#262626] focus:border-black dark:focus:border-white"
+                    )}
                   />
-                  {errors.message && <p className="mt-1 text-rose-500">{errors.message}</p>}
+                  {errors.email && <p className="text-[10px] text-black dark:text-white font-bold">{errors.email}</p>}
                 </div>
+              </div>
 
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="md"
-                  disabled={status === "submitting"}
-                  icon={<Send className="w-3.5 h-3.5" />}
-                  className="font-mono"
-                >
-                  {status === "submitting" ? "Processing..." : "Send Message"}
-                </Button>
-              </form>
-            </div>
+              {/* Subject */}
+              <div className="space-y-1 font-mono text-xs">
+                <label htmlFor="contact-subject" className="font-bold text-black dark:text-white uppercase">
+                  Subject *
+                </label>
+                <input
+                  id="contact-subject"
+                  type="text"
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                  placeholder="Data Science Opportunity / Collaboration"
+                  className={cn(
+                    "w-full px-3 py-2.5 bg-[#F5F5F5] dark:bg-[#141414] border text-black dark:text-white outline-none transition-colors",
+                    errors.subject ? "border-black dark:border-white font-bold" : "border-[#D4D4D4] dark:border-[#262626] focus:border-black dark:focus:border-white"
+                  )}
+                />
+                {errors.subject && <p className="text-[10px] text-black dark:text-white font-bold">{errors.subject}</p>}
+              </div>
+
+              {/* Message */}
+              <div className="space-y-1 font-mono text-xs">
+                <label htmlFor="contact-message" className="font-bold text-black dark:text-white uppercase">
+                  Message *
+                </label>
+                <textarea
+                  id="contact-message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="Share details regarding your inquiry, project, or role..."
+                  className={cn(
+                    "w-full px-3 py-2.5 bg-[#F5F5F5] dark:bg-[#141414] border text-black dark:text-white outline-none transition-colors font-sans resize-none",
+                    errors.message ? "border-black dark:border-white font-bold" : "border-[#D4D4D4] dark:border-[#262626] focus:border-black dark:focus:border-white"
+                  )}
+                />
+                {errors.message && <p className="text-[10px] text-black dark:text-white font-bold">{errors.message}</p>}
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-3 bg-black text-white hover:bg-[#171717] dark:bg-white dark:text-black dark:hover:bg-[#E5E5E5] border border-black dark:border-white font-mono text-xs font-bold uppercase transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+              >
+                <Send className="w-3.5 h-3.5" />
+                <span>Send Message via Email Client</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>

@@ -1,57 +1,61 @@
 import React from "react";
-import { CheckCircle2 } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export function About() {
   const highlights = [
-    "Computer Science & Engineering student at Toc H Institute of Science and Technology (2022–2026).",
-    "Hands-on experience building full-stack web applications, REST APIs, and database architectures with React, Node.js, Express, Flask, and MySQL.",
-    "Actively pursuing a 6-month intensive training program at Luminar Technolab covering Python, SQL, Data Science, Machine Learning, Deep Learning, AWS, and Power BI.",
-    "Committed to rigorous engineering practices: normalized database schemas, modular service layers, explainable AI (SHAP), and accessible interfaces.",
+    "Computer Science Engineering student at Toc H Institute of Science and Technology (2022–2026).",
+    "Focus on Python and SQL for data manipulation, relational modeling, and automated pipeline workflows.",
+    "Practical experience with exploratory data analysis (EDA), data cleaning, statistical analysis, and feature engineering.",
+    "Implementation of machine learning models (XGBoost, CatBoost, Scikit-learn), model evaluation metrics, and deep learning CNNs.",
+    "Committed to verifiable, reproducible projects with transparent explainability (SHAP) and structured database schemas.",
   ];
 
   return (
-    <section id="about" className="py-20 md:py-28 border-t border-[#C9E6F0] dark:border-[#404258]">
+    <section id="about" className="py-20 md:py-28 border-b border-[#D4D4D4] dark:border-[#171717]">
       <div className="editorial-container">
         <SectionHeader
           number="01"
-          tag="BACKGROUND & PHILOSOPHY"
+          tag="BACKGROUND &amp; FOCUS"
           title="About Me"
-          description="A practical software developer with strong web engineering fundamentals, expanding actively into Data Science, Machine Learning, and AI."
+          description="Computer Science Engineering student focused on Python, SQL, Data Science, Machine Learning, and data-driven problem-solving."
         />
 
-        {/* 3-Column Editorial Layout */}
+        {/* 3-Column Editorial Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Column 1: Editorial Index & Title */}
+          {/* Column 1: Index Label */}
           <div className="lg:col-span-3 space-y-2">
-            <span className="text-xs font-mono font-bold text-[#1B2CC1] dark:text-[#7692FF] uppercase tracking-wider block">
-              // ENGINEERING PROFILE
+            <span className="text-xs font-mono font-bold text-black dark:text-white uppercase tracking-wider block">
+              // ACADEMIC PROFILE
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-[#091540] dark:text-[#FFFAF3] font-sans leading-tight">
-              Software Foundations & Active Growth
+            <h3 className="text-xl sm:text-2xl font-extrabold text-black dark:text-white font-sans leading-tight uppercase">
+              Data-Driven Engineering
             </h3>
-            <p className="text-xs text-[#6B728E] dark:text-[#ABD2FA] font-mono pt-2">
+            <p className="text-xs text-[#737373] font-mono pt-2">
               Toc H Institute of Science and Technology (2022–2026)
             </p>
           </div>
 
-          {/* Column 2: Narrative Story */}
-          <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-[#404258] dark:text-[#C9E6F0] leading-relaxed font-sans">
+          {/* Column 2: Structured Professional Narrative (2-3 Paragraphs) */}
+          <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-[#171717] dark:text-[#E5E5E5] leading-relaxed font-sans">
             <p>
-              I am an emerging <strong>Full-Stack Developer</strong> focusing on building practical software systems with clean code, structured APIs, and robust data persistence.
+              I am a <strong>Computer Science Engineering student</strong> at Toc H Institute of Science and Technology (2022–2026), dedicated to Data Science, Machine Learning, and analytical computing. My engineering foundation combines algorithmic problem-solving with relational database design, statistical methods, and applied machine learning pipelines.
             </p>
             <p>
-              Across my GitHub repositories, I have designed and implemented full-stack systems spanning multi-model machine learning ensembles with SHAP explainability (<em>Personalized Career Recommendation System</em>), threat detection dashboards in Flask (<em>WEBSHIELD</em>), mathematical color theory tools (<em>ChRoMALaB</em>), and interactive 3D WebGL visualizations (<em>WeatherVista</em>).
+              My practical work focuses on <strong>Python, SQL, and Machine Learning</strong>. Across demonstrable repositories, I have developed multi-model ensembles with SHAP explainability (<em>Personalized Career Recommendation System</em>), image classification pipelines using Convolutional Neural Networks (<em>Rock Identification Studio</em>), and automated threat classification systems (<em>WEBSHIELD</em>). Each project emphasizes rigorous feature engineering, data cleaning, model evaluation, and normalized persistence.
             </p>
             <p>
-              To expand beyond foundational web development, I am currently enrolled in a structured 6-month professional training program at <strong>Luminar Technolab</strong>, mastering Python for Data Science, Exploratory Data Analysis, Supervised/Unsupervised Machine Learning, Deep Learning (CNN, YOLO, NLP), AWS Cloud, and Business Intelligence in Power BI.
+              Through comprehensive coursework and professional training in Data Science, Machine Learning, Deep Learning, and Microsoft Power BI at Luminar Technolab, I actively explore exploratory data analysis (EDA), statistical inference, business intelligence dashboards, and predictive modeling for practical, real-world problems.
             </p>
 
-            <div className="space-y-2.5 pt-2 border-t border-[#C9E6F0]/60 dark:border-[#404258]/60">
+            {/* Core Competencies Checklist */}
+            <div className="space-y-2.5 pt-4 border-t border-[#D4D4D4] dark:border-[#171717]">
               {highlights.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-[#091540] dark:text-[#FFFAF3]">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#1B2CC1] dark:text-[#7692FF] shrink-0 mt-0.5" />
+                <div key={idx} className="flex items-start gap-2.5 text-xs text-black dark:text-white">
+                  <span className="w-4 h-4 rounded-none bg-black text-white dark:bg-white dark:text-black flex items-center justify-center shrink-0 mt-0.5 font-bold">
+                    <Check className="w-2.5 h-2.5 stroke-[3]" />
+                  </span>
                   <span>{item}</span>
                 </div>
               ))}
@@ -59,39 +63,39 @@ export function About() {
           </div>
 
           {/* Column 3: Compact Editorial Facts */}
-          <div className="lg:col-span-3 space-y-4 text-xs font-mono border-t lg:border-t-0 lg:border-l border-[#C9E6F0] dark:border-[#404258] pt-6 lg:pt-0 lg:pl-6">
-            <div className="pb-3 border-b border-[#C9E6F0]/60 dark:border-[#404258]/60">
-              <span className="text-[#6B728E] dark:text-[#ABD2FA] block text-[10px] uppercase">Location</span>
-              <span className="font-bold text-[#091540] dark:text-[#FFFAF3] mt-0.5 block">
+          <div className="lg:col-span-3 space-y-4 text-xs font-mono border-t lg:border-t-0 lg:border-l border-[#D4D4D4] dark:border-[#171717] pt-6 lg:pt-0 lg:pl-6">
+            <div className="pb-3 border-b border-[#D4D4D4] dark:border-[#171717]">
+              <span className="text-[#737373] block text-[10px] uppercase tracking-wider">Education</span>
+              <span className="font-bold text-black dark:text-white mt-0.5 block">
+                B.Tech in CSE (2022–2026)
+              </span>
+            </div>
+
+            <div className="pb-3 border-b border-[#D4D4D4] dark:border-[#171717]">
+              <span className="text-[#737373] block text-[10px] uppercase tracking-wider">Primary Focus</span>
+              <span className="font-bold text-black dark:text-white mt-0.5 block">
+                Data Science &amp; Machine Learning
+              </span>
+            </div>
+
+            <div className="pb-3 border-b border-[#D4D4D4] dark:border-[#171717]">
+              <span className="text-[#737373] block text-[10px] uppercase tracking-wider">Core Tooling</span>
+              <span className="font-bold text-black dark:text-white mt-0.5 block">
+                Python • SQL • Scikit-learn • Power BI
+              </span>
+            </div>
+
+            <div className="pb-3 border-b border-[#D4D4D4] dark:border-[#171717]">
+              <span className="text-[#737373] block text-[10px] uppercase tracking-wider">Location</span>
+              <span className="font-bold text-black dark:text-white mt-0.5 block">
                 {PERSONAL_INFO.location}
               </span>
             </div>
 
-            <div className="pb-3 border-b border-[#C9E6F0]/60 dark:border-[#404258]/60">
-              <span className="text-[#6B728E] dark:text-[#ABD2FA] block text-[10px] uppercase">Focus</span>
-              <span className="font-bold text-[#091540] dark:text-[#FFFAF3] mt-0.5 block">
-                Full-Stack Development
-              </span>
-            </div>
-
-            <div className="pb-3 border-b border-[#C9E6F0]/60 dark:border-[#404258]/60">
-              <span className="text-[#6B728E] dark:text-[#ABD2FA] block text-[10px] uppercase">Exploring</span>
-              <span className="font-bold text-[#84B179] dark:text-[#A2CB8B] mt-0.5 block">
-                Data / ML / AI
-              </span>
-            </div>
-
-            <div className="pb-3 border-b border-[#C9E6F0]/60 dark:border-[#404258]/60">
-              <span className="text-[#6B728E] dark:text-[#ABD2FA] block text-[10px] uppercase">Education</span>
-              <span className="font-bold text-[#091540] dark:text-[#FFFAF3] mt-0.5 block">
-                B.Tech CSE (2022–2026)
-              </span>
-            </div>
-
             <div>
-              <span className="text-[#6B728E] dark:text-[#ABD2FA] block text-[10px] uppercase">Current</span>
-              <span className="font-bold text-[#C2410C] dark:text-[#F96E2A] mt-0.5 block">
-                Professional Training (Luminar)
+              <span className="text-[#737373] block text-[10px] uppercase tracking-wider">Status</span>
+              <span className="font-bold text-black dark:text-white mt-0.5 block">
+                Available for DS / ML Roles
               </span>
             </div>
           </div>

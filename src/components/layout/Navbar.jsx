@@ -7,10 +7,10 @@ import { cn } from "@/utils/helpers";
 
 const NAV_ITEMS = [
   { label: "About", href: "#about" },
-  { label: "Capabilities", href: "#focus" },
+  { label: "Focus", href: "#focus" },
   { label: "Skills", href: "#skills" },
-  { label: "Selected Work", href: "#projects" },
-  { label: "Learning Path", href: "#learning-journey" },
+  { label: "Projects", href: "#projects" },
+  { label: "Analytics", href: "#analytics" },
   { label: "Education", href: "#education" },
   { label: "Certifications", href: "#certifications" },
   { label: "Contact", href: "#contact" },
@@ -45,8 +45,8 @@ export function Navbar({ activeSection = "hero" }) {
       className={cn(
         "fixed top-0 left-0 right-0 z-40 transition-all duration-200 border-b",
         isScrolled
-          ? "bg-[#FFFAF3]/95 dark:bg-[#091540]/95 backdrop-blur-sm border-[#C9E6F0] dark:border-[#404258] py-3 shadow-2xs"
-          : "bg-[#FFFAF3]/80 dark:bg-[#091540]/80 backdrop-blur-xs border-[#C9E6F0]/60 dark:border-[#404258]/60 py-4"
+          ? "bg-white/95 dark:bg-black/95 backdrop-blur-sm border-[#D4D4D4] dark:border-[#171717] py-3 shadow-none"
+          : "bg-white/80 dark:bg-black/80 backdrop-blur-xs border-[#D4D4D4]/60 dark:border-[#171717]/60 py-4"
       )}
     >
       <div className="editorial-container flex items-center justify-between">
@@ -54,12 +54,12 @@ export function Navbar({ activeSection = "hero" }) {
         <a
           href="#hero"
           onClick={(e) => handleNavClick(e, "#hero")}
-          className="flex items-center gap-2 group cursor-pointer focus:outline-none select-none"
+          className="flex items-center gap-2.5 group cursor-pointer focus:outline-none select-none"
         >
-          <span className="font-mono font-bold text-xs px-2 py-0.5 rounded bg-[#ABD2FA]/30 text-[#1B2CC1] dark:bg-[#7692FF]/20 dark:text-[#ABD2FA] border border-[#C9E6F0] dark:border-[#50577A]">
+          <span className="font-mono font-bold text-xs px-2 py-0.5 bg-black text-white dark:bg-white dark:text-black border border-black dark:border-white">
             AMB
           </span>
-          <span className="font-bold text-sm tracking-tight text-[#091540] dark:text-[#FFFAF3] group-hover:text-[#1B2CC1] dark:group-hover:text-[#7692FF] transition-colors uppercase font-mono">
+          <span className="font-bold text-sm tracking-tight text-black dark:text-white uppercase font-mono">
             {PERSONAL_INFO.name}
           </span>
         </a>
@@ -75,15 +75,15 @@ export function Navbar({ activeSection = "hero" }) {
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
                 className={cn(
-                  "px-3 py-1.5 rounded transition-colors cursor-pointer relative",
+                  "px-3 py-1.5 transition-colors cursor-pointer relative uppercase",
                   isActive
-                    ? "text-[#1B2CC1] dark:text-[#7692FF] font-bold"
-                    : "text-[#404258] hover:text-[#091540] dark:text-[#C9E6F0] dark:hover:text-white"
+                    ? "text-black dark:text-white font-bold"
+                    : "text-[#737373] hover:text-black dark:hover:text-white"
                 )}
               >
                 {item.label}
                 {isActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#1B2CC1] dark:bg-[#7692FF] rounded-full" />
+                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-black dark:bg-white" />
                 )}
               </a>
             );
@@ -92,39 +92,39 @@ export function Navbar({ activeSection = "hero" }) {
 
         {/* Action Controls */}
         <div className="flex items-center gap-2">
-          {/* GitHub Link */}
+          {/* GitHub Profile */}
           <a
             href={PERSONAL_INFO.github}
             target="_blank"
             rel="noopener noreferrer"
             title="GitHub Profile"
-            className="p-2 rounded text-[#404258] hover:text-[#091540] dark:text-[#C9E6F0] dark:hover:text-white hover:bg-[#FBF8EF] dark:hover:bg-[#141F46] transition-colors"
+            className="p-2 text-[#737373] hover:text-black dark:hover:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] transition-colors"
           >
             <GithubIcon className="w-4 h-4" />
           </a>
 
-          {/* LinkedIn Link */}
+          {/* LinkedIn Profile */}
           <a
             href={PERSONAL_INFO.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             title="LinkedIn Profile"
-            className="p-2 rounded text-[#404258] hover:text-[#1B2CC1] dark:text-[#C9E6F0] dark:hover:text-[#7692FF] hover:bg-[#FBF8EF] dark:hover:bg-[#141F46] transition-colors"
+            className="p-2 text-[#737373] hover:text-black dark:hover:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] transition-colors"
           >
             <LinkedinIcon className="w-4 h-4" />
           </a>
 
-          {/* Direct Theme Toggle with Tooltip */}
+          {/* Monochrome Theme Toggle */}
           <button
             onClick={toggleTheme}
-            aria-label="Switch theme"
-            title="Switch theme"
-            className="p-2 rounded text-[#091540] dark:text-[#FFFAF3] hover:bg-[#FBF8EF] dark:hover:bg-[#141F46] transition-colors cursor-pointer border border-[#C9E6F0] dark:border-[#404258]"
+            aria-label="Toggle theme mode"
+            title="Toggle theme mode"
+            className="p-2 text-black dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] transition-colors cursor-pointer border border-[#D4D4D4] dark:border-[#262626]"
           >
             {resolvedTheme === "dark" ? (
-              <Sun className="w-4 h-4 text-[#ABD2FA] transition-transform duration-200 hover:rotate-45" />
+              <Sun className="w-4 h-4 transition-transform duration-200 hover:rotate-45" />
             ) : (
-              <Moon className="w-4 h-4 text-[#091540] transition-transform duration-200 hover:-rotate-12" />
+              <Moon className="w-4 h-4 transition-transform duration-200 hover:-rotate-12" />
             )}
           </button>
 
@@ -132,26 +132,26 @@ export function Navbar({ activeSection = "hero" }) {
           <a
             href="#contact"
             onClick={(e) => handleNavClick(e, "#contact")}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-semibold bg-[#1B2CC1] hover:bg-[#7692FF] text-white dark:bg-[#7692FF] dark:hover:bg-[#ABD2FA] dark:text-[#091540] transition-colors cursor-pointer font-mono shadow-2xs"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold uppercase bg-black hover:bg-[#171717] text-white dark:bg-white dark:hover:bg-[#E5E5E5] dark:text-black transition-colors cursor-pointer font-mono border border-black dark:border-white"
           >
             <span>Connect</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle Navigation"
-            className="lg:hidden p-2 rounded text-[#091540] dark:text-[#FFFAF3] hover:bg-[#FBF8EF] dark:hover:bg-[#141F46] cursor-pointer"
+            className="lg:hidden p-2 text-black dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] cursor-pointer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#FFFAF3] dark:bg-[#091540] border-b border-[#C9E6F0] dark:border-[#404258] px-6 py-5 shadow-lg space-y-2">
+        <div className="lg:hidden bg-white dark:bg-black border-b border-[#D4D4D4] dark:border-[#171717] px-6 py-5 space-y-2">
           <nav className="flex flex-col space-y-1">
             {NAV_ITEMS.map((item) => {
               const sectionKey = item.href.replace("#", "");
@@ -162,10 +162,10 @@ export function Navbar({ activeSection = "hero" }) {
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className={cn(
-                    "px-3 py-2 rounded text-xs font-mono font-medium transition-colors",
+                    "px-3 py-2 text-xs font-mono font-medium transition-colors uppercase",
                     isActive
-                      ? "bg-[#ABD2FA]/30 dark:bg-[#141F46] text-[#1B2CC1] dark:text-[#7692FF] font-bold"
-                      : "text-[#091540] dark:text-[#FFFAF3] hover:bg-[#FBF8EF] dark:hover:bg-[#141F46]"
+                      ? "bg-black text-white dark:bg-white dark:text-black font-bold"
+                      : "text-black dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717]"
                   )}
                 >
                   {item.label}

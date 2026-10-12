@@ -54,22 +54,22 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Central Solid Dot */}
+      {/* Central Monochrome Dot */}
       <div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#1B2CC1] dark:bg-[#7692FF] pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 ease-out"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-black dark:bg-white pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 transition-transform duration-75 ease-out"
         style={{
           transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
         }}
       />
 
-      {/* Expanding Interactive Ring & Badge */}
+      {/* Expanding Interactive Ring & Label */}
       <div
-        className={`fixed top-0 left-0 rounded-full border border-[#7692FF]/50 pointer-events-none z-50 transition-all duration-200 ease-out flex items-center justify-center -translate-x-1/2 -translate-y-1/2 ${
+        className={`fixed top-0 left-0 rounded-full border border-black/40 dark:border-white/40 pointer-events-none z-50 transition-all duration-200 ease-out flex items-center justify-center -translate-x-1/2 -translate-y-1/2 ${
           isHovered
             ? cursorLabel
-              ? "w-16 h-16 bg-[#1B2CC1]/10 text-[9px] font-mono font-bold text-[#1B2CC1] dark:text-[#ABD2FA]"
-              : "w-8 h-8 bg-[#1B2CC1]/10 scale-125"
-            : "w-5 h-5 scale-100 opacity-60"
+              ? "w-16 h-16 bg-black/5 dark:bg-white/10 text-[9px] font-mono font-bold text-black dark:text-white"
+              : "w-8 h-8 bg-black/5 dark:bg-white/10 scale-125"
+            : "w-5 h-5 scale-100 opacity-40"
         }`}
         style={{
           transform: `translate3d(${position.x - (isHovered && cursorLabel ? 32 : isHovered ? 16 : 10)}px, ${

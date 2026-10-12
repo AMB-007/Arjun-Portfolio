@@ -1,57 +1,76 @@
 import React, { useState } from "react";
-import { Terminal, Copy, Check, Code2, Database } from "lucide-react";
+import { Terminal, Copy, Check, Cpu, Database, Binary } from "lucide-react";
 import { copyToClipboard } from "@/utils/helpers";
 
 const CODE_SAMPLES = {
   python: {
     filename: "career_ensemble.py",
-    language: "Python (ML Ensemble)",
+    language: "Python • ML Ensemble",
+    icon: Cpu,
     code: `# Multi-Model Ensemble with Soft Voting
 from sklearn.ensemble import VotingClassifier
 from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
+from lightgbm import LGBMClassifier
+import shap
 
+# 1. Base Classifiers
 models = [
-  ('xgb', XGBClassifier(n_estimators=300, learning_rate=0.05)),
-  ('cat', CatBoostClassifier(iterations=300, verbose=0)),
+  ('xgb', XGBClassifier(n_estimators=300, learning_rate=0.05, max_depth=5)),
+  ('cat', CatBoostClassifier(iterations=300, learning_rate=0.05, verbose=0)),
   ('lgb', LGBMClassifier(n_estimators=250, learning_rate=0.05))
 ]
 
+# 2. Weighted Soft Voting Ensemble
 ensemble = VotingClassifier(
   estimators=models,
   voting='soft',
   weights=[0.35, 0.30, 0.20]
 )
-ensemble.fit(X_train_72d, y_train)`,
+ensemble.fit(X_train_72d, y_train)
+
+# 3. SHAP Feature Attribution
+explainer = shap.TreeExplainer(ensemble.named_estimators_['xgb'])
+shap_values = explainer.shap_values(X_test_sample)`,
   },
-  react: {
-    filename: "Hero3DScene.jsx",
-    language: "React 19 & Three.js",
-    code: `export function Hero3DScene() {
-  const mountRef = useRef(null);
+  cnn: {
+    filename: "rock_specimen_cnn.py",
+    language: "Python • CNN Preprocessing",
+    icon: Binary,
+    code: `# Geological Specimen Preprocessing Pipeline
+import numpy as np
+from PIL import Image
+
+def preprocess_specimen_tensor(image_path, target_size=(64, 64)):
+  img = Image.open(image_path).convert('RGB')
   
-  useEffect(() => {
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    
-    // Developer Network Node Meshes
-    nodesGroup.add(nodeMeshes);
-    renderer.render(scene, camera);
-  }, []);
-}`,
+  # Center crop to preserve specimen striations
+  w, h = img.size
+  min_dim = min(w, h)
+  left = (w - min_dim) / 2
+  top = (h - min_dim) / 2
+  img_cropped = img.crop((left, top, left + min_dim, top + min_dim))
+  
+  # Resize to 64x64 and normalize [0, 1]
+  img_resized = img_cropped.resize(target_size, Image.Resampling.LANCZOS)
+  tensor = np.array(img_resized, dtype=np.float32) / 255.0
+  return np.expand_dims(tensor, axis=0) # Shape: (1, 64, 64, 3)`,
   },
   sql: {
-    filename: "schema_19_tables.sql",
-    language: "MySQL 8.x DDL",
-    code: `-- Normalized Assessment Schema
+    filename: "assessment_schema.sql",
+    language: "MySQL 8.x • Relational DDL",
+    icon: Database,
+    code: `-- 19-Table Normalized Assessment Persistence Schema
 CREATE TABLE student_cognitive_vectors (
   vector_id BIGINT PRIMARY KEY AUTO_INCREMENT,
   user_id VARCHAR(64) NOT NULL,
-  dimensions_json JSON NOT NULL,
-  grade_level ENUM('7-10', '11-12', 'UG') NOT NULL,
+  grade_tier ENUM('7-8', '9-10', '11-12', 'UG_PG') NOT NULL,
+  vector_72d JSON NOT NULL,
+  normalized_score DECIMAL(5,2) NOT NULL,
+  predicted_cluster_id INT NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES auth_users(id) ON DELETE CASCADE
+  FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+  INDEX idx_tier_cluster (grade_tier, predicted_cluster_id)
 );`,
   },
 };
@@ -60,69 +79,73 @@ export function CodePanel() {
   const [tab, setTab] = useState("python");
   const [copied, setCopied] = useState(false);
 
-  const sample = CODE_SAMPLES[tab];
+  const activeSample = CODE_SAMPLES[tab];
+  const IconComponent = activeSample.icon;
 
   const handleCopy = () => {
-    copyToClipboard(sample.code);
+    copyToClipboard(activeSample.code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   return (
-    <div className="w-full rounded-2xl bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] overflow-hidden text-xs font-mono select-none shadow-2xs">
-      {/* Code Header Bar */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-[#FBF8EF] dark:bg-[#101A3D] border-b border-[#C9E6F0] dark:border-[#404258]">
-        <div className="flex items-center gap-1.5">
-          <button
-            onClick={() => setTab("python")}
-            className={`px-2.5 py-1 rounded text-[11px] font-bold cursor-pointer transition-colors ${
-              tab === "python"
-                ? "bg-white dark:bg-[#141F46] text-[#1B2CC1] dark:text-[#7692FF] border border-[#C9E6F0] dark:border-[#404258]"
-                : "text-[#404258] hover:text-[#091540] dark:text-[#C9E6F0]"
-            }`}
-          >
-            Python ML
-          </button>
-          <button
-            onClick={() => setTab("react")}
-            className={`px-2.5 py-1 rounded text-[11px] font-bold cursor-pointer transition-colors ${
-              tab === "react"
-                ? "bg-white dark:bg-[#141F46] text-[#1B2CC1] dark:text-[#7692FF] border border-[#C9E6F0] dark:border-[#404258]"
-                : "text-[#404258] hover:text-[#091540] dark:text-[#C9E6F0]"
-            }`}
-          >
-            Three.js UI
-          </button>
-          <button
-            onClick={() => setTab("sql")}
-            className={`px-2.5 py-1 rounded text-[11px] font-bold cursor-pointer transition-colors ${
-              tab === "sql"
-                ? "bg-white dark:bg-[#141F46] text-[#1B2CC1] dark:text-[#7692FF] border border-[#C9E6F0] dark:border-[#404258]"
-                : "text-[#404258] hover:text-[#091540] dark:text-[#C9E6F0]"
-            }`}
-          >
-            MySQL DDL
-          </button>
+    <div className="w-full rounded-none border border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] font-mono text-xs overflow-hidden shadow-none select-none">
+      {/* Editor Header Bar */}
+      <div className="flex items-center justify-between px-4 py-3 bg-[#F5F5F5] dark:bg-[#171717] border-b border-[#D4D4D4] dark:border-[#262626]">
+        {/* Tab Buttons */}
+        <div className="flex items-center gap-1">
+          {Object.entries(CODE_SAMPLES).map(([key, sample]) => {
+            const isActive = tab === key;
+            return (
+              <button
+                key={key}
+                onClick={() => setTab(key)}
+                className={`px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer border ${
+                  isActive
+                    ? "bg-black text-white dark:bg-white dark:text-black border-black dark:border-white"
+                    : "bg-transparent text-[#737373] hover:text-black dark:hover:text-white border-transparent"
+                }`}
+              >
+                {sample.filename}
+              </button>
+            );
+          })}
         </div>
 
+        {/* Copy Button */}
         <button
           onClick={handleCopy}
-          className="text-xs text-[#404258] hover:text-[#091540] dark:text-[#C9E6F0] dark:hover:text-white flex items-center gap-1 cursor-pointer"
+          aria-label="Copy code"
+          className="flex items-center gap-1 text-[11px] text-[#737373] hover:text-black dark:hover:text-white cursor-pointer px-2 py-1 transition-colors"
         >
-          {copied ? <Check className="w-3.5 h-3.5 text-[#84B179] dark:text-[#A2CB8B]" /> : <Copy className="w-3.5 h-3.5" />}
-          <span>{copied ? "Copied" : "Copy"}</span>
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5" />
+              <span>COPIED</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>COPY</span>
+            </>
+          )}
         </button>
       </div>
 
-      {/* Code Body */}
-      <pre className="p-4 overflow-x-auto text-[11px] leading-relaxed text-[#091540] dark:text-[#FFFAF3] bg-white dark:bg-[#141F46]">
-        <code>{sample.code}</code>
-      </pre>
+      {/* Language Subheader */}
+      <div className="px-4 py-2 border-b border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] flex items-center justify-between text-[11px] text-[#737373]">
+        <div className="flex items-center gap-1.5">
+          <IconComponent className="w-3.5 h-3.5 text-black dark:text-white" />
+          <span className="font-semibold text-black dark:text-white">{activeSample.language}</span>
+        </div>
+        <span>UTF-8 // VERIFIED CODE</span>
+      </div>
 
-      {/* Code Footer */}
-      <div className="px-4 py-2 bg-[#FBF8EF] dark:bg-[#101A3D] border-t border-[#C9E6F0] dark:border-[#404258] flex items-center justify-between text-[10px] text-[#6B728E] dark:text-[#ABD2FA]">
-        <span>// {sample.filename}</span>
-        <span className="text-[#1B2CC1] dark:text-[#7692FF] font-bold">{sample.language}</span>
+      {/* Code Text Content */}
+      <div className="p-4 overflow-x-auto text-black dark:text-white leading-relaxed text-[11px] max-h-[300px]">
+        <pre>
+          <code>{activeSample.code}</code>
+        </pre>
       </div>
     </div>
   );

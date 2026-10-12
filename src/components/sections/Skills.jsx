@@ -1,247 +1,157 @@
 import React, { useState } from "react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { CORE_SKILLS, CURRENTLY_LEARNING_SKILLS } from "@/data/portfolioData";
+import { SKILL_GROUPS } from "@/data/portfolioData";
 import { cn } from "@/utils/helpers";
 
 const SKILL_PROJECT_MAP = {
-  Python: ["Career Recommendation (Ensemble)", "Rock Identification Studio", "WeatherVista", "WEBSHIELD", "Quiz App"],
-  JavaScript: ["ChRoMALaB (14 Tools)", "WeatherVista (Three.js)", "Lunar Dashboard", "Study Planner"],
-  "React.js": ["Study Planner & Tasks", "Interactive Developer Portals"],
-  Flask: ["Career Recommendation (Blueprints)", "WEBSHIELD", "Rock Identification", "WeatherVista", "Quiz App"],
-  "MySQL 8.x": ["Career Recommendation (19 Tables)", "Quiz App Assessment Schema", "Study Planner Relational DB"],
-  "Node.js": ["Study Planner Backend", "RESTful Middleware Services"],
-  "Express.js": ["Task Management & Study Planner APIs"],
-  "Three.js": ["WeatherVista 3D Earth Globe Visualization", "Hero 3D Developer System Network"],
-  "HTML5 Canvas": ["ChRoMALaB Color Wheel & CVD Filters"],
-  "XGBoost / CatBoost": ["Career Recommendation Soft-Voting Ensemble"],
-  "Deep Learning (CNN)": ["Rock Identification 13-Class Geological Specimen Model"],
-  "Exploratory Data Analysis": ["Luminar Practical Data Exploration & Cleaning"],
-  "Power BI": ["Business Intelligence Dashboards & DAX Data Modeling"],
-  AWS: ["Cloud Compute (EC2) & Storage (S3) Infrastructure"],
-};
-
-const SKILL_COLOR_MAP = {
-  Python: "bg-[#1B2CC1] dark:bg-[#7692FF]",
-  JavaScript: "bg-[#1B2CC1] dark:bg-[#7692FF]",
-  "React.js": "bg-[#7692FF] dark:bg-[#ABD2FA]",
-  "HTML5 / CSS3": "bg-[#78B3CE] dark:text-[#78B3CE]",
-  SQL: "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Node.js": "bg-[#1B2CC1] dark:bg-[#7692FF]",
-  "Express.js": "bg-[#78B3CE] dark:bg-[#78B3CE]",
-  Flask: "bg-[#1B2CC1] dark:bg-[#7692FF]",
-  "REST APIs": "bg-[#78B3CE] dark:bg-[#78B3CE]",
-  "MySQL 8.x": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  MongoDB: "bg-[#84B179] dark:bg-[#A2CB8B]",
-  Git: "bg-[#F96E2A] dark:bg-[#F96E2A]",
-  GitHub: "bg-[#F96E2A] dark:bg-[#F96E2A]",
-  "VS Code": "bg-[#78B3CE] dark:bg-[#78B3CE]",
-  Postman: "bg-[#F96E2A] dark:bg-[#F96E2A]",
-  "Bootstrap 5": "bg-[#7692FF] dark:bg-[#ABD2FA]",
-  NumPy: "bg-[#84B179] dark:bg-[#A2CB8B]",
-  Pandas: "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Data Cleaning & Preprocessing": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Data Visualization": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Statistical Analysis": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Supervised Learning": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Ensemble Models": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Unsupervised Learning": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Model Evaluation": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Hyperparameter Tuning": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Artificial Neural Networks": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Convolutional Neural Networks": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "OpenCV & Image Processing": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "YOLO Object Detection": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Recurrent Neural Networks": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "NLP & Text Processing": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "Generative AI & LLMs": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "LangChain Fundamentals": "bg-[#A2CB8B] dark:bg-[#A2CB8B]",
-  "AWS IAM": "bg-[#F96E2A] dark:bg-[#F96E2A]",
-  "AWS EC2 & S3": "bg-[#F96E2A] dark:bg-[#F96E2A]",
-  "Power Query & ETL": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "DAX Formulas": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Data Modeling": "bg-[#84B179] dark:bg-[#A2CB8B]",
-  "Interactive Dashboards": "bg-[#84B179] dark:bg-[#A2CB8B]",
+  Python: ["Career Recommendation (Ensemble)", "Rock Identification Studio", "WEBSHIELD", "WeatherVista"],
+  SQL: ["Career Recommendation (19 Tables)", "Interactive Assessment Schema"],
+  NumPy: ["Career Recommendation (72-D Vector)", "Rock Identification (Tensors)"],
+  Pandas: ["Career Recommendation (Data Normalization)", "Analytical Feature Engineering"],
+  "Exploratory Data Analysis (EDA)": ["Career Recommendation Feature Analysis", "Specimen Variation Studies"],
+  Statistics: ["Cognitive Distribution Scaling", "Outlier Clipping & Correlation"],
+  "Data Visualization": ["SHAP Contribution Plots", "Specimen Confusion Matrices"],
+  "Microsoft Power BI": ["Business Intelligence Star Schema", "DAX Analytical Modeling"],
+  "Machine Learning": ["Career Recommendation", "WEBSHIELD Threat Classifier"],
+  "Scikit-learn": ["Career Recommendation Pipelines", "WEBSHIELD Random Forest"],
+  XGBoost: ["Career Recommendation Soft-Voting Ensemble"],
+  "Random Forest": ["Career Recommendation", "WEBSHIELD Threat Classifier"],
+  "Computer Vision": ["Rock Identification Studio (13 Classes)"],
+  OpenCV: ["Specimen Image Resizing & Normalization"],
+  "Neural Networks": ["Rock Identification CNN"],
+  "Deep Learning": ["Convolutional Neural Network Specimen Classifier"],
+  Git: ["Version-Controlled Machine Learning Repositories"],
+  GitHub: ["@AMB-007 Public Repositories"],
 };
 
 export function Skills() {
   const [activeHoverSkill, setActiveHoverSkill] = useState(null);
 
-  const relatedProjects = activeHoverSkill && SKILL_PROJECT_MAP[activeHoverSkill]
-    ? SKILL_PROJECT_MAP[activeHoverSkill]
-    : null;
+  const relatedProjects =
+    activeHoverSkill && SKILL_PROJECT_MAP[activeHoverSkill]
+      ? SKILL_PROJECT_MAP[activeHoverSkill]
+      : null;
 
   return (
-    <section id="skills" className="py-20 md:py-28 border-t border-[#C9E6F0] dark:border-[#404258]">
+    <section id="skills" className="py-20 md:py-28 border-b border-[#D4D4D4] dark:border-[#171717]">
       <div className="editorial-container">
         <SectionHeader
           number="03"
           tag="TECHNICAL MATRIX"
-          title="Skills & Project Traces"
-          description="A structured technical matrix distinguishing production-verified technologies from currently active training areas, with interactive repository linkage."
+          title="Data Science Skills"
+          description="Disciplined technical capabilities focused strictly on data manipulation, statistical analysis, machine learning algorithms, deep learning, and business intelligence."
         />
 
-        {/* Dynamic Project Tracer Banner */}
-        <div className="mb-8 p-3.5 rounded-xl bg-white dark:bg-[#141F46] border border-[#C9E6F0] dark:border-[#404258] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono shadow-2xs">
+        {/* Dynamic Project Tracer Banner (Strict Monochrome) */}
+        <div className="mb-10 p-4 border border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#1B2CC1] dark:bg-[#7692FF] animate-pulse" />
-            <span className="text-[#6B728E] dark:text-[#ABD2FA] uppercase text-[11px]">
-              // ACTIVE REPOSITORY TRACER:
+            <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
+            <span className="text-[#737373] uppercase text-[11px] font-bold">
+              // REPOSITORY EVIDENCE TRACER:
             </span>
-            <span className="font-bold text-[#091540] dark:text-[#FFFAF3]">
-              {activeHoverSkill ? activeHoverSkill : "Hover any skill chip to trace verified projects"}
+            <span className="font-bold text-black dark:text-white">
+              {activeHoverSkill ? activeHoverSkill : "Hover emphasized skills to trace project applications"}
             </span>
           </div>
 
           {relatedProjects ? (
             <div className="flex flex-wrap gap-1.5 items-center">
-              <span className="text-[10px] text-[#6B728E] dark:text-[#ABD2FA] uppercase">Used in:</span>
+              <span className="text-[10px] text-[#737373] uppercase font-semibold">Applied in:</span>
               {relatedProjects.map((p) => (
                 <span
                   key={p}
-                  className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#ABD2FA]/30 text-[#1B2CC1] dark:bg-[#7692FF]/20 dark:text-[#ABD2FA] border border-[#C9E6F0] dark:border-[#50577A]"
+                  className="px-2 py-0.5 text-[10px] font-bold bg-black text-white dark:bg-white dark:text-black"
                 >
                   {p}
                 </span>
               ))}
             </div>
           ) : (
-            <span className="text-[11px] text-[#6B728E] dark:text-[#ABD2FA]">
-              Hover skills to view repository linkages
+            <span className="text-[11px] text-[#737373]">
+              Zero fabricated ratings • Grounded in code
             </span>
           )}
         </div>
 
-        {/* 2-Column Technical Matrix */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* LEFT: Core Technologies (Verified in GitHub) */}
-          <div className="lg:col-span-6 space-y-6">
-            <div className="pb-3 border-b border-[#C9E6F0] dark:border-[#404258] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#1B2CC1] dark:bg-[#7692FF]" />
-                <h3 className="font-mono text-sm font-bold uppercase tracking-wider text-[#091540] dark:text-[#FFFAF3]">
-                  CORE TECHNOLOGIES
-                </h3>
-              </div>
-              <span className="text-[11px] font-mono text-[#6B728E] dark:text-[#ABD2FA]">
-                Backed by GitHub Repositories
-              </span>
-            </div>
-
-            <div className="space-y-6">
-              {CORE_SKILLS.map((group) => (
-                <div key={group.title} className="space-y-2">
-                  <div className="text-[11px] font-mono font-semibold uppercase text-[#6B728E] dark:text-[#ABD2FA]">
-                    // {group.title}:
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => {
-                      const dotColor = SKILL_COLOR_MAP[skill.name] || "bg-[#1B2CC1] dark:bg-[#7692FF]";
-                      const isHovered = activeHoverSkill === skill.name;
-
-                      return (
-                        <div
-                          key={skill.name}
-                          onMouseEnter={() => setActiveHoverSkill(skill.name)}
-                          onMouseLeave={() => setActiveHoverSkill(null)}
-                          className={cn(
-                            "flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-[#141F46] border transition-all cursor-pointer select-none",
-                            isHovered
-                              ? "border-[#1B2CC1] dark:border-[#7692FF] shadow-xs scale-[1.02] bg-[#ABD2FA]/20 dark:bg-[#1A2752]"
-                              : "border-[#C9E6F0] dark:border-[#404258] hover:border-slate-400 dark:hover:border-slate-600"
-                          )}
-                        >
-                          <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", dotColor)} />
-                          <span className="text-xs font-semibold text-[#091540] dark:text-[#FFFAF3] font-sans">
-                            {skill.name}
-                          </span>
-                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#FBF8EF] dark:bg-[#101A3D] text-[#404258] dark:text-[#C9E6F0]">
-                            {skill.level}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
+        {/* 6-Group Structured Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
+          {SKILL_GROUPS.map((group, groupIdx) => (
+            <div
+              key={group.id}
+              className="p-6 border border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] flex flex-col justify-between space-y-5 transition-colors hover:border-black dark:hover:border-white h-full"
+            >
+              {/* Category Header */}
+              <div className="space-y-1 pb-3 border-b border-[#D4D4D4] dark:border-[#171717]">
+                <div className="flex items-center justify-between text-xs font-mono">
+                  <span className="font-bold text-black dark:text-white">
+                    0{groupIdx + 1}
+                  </span>
+                  <span className="text-[#737373] uppercase text-[10px] tracking-wider">
+                    {group.skills.length} Competencies
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT: Expanding into Data & AI (Luminar Technolab) */}
-          <div className="lg:col-span-6 space-y-6">
-            <div className="pb-3 border-b border-[#C9E6F0] dark:border-[#404258] flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#84B179] dark:bg-[#A2CB8B] animate-pulse" />
-                <h3 className="font-mono text-sm font-bold uppercase tracking-wider text-[#091540] dark:text-[#FFFAF3]">
-                  EXPANDING INTO DATA & AI
+                <h3 className="text-base font-extrabold text-black dark:text-white font-sans uppercase">
+                  {group.title}
                 </h3>
+                <p className="text-xs text-[#737373] font-sans">
+                  {group.description}
+                </p>
               </div>
-              <span className="text-[11px] font-mono text-[#6B728E] dark:text-[#ABD2FA]">
-                Luminar Technolab Curriculum
-              </span>
-            </div>
 
-            <div className="space-y-6">
-              {CURRENTLY_LEARNING_SKILLS.map((group) => (
-                <div key={group.title} className="space-y-2">
-                  <div className="text-[11px] font-mono font-semibold uppercase text-[#6B728E] dark:text-[#ABD2FA]">
-                    // {group.title}:
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {group.skills.map((skill) => {
-                      const dotColor = SKILL_COLOR_MAP[skill.name] || "bg-[#84B179] dark:bg-[#A2CB8B]";
-                      const isHovered = activeHoverSkill === skill.name;
+              {/* Skill Chips List */}
+              <div className="flex flex-wrap gap-2 pt-1">
+                {group.skills.map((skill) => {
+                  const isEmphasized = skill.isCore;
+                  const isHovered = activeHoverSkill === skill.name;
 
-                      return (
-                        <div
-                          key={skill.name}
-                          onMouseEnter={() => setActiveHoverSkill(skill.name)}
-                          onMouseLeave={() => setActiveHoverSkill(null)}
-                          className={cn(
-                            "flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white dark:bg-[#141F46] border transition-all cursor-pointer select-none",
-                            isHovered
-                              ? "border-[#84B179] dark:border-[#A2CB8B] shadow-xs scale-[1.02] bg-[#E8F5BD]/40 dark:bg-[#1A2752]"
-                              : "border-[#C9E6F0] dark:border-[#404258] hover:border-slate-400 dark:hover:border-slate-600"
-                          )}
-                        >
-                          <span className={cn("w-1.5 h-1.5 rounded-full shrink-0", dotColor)} />
-                          <span className="text-xs font-semibold text-[#091540] dark:text-[#FFFAF3] font-sans">
-                            {skill.name}
-                          </span>
-                          <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#E8F5BD]/60 dark:bg-[#84B179]/20 text-[#15803D] dark:text-[#A2CB8B]">
-                            {skill.level}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
+                  return (
+                    <div
+                      key={skill.name}
+                      onMouseEnter={() => setActiveHoverSkill(skill.name)}
+                      onMouseLeave={() => setActiveHoverSkill(null)}
+                      className={cn(
+                        "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono transition-all duration-150 cursor-pointer select-none border",
+                        isEmphasized
+                          ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white font-bold"
+                          : "bg-[#F5F5F5] text-black dark:bg-[#141414] dark:text-[#E5E5E5] border-[#D4D4D4] dark:border-[#262626] font-medium hover:border-black dark:hover:border-white",
+                        isHovered && !isEmphasized
+                          ? "border-black dark:border-white bg-[#E5E5E5] dark:bg-[#222222]"
+                          : "",
+                        isHovered && isEmphasized
+                          ? "scale-[1.02]"
+                          : ""
+                      )}
+                    >
+                      <span>{skill.name}</span>
+                      {isEmphasized && (
+                        <span className="text-[9px] uppercase tracking-wider px-1 py-0.2 bg-white text-black dark:bg-black dark:text-white font-mono font-bold">
+                          Core
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
 
-        {/* Semantic Color Legend */}
-        <div className="mt-12 pt-4 border-t border-[#C9E6F0] dark:border-[#404258] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#6B728E] dark:text-[#ABD2FA]">
+        {/* Semantic Monochrome Legend */}
+        <div className="mt-10 pt-4 border-t border-[#D4D4D4] dark:border-[#171717] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#737373]">
           <div className="flex flex-wrap items-center gap-4">
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#1B2CC1] dark:bg-[#7692FF]" />
-              <span>Full-Stack & Core</span>
+              <span className="px-1.5 py-0.5 bg-black text-white dark:bg-white dark:text-black text-[10px] font-bold">
+                Core
+              </span>
+              <span>Primary Visual Focus (Python, SQL, Pandas, NumPy, Statistics, EDA, ML, Scikit-learn, Power BI)</span>
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#A2CB8B]" />
-              <span>Machine Learning & Deep Learning</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#84B179]" />
-              <span>Database, EDA & Power BI</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#F96E2A]" />
-              <span>DevOps & Cloud Tools</span>
+              <span className="w-2 h-2 border border-[#737373]" />
+              <span>Demonstrated Techniques &amp; Tools</span>
             </span>
           </div>
-          <span className="text-[#1B2CC1] dark:text-[#7692FF] font-bold">
-            Zero Fake Metrics
+          <span className="font-bold text-black dark:text-white uppercase tracking-wider">
+            Exclusively Data Science
           </span>
         </div>
       </div>
