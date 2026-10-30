@@ -64,3 +64,4 @@
   <circle cx="480" cy="280" r="18" fill="#C8F31D" stroke="#FFF" stroke-width="4" filter="url(#neuralGlow)"/>
   <circle cx="480" cy="280" r="28" fill="none" stroke="#C8F31D" stroke-width="2" stroke-dasharray="4 4"/>
 </svg>
+

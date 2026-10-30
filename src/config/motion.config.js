@@ -82,3 +82,4 @@ export const FAN_DECK_CONFIG = {
   brightnessStep: 0.14,
   maxParallaxTiltDeg: 4,
 };
+
