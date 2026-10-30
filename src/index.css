@@ -181,4 +181,9 @@
     scroll-behavior: auto !important;
     filter: none !important;
   }
+
+  .focus-word {
+    filter: none !important;
+    opacity: 1 !important;
+  }
 }

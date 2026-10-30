@@ -205,7 +205,7 @@ export function FocusTextReveal({
               tabIndex={0}
               aria-hidden="true"
               className={cn(
-                "inline-block cursor-default outline-none transition-[filter,opacity] duration-200 ease-out",
+                "focus-word inline-block cursor-default outline-none transition-[filter,opacity] duration-200 ease-out",
                 "focus-visible:ring-1 focus-visible:ring-[#C8F31D]/80"
               )}
               style={{
