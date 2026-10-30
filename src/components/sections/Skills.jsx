@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { CardFolderSection } from "@/components/ui/CardFolderSection";
 import { SKILL_GROUPS } from "@/data/portfolioData";
 import { cn } from "@/utils/helpers";
 
@@ -41,6 +42,9 @@ export function Skills() {
           title="Data Science Skills"
           description="Disciplined technical capabilities focused strictly on data manipulation, statistical analysis, machine learning algorithms, deep learning, and business intelligence."
         />
+
+        {/* ANIMATION 4: Card Folder Methodology / Skills Section */}
+        <CardFolderSection />
 
         {/* Dynamic Project Tracer Banner (Strict Monochrome) */}
         <div className="mb-10 p-4 border border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">

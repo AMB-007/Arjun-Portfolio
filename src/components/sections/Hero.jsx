@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { ProfilePortrait } from "@/components/ui/ProfilePortrait";
 import { CodePanel } from "@/components/ui/CodePanel";
 import { GithubIcon } from "@/components/ui/Icons";
+import { FocusTextReveal } from "@/components/ui/FocusTextReveal";
 import { cn } from "@/utils/helpers";
 
 export function Hero() {
@@ -53,14 +54,20 @@ export function Hero() {
               </span>
             </motion.div>
 
-            {/* Display Heading & Supporting Text */}
+            {/* Display Heading & Supporting Text with Interactive Viewfinder Focus Reveal */}
             <motion.div variants={itemVariants} className="space-y-4">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-7.5xl font-extrabold tracking-tight text-black dark:text-white font-sans leading-[1.02] uppercase">
-                DATA SCIENCE &amp; MACHINE LEARNING
-              </h1>
-              <p className="text-lg sm:text-xl md:text-2xl font-medium text-[#171717] dark:text-[#F5F5F5] font-sans leading-snug">
-                I explore data, build machine learning solutions, and transform complex datasets into meaningful insights.
-              </p>
+              <FocusTextReveal
+                text="DATA SCIENCE & MACHINE LEARNING"
+                as="h1"
+                bracketSize="lg"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-7.5xl font-extrabold tracking-tight text-black dark:text-white font-sans leading-[1.02] uppercase"
+              />
+              <FocusTextReveal
+                text="I explore data, build machine learning solutions, and transform complex datasets into meaningful insights."
+                as="p"
+                bracketSize="sm"
+                className="text-lg sm:text-xl md:text-2xl font-medium text-[#171717] dark:text-[#F5F5F5] font-sans leading-snug"
+              />
             </motion.div>
 
             {/* Short Professional Introduction */}

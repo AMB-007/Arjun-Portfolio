@@ -3,17 +3,97 @@ import { Sun, Moon, Menu, X, ArrowUpRight } from "lucide-react";
 import { useTheme } from "@/context/ThemeContext";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import { NavPill } from "@/components/ui/NavPill";
 import { cn } from "@/utils/helpers";
 
 const NAV_ITEMS = [
-  { label: "About", href: "#about" },
-  { label: "Focus", href: "#focus" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Analytics", href: "#analytics" },
-  { label: "Education", href: "#education" },
-  { label: "Certifications", href: "#certifications" },
-  { label: "Contact", href: "#contact" },
+  {
+    label: "About",
+    href: "#about",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Focus",
+    href: "#focus",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+        <polyline points="2 17 12 22 22 17" />
+        <polyline points="2 12 12 17 22 12" />
+      </svg>
+    ),
+  },
+  {
+    label: "Skills",
+    href: "#skills",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <rect x="9" y="9" width="6" height="6" />
+        <line x1="9" y1="1" x2="9" y2="4" />
+        <line x1="15" y1="1" x2="15" y2="4" />
+        <line x1="9" y1="20" x2="9" y2="23" />
+        <line x1="15" y1="20" x2="15" y2="23" />
+        <line x1="20" y1="9" x2="23" y2="9" />
+        <line x1="20" y1="14" x2="23" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    label: "Projects",
+    href: "#projects",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
+      </svg>
+    ),
+  },
+  {
+    label: "Analytics",
+    href: "#analytics",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <line x1="12" y1="20" x2="12" y2="10" />
+        <line x1="18" y1="20" x2="18" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="16" />
+      </svg>
+    ),
+  },
+  {
+    label: "Education",
+    href: "#education",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
+      </svg>
+    ),
+  },
+  {
+    label: "Certifications",
+    href: "#certifications",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="8" r="6" />
+        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+      </svg>
+    ),
+  },
+  {
+    label: "Contact",
+    href: "#contact",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect width="20" height="16" x="2" y="4" rx="2" />
+        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+      </svg>
+    ),
+  },
 ];
 
 export function Navbar({ activeSection = "hero" }) {
@@ -64,28 +144,38 @@ export function Navbar({ activeSection = "hero" }) {
           </span>
         </a>
 
-        {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center gap-1 font-medium text-xs font-mono">
+        {/* Desktop Nav Links - Iconic Nav Pills with Rotating Iridescent Rings */}
+        <nav className="hidden xl:flex items-center gap-1.5 font-medium text-xs font-mono">
           {NAV_ITEMS.map((item) => {
             const sectionKey = item.href.replace("#", "");
             const isActive = activeSection === sectionKey;
             return (
-              <a
+              <NavPill
                 key={item.label}
+                label={item.label}
                 href={item.href}
+                icon={item.icon}
+                isActive={isActive}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={cn(
-                  "px-3 py-1.5 transition-colors cursor-pointer relative uppercase",
-                  isActive
-                    ? "text-black dark:text-white font-bold"
-                    : "text-[#737373] hover:text-black dark:hover:text-white"
-                )}
-              >
-                {item.label}
-                {isActive && (
-                  <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-black dark:bg-white" />
-                )}
-              </a>
+              />
+            );
+          })}
+        </nav>
+
+        {/* Condensed Desktop Nav Links for intermediate lg breakpoint */}
+        <nav className="hidden lg:flex xl:hidden items-center gap-1 font-medium text-xs font-mono">
+          {NAV_ITEMS.slice(0, 5).map((item) => {
+            const sectionKey = item.href.replace("#", "");
+            const isActive = activeSection === sectionKey;
+            return (
+              <NavPill
+                key={item.label}
+                label={item.label}
+                href={item.href}
+                icon={item.icon}
+                isActive={isActive}
+                onClick={(e) => handleNavClick(e, item.href)}
+              />
             );
           })}
         </nav>
@@ -152,24 +242,20 @@ export function Navbar({ activeSection = "hero" }) {
       {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-white dark:bg-black border-b border-[#D4D4D4] dark:border-[#171717] px-6 py-5 space-y-2">
-          <nav className="flex flex-col space-y-1">
+          <nav className="flex flex-col space-y-2">
             {NAV_ITEMS.map((item) => {
               const sectionKey = item.href.replace("#", "");
               const isActive = activeSection === sectionKey;
               return (
-                <a
+                <NavPill
                   key={item.label}
+                  label={item.label}
                   href={item.href}
+                  icon={item.icon}
+                  isActive={isActive}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={cn(
-                    "px-3 py-2 text-xs font-mono font-medium transition-colors uppercase",
-                    isActive
-                      ? "bg-black text-white dark:bg-white dark:text-black font-bold"
-                      : "text-black dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717]"
-                  )}
-                >
-                  {item.label}
-                </a>
+                  className="w-full justify-start py-2"
+                />
               );
             })}
           </nav>

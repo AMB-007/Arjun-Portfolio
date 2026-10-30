@@ -84,6 +84,69 @@
   }
 }
 
+/* @property Registration for Conic Gradient Angle Rotation */
+@property --nav-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes nav-angle-spin {
+  0% {
+    --nav-angle: 0deg;
+  }
+  100% {
+    --nav-angle: 360deg;
+  }
+}
+
+@keyframes nav-rotate-fallback {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Iridescent Conic Ring Utilities */
+.nav-ring-conic {
+  --nav-angle: 0deg;
+  animation: nav-angle-spin 4s linear infinite;
+  background: conic-gradient(
+    from var(--nav-angle),
+    #3b82f6,
+    #f97316,
+    #22c55e,
+    #d946ef,
+    #e2e8f0,
+    #3b82f6
+  );
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
+}
+
+.nav-ring-conic-fast {
+  animation-duration: 2s !important;
+}
+
+/* Fallback if @property is unsupported */
+@supports not (background: paint(something)) {
+  .nav-ring-conic {
+    /* If @property is not animated, provide smooth transform spin on pseudo-element */
+    animation: none;
+    background: conic-gradient(
+      from 0deg,
+      #3b82f6,
+      #f97316,
+      #22c55e,
+      #d946ef,
+      #e2e8f0,
+      #3b82f6
+    );
+  }
+}
+
 /* Master Editorial Container (1280px–1360px max width) */
 .editorial-container {
   max-width: 1320px;
@@ -116,5 +179,6 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    filter: none !important;
   }
 }

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="coralGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FB7185" stopOpacity="0.8"/>
+      <stop offset="50%" stopColor="#F43F5E" stopOpacity="0.4"/>
+      <stop offset="100%" stopColor="#881337" stopOpacity="0"/>
+    </linearGradient>
+    <linearGradient id="synapseGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#FDA4AF"/>
+      <stop offset="100%" stopColor="#C8F31D"/>
+    </linearGradient>
+    <linearGradient id="tensorGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="#FB923C"/>
+      <stop offset="100%" stopColor="#E11D48"/>
+    </linearGradient>
+    <filter id="neuralGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient background radiance -->
+  <circle cx="300" cy="300" r="210" fill="url(#coralGlow)" filter="url(#neuralGlow)"/>
+
+  <!-- Isometric Convolutional Tensor Matrix Planes -->
+  <!-- Layer 1 (Input Tensor) -->
+  <g transform="translate(140, 160)" opacity="0.45">
+    <polygon points="0,50 60,10 60,150 0,190" fill="#FDA4AF" stroke="#FFF" stroke-width="1"/>
+  </g>
+
+  <!-- Layer 2 (Feature Map) -->
+  <g transform="translate(190, 180)" opacity="0.6">
+    <polygon points="0,40 50,10 50,120 0,150" fill="#FB7185" stroke="#FFF" stroke-width="1.2"/>
+  </g>
+
+  <!-- Synaptic Interconnection Edges -->
+  <g stroke="url(#synapseGrad1)" stroke-width="2" opacity="0.75">
+    <line x1="220" y1="240" x2="310" y2="170"/>
+    <line x1="220" y1="240" x2="310" y2="280"/>
+    <line x1="220" y1="330" x2="310" y2="280"/>
+    <line x1="220" y1="330" x2="310" y2="390"/>
+    <line x1="310" y1="170" x2="410" y2="220"/>
+    <line x1="310" y1="280" x2="410" y2="220"/>
+    <line x1="310" y1="280" x2="410" y2="340"/>
+    <line x1="310" y1="390" x2="410" y2="340"/>
+    <line x1="410" y1="220" x2="480" y2="280"/>
+    <line x1="410" y1="340" x2="480" y2="280"/>
+  </g>
+
+  <!-- Hidden Layer 1 Nodes -->
+  <circle cx="220" cy="240" r="10" fill="#FFE4E6" stroke="#E11D48" stroke-width="3"/>
+  <circle cx="220" cy="330" r="10" fill="#FFE4E6" stroke="#E11D48" stroke-width="3"/>
+
+  <!-- Hidden Layer 2 Nodes (Deep Latent Representations) -->
+  <circle cx="310" cy="170" r="13" fill="#FFF" stroke="#FB7185" stroke-width="3"/>
+  <circle cx="310" cy="280" r="15" fill="#C8F31D" stroke="#000" stroke-width="3" filter="url(#neuralGlow)"/>
+  <circle cx="310" cy="390" r="13" fill="#FFF" stroke="#FB7185" stroke-width="3"/>
+
+  <!-- Dense Output Layer Nodes -->
+  <circle cx="410" cy="220" r="12" fill="#FFE4E6" stroke="#BE123C" stroke-width="3"/>
+  <circle cx="410" cy="340" r="12" fill="#FFE4E6" stroke="#BE123C" stroke-width="3"/>
+
+  <!-- Decision Output Node (Lime Activated) -->
+  <circle cx="480" cy="280" r="18" fill="#C8F31D" stroke="#FFF" stroke-width="4" filter="url(#neuralGlow)"/>
+  <circle cx="480" cy="280" r="28" fill="none" stroke="#C8F31D" stroke-width="2" stroke-dasharray="4 4"/>
+</svg>

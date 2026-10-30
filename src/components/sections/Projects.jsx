@@ -3,6 +3,7 @@ import { ArrowRight, BookOpen, ExternalLink, Cpu, Database, Shield, Globe, Termi
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { PROJECTS } from "@/data/portfolioData";
 import { GithubIcon } from "@/components/ui/Icons";
+import { ProjectFanDeck } from "@/components/ui/ProjectFanDeck";
 import { CaseStudyModal } from "./CaseStudyModal";
 import { cn } from "@/utils/helpers";
 
@@ -184,6 +185,24 @@ export function Projects() {
           title="Featured Projects"
           description="Verified machine learning systems, computer vision classifiers, security analytics consoles, and predictive data applications derived from active repositories."
         />
+
+        {/* ANIMATION 3: Spring Physics Fan Deck Project Showcase */}
+        <div className="mb-20">
+          <ProjectFanDeck
+            onSelectCaseStudy={(projectId) => setSelectedProjectId(projectId)}
+          />
+        </div>
+
+        {/* Section Sub-Divider to Technical Blueprints */}
+        <div className="pt-8 pb-6 border-t border-[#D4D4D4] dark:border-[#171717] flex items-center justify-between font-mono text-xs">
+          <span className="text-black dark:text-white font-bold uppercase tracking-wider flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#C8F31D]" />
+            <span>// DEEP ARCHITECTURAL BLUEPRINTS &amp; CODE SCHEMAS:</span>
+          </span>
+          <span className="hidden sm:inline text-[#737373] text-[11px]">
+            Scroll for full mathematical specifications &amp; code traces
+          </span>
+        </div>
 
         {/* Featured Projects Grid */}
         <div className="space-y-16 sm:space-y-24">

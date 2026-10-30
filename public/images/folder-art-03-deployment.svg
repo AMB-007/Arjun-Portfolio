@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#38BDF8" stopOpacity="0.8"/>
+      <stop offset="50%" stopColor="#0284C7" stopOpacity="0.4"/>
+      <stop offset="100%" stopColor="#082F49" stopOpacity="0"/>
+    </linearGradient>
+    <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#E0F2FE"/>
+      <stop offset="100%" stopColor="#7DD3FC"/>
+    </linearGradient>
+    <linearGradient id="cubeLeft" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#38BDF8"/>
+      <stop offset="100%" stopColor="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="cubeRight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stopColor="#0284C7"/>
+      <stop offset="100%" stopColor="#0C4A6E"/>
+    </linearGradient>
+    <filter id="deployGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient background radiance -->
+  <circle cx="300" cy="300" r="210" fill="url(#cyanGlow)" filter="url(#deployGlow)"/>
+
+  <!-- Orbital Data Rings -->
+  <ellipse cx="300" cy="300" rx="220" ry="110" fill="none" stroke="#7DD3FC" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4" transform="rotate(-20 300 300)"/>
+  <ellipse cx="300" cy="300" rx="170" ry="85" fill="none" stroke="#C8F31D" stroke-width="2" opacity="0.6" transform="rotate(25 300 300)"/>
+
+  <!-- Isometric Central Deployment Microservice Cube -->
+  <g transform="translate(300, 260)">
+    <!-- Top Face -->
+    <polygon points="0,-70 80,-25 0,20 -80,-25" fill="url(#cubeTop)" stroke="#FFF" stroke-width="1.5"/>
+    <!-- Left Face -->
+    <polygon points="-80,-25 0,20 0,110 -80,65" fill="url(#cubeLeft)" stroke="#FFF" stroke-width="1.5"/>
+    <!-- Right Face -->
+    <polygon points="0,20 80,-25 80,65 0,110" fill="url(#cubeRight)" stroke="#FFF" stroke-width="1.5"/>
+  </g>
+
+  <!-- Floating Satellite Database Pod 1 (MySQL Relational Table Node) -->
+  <g transform="translate(160, 220)">
+    <polygon points="0,-35 40,-12 0,10 -40,-12" fill="#BAE6FD"/>
+    <polygon points="-40,-12 0,10 0,55 -40,32" fill="#0284C7"/>
+    <polygon points="0,10 40,-12 40,32 0,55" fill="#0369A1"/>
+  </g>
+
+  <!-- Floating Satellite Dashboard Pod 2 (Power BI DAX Prism) -->
+  <g transform="translate(440, 230)">
+    <polygon points="0,-35 40,-12 0,10 -40,-12" fill="#ECFCCB"/>
+    <polygon points="-40,-12 0,10 0,55 -40,32" fill="#C8F31D"/>
+    <polygon points="0,10 40,-12 40,32 0,55" fill="#65A30D"/>
+  </g>
+
+  <!-- Real-Time Packet Stream Lines -->
+  <path d="M 160 220 Q 230 180 300 190" fill="none" stroke="#C8F31D" stroke-width="2.5" stroke-dasharray="4 4"/>
+  <path d="M 300 370 Q 370 380 440 285" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="4 4"/>
+
+  <!-- Satellite Connection Indicators -->
+  <circle cx="160" cy="220" r="6" fill="#C8F31D" filter="url(#deployGlow)"/>
+  <circle cx="440" cy="230" r="7" fill="#FFF" stroke="#C8F31D" stroke-width="2"/>
+</svg>
