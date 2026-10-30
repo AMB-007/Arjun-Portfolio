@@ -1,23 +1,31 @@
 export const PERSONAL_INFO = {
   name: "Arjun M Babu",
-  eyebrow: "DATA SCIENCE & MACHINE LEARNING",
-  headline: "DATA SCIENCE & MACHINE LEARNING",
+  eyebrow: "COMPUTER SCIENCE & ENGINEERING // DATA ANALYST & ML",
+  headline: "I turn data into decisions.",
+  headlineAlt: "DATA ANALYTICS & MACHINE LEARNING",
   supportingParagraph:
-    "I explore data, build machine learning solutions, and transform complex datasets into meaningful insights.",
-  bio: "I'm Arjun M Babu, a Computer Science Engineering student interested in Data Science, Machine Learning, Artificial Intelligence, and analytical problem-solving.",
+    "Computer Science graduate skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges.",
+  bio: "I'm Arjun M Babu, a Computer Science graduate skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges.",
   aboutNarrative: [
-    "I am a Computer Science Engineering student at Toc H Institute of Science and Technology (2022–2026), focused on Python, SQL, Data Science, Machine Learning, and data-driven problem-solving.",
-    "My work centers on building end-to-end machine learning pipelines and analytical workflows—ranging from multi-model ensembles with SHAP explainability (Personalized Career Recommendation System) and Convolutional Neural Networks for geological specimen classification (Rock Identification Studio) to automated threat classification dashboards (WEBSHIELD).",
-    "Through intensive training in Data Science, Machine Learning, Deep Learning, and Power BI at Luminar Technolab alongside academic engineering coursework, I have developed strong competencies in exploratory data analysis (EDA), data cleaning, statistical modeling, feature engineering, and business intelligence dashboards.",
+    "I am a Computer Science Engineering student at Toc H Institute of Science and Technology (2022–2026), skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges.",
+    "My practical work centers on applied machine learning pipelines, predictive modeling, and data analytics—including a Personalized Career Recommendation System utilizing XGBoost, LightGBM, and SHAP explainability, a real-time WebShield cybersecurity telemetry dashboard with Random Forest threat scoring, and an interactive full-stack Quiz App with role-based administration.",
+    "Through my Data Science Internship at Luminar Technolab (2026) and Front End Web Development training at Aesthetix Edu-Tech (2025), I continuously expand capabilities across exploratory data analysis (EDA), data visualization in Power BI, cloud computing on AWS, and end-to-end data pipelines.",
   ],
+  siteUrl: "https://arjun-m-babu.vercel.app",
   github: "https://github.com/AMB-007",
   githubUsername: "AMB-007",
-  linkedin: "https://www.linkedin.com/in/arjun-m-babu-45024224a",
-  email: "arjunmbabu2004@gmail.com",
+  linkedin: "https://www.linkedin.com/in/arjun-m-babu",
+  email: "arjunmbabu.ds@gmail.com",
   phone: "6235689805",
   location: "Kerala, India",
-  availableFor: "Data Science & Machine Learning Opportunities",
+  availableFor: "Data Analyst & Machine Learning Opportunities",
   resumePath: "/resume.html",
+  stats: [
+    { label: "Production Repos", value: 6, suffix: "+" },
+    { label: "Core Competencies", value: 18, suffix: "+" },
+    { label: "Models & Ensembles", value: 12, suffix: "+" },
+    { label: "Years Specialized", value: 3, suffix: "+" },
+  ],
 };
 
 export const FOCUS_AREAS = [
@@ -108,43 +116,47 @@ export const SKILL_GROUPS = [
     skills: [
       { name: "Machine Learning", isCore: true },
       { name: "Scikit-learn", isCore: true },
+      { name: "Model Evaluation", isCore: true },
+      { name: "XGBoost", isCore: true },
+      { name: "LightGBM", isCore: true },
+      { name: "Random Forest", isCore: false },
       { name: "Regression", isCore: false },
       { name: "Classification", isCore: false },
       { name: "Decision Trees", isCore: false },
-      { name: "Random Forest", isCore: false },
-      { name: "XGBoost", isCore: false },
       { name: "Support Vector Machines", isCore: false },
       { name: "K-Nearest Neighbors", isCore: false },
       { name: "Clustering", isCore: false },
-      { name: "Model Evaluation", isCore: false },
       { name: "Hyperparameter Tuning", isCore: false },
       { name: "Predictive Analytics", isCore: false },
     ],
   },
   {
     id: "deep-learning-ai",
-    title: "Deep Learning and Artificial Intelligence",
-    description: "Neural architectures, vision, and language models",
+    title: "Deep Learning & Artificial Intelligence",
+    description: "Neural architectures, vision, NLP, and generative models",
     skills: [
+      { name: "Natural Language Processing (NLP)", isCore: true },
+      { name: "Generative AI", isCore: true },
       { name: "Deep Learning", isCore: false },
       { name: "Neural Networks", isCore: false },
       { name: "TensorFlow", isCore: false },
       { name: "PyTorch", isCore: false },
-      { name: "Natural Language Processing (NLP)", isCore: false },
       { name: "Computer Vision", isCore: false },
       { name: "OpenCV", isCore: false },
-      { name: "Generative AI", isCore: false },
       { name: "Large Language Models (LLMs)", isCore: false },
     ],
   },
   {
     id: "data-science-tools",
-    title: "Data Science Tools",
-    description: "Computational environments and version control",
+    title: "Tools, Cloud & Platforms",
+    description: "Cloud computing, analytics tools, and version control",
     skills: [
+      { name: "Microsoft Power BI", isCore: true },
+      { name: "AWS", isCore: true },
+      { name: "Cloud Computing", isCore: false },
+      { name: "Git", isCore: true },
+      { name: "GitHub", isCore: true },
       { name: "Jupyter Notebook", isCore: false },
-      { name: "Git", isCore: false },
-      { name: "GitHub", isCore: false },
     ],
   },
 ];
@@ -439,22 +451,22 @@ export const PROJECTS = [
   },
 ];
 
-// EDUCATION (Verified Academic Records)
+// EDUCATION (Directly Mapped from Resume)
 export const EDUCATION = [
   {
-    degree: "Bachelor of Technology in Computer Science and Engineering",
+    degree: "B.Tech. in Computer Science and Engineering",
     institution: "Toc H Institute of Science and Technology",
     period: "2022 — 2026",
     location: "Kerala, India",
     highlights: [
-      "Core coursework: Data Structures, Algorithms, Relational Database Systems (MySQL), Operating Systems, Computer Networks, and Machine Learning Foundations.",
-      "Engineered machine learning systems and analytical software using Python, Flask, Scikit-learn, and normalized SQL schemas.",
-      "Active participant in technical student initiatives and National Service Scheme (NSS) volunteer community programs.",
+      "Rigorous engineering coursework: Data Structures, Algorithms, Relational Database Management Systems (MySQL), Operating Systems, Software Engineering, and Applied Mathematics.",
+      "Engineered machine learning pipelines, predictive guidance models, and cybersecurity telemetry dashboards using Python, Scikit-learn, Flask, and SQL.",
+      "Active participant in technical student engineering initiatives and community service programs.",
     ],
   },
   {
-    degree: "Class 12 (Higher Secondary) — Science Stream",
-    institution: "HSS Koothattukulam",
+    degree: "Higher Secondary Education (Class XII)",
+    institution: "Higher Secondary Education",
     period: "2020 — 2022",
     location: "Kerala, India",
     highlights: [
@@ -462,22 +474,30 @@ export const EDUCATION = [
     ],
   },
   {
-    degree: "Class 10 (Secondary School Examination)",
+    degree: "Secondary Education (Class X)",
     institution: "Bappuji English Medium School",
     period: "2020",
     location: "Kerala, India",
     highlights: [
-      "CBSE Board curriculum with solid academic foundations in Mathematics and Science.",
+      "Completed secondary education with strong foundations in Mathematics, Science, and Analytical Logic.",
     ],
   },
 ];
 
-// VERIFIED TRAINING & CERTIFICATIONS (Preserving Real Records)
+// VERIFIED TRAINING & CERTIFICATIONS (Directly Mapped from Resume)
 export const COMPLETED_CERTIFICATIONS = [
+  {
+    title: "Data Science Intern",
+    organization: "Luminar Technolab",
+    period: "2026",
+    hours: "Specialized Internship",
+    skills: ["Python", "SQL", "Power BI", "EDA", "Machine Learning", "Model Evaluation"],
+  },
   {
     title: "Front End Web Development — 60 Hours Training Program",
     organization: "Aesthetix Edu-Tech",
     hours: "60 Hours",
+    period: "2025",
     skills: ["HTML5", "CSS3", "JavaScript", "DOM Manipulation", "Responsive Design"],
   },
   {
@@ -517,11 +537,48 @@ export const SOFT_SKILLS = [
   "Teamwork & Collaboration",
 ];
 
+// 4-STEP SYSTEM ENGINEERING PROCESS
+export const PROCESS_STEPS = [
+  {
+    step: "01",
+    phase: "UNDERSTAND",
+    title: "Domain Problem & Guidance Objectives",
+    description:
+      "Deconstruct analytical challenges, define target response distributions, establish evaluation metrics, and formulate quantitative success criteria.",
+    deliverables: ["Problem Specification", "Metric Baselines", "Constraint Analysis"],
+  },
+  {
+    step: "02",
+    phase: "EXPLORE",
+    title: "Data Ingest, Auditing & Feature Engineering",
+    description:
+      "Ingest structured and unstructured telemetry, mitigate outliers, normalize multi-tier distributions, and engineer standardized high-dimensional feature vectors.",
+    deliverables: ["EDA Reports", "Feature Transformation", "Outlier Treatments"],
+  },
+  {
+    step: "03",
+    phase: "MODEL",
+    title: "Ensemble Architecture & Neural Tuning",
+    description:
+      "Train diverse estimators (XGBoost, CatBoost, LightGBM, CNNs), optimize hyperparameters via cross-validation, and extract transparent SHAP local explainability.",
+    deliverables: ["Model Evaluation", "SHAP Attribution", "Tensor Preprocessing"],
+  },
+  {
+    step: "04",
+    phase: "DELIVER",
+    title: "REST Ingestion, DB Schema & Dashboards",
+    description:
+      "Wrap inference routines in lightweight Flask microservices, persist transactional state in normalized MySQL tables, and publish executive Power BI dashboards.",
+    deliverables: ["Production REST API", "Relational Views", "Live Dashboards"],
+  },
+];
+
 const portfolioData = {
   personal: PERSONAL_INFO,
   focusAreas: FOCUS_AREAS,
   skillGroups: SKILL_GROUPS,
   projects: PROJECTS,
+  processSteps: PROCESS_STEPS,
   education: EDUCATION,
   certifications: COMPLETED_CERTIFICATIONS,
   activities: ACTIVITIES,

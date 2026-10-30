@@ -113,9 +113,9 @@ export function GitHubSection() {
                   <ExternalLink className="w-3.5 h-3.5 text-[#737373] group-hover:text-black dark:group-hover:text-white transition-colors" />
                 </div>
 
-                <h4 className="font-bold text-xs sm:text-sm text-black dark:text-white transition-colors line-clamp-1 font-mono uppercase">
+                <h3 className="font-bold text-xs sm:text-sm text-black dark:text-white transition-colors line-clamp-1 font-mono uppercase">
                   {repo.name}
-                </h4>
+                </h3>
 
                 <p className="text-xs text-[#737373] dark:text-[#A3A3A3] line-clamp-2 leading-relaxed font-sans">
                   {repo.description}

@@ -3,126 +3,347 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume - Arjun M Babu | Full-Stack Developer</title>
+  <title>Arjun M Babu - Resume | Data Analyst &amp; Machine Learning</title>
+  <meta name="description" content="Resume of Arjun M Babu - Computer Science graduate skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking Data Analyst roles.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.55;
-      color: #0f172a;
-      background: #f8fafc;
-      margin: 0;
-      padding: 30px 15px;
+    *, *::before, *::after {
+      box-sizing: border-box;
     }
-    .resume-container {
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+      color: #111827;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 24px 12px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .print-bar {
+      max-width: 820px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: #111827;
+      color: #f9fafb;
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+    }
+    .print-btn {
+      background: #C8F31D;
+      color: #000000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+    .print-btn:hover {
+      background: #d4fa3c;
+    }
+    .back-link {
+      color: #9ca3af;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .back-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .resume-sheet {
       max-width: 820px;
       margin: 0 auto;
       background: #ffffff;
-      padding: 36px 40px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      padding: 44px 52px;
+      border: 1px solid #e5e7eb;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
-    h1 { margin: 0 0 2px; font-size: 26px; color: #0284c7; }
-    .subtitle { font-size: 14px; font-weight: 600; color: #334155; margin-bottom: 6px; }
-    h2 { font-size: 15px; text-transform: uppercase; border-bottom: 2px solid #0284c7; padding-bottom: 4px; margin-top: 22px; color: #0f172a; letter-spacing: 0.5px; }
-    h3 { margin: 0 0 2px; font-size: 14px; font-weight: 700; }
-    .contact-info { font-size: 12.5px; color: #475569; margin-bottom: 18px; line-height: 1.6; }
-    .contact-info a { color: #0284c7; text-decoration: none; font-weight: 500; }
-    .section-item { margin-bottom: 14px; }
-    .meta { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-    ul { margin: 4px 0 0 16px; padding: 0; font-size: 12.5px; color: #334155; }
-    li { margin-bottom: 3px; }
-    .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 16px; font-size: 12.5px; }
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .candidate-name {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 34px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin: 0 0 6px 0;
+      color: #111827;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 6px 14px;
+      font-size: 12.5px;
+      color: #374151;
+    }
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-decoration: none;
+      color: #1f2937;
+    }
+    .contact-item a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+    .contact-item a:hover {
+      text-decoration: underline;
+    }
+    .divider-pipe {
+      color: #9ca3af;
+    }
+    h2 {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #111827;
+      border-bottom: 1px solid #111827;
+      padding-bottom: 2px;
+      margin: 18px 0 10px 0;
+    }
+    p.summary-text {
+      font-size: 12.5px;
+      color: #1f2937;
+      margin: 0;
+      line-height: 1.55;
+    }
+    .skills-block {
+      font-size: 12.5px;
+      line-height: 1.6;
+      color: #1f2937;
+    }
+    .skills-block strong {
+      color: #111827;
+      font-weight: 600;
+    }
+    .entry {
+      margin-bottom: 12px;
+    }
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 13px;
+      font-weight: 700;
+      color: #111827;
+    }
+    .entry-header .title-link {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 12px;
+    }
+    .entry-header .title-link:hover {
+      text-decoration: underline;
+    }
+    .entry-header .date {
+      font-weight: 500;
+      font-size: 12px;
+      color: #374151;
+    }
+    .entry-sub {
+      font-size: 12px;
+      color: #4b5563;
+      margin-bottom: 3px;
+    }
+    ul.bullet-list {
+      margin: 3px 0 6px 18px;
+      padding: 0;
+      font-size: 12px;
+      color: #1f2937;
+      line-height: 1.5;
+    }
+    ul.bullet-list li {
+      margin-bottom: 2px;
+    }
+    .tech-inline {
+      font-weight: 600;
+      color: #111827;
+    }
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .print-bar {
+        display: none !important;
+      }
+      .resume-sheet {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+      }
+      @page {
+        margin: 14mm 16mm;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="resume-container">
-    <h1>Arjun M Babu</h1>
-    <div class="subtitle">Full-Stack Developer • Computer Science & Engineering</div>
-    <div class="contact-info">
-      Email: <a href="mailto:arjunmbabu2004@gmail.com">arjunmbabu2004@gmail.com</a> &bull; 
-      Phone: 6235689805 &bull; 
-      Location: Kerala, India<br>
-      GitHub: <a href="https://github.com/AMB-007" target="_blank">github.com/AMB-007</a> &bull; 
-      LinkedIn: <a href="https://www.linkedin.com/in/arjun-m-babu-45024224a" target="_blank">linkedin.com/in/arjun-m-babu-45024224a</a>
-    </div>
 
-    <h2>Professional Summary</h2>
-    <p style="font-size: 12.5px; color: #334155; margin: 0;">
-      Full-Stack Developer and Computer Science Engineering student focused on building scalable web applications, RESTful APIs, relational databases, and applied machine learning systems using React, Node.js, Express, Python Flask, and MySQL.
-    </p>
-
-    <h2>Education</h2>
-    <div class="section-item">
-      <div style="display: flex; justify-content: space-between;">
-        <h3>Bachelor of Technology in Computer Science and Engineering</h3>
-        <span class="meta" style="font-weight: 600;">2022 — 2026</span>
-      </div>
-      <div class="meta">Toc H Institute of Science and Technology, Kerala</div>
+  <!-- Screen Top Bar with Quick Print / Download -->
+  <div class="print-bar">
+    <span>Arjun M Babu &bull; Professional Resume</span>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <a href="/" class="back-link">&larr; Back to Portfolio</a>
+      <button class="print-btn" onclick="window.print()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+        Download / Print PDF
+      </button>
     </div>
-    <div class="section-item">
-      <div style="display: flex; justify-content: space-between;">
-        <h3>Class 12 (Higher Secondary) — Science Stream</h3>
-        <span class="meta" style="font-weight: 600;">2020 — 2022</span>
-      </div>
-      <div class="meta">HSS Koothattukulam, Kerala</div>
-    </div>
-    <div class="section-item">
-      <div style="display: flex; justify-content: space-between;">
-        <h3>Class 10 (Secondary School Examination)</h3>
-        <span class="meta" style="font-weight: 600;">2020</span>
-      </div>
-      <div class="meta">Bappuji English Medium School, Kerala (CBSE)</div>
-    </div>
-
-    <h2>Key Technical Projects (GitHub Sourced)</h2>
-    <div class="section-item">
-      <h3>Personalized Career Recommendation System (Flask, MySQL 8.x, ML Ensemble, SHAP)</h3>
-      <ul>
-        <li>Engineered multi-grade adaptive assessment (Class 7 through PG) with 19-dimensional cognitive evaluation.</li>
-        <li>Implemented 72-feature vector, XGBoost/CatBoost/LightGBM/Random Forest ensemble with SHAP explainability.</li>
-      </ul>
-    </div>
-    <div class="section-item">
-      <h3>WEBSHIELD — Security Operations & Threat Detection (Flask, Random Forest, Nmap)</h3>
-      <ul>
-        <li>Built threat intelligence dashboard integrating brute-force and SQLi detection with Random Forest classifier.</li>
-      </ul>
-    </div>
-    <div class="section-item">
-      <h3>ChRoMALaB — Browser-Native Color Theory Studio (Vanilla JS, Canvas, WCAG 2.1)</h3>
-      <ul>
-        <li>Developed 14-tool color workspace with real-time wheel calculations, WCAG contrast, and colorblind simulation.</li>
-      </ul>
-    </div>
-    <div class="section-item">
-      <h3>WeatherVista — 3D Globe & Atmospheric Intelligence (Three.js, WebGL, Flask)</h3>
-      <ul>
-        <li>Combined Three.js 3D Earth globe with live Open-Meteo API forecasts, AQI, and UV telemetry.</li>
-      </ul>
-    </div>
-
-    <h2>Technical Skills</h2>
-    <div class="skills-grid">
-      <div><strong>Languages:</strong> Python, JavaScript (ES6+), HTML5, CSS3, SQL</div>
-      <div><strong>Frontend:</strong> React.js, Vite, Responsive Design, Tailwind CSS</div>
-      <div><strong>Backend & APIs:</strong> Node.js, Express.js, Python Flask, RESTful APIs</div>
-      <div><strong>Databases:</strong> MySQL 8.x, MySQL Workbench, MongoDB</div>
-      <div><strong>Machine Learning:</strong> XGBoost, CatBoost, LightGBM, Random Forest, CNN, SHAP</div>
-      <div><strong>Tools & DevOps:</strong> Git, GitHub, VS Code, Postman, Jupyter Notebook</div>
-    </div>
-
-    <h2>Certifications & Training</h2>
-    <ul>
-      <li><strong>Front End Web Development (60 Hours Training Program):</strong> Aesthetix Edu-Tech</li>
-      <li><strong>Flutter Internship Program:</strong> Genzee Technologies</li>
-      <li><strong>SquardSkills Industry Leadership Training Program:</strong> GooseBerry Media</li>
-    </ul>
-
-    <h2>Activities & Volunteer Work</h2>
-    <ul>
-      <li><strong>National Service Scheme (NSS) Volunteer:</strong> Participated in health camps, cleanliness drives, and community outreach.</li>
-    </ul>
   </div>
+
+  <main class="resume-sheet">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="candidate-name">Arjun M Babu</h1>
+      <div class="contact-row">
+        <span class="contact-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+          <a href="https://github.com/AMB-007" target="_blank" rel="noopener">AMB-007</a>
+        </span>
+        <span class="divider-pipe">|</span>
+        <span class="contact-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          <a href="https://linkedin.com/in/arjun-m-babu" target="_blank" rel="noopener">arjun-m-babu</a>
+        </span>
+        <span class="divider-pipe">|</span>
+        <span class="contact-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <a href="https://arjun-m-babu.vercel.app" target="_blank" rel="noopener">Portfolio</a>
+        </span>
+        <span class="divider-pipe">|</span>
+        <span class="contact-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <a href="mailto:arjunmbabu.ds@gmail.com">arjunmbabu.ds@gmail.com</a>
+        </span>
+        <span class="divider-pipe">|</span>
+        <span class="contact-item">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          <span>6235689805</span>
+        </span>
+      </div>
+    </header>
+
+    <!-- Summary -->
+    <section>
+      <h2>SUMMARY</h2>
+      <p class="summary-text">
+        Computer Science graduate skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges. <a href="https://arjun-m-babu.vercel.app" target="_blank" rel="noopener" style="color: #1d4ed8; text-decoration: none; font-weight: 500;">click here</a>.
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2>SKILLS</h2>
+      <div class="skills-block">
+        <div><strong>Programming:</strong> Python, SQL</div>
+        <div><strong>Data Analysis:</strong> EDA, Pandas, NumPy, Data Visualization</div>
+        <div><strong>Machine Learning:</strong> Machine Learning, Scikit-learn, Model Evaluation</div>
+        <div><strong>AI:</strong> Natural Language Processing, Generative AI</div>
+        <div><strong>Tools &amp; Platforms:</strong> Power BI, AWS, Cloud Computing, Git, GitHub</div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section>
+      <h2>PROJECTS</h2>
+      
+      <!-- Project 1 -->
+      <div class="entry">
+        <div class="entry-header">
+          <span>Personalized Career Recommendation System</span>
+          <a href="https://github.com/AMB-007/Personalized-Career-Recommendation-System-Using-Machine-Learning" target="_blank" rel="noopener" class="title-link">GitHub</a>
+        </div>
+        <ul class="bullet-list">
+          <li>Built a machine learning-based career guidance platform that recommends suitable careers to students based on their interests, aptitude, and academic profile.</li>
+          <li>Trained and compared XGBoost and LightGBM classifiers, and used SHAP to explain which features drive each recommendation.</li>
+          <li>Integrated the prediction model with a Flask web application and MySQL database.</li>
+          <li><span class="tech-inline">Technologies:</span> Python, XGBoost, LightGBM, Scikit-learn, SHAP, Flask, MySQL.</li>
+        </ul>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="entry">
+        <div class="entry-header">
+          <span>WebShield</span>
+          <a href="https://github.com/AMB-007/WEBSHIELD" target="_blank" rel="noopener" class="title-link">GitHub</a>
+        </div>
+        <ul class="bullet-list">
+          <li>Designed a cybersecurity monitoring dashboard that logs and visualizes security events such as brute-force logins and SQL injection patterns.</li>
+          <li>Integrated a Random Forest classifier that scores detected threats with confidence values and severity levels.</li>
+          <li>Implemented REST API endpoints for security-event monitoring and management.</li>
+          <li><span class="tech-inline">Technologies:</span> Python, Flask, Scikit-learn, Pandas, NumPy, SQLite, JavaScript.</li>
+        </ul>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="entry">
+        <div class="entry-header">
+          <span>Quiz App</span>
+          <a href="https://github.com/AMB-007/Quiz-App" target="_blank" rel="noopener" class="title-link">GitHub</a>
+        </div>
+        <ul class="bullet-list">
+          <li>Implemented a full-stack quiz application with separate user and admin portals, role-based access, and quiz management features.</li>
+          <li>Created a responsive interface with light and dark modes and CSS animations.</li>
+          <li><span class="tech-inline">Technologies:</span> Python, Flask, HTML, CSS, JavaScript.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2>EDUCATION</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span>B.Tech. in Computer Science and Engineering</span>
+          <span class="date">2022 &ndash; 2026</span>
+        </div>
+        <div class="entry-sub">Toc H Institute of Science and Technology, Kerala, India</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header">
+          <span>Higher Secondary Education (Class XII)</span>
+          <span class="date">2020 &ndash; 2022</span>
+        </div>
+        <div class="entry-sub">Kerala, India</div>
+      </div>
+      <div class="entry">
+        <div class="entry-header">
+          <span>Secondary Education (Class X)</span>
+          <span class="date">2020</span>
+        </div>
+        <div class="entry-sub">Bappuji English Medium School, Kerala, India</div>
+      </div>
+    </section>
+
+    <!-- Experience & Certifications -->
+    <section>
+      <h2>EXPERIENCE &amp; CERTIFICATIONS</h2>
+      <ul class="bullet-list" style="margin-left: 18px;">
+        <li><strong>Data Science Intern</strong> &ndash; Luminar Technolab, 2026</li>
+        <li><strong>Front End Web Development &ndash; 60 Hours Training Program</strong>, &ndash; Aesthetix Edu-Tech, 2025</li>
+      </ul>
+    </section>
+  </main>
+
 </body>
 </html>

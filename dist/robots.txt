@@ -1,0 +1,5 @@
+# robots.txt for https://arjun-m-babu.vercel.app/
+User-agent: *
+Allow: /
+
+Sitemap: https://arjun-m-babu.vercel.app/sitemap.xml

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { CardFolderSection } from "@/components/ui/CardFolderSection";
+import { TechMarquee } from "@/components/ui/TechMarquee";
 import { SKILL_GROUPS } from "@/data/portfolioData";
 import { cn } from "@/utils/helpers";
 
@@ -34,7 +35,7 @@ export function Skills() {
       : null;
 
   return (
-    <section id="skills" className="py-20 md:py-28 border-b border-[#D4D4D4] dark:border-[#171717]">
+    <section id="skills" className="py-24 md:py-32 border-b border-white/5 bg-[#060608]">
       <div className="editorial-container">
         <SectionHeader
           number="03"
@@ -43,36 +44,39 @@ export function Skills() {
           description="Disciplined technical capabilities focused strictly on data manipulation, statistical analysis, machine learning algorithms, deep learning, and business intelligence."
         />
 
+        {/* Continuous Hardware-Accelerated Marquee */}
+        <TechMarquee />
+
         {/* ANIMATION 4: Card Folder Methodology / Skills Section */}
         <CardFolderSection />
 
-        {/* Dynamic Project Tracer Banner (Strict Monochrome) */}
-        <div className="mb-10 p-4 border border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
+        {/* Dynamic Project Tracer Banner */}
+        <div className="mb-12 p-4 rounded-xl border border-white/5 bg-[#0E0E12] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-black dark:bg-white animate-pulse" />
-            <span className="text-[#737373] uppercase text-[11px] font-bold">
+            <span className="w-2 h-2 rounded-full bg-[#C8F31D] animate-pulse" />
+            <span className="text-[#8B8B93] uppercase text-[11px] font-bold">
               // REPOSITORY EVIDENCE TRACER:
             </span>
-            <span className="font-bold text-black dark:text-white">
+            <span className="font-bold text-[#F4F4F5]">
               {activeHoverSkill ? activeHoverSkill : "Hover emphasized skills to trace project applications"}
             </span>
           </div>
 
           {relatedProjects ? (
             <div className="flex flex-wrap gap-1.5 items-center">
-              <span className="text-[10px] text-[#737373] uppercase font-semibold">Applied in:</span>
+              <span className="text-[10px] text-[#8B8B93] uppercase font-semibold">Applied in:</span>
               {relatedProjects.map((p) => (
                 <span
                   key={p}
-                  className="px-2 py-0.5 text-[10px] font-bold bg-black text-white dark:bg-white dark:text-black"
+                  className="px-2 py-0.5 text-[10px] font-bold rounded bg-[#C8F31D] text-black shadow-sm"
                 >
                   {p}
                 </span>
               ))}
             </div>
           ) : (
-            <span className="text-[11px] text-[#737373]">
-              Zero fabricated ratings • Grounded in code
+            <span className="text-[11px] text-[#8B8B93]">
+              Zero fabricated ratings • Grounded in real code
             </span>
           )}
         </div>
@@ -82,22 +86,22 @@ export function Skills() {
           {SKILL_GROUPS.map((group, groupIdx) => (
             <div
               key={group.id}
-              className="p-6 border border-[#D4D4D4] dark:border-[#171717] bg-white dark:bg-[#0A0A0A] flex flex-col justify-between space-y-5 transition-colors hover:border-black dark:hover:border-white h-full"
+              className="p-6 rounded-xl border border-white/5 bg-[#0E0E12] flex flex-col justify-between space-y-5 transition-all duration-300 hover:border-[#C8F31D]/40 group h-full shadow-lg"
             >
               {/* Category Header */}
-              <div className="space-y-1 pb-3 border-b border-[#D4D4D4] dark:border-[#171717]">
+              <div className="space-y-1.5 pb-3 border-b border-white/5">
                 <div className="flex items-center justify-between text-xs font-mono">
-                  <span className="font-bold text-black dark:text-white">
+                  <span className="font-bold text-[#C8F31D]">
                     0{groupIdx + 1}
                   </span>
-                  <span className="text-[#737373] uppercase text-[10px] tracking-wider">
+                  <span className="text-[#8B8B93] uppercase text-[10px] tracking-wider">
                     {group.skills.length} Competencies
                   </span>
                 </div>
-                <h3 className="text-base font-extrabold text-black dark:text-white font-sans uppercase">
+                <h3 className="text-base font-extrabold text-[#F4F4F5] font-sans uppercase">
                   {group.title}
                 </h3>
-                <p className="text-xs text-[#737373] font-sans">
+                <p className="text-xs text-[#8B8B93] font-sans">
                   {group.description}
                 </p>
               </div>
@@ -114,23 +118,16 @@ export function Skills() {
                       onMouseEnter={() => setActiveHoverSkill(skill.name)}
                       onMouseLeave={() => setActiveHoverSkill(null)}
                       className={cn(
-                        "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono transition-all duration-150 cursor-pointer select-none border",
+                        "inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono rounded transition-all duration-150 cursor-pointer select-none border",
                         isEmphasized
-                          ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white font-bold"
-                          : "bg-[#F5F5F5] text-black dark:bg-[#141414] dark:text-[#E5E5E5] border-[#D4D4D4] dark:border-[#262626] font-medium hover:border-black dark:hover:border-white",
-                        isHovered && !isEmphasized
-                          ? "border-black dark:border-white bg-[#E5E5E5] dark:bg-[#222222]"
-                          : "",
-                        isHovered && isEmphasized
-                          ? "scale-[1.02]"
-                          : ""
+                          ? "bg-white text-black font-bold border-white shadow-sm hover:bg-[#C8F31D] hover:border-[#C8F31D]"
+                          : "bg-[#141418] text-[#D4D4D8] border-white/5 font-medium hover:border-[#C8F31D]/50 hover:text-white",
+                        isHovered && "ring-2 ring-[#C8F31D] border-[#C8F31D]"
                       )}
                     >
                       <span>{skill.name}</span>
                       {isEmphasized && (
-                        <span className="text-[9px] uppercase tracking-wider px-1 py-0.2 bg-white text-black dark:bg-black dark:text-white font-mono font-bold">
-                          Core
-                        </span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C8F31D]" />
                       )}
                     </div>
                   );
@@ -138,25 +135,6 @@ export function Skills() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Semantic Monochrome Legend */}
-        <div className="mt-10 pt-4 border-t border-[#D4D4D4] dark:border-[#171717] flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#737373]">
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              <span className="px-1.5 py-0.5 bg-black text-white dark:bg-white dark:text-black text-[10px] font-bold">
-                Core
-              </span>
-              <span>Primary Visual Focus (Python, SQL, Pandas, NumPy, Statistics, EDA, ML, Scikit-learn, Power BI)</span>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 border border-[#737373]" />
-              <span>Demonstrated Techniques &amp; Tools</span>
-            </span>
-          </div>
-          <span className="font-bold text-black dark:text-white uppercase tracking-wider">
-            Exclusively Data Science
-          </span>
         </div>
       </div>
     </section>

@@ -161,9 +161,8 @@ export function FocusTextReveal({
     <Component
       ref={containerRef}
       className={cn("relative inline-block select-text", className)}
-      aria-label={text}
     >
-      {/* Real selectable word spans */}
+      {/* Real selectable words in standard document order for accessibility */}
       <span className="flex flex-wrap items-baseline gap-x-[0.28em] gap-y-1">
         {words.map((word, index) => {
           // If reduced motion or touch settled, all words are fully sharp
@@ -203,7 +202,6 @@ export function FocusTextReveal({
               onFocus={() => handleWordActivate(index)}
               onBlur={handleWordDeactivate}
               tabIndex={0}
-              aria-hidden="true"
               className={cn(
                 "focus-word inline-block cursor-default outline-none transition-[filter,opacity] duration-200 ease-out",
                 "focus-visible:ring-1 focus-visible:ring-[#C8F31D]/80"

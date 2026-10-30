@@ -130,9 +130,9 @@ export function DataShowcase() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
+                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
                     SHAP Feature Contribution Rankings (Ensemble ML)
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#737373] font-mono">
                     Model: XGBoost / CatBoost Soft Voting • Target: Career Cluster Guidance Vector
                   </p>
@@ -180,9 +180,9 @@ export function DataShowcase() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
+                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
                     CNN Confusion Matrix (Rock Identification Studio)
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#737373] font-mono">
                     Evaluation: 8 Geological Test Classes • 64x64 Tensor Input • Softmax Density
                   </p>
@@ -272,9 +272,9 @@ export function DataShowcase() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
+                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
                     Pairwise Cognitive Dimension Correlation (EDA)
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#737373] font-mono">
                     Pearson Correlation Coefficient Matrix (-1.00 to +1.00)
                   </p>
@@ -348,9 +348,9 @@ export function DataShowcase() {
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
                 <div>
-                  <h4 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
+                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
                     Power BI Dimensional Data Model &amp; DAX Measures
-                  </h4>
+                  </h3>
                   <p className="text-xs text-[#737373] font-mono">
                     Star Schema Architecture • Power Query Transformations • Time Intelligence
                   </p>

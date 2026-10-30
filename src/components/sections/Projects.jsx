@@ -366,9 +366,9 @@ export function Projects() {
                       </span>
                     </div>
 
-                    <h4 className="text-lg font-bold text-black dark:text-white font-sans uppercase">
+                    <h3 className="text-lg font-bold text-black dark:text-white font-sans uppercase">
                       {project.title}
-                    </h4>
+                    </h3>
 
                     <p className="text-xs text-[#737373] dark:text-[#A3A3A3] leading-relaxed font-sans">
                       {project.tagline}

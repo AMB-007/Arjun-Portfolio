@@ -399,20 +399,24 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
           <ArrowLeft className="w-4 h-4" />
         </button>
 
-        {/* Dot Indicators */}
-        <div className="flex items-center gap-2">
+        {/* Dot Indicators with Accessible Touch Targets */}
+        <div className="flex items-center gap-1">
           {FAN_CARDS.map((card, idx) => (
             <button
               key={card.id}
               onClick={() => setActiveIndex(idx)}
               aria-label={`Jump to project ${idx + 1}: ${card.title}`}
-              className={cn(
-                "transition-all duration-300 rounded-full cursor-pointer",
-                idx === activeIndex
-                  ? "w-6 h-2 bg-[#C8F31D]"
-                  : "w-2 h-2 bg-white/30 hover:bg-white/60"
-              )}
-            />
+              className="p-2 cursor-pointer flex items-center justify-center min-w-[28px] min-h-[28px]"
+            >
+              <span
+                className={cn(
+                  "transition-all duration-300 rounded-full block",
+                  idx === activeIndex
+                    ? "w-6 h-2 bg-[#C8F31D]"
+                    : "w-2 h-2 bg-white/30 hover:bg-white/60"
+                )}
+              />
+            </button>
           ))}
         </div>
 

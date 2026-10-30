@@ -70,9 +70,9 @@ export function Certifications() {
                 <div key={idx} className="space-y-1 text-xs font-sans p-4 bg-white dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717]">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 bg-black dark:bg-white shrink-0" />
-                    <h4 className="font-bold text-sm text-black dark:text-white uppercase">
+                    <h3 className="font-bold text-sm text-black dark:text-white uppercase">
                       {act.title}
-                    </h4>
+                    </h3>
                   </div>
                   <p className="text-[#737373] font-mono pl-4">{act.organization}</p>
                   <p className="text-[#171717] dark:text-[#E5E5E5] pl-4 leading-relaxed font-sans">

@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Sun, Moon, Menu, X, ArrowUpRight } from "lucide-react";
-import { useTheme } from "@/context/ThemeContext";
-import { PERSONAL_INFO } from "@/data/portfolioData";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Menu, X, ArrowUpRight, Zap, ZapOff } from "lucide-react";
 import { NavPill } from "@/components/ui/NavPill";
+import { PERSONAL_INFO } from "@/data/portfolioData";
 import { cn } from "@/utils/helpers";
 
 const NAV_ITEMS = [
+  {
+    label: "Home",
+    href: "#hero",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <polyline points="9 22 9 12 15 12 15 22" />
+      </svg>
+    ),
+  },
   {
     label: "About",
     href: "#about",
@@ -14,17 +23,6 @@ const NAV_ITEMS = [
       <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
-      </svg>
-    ),
-  },
-  {
-    label: "Focus",
-    href: "#focus",
-    icon: (
-      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 2 7 12 12 22 7 12 2" />
-        <polyline points="2 17 12 22 22 17" />
-        <polyline points="2 12 12 17 22 12" />
       </svg>
     ),
   },
@@ -41,6 +39,8 @@ const NAV_ITEMS = [
         <line x1="15" y1="20" x2="15" y2="23" />
         <line x1="20" y1="9" x2="23" y2="9" />
         <line x1="20" y1="14" x2="23" y2="14" />
+        <line x1="1" y1="9" x2="4" y2="9" />
+        <line x1="1" y1="14" x2="4" y2="14" />
       </svg>
     ),
   },
@@ -54,33 +54,12 @@ const NAV_ITEMS = [
     ),
   },
   {
-    label: "Analytics",
-    href: "#analytics",
+    label: "Experience",
+    href: "#experience",
     icon: (
       <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="12" y1="20" x2="12" y2="10" />
-        <line x1="18" y1="20" x2="18" y2="4" />
-        <line x1="6" y1="20" x2="6" y2="16" />
-      </svg>
-    ),
-  },
-  {
-    label: "Education",
-    href: "#education",
-    icon: (
-      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-        <path d="M6 12v5c3 3 9 3 12 0v-5" />
-      </svg>
-    ),
-  },
-  {
-    label: "Certifications",
-    href: "#certifications",
-    icon: (
-      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="8" r="6" />
-        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
       </svg>
     ),
   },
@@ -96,18 +75,70 @@ const NAV_ITEMS = [
   },
 ];
 
+/**
+ * Navbar Component
+ * Floating glass pill bar with rotating iridescent conic ring nav pills,
+ * active section scroll-spy, resume download, on-page reduced-motion toggle,
+ * and an animated full-screen mobile menu with focus trap.
+ */
 export function Navbar({ activeSection = "hero" }) {
-  const { resolvedTheme, toggleTheme } = useTheme();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const mobileMenuRef = useRef(null);
 
+  // Synchronize manual reduced-motion toggle
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const saved = localStorage.getItem("reduced-motion") === "true";
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const initial = saved || media;
+    setIsReducedMotion(initial);
+    if (initial) {
+      document.documentElement.classList.add("reduce-motion");
+    }
   }, []);
+
+  const toggleReducedMotion = () => {
+    const next = !isReducedMotion;
+    setIsReducedMotion(next);
+    localStorage.setItem("reduced-motion", next ? "true" : "false");
+    if (next) {
+      document.documentElement.classList.add("reduce-motion");
+    } else {
+      document.documentElement.classList.remove("reduce-motion");
+    }
+  };
+
+  // Keyboard trap and Esc handler for mobile drawer
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+        return;
+      }
+
+      if (e.key === "Tab" && mobileMenuRef.current) {
+        const focusables = mobileMenuRef.current.querySelectorAll(
+          'a, button, [tabindex="0"]'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileMenuOpen]);
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -115,134 +146,39 @@ export function Navbar({ activeSection = "hero" }) {
     const targetId = href.replace("#", "");
     const elem = document.getElementById(targetId);
     if (elem) {
-      const topOffset = elem.getBoundingClientRect().top + window.scrollY - 70;
+      const topOffset = elem.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: topOffset, behavior: "smooth" });
     }
   };
 
   return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 right-0 z-40 transition-all duration-200 border-b",
-        isScrolled
-          ? "bg-white/95 dark:bg-black/95 backdrop-blur-sm border-[#D4D4D4] dark:border-[#171717] py-3 shadow-none"
-          : "bg-white/80 dark:bg-black/80 backdrop-blur-xs border-[#D4D4D4]/60 dark:border-[#171717]/60 py-4"
-      )}
-    >
-      <div className="editorial-container flex items-center justify-between">
-        {/* Brand / Logo */}
-        <a
-          href="#hero"
-          onClick={(e) => handleNavClick(e, "#hero")}
-          className="flex items-center gap-2.5 group cursor-pointer focus:outline-none select-none"
+    <>
+      {/* Floating Glass Pill Navigation Header */}
+      <header className="fixed top-4 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
+        <nav
+          aria-label="Primary Navigation"
+          className={cn(
+            "pointer-events-auto flex items-center justify-between gap-2 sm:gap-3 px-3 py-2 rounded-full",
+            "glass-panel shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10"
+          )}
         >
-          <span className="font-mono font-bold text-xs px-2 py-0.5 bg-black text-white dark:bg-white dark:text-black border border-black dark:border-white">
-            AMB
-          </span>
-          <span className="font-bold text-sm tracking-tight text-black dark:text-white uppercase font-mono">
-            {PERSONAL_INFO.name}
-          </span>
-        </a>
-
-        {/* Desktop Nav Links - Iconic Nav Pills with Rotating Iridescent Rings */}
-        <nav className="hidden xl:flex items-center gap-1.5 font-medium text-xs font-mono">
-          {NAV_ITEMS.map((item) => {
-            const sectionKey = item.href.replace("#", "");
-            const isActive = activeSection === sectionKey;
-            return (
-              <NavPill
-                key={item.label}
-                label={item.label}
-                href={item.href}
-                icon={item.icon}
-                isActive={isActive}
-                onClick={(e) => handleNavClick(e, item.href)}
-              />
-            );
-          })}
-        </nav>
-
-        {/* Condensed Desktop Nav Links for intermediate lg breakpoint */}
-        <nav className="hidden lg:flex xl:hidden items-center gap-1 font-medium text-xs font-mono">
-          {NAV_ITEMS.slice(0, 5).map((item) => {
-            const sectionKey = item.href.replace("#", "");
-            const isActive = activeSection === sectionKey;
-            return (
-              <NavPill
-                key={item.label}
-                label={item.label}
-                href={item.href}
-                icon={item.icon}
-                isActive={isActive}
-                onClick={(e) => handleNavClick(e, item.href)}
-              />
-            );
-          })}
-        </nav>
-
-        {/* Action Controls */}
-        <div className="flex items-center gap-2">
-          {/* GitHub Profile */}
+          {/* Logo / Monogram */}
           <a
-            href={PERSONAL_INFO.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="GitHub Profile"
-            className="p-2 text-[#737373] hover:text-black dark:hover:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] transition-colors"
+            href="#hero"
+            onClick={(e) => handleNavClick(e, "#hero")}
+            aria-label="Arjun M Babu Home"
+            className="flex items-center gap-2 pl-1.5 pr-2 py-1 rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8F31D]"
           >
-            <GithubIcon className="w-4 h-4" />
+            <span className="w-7 h-7 rounded-full bg-[#141418] border border-white/15 flex items-center justify-center font-mono font-bold text-xs text-[#C8F31D]">
+              AMB
+            </span>
+            <span className="hidden md:inline font-mono text-xs font-bold tracking-tight text-[#F4F4F5] uppercase">
+              {PERSONAL_INFO.name}
+            </span>
           </a>
 
-          {/* LinkedIn Profile */}
-          <a
-            href={PERSONAL_INFO.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="LinkedIn Profile"
-            className="p-2 text-[#737373] hover:text-black dark:hover:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] transition-colors"
-          >
-            <LinkedinIcon className="w-4 h-4" />
-          </a>
-
-          {/* Monochrome Theme Toggle */}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme mode"
-            title="Toggle theme mode"
-            className="p-2 text-black dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] transition-colors cursor-pointer border border-[#D4D4D4] dark:border-[#262626]"
-          >
-            {resolvedTheme === "dark" ? (
-              <Sun className="w-4 h-4 transition-transform duration-200 hover:rotate-45" />
-            ) : (
-              <Moon className="w-4 h-4 transition-transform duration-200 hover:-rotate-12" />
-            )}
-          </button>
-
-          {/* Connect Button */}
-          <a
-            href="#contact"
-            onClick={(e) => handleNavClick(e, "#contact")}
-            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold uppercase bg-black hover:bg-[#171717] text-white dark:bg-white dark:hover:bg-[#E5E5E5] dark:text-black transition-colors cursor-pointer font-mono border border-black dark:border-white"
-          >
-            <span>Connect</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Navigation"
-            className="lg:hidden p-2 text-black dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717] cursor-pointer"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-white dark:bg-black border-b border-[#D4D4D4] dark:border-[#171717] px-6 py-5 space-y-2">
-          <nav className="flex flex-col space-y-2">
+          {/* Desktop Nav Items */}
+          <div className="hidden lg:flex items-center gap-1.5">
             {NAV_ITEMS.map((item) => {
               const sectionKey = item.href.replace("#", "");
               const isActive = activeSection === sectionKey;
@@ -254,14 +190,140 @@ export function Navbar({ activeSection = "hero" }) {
                   icon={item.icon}
                   isActive={isActive}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="w-full justify-start py-2"
                 />
               );
             })}
-          </nav>
-        </div>
-      )}
-    </header>
+          </div>
+
+          {/* Actions & Utilities */}
+          <div className="flex items-center gap-1.5">
+            {/* Reduce Motion Quick Toggle */}
+            <button
+              onClick={toggleReducedMotion}
+              title={isReducedMotion ? "Enable animations" : "Reduce motion for comfort"}
+              aria-label={isReducedMotion ? "Enable animations" : "Reduce motion"}
+              className={cn(
+                "p-2 rounded-full transition-colors cursor-pointer border",
+                isReducedMotion
+                  ? "bg-[#C8F31D]/15 text-[#C8F31D] border-[#C8F31D]"
+                  : "bg-white/5 text-[#8B8B93] hover:text-[#F4F4F5] border-white/10 hover:border-white/20"
+              )}
+            >
+              {isReducedMotion ? <ZapOff className="w-3.5 h-3.5" /> : <Zap className="w-3.5 h-3.5" />}
+            </button>
+
+            {/* Resume Download CTA */}
+            <a
+              href="/resume.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download verified resume"
+              className={cn(
+                "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-mono text-xs font-bold uppercase",
+                "bg-[#C8F31D] text-black hover:bg-[#b8e212] transition-colors shadow-xs"
+              )}
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>Resume</span>
+            </a>
+
+            {/* Mobile Menu Trigger */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open mobile menu"
+              className="lg:hidden p-2 rounded-full bg-white/5 text-[#F4F4F5] border border-white/10 hover:bg-white/10 cursor-pointer"
+            >
+              <Menu className="w-4 h-4" />
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Full-Screen Animated Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            ref={mobileMenuRef}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-50 flex flex-col justify-between p-6 bg-[#060608]/95 backdrop-blur-2xl"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile Navigation Drawer"
+          >
+            {/* Drawer Header */}
+            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <span className="w-8 h-8 rounded-full bg-[#141418] border border-white/15 flex items-center justify-center font-mono font-bold text-xs text-[#C8F31D]">
+                  AMB
+                </span>
+                <span className="font-mono text-xs font-bold text-[#F4F4F5] uppercase">
+                  {PERSONAL_INFO.name} // MCA
+                </span>
+              </div>
+
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                aria-label="Close mobile menu"
+                className="p-2.5 rounded-full bg-white/5 text-white border border-white/10 hover:bg-white/10 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Nav Pill Links List */}
+            <div className="flex flex-col space-y-3 my-auto py-6">
+              {NAV_ITEMS.map((item, idx) => {
+                const sectionKey = item.href.replace("#", "");
+                const isActive = activeSection === sectionKey;
+                return (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                  >
+                    <NavPill
+                      label={item.label}
+                      href={item.href}
+                      icon={item.icon}
+                      isActive={isActive}
+                      onClick={(e) => handleNavClick(e, item.href)}
+                      className="w-full justify-start py-2.5 px-4 text-sm"
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="pt-4 border-t border-white/10 space-y-3 font-mono">
+              <a
+                href="/resume.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#C8F31D] text-black font-bold text-xs uppercase"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download Resume (PDF / Web)</span>
+              </a>
+
+              <div className="flex items-center justify-between text-xs text-[#8B8B93] pt-2">
+                <span>Toc H Institute // MCA</span>
+                <button
+                  onClick={toggleReducedMotion}
+                  className="hover:text-white transition-colors flex items-center gap-1"
+                >
+                  {isReducedMotion ? "Animations Off" : "Animations On"}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
