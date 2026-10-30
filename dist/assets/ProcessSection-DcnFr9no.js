@@ -1,4 +1,4 @@
-import{r as c,j as e,m as d}from"./vendor-motion-4M-5HAnn.js";import{d as t,S as x,c as i}from"./index-DUV6me02.js";import{o as p,c as m,b as f,T as o,f as b,p as h}from"./vendor-icons-Csxg35F-.js";const g={"01":o,"02":f,"03":m,"04":p},u={"01":`# Phase 1: Problem Definition & Metric Specification
+import{r as c,j as e,m as d}from"./vendor-motion-4M-5HAnn.js";import{d as t,S as x,c as i}from"./index-tmq_iE7S.js";import{o as p,c as m,b as f,T as o,f as b,p as h}from"./vendor-icons-Csxg35F-.js";const g={"01":o,"02":f,"03":m,"04":p},u={"01":`# Phase 1: Problem Definition & Metric Specification
 problem = "Predict optimal career pathways across 19 student dimensions"
 target_metric = "Top-3 Accuracy >= 90% with balanced recall"
 baseline_eval = "Zero-rule frequency baseline: 24.3%"
