@@ -28,7 +28,7 @@
 
   <!-- Orbital Data Rings -->
   <ellipse cx="300" cy="300" rx="220" ry="110" fill="none" stroke="#7DD3FC" stroke-width="1.5" stroke-dasharray="6 6" opacity="0.4" transform="rotate(-20 300 300)"/>
-  <ellipse cx="300" cy="300" rx="170" ry="85" fill="none" stroke="#C8F31D" stroke-width="2" opacity="0.6" transform="rotate(25 300 300)"/>
+  <ellipse cx="300" cy="300" rx="170" ry="85" fill="none" stroke="#D6B979" stroke-width="2" opacity="0.6" transform="rotate(25 300 300)"/>
 
   <!-- Isometric Central Deployment Microservice Cube -->
   <g transform="translate(300, 260)">
@@ -49,17 +49,17 @@
 
   <!-- Floating Satellite Dashboard Pod 2 (Power BI DAX Prism) -->
   <g transform="translate(440, 230)">
-    <polygon points="0,-35 40,-12 0,10 -40,-12" fill="#ECFCCB"/>
-    <polygon points="-40,-12 0,10 0,55 -40,32" fill="#C8F31D"/>
-    <polygon points="0,10 40,-12 40,32 0,55" fill="#65A30D"/>
+    <polygon points="0,-35 40,-12 0,10 -40,-12" fill="#F0DDA8"/>
+    <polygon points="-40,-12 0,10 0,55 -40,32" fill="#D6B979"/>
+    <polygon points="0,10 40,-12 40,32 0,55" fill="#9C7F3F"/>
   </g>
 
   <!-- Real-Time Packet Stream Lines -->
-  <path d="M 160 220 Q 230 180 300 190" fill="none" stroke="#C8F31D" stroke-width="2.5" stroke-dasharray="4 4"/>
+  <path d="M 160 220 Q 230 180 300 190" fill="none" stroke="#D6B979" stroke-width="2.5" stroke-dasharray="4 4"/>
   <path d="M 300 370 Q 370 380 440 285" fill="none" stroke="#38BDF8" stroke-width="2.5" stroke-dasharray="4 4"/>
 
   <!-- Satellite Connection Indicators -->
-  <circle cx="160" cy="220" r="6" fill="#C8F31D" filter="url(#deployGlow)"/>
-  <circle cx="440" cy="230" r="7" fill="#FFF" stroke="#C8F31D" stroke-width="2"/>
+  <circle cx="160" cy="220" r="6" fill="#D6B979" filter="url(#deployGlow)"/>
+  <circle cx="440" cy="230" r="7" fill="#FFF" stroke="#D6B979" stroke-width="2"/>
 </svg>
 

@@ -60,7 +60,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-36 bg-[#060608] border-b border-white/5 relative overflow-hidden">
+    <section id="contact" className="py-24 md:py-36 bg-[#07080C] border-b border-white/[0.07] relative overflow-hidden">
       <div className="editorial-container relative z-10">
         <SectionHeader
           number="09"
@@ -72,16 +72,16 @@ export function Contact() {
         {/* Large Editorial Headline & Status */}
         <div className="mb-14 space-y-4">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono font-bold rounded-full bg-[#0E0E12] text-[#F4F4F5] border border-white/10">
-              <span className="w-2 h-2 rounded-full bg-[#C8F31D] animate-pulse" />
+            <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono font-bold rounded-full bg-[#0D0F14] text-[#F3EFE6] border border-white/[0.07]">
+              <span className="w-2 h-2 rounded-full bg-[#D6B979] animate-pulse" />
               <span>OPEN TO DATA ANALYST &amp; ML OPPORTUNITIES // B.TECH '26</span>
             </span>
           </div>
 
-          <h3 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#F4F4F5] font-sans uppercase leading-tight">
+          <h3 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#F3EFE6] font-sans uppercase leading-tight">
             LET&apos;S WORK WITH DATA.
           </h3>
-          <p className="text-base sm:text-lg text-[#8B8B93] max-w-2xl font-sans">
+          <p className="text-base sm:text-lg text-[#A8A59C] max-w-2xl font-sans">
             Whether you have a machine learning challenge, dataset analysis requirement, or prospective role, I am glad to discuss how we can build impactful solutions together.
           </p>
         </div>
@@ -91,18 +91,18 @@ export function Contact() {
           {/* LEFT: Verified Direct Contact Channels */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-4">
-              <span className="text-xs font-mono font-bold text-[#8B8B93] uppercase tracking-wider block pb-2 border-b border-white/10 flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-[#A8A59C] uppercase tracking-wider block pb-2 border-b border-white/[0.07] flex items-center justify-between">
                 <span>// VERIFIED CONTACT CHANNELS</span>
-                <span className="text-[#C8F31D]">ENCRYPTED SSL</span>
+                <span className="text-[#D6B979]">ENCRYPTED SSL</span>
               </span>
 
               {/* Direct Email Card */}
-              <div className="p-6 rounded-2xl bg-[#0E0E12] border border-white/10 hover:border-[#C8F31D]/40 transition-all duration-300 space-y-3 shadow-lg">
-                <div className="flex items-center justify-between text-xs font-mono text-[#8B8B93]">
-                  <span className="uppercase font-bold text-[#F4F4F5]">Professional Email</span>
+              <div className="p-6 rounded-2xl bg-[#0D0F14] border border-white/[0.07] hover:border-[#D6B979]/40 transition-all duration-300 space-y-3 shadow-lg">
+                <div className="flex items-center justify-between text-xs font-mono text-[#A8A59C]">
+                  <span className="uppercase font-bold text-[#F3EFE6]">Professional Email</span>
                   <button
                     onClick={handleCopyEmail}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#141418] hover:bg-[#C8F31D] hover:text-black text-[#C8F31D] transition-colors cursor-pointer text-[11px] font-bold"
+                    className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#12151C] hover:bg-[#D6B979] hover:text-[#07080C] text-[#D6B979] transition-colors cursor-pointer text-[11px] font-bold"
                   >
                     {copiedEmail ? (
                       <>
@@ -119,7 +119,7 @@ export function Contact() {
                 </div>
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="text-base sm:text-xl font-bold font-mono text-[#F4F4F5] hover:text-[#C8F31D] transition-colors block break-all"
+                  className="text-base sm:text-xl font-bold font-mono text-[#F3EFE6] hover:text-[#D6B979] transition-colors block break-all"
                 >
                   {PERSONAL_INFO.email}
                 </a>
@@ -132,15 +132,15 @@ export function Contact() {
                   href={PERSONAL_INFO.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-5 rounded-xl bg-[#0E0E12] border border-white/10 hover:border-[#C8F31D]/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
+                  className="p-5 rounded-xl bg-[#0D0F14] border border-white/[0.07] hover:border-[#D6B979]/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
                 >
                   <div className="flex items-center justify-between">
-                    <LinkedinIcon className="w-4 h-4 text-[#F4F4F5]" />
-                    <ExternalLink className="w-3.5 h-3.5 text-[#8B8B93] group-hover:text-[#C8F31D] transition-colors" />
+                    <LinkedinIcon className="w-4 h-4 text-[#F3EFE6]" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A59C] group-hover:text-[#D6B979] transition-colors" />
                   </div>
                   <div className="pt-4">
-                    <span className="font-bold text-[#F4F4F5] block uppercase">LinkedIn</span>
-                    <span className="text-[10px] text-[#8B8B93] block truncate">Arjun M Babu</span>
+                    <span className="font-bold text-[#F3EFE6] block uppercase">LinkedIn</span>
+                    <span className="text-[10px] text-[#A8A59C] block truncate">Arjun M Babu</span>
                   </div>
                 </a>
 
@@ -149,26 +149,26 @@ export function Contact() {
                   href={PERSONAL_INFO.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-5 rounded-xl bg-[#0E0E12] border border-white/10 hover:border-[#C8F31D]/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
+                  className="p-5 rounded-xl bg-[#0D0F14] border border-white/[0.07] hover:border-[#D6B979]/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
                 >
                   <div className="flex items-center justify-between">
-                    <GithubIcon className="w-4 h-4 text-[#F4F4F5]" />
-                    <ExternalLink className="w-3.5 h-3.5 text-[#8B8B93] group-hover:text-[#C8F31D] transition-colors" />
+                    <GithubIcon className="w-4 h-4 text-[#F3EFE6]" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A59C] group-hover:text-[#D6B979] transition-colors" />
                   </div>
                   <div className="pt-4">
-                    <span className="font-bold text-[#F4F4F5] block uppercase">GitHub</span>
-                    <span className="text-[10px] text-[#8B8B93] block">@AMB-007</span>
+                    <span className="font-bold text-[#F3EFE6] block uppercase">GitHub</span>
+                    <span className="text-[10px] text-[#A8A59C] block">@AMB-007</span>
                   </div>
                 </a>
               </div>
             </div>
 
             {/* Academic Footnote */}
-            <div className="p-5 rounded-xl bg-[#0E0E12]/60 border border-white/10 text-xs font-mono text-[#8B8B93] space-y-1.5">
-              <span className="font-bold text-[#F4F4F5] uppercase block">Academic Affiliation &amp; Phone:</span>
-              <p className="text-[#D4D4D8]">Toc H Institute of Science and Technology • B.Tech in CSE (2022–2026)</p>
-              <p className="text-[11px] text-[#C8F31D] font-mono">Direct Phone: +91 6235689805</p>
-              <p className="text-[11px] text-[#8B8B93]">Primary Hub: {PERSONAL_INFO.location}</p>
+            <div className="p-5 rounded-xl bg-[#0D0F14]/70 border border-white/[0.07] text-xs font-mono text-[#A8A59C] space-y-1.5">
+              <span className="font-bold text-[#F3EFE6] uppercase block">Academic Affiliation &amp; Phone:</span>
+              <p className="text-[#F3EFE6]/80">Toc H Institute of Science and Technology • B.Tech in CSE (2022–2026)</p>
+              <p className="text-[11px] text-[#D6B979] font-mono font-bold">Direct Phone: +91 6235689805</p>
+              <p className="text-[11px] text-[#A8A59C]">Primary Hub: {PERSONAL_INFO.location}</p>
             </div>
           </div>
 
@@ -177,7 +177,7 @@ export function Contact() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="p-6 sm:p-8 rounded-2xl bg-[#0E0E12] border border-white/10 space-y-5 shadow-2xl"
+              className="p-6 sm:p-8 rounded-2xl bg-[#0D0F14] border border-white/[0.07] space-y-5 shadow-2xl"
             >
               {/* Hidden Honeypot Input */}
               <input
@@ -191,18 +191,18 @@ export function Contact() {
                 aria-hidden="true"
               />
 
-              <div className="space-y-1 pb-3 border-b border-white/10">
-                <h4 className="font-mono text-xs font-bold uppercase text-[#F4F4F5] tracking-wider flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#C8F31D]" />
+              <div className="space-y-1 pb-3 border-b border-white/[0.07]">
+                <h4 className="font-mono text-xs font-bold uppercase text-[#F3EFE6] tracking-wider flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#D6B979]" />
                   <span>// COMPOSE DIRECT MESSAGE</span>
                 </h4>
-                <p className="text-xs text-[#8B8B93] font-sans">
+                <p className="text-xs text-[#A8A59C] font-sans">
                   Submitting directly prepares and launches your message via your system mail client.
                 </p>
               </div>
 
               {submittedSuccess && (
-                <div className="p-3 rounded-lg bg-[#C8F31D]/15 border border-[#C8F31D]/40 text-xs font-mono text-[#C8F31D] flex items-center gap-2">
+                <div className="p-3 rounded-lg bg-[#D6B979]/15 border border-[#D6B979]/40 text-xs font-mono text-[#D6B979] flex items-center gap-2">
                   <Check className="w-4 h-4" />
                   <span>Message client initiated. Thank you!</span>
                 </div>
@@ -211,7 +211,7 @@ export function Contact() {
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5 font-mono text-xs">
-                  <label htmlFor="contact-name" className="font-bold text-[#F4F4F5] uppercase">
+                  <label htmlFor="contact-name" className="font-bold text-[#F3EFE6] uppercase">
                     Your Name *
                   </label>
                   <input
@@ -221,17 +221,17 @@ export function Contact() {
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Jane Doe"
                     className={cn(
-                      "w-full px-3.5 py-2.5 rounded-lg bg-[#141418] border text-[#F4F4F5] outline-none transition-colors",
+                      "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors",
                       errors.name
                         ? "border-red-500 focus:border-red-500"
-                        : "border-white/10 focus:border-[#C8F31D] focus:ring-1 focus:ring-[#C8F31D]"
+                        : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
                     )}
                   />
                   {errors.name && <p className="text-[10px] text-red-400 font-bold">{errors.name}</p>}
                 </div>
 
                 <div className="space-y-1.5 font-mono text-xs">
-                  <label htmlFor="contact-email" className="font-bold text-[#F4F4F5] uppercase">
+                  <label htmlFor="contact-email" className="font-bold text-[#F3EFE6] uppercase">
                     Your Email *
                   </label>
                   <input
@@ -241,10 +241,10 @@ export function Contact() {
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="jane@company.com"
                     className={cn(
-                      "w-full px-3.5 py-2.5 rounded-lg bg-[#141418] border text-[#F4F4F5] outline-none transition-colors",
+                      "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors",
                       errors.email
                         ? "border-red-500 focus:border-red-500"
-                        : "border-white/10 focus:border-[#C8F31D] focus:ring-1 focus:ring-[#C8F31D]"
+                        : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
                     )}
                   />
                   {errors.email && <p className="text-[10px] text-red-400 font-bold">{errors.email}</p>}
@@ -253,7 +253,7 @@ export function Contact() {
 
               {/* Subject */}
               <div className="space-y-1.5 font-mono text-xs">
-                <label htmlFor="contact-subject" className="font-bold text-[#F4F4F5] uppercase">
+                <label htmlFor="contact-subject" className="font-bold text-[#F3EFE6] uppercase">
                   Subject *
                 </label>
                 <input
@@ -263,10 +263,10 @@ export function Contact() {
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   placeholder="Data Science Opportunity / Analytical Project"
                   className={cn(
-                    "w-full px-3.5 py-2.5 rounded-lg bg-[#141418] border text-[#F4F4F5] outline-none transition-colors",
+                    "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors",
                     errors.subject
                       ? "border-red-500 focus:border-red-500"
-                      : "border-white/10 focus:border-[#C8F31D] focus:ring-1 focus:ring-[#C8F31D]"
+                      : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
                   )}
                 />
                 {errors.subject && <p className="text-[10px] text-red-400 font-bold">{errors.subject}</p>}
@@ -274,7 +274,7 @@ export function Contact() {
 
               {/* Message */}
               <div className="space-y-1.5 font-mono text-xs">
-                <label htmlFor="contact-message" className="font-bold text-[#F4F4F5] uppercase">
+                <label htmlFor="contact-message" className="font-bold text-[#F3EFE6] uppercase">
                   Message *
                 </label>
                 <textarea
@@ -284,10 +284,10 @@ export function Contact() {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Share details regarding your inquiry, technical challenge, or role..."
                   className={cn(
-                    "w-full px-3.5 py-2.5 rounded-lg bg-[#141418] border text-[#F4F4F5] outline-none transition-colors font-sans resize-none",
+                    "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors font-sans resize-none",
                     errors.message
                       ? "border-red-500 focus:border-red-500"
-                      : "border-white/10 focus:border-[#C8F31D] focus:ring-1 focus:ring-[#C8F31D]"
+                      : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
                   )}
                 />
                 {errors.message && <p className="text-[10px] text-red-400 font-bold">{errors.message}</p>}
@@ -297,7 +297,7 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-lg bg-[#C8F31D] hover:bg-[#d6fa3f] text-black font-mono text-xs font-black uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-[0_0_20px_rgba(200,243,29,0.15)]"
+                className="w-full py-3.5 rounded-lg bg-[#D6B979] hover:bg-[#F0DDA8] text-[#07080C] font-sans text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-[0_0_20px_rgba(214,185,121,0.25)]"
               >
                 <Send className="w-4 h-4 stroke-[2.5]" />
                 <span>Transmit Message via Mail Client</span>

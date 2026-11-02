@@ -72,13 +72,13 @@ export function Preloader({ onComplete }) {
           aria-label="Portfolio Introduction"
         >
           {/* Subtle Ambient Glow */}
-          <div className="absolute w-72 h-72 rounded-full bg-[#C8F31D]/10 blur-3xl pointer-events-none" />
+          <div className="absolute w-72 h-72 rounded-full bg-[#D6B979]/10 blur-3xl pointer-events-none" />
 
-          {/* Center Monogram with Iridescent Rotating Ring */}
+          {/* Center Monogram with Metallic Champagne Conic Ring */}
           <div className="relative mb-6">
-            <div className="w-16 h-16 rounded-2xl p-[2px] bg-gradient-to-r from-[#3b82f6] via-[#d946ef] to-[#C8F31D] animate-spin" style={{ animationDuration: "3s" }}>
-              <div className="w-full h-full bg-[#0E0E12] rounded-[14px] flex items-center justify-center">
-                <span className="font-mono font-black text-xl text-white tracking-wider">
+            <div className="w-16 h-16 rounded-2xl p-[2px] bg-gradient-to-r from-[#D6B979] via-[#F0DDA8] to-[#9C7F3F] animate-spin" style={{ animationDuration: "3s" }}>
+              <div className="w-full h-full bg-[#0D0F14] rounded-[14px] flex items-center justify-center border border-white/5">
+                <span className="font-mono font-black text-xl text-[#F3EFE6] tracking-wider">
                   AMB
                 </span>
               </div>
@@ -87,12 +87,12 @@ export function Preloader({ onComplete }) {
 
           {/* Title & Status */}
           <div className="text-center space-y-2 mb-8">
-            <div className="flex items-center justify-center gap-2 text-xs font-mono font-bold text-[#C8F31D] tracking-widest uppercase">
+            <div className="flex items-center justify-center gap-2 text-xs font-mono font-bold text-[#D6B979] tracking-widest uppercase">
               <Terminal className="w-3.5 h-3.5" />
-              <span>ARJUN M BABU // MCA</span>
+              <span>ARJUN M BABU // B.TECH CSE</span>
             </div>
-            <p className="text-xs font-mono text-[#8B8B93] tracking-wider">
-              DATA SCIENCE &amp; MACHINE LEARNING
+            <p className="text-xs font-mono text-[#A8A59C] tracking-wider">
+              DATA ANALYST &amp; MACHINE LEARNING ENGINEER
             </p>
           </div>
 
@@ -100,12 +100,12 @@ export function Preloader({ onComplete }) {
           <div className="w-48 space-y-1.5">
             <div className="h-[2px] w-full bg-white/10 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#C8F31D] transition-all duration-75 ease-out"
+                className="h-full bg-gradient-to-r from-[#D6B979] to-[#F0DDA8] transition-all duration-75 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="flex items-center justify-between text-[10px] font-mono text-[#8B8B93]">
-              <span>LOADING SYSTEMS</span>
+            <div className="flex items-center justify-between text-[10px] font-mono text-[#A8A59C]">
+              <span>INITIALIZING 3D KERNEL</span>
               <span>{progress}%</span>
             </div>
           </div>

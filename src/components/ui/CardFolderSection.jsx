@@ -99,7 +99,7 @@ export function CardFolderSection() {
       {/* Editorial Eyebrow */}
       <div className="flex items-center justify-between pb-4 mb-8 border-b border-[#D4D4D4] dark:border-[#171717] font-mono text-xs">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#C8F31D]" />
+          <span className="w-2 h-2 rounded-full bg-[#D6B979]" />
           <span className="text-[#737373] uppercase tracking-wider font-bold">
             // CORE METHODOLOGY ARCHITECTURE:
           </span>
@@ -126,7 +126,7 @@ export function CardFolderSection() {
               className={cn(
                 "relative group flex flex-col cursor-pointer select-none outline-none transition-opacity duration-300",
                 isSibling ? "opacity-60" : "opacity-100",
-                "focus-visible:ring-2 focus-visible:ring-[#C8F31D] focus-visible:ring-offset-4 focus-visible:ring-offset-black rounded-3xl"
+                "focus-visible:ring-2 focus-visible:ring-[#D6B979] focus-visible:ring-offset-4 focus-visible:ring-offset-black rounded-3xl"
               )}
             >
               {/* Soft Radial Ambient Glow Underneath */}
@@ -200,7 +200,7 @@ export function CardFolderSection() {
                       className={cn(
                         "w-7 h-7 rounded-full flex items-center justify-center border border-white/15 bg-white/5 transition-all duration-300",
                         isCurrent
-                          ? "border-[#C8F31D] text-[#C8F31D] rotate-45 scale-110"
+                          ? "border-[#D6B979] text-[#D6B979] rotate-45 scale-110"
                           : "text-white/60"
                       )}
                     >
@@ -269,7 +269,7 @@ export function CardFolderSection() {
                 {/* LOWER SECTION: Title, Description, and Tags */}
                 <div className="relative z-10 pt-4 mt-auto border-t border-white/10 space-y-3">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono uppercase font-bold text-[#C8F31D] tracking-wider block">
+                    <span className="text-[10px] font-mono uppercase font-bold text-[#D6B979] tracking-wider block">
                       {card.tag}
                     </span>
                     <h3 className="text-lg sm:text-xl font-extrabold text-white uppercase font-sans tracking-tight leading-snug">
@@ -283,7 +283,7 @@ export function CardFolderSection() {
 
                   <div className="pt-1 flex items-center justify-between text-[11px] font-mono text-white/50">
                     <span className="flex items-center gap-1 group-hover:text-white transition-colors">
-                      <Sparkles className="w-3 h-3 text-[#C8F31D]" />
+                      <Sparkles className="w-3 h-3 text-[#D6B979]" />
                       <span>Production Tested</span>
                     </span>
                     <span className="text-white/40">AMB // CSE</span>

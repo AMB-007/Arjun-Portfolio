@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Menu, X, ArrowUpRight, Zap, ZapOff } from "lucide-react";
+import { Download, Menu, X, Box, Zap, ZapOff } from "lucide-react";
 import { NavPill } from "@/components/ui/NavPill";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { cn } from "@/utils/helpers";
@@ -35,12 +35,6 @@ const NAV_ITEMS = [
         <rect x="9" y="9" width="6" height="6" />
         <line x1="9" y1="1" x2="9" y2="4" />
         <line x1="15" y1="1" x2="15" y2="4" />
-        <line x1="9" y1="20" x2="9" y2="23" />
-        <line x1="15" y1="20" x2="15" y2="23" />
-        <line x1="20" y1="9" x2="23" y2="9" />
-        <line x1="20" y1="14" x2="23" y2="14" />
-        <line x1="1" y1="9" x2="4" y2="9" />
-        <line x1="1" y1="14" x2="4" y2="14" />
       </svg>
     ),
   },
@@ -54,12 +48,21 @@ const NAV_ITEMS = [
     ),
   },
   {
-    label: "Experience",
-    href: "#experience",
+    label: "Process",
+    href: "#process",
     icon: (
       <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+      </svg>
+    ),
+  },
+  {
+    label: "Education",
+    href: "#education",
+    icon: (
+      <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+        <path d="M6 12v5c3 3 9 3 12 0v-5" />
       </svg>
     ),
   },
@@ -77,35 +80,25 @@ const NAV_ITEMS = [
 
 /**
  * Navbar Component
- * Floating glass pill bar with rotating iridescent conic ring nav pills,
- * active section scroll-spy, resume download, on-page reduced-motion toggle,
- * and an animated full-screen mobile menu with focus trap.
+ * Solid frosted-glass floating pill (Defect d) with metallic champagne conic ring nav pills,
+ * active section tracking, persistent 3D / motion toggle, and accessible mobile drawer.
  */
 export function Navbar({ activeSection = "hero" }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isReducedMotion, setIsReducedMotion] = useState(false);
+  const [is3dDisabled, setIs3dDisabled] = useState(false);
   const mobileMenuRef = useRef(null);
 
-  // Synchronize manual reduced-motion toggle
+  // Synchronize manual 3D / reduced-motion toggle from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem("reduced-motion") === "true";
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const initial = saved || media;
-    setIsReducedMotion(initial);
-    if (initial) {
-      document.documentElement.classList.add("reduce-motion");
-    }
+    const saved3d = localStorage.getItem("portfolio_3d_disabled") === "true";
+    setIs3dDisabled(saved3d);
   }, []);
 
-  const toggleReducedMotion = () => {
-    const next = !isReducedMotion;
-    setIsReducedMotion(next);
-    localStorage.setItem("reduced-motion", next ? "true" : "false");
-    if (next) {
-      document.documentElement.classList.add("reduce-motion");
-    } else {
-      document.documentElement.classList.remove("reduce-motion");
-    }
+  const toggle3DExperience = () => {
+    const next = !is3dDisabled;
+    setIs3dDisabled(next);
+    localStorage.setItem("portfolio_3d_disabled", next ? "true" : "false");
+    window.location.reload();
   };
 
   // Keyboard trap and Esc handler for mobile drawer
@@ -153,13 +146,14 @@ export function Navbar({ activeSection = "hero" }) {
 
   return (
     <>
-      {/* Floating Glass Pill Navigation Header */}
+      {/* Floating Solid Frosted Glass Pill Navigation Header (Defect d) */}
       <header className="fixed top-4 left-0 right-0 z-40 flex justify-center px-4 pointer-events-none">
         <nav
           aria-label="Primary Navigation"
           className={cn(
             "pointer-events-auto flex items-center justify-between gap-2 sm:gap-3 px-3 py-2 rounded-full",
-            "glass-panel shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10"
+            // Solid frosted glass (Defect d: headings never bleed through)
+            "bg-[#0D0F14]/92 backdrop-blur-2xl border border-white/[0.08] shadow-[0_16px_40px_rgba(0,0,0,0.8)]"
           )}
         >
           {/* Logo / Monogram */}
@@ -167,17 +161,17 @@ export function Navbar({ activeSection = "hero" }) {
             href="#hero"
             onClick={(e) => handleNavClick(e, "#hero")}
             aria-label="Arjun M Babu Home"
-            className="flex items-center gap-2 pl-1.5 pr-2 py-1 rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8F31D]"
+            className="flex items-center gap-2 pl-1.5 pr-2 py-1 rounded-full cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B979]"
           >
-            <span className="w-7 h-7 rounded-full bg-[#141418] border border-white/15 flex items-center justify-center font-mono font-bold text-xs text-[#C8F31D]">
+            <span className="w-7 h-7 rounded-full bg-[#12151C] border border-[#D6B979]/40 flex items-center justify-center font-mono font-bold text-xs text-[#D6B979] shadow-sm">
               AMB
             </span>
-            <span className="hidden md:inline font-mono text-xs font-bold tracking-tight text-[#F4F4F5] uppercase">
+            <span className="hidden md:inline font-mono text-xs font-bold tracking-tight text-[#F3EFE6] uppercase">
               {PERSONAL_INFO.name}
             </span>
           </a>
 
-          {/* Desktop Nav Items */}
+          {/* Desktop Nav Items with Metallic Conic Rings */}
           <div className="hidden lg:flex items-center gap-1.5">
             {NAV_ITEMS.map((item) => {
               const sectionKey = item.href.replace("#", "");
@@ -196,31 +190,34 @@ export function Navbar({ activeSection = "hero" }) {
           </div>
 
           {/* Actions & Utilities */}
-          <div className="flex items-center gap-1.5">
-            {/* Reduce Motion Quick Toggle */}
+          <div className="flex items-center gap-2">
+            {/* 3D / Reduced Mode Toggle (Persists in localStorage) */}
             <button
-              onClick={toggleReducedMotion}
-              title={isReducedMotion ? "Enable animations" : "Reduce motion for comfort"}
-              aria-label={isReducedMotion ? "Enable animations" : "Reduce motion"}
+              onClick={toggle3DExperience}
+              title={is3dDisabled ? "Enable 3D WebGL scenes" : "Disable 3D WebGL scenes (Power Save)"}
+              aria-label={is3dDisabled ? "Enable 3D scenes" : "Disable 3D scenes"}
               className={cn(
-                "p-2 rounded-full transition-colors cursor-pointer border",
-                isReducedMotion
-                  ? "bg-[#C8F31D]/15 text-[#C8F31D] border-[#C8F31D]"
-                  : "bg-white/5 text-[#8B8B93] hover:text-[#F4F4F5] border-white/10 hover:border-white/20"
+                "p-2 rounded-full transition-colors cursor-pointer border text-xs font-mono flex items-center gap-1",
+                is3dDisabled
+                  ? "bg-white/5 text-[#A8A59C] border-white/[0.08]"
+                  : "bg-[#D6B979]/15 text-[#D6B979] border-[#D6B979]/40 shadow-[0_0_10px_rgba(214,185,121,0.2)]"
               )}
             >
-              {isReducedMotion ? <ZapOff className="w-3.5 h-3.5" /> : <Zap className="w-3.5 h-3.5" />}
+              <Box className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline text-[10px] font-bold">
+                {is3dDisabled ? "3D OFF" : "3D ON"}
+              </span>
             </button>
 
-            {/* Resume Download CTA */}
+            {/* Resume CTA in Champagne Gold */}
             <a
               href="/resume.html"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download verified resume"
               className={cn(
-                "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-mono text-xs font-bold uppercase",
-                "bg-[#C8F31D] text-black hover:bg-[#b8e212] transition-colors shadow-xs"
+                "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-sans text-xs font-bold uppercase",
+                "bg-[#D6B979] text-[#07080C] hover:bg-[#F0DDA8] transition-colors shadow-sm"
               )}
             >
               <Download className="w-3.5 h-3.5" />
@@ -231,7 +228,7 @@ export function Navbar({ activeSection = "hero" }) {
             <button
               onClick={() => setMobileMenuOpen(true)}
               aria-label="Open mobile menu"
-              className="lg:hidden p-2 rounded-full bg-white/5 text-[#F4F4F5] border border-white/10 hover:bg-white/10 cursor-pointer"
+              className="lg:hidden p-2 rounded-full bg-white/5 text-[#F3EFE6] border border-white/10 hover:bg-white/10 cursor-pointer"
             >
               <Menu className="w-4 h-4" />
             </button>
@@ -239,7 +236,7 @@ export function Navbar({ activeSection = "hero" }) {
         </nav>
       </header>
 
-      {/* Full-Screen Animated Mobile Menu Overlay */}
+      {/* Full-Screen Animated Mobile Menu Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -247,20 +244,20 @@ export function Navbar({ activeSection = "hero" }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 flex flex-col justify-between p-6 bg-[#060608]/95 backdrop-blur-2xl"
+            transition={{ duration: 0.22 }}
+            className="fixed inset-0 z-50 flex flex-col justify-between p-6 bg-[#07080C]/96 backdrop-blur-2xl"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile Navigation Drawer"
           >
             {/* Drawer Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
+            <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
               <div className="flex items-center gap-2">
-                <span className="w-8 h-8 rounded-full bg-[#141418] border border-white/15 flex items-center justify-center font-mono font-bold text-xs text-[#C8F31D]">
+                <span className="w-8 h-8 rounded-full bg-[#12151C] border border-[#D6B979]/40 flex items-center justify-center font-mono font-bold text-xs text-[#D6B979]">
                   AMB
                 </span>
-                <span className="font-mono text-xs font-bold text-[#F4F4F5] uppercase">
-                  {PERSONAL_INFO.name} // MCA
+                <span className="font-mono text-xs font-bold text-[#F3EFE6] uppercase">
+                  {PERSONAL_INFO.name} // B.Tech CSE
                 </span>
               </div>
 
@@ -283,7 +280,7 @@ export function Navbar({ activeSection = "hero" }) {
                     key={item.label}
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: idx * 0.05 }}
+                    transition={{ delay: idx * 0.04 }}
                   >
                     <NavPill
                       label={item.label}
@@ -299,24 +296,24 @@ export function Navbar({ activeSection = "hero" }) {
             </div>
 
             {/* Bottom Actions */}
-            <div className="pt-4 border-t border-white/10 space-y-3 font-mono">
+            <div className="pt-4 border-t border-white/[0.08] space-y-3 font-mono">
               <a
                 href="/resume.html"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#C8F31D] text-black font-bold text-xs uppercase"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#D6B979] text-[#07080C] font-sans font-bold text-xs uppercase shadow-sm"
               >
                 <Download className="w-4 h-4" />
                 <span>Download Resume (PDF / Web)</span>
               </a>
 
-              <div className="flex items-center justify-between text-xs text-[#8B8B93] pt-2">
-                <span>Toc H Institute // MCA</span>
+              <div className="flex items-center justify-between text-xs text-[#A8A59C] pt-2">
+                <span>Toc H Institute // B.Tech CSE</span>
                 <button
-                  onClick={toggleReducedMotion}
-                  className="hover:text-white transition-colors flex items-center gap-1"
+                  onClick={toggle3DExperience}
+                  className="hover:text-white transition-colors flex items-center gap-1 font-mono text-[11px]"
                 >
-                  {isReducedMotion ? "Animations Off" : "Animations On"}
+                  {is3dDisabled ? "Enable 3D" : "Disable 3D"}
                 </button>
               </div>
             </div>

@@ -101,8 +101,8 @@ export function NeuralCanvas({ className = "" }) {
             ctx.lineTo(nodes[j].x, nodes[j].y);
             ctx.strokeStyle =
               nodes[i].isHighlight || nodes[j].isHighlight
-                ? `rgba(200, 243, 29, ${alpha * 1.5})`
-                : `rgba(255, 255, 255, ${alpha})`;
+                ? `rgba(214, 185, 121, ${alpha * 1.5})`
+                : `rgba(243, 239, 230, ${alpha * 0.6})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -134,13 +134,13 @@ export function NeuralCanvas({ className = "" }) {
         // Draw particle
         ctx.beginPath();
         ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = n.isHighlight ? "#C8F31D" : "rgba(255, 255, 255, 0.6)";
+        ctx.fillStyle = n.isHighlight ? "#D6B979" : "rgba(243, 239, 230, 0.6)";
         ctx.fill();
 
         if (n.isHighlight) {
           ctx.beginPath();
           ctx.arc(n.x, n.y, n.radius + 3, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(200, 243, 29, 0.15)";
+          ctx.fillStyle = "rgba(214, 185, 121, 0.25)";
           ctx.fill();
         }
       }
@@ -165,7 +165,7 @@ export function NeuralCanvas({ className = "" }) {
       <div
         className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full blur-[140px] opacity-25 pointer-events-none"
         style={{
-          background: "radial-gradient(circle, rgba(200,243,29,0.3) 0%, rgba(30,27,75,0.4) 60%, transparent 100%)",
+          background: "radial-gradient(circle, rgba(214,185,121,0.2) 0%, rgba(59,63,158,0.2) 60%, transparent 100%)",
         }}
         aria-hidden="true"
       />

@@ -6,6 +6,7 @@ import { cn } from "@/utils/helpers";
 /**
  * MagneticButton Component
  * Gently attracts toward the cursor on desktop (pointer: fine), with spring snapback on leave.
+ * Enforces whitespace-nowrap, body font (font-sans), and flex layout to eliminate text/icon wrapping (Defect c).
  */
 export function MagneticButton({
   children,
@@ -53,9 +54,8 @@ export function MagneticButton({
     const centerX = left + width / 2;
     const centerY = top + height / 2;
 
-    // Attract by max 10px
-    const deltaX = (clientX - centerX) * 0.22;
-    const deltaY = (clientY - centerY) * 0.22;
+    const deltaX = (clientX - centerX) * 0.2;
+    const deltaY = (clientY - centerY) * 0.2;
 
     setPosition({ x: deltaX, y: deltaY });
   };
@@ -67,31 +67,32 @@ export function MagneticButton({
   const sizeClasses = {
     sm: "px-3.5 py-1.5 text-xs gap-1.5",
     md: "px-5 py-2.5 text-xs sm:text-sm gap-2",
-    lg: "px-7 py-3.5 text-sm sm:text-base gap-2.5",
+    lg: "px-6 py-3 text-sm sm:text-base gap-2.5",
   };
 
   const variantClasses = {
     primary:
-      "bg-[#C8F31D] hover:bg-[#b8e212] text-black font-bold shadow-[0_0_20px_rgba(200,243,29,0.25)] hover:shadow-[0_0_28px_rgba(200,243,29,0.4)] border border-[#C8F31D]",
+      "bg-[#D6B979] hover:bg-[#F0DDA8] text-[#07080C] font-bold shadow-[0_0_24px_rgba(214,185,121,0.25)] hover:shadow-[0_0_32px_rgba(214,185,121,0.4)] border border-[#D6B979]",
     secondary:
-      "bg-[#141418] hover:bg-[#1B1B22] text-[#F4F4F5] border border-white/10 hover:border-white/20 shadow-xs",
+      "bg-[#0D0F14] hover:bg-[#12151C] text-[#F3EFE6] border border-white/[0.08] hover:border-[#D6B979]/40 shadow-sm",
     outline:
-      "bg-transparent hover:bg-white/5 text-[#F4F4F5] border border-white/20 hover:border-[#C8F31D] hover:text-[#C8F31D]",
+      "bg-transparent hover:bg-white/5 text-[#F3EFE6] border border-white/20 hover:border-[#D6B979] hover:text-[#D6B979]",
     ghost:
-      "bg-transparent text-[#8B8B93] hover:text-[#F4F4F5] hover:bg-white/5 border border-transparent",
+      "bg-transparent text-[#A8A59C] hover:text-[#F3EFE6] hover:bg-white/5 border border-transparent",
   };
 
+  // Enforce inline-flex, items-center, gap, whitespace-nowrap, font-sans (Defect c)
   const baseClasses = cn(
-    "relative inline-flex items-center justify-center font-mono font-semibold transition-colors duration-150 rounded-xl cursor-pointer select-none outline-none group",
-    "focus-visible:ring-2 focus-visible:ring-[#C8F31D] focus-visible:ring-offset-2 focus-visible:ring-offset-[#060608]",
-    "disabled:opacity-50 disabled:pointer-events-none active:scale-[0.97]",
+    "relative inline-flex items-center justify-center font-sans font-semibold whitespace-nowrap transition-colors duration-150 rounded-xl cursor-pointer select-none outline-none group shrink-0",
+    "focus-visible:ring-2 focus-visible:ring-[#D6B979] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07080C]",
+    "disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]",
     sizeClasses[size],
     variantClasses[variant],
     className
   );
 
   const content = (
-    <>
+    <span className="inline-flex items-center gap-2 whitespace-nowrap">
       {icon && iconPosition === "left" && (
         <span className="shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5">
           {icon}
@@ -103,7 +104,7 @@ export function MagneticButton({
           {icon}
         </span>
       )}
-    </>
+    </span>
   );
 
   if (href) {
@@ -112,14 +113,13 @@ export function MagneticButton({
         ref={buttonRef}
         href={href}
         target={target}
-        rel={target === "_blank" ? rel || "noopener noreferrer" : rel}
+        rel={target === "_blank" ? "noopener noreferrer" : rel}
         download={download}
-        onClick={onClick}
+        className={baseClasses}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        animate={isPointerFine && !isReducedMotion ? { x: position.x, y: position.y } : {}}
-        transition={SPRINGS.tilt}
-        className={baseClasses}
+        animate={{ x: position.x, y: position.y }}
+        transition={SPRINGS.default}
         {...rest}
       >
         {content}
@@ -133,11 +133,11 @@ export function MagneticButton({
       type="button"
       onClick={onClick}
       disabled={disabled}
+      className={baseClasses}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      animate={isPointerFine && !isReducedMotion ? { x: position.x, y: position.y } : {}}
-      transition={SPRINGS.tilt}
-      className={baseClasses}
+      animate={{ x: position.x, y: position.y }}
+      transition={SPRINGS.default}
       {...rest}
     >
       {content}
@@ -146,4 +146,3 @@ export function MagneticButton({
 }
 
 export default MagneticButton;
-

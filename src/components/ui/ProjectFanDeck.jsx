@@ -1,109 +1,21 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ExternalLink,
-  BookOpen,
-  Layers,
-  Sparkles,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Cpu, Check, Layers } from "lucide-react";
 import { SPRINGS, DURATIONS } from "@/config/motion.config";
+import { FEATURED_PROJECTS } from "@/data/projects";
 import { GithubIcon } from "@/components/ui/Icons";
 import { cn } from "@/utils/helpers";
 
-// The real portfolio projects mapped with unique glossy gradients and ambient glow orbs
-const FAN_CARDS = [
-  {
-    id: "career-recommendation",
-    number: "01",
-    title: "Personalized Career Recommendation System",
-    category: "Ensemble ML • SHAP",
-    tagline:
-      "Multi-grade adaptive career guidance engine with 72-feature vector, weighted soft voting ensemble, and SHAP rationales.",
-    tags: ["XGBoost", "CatBoost", "LightGBM", "Random Forest", "SHAP"],
-    githubUrl:
-      "https://github.com/AMB-007/Personalized-Career-Recommendation-System-Using-Machine-Learning",
-    gradient: "from-[#0F172A] via-[#1E1B4B] to-[#042F2E]",
-    glowColor: "#10B981",
-    accentBorder: "rgba(16, 185, 129, 0.4)",
-  },
-  {
-    id: "rock-identification",
-    number: "02",
-    title: "Rock Identification Studio — CNN Computer Vision",
-    category: "CNN • Computer Vision",
-    tagline:
-      "Geological specimen classification system powered by a Convolutional Neural Network in Flask with 94.8% test accuracy.",
-    tags: ["CNN", "TensorFlow", "OpenCV", "NumPy", "Flask"],
-    githubUrl: "https://github.com/AMB-007/Rock-Identification-Mini-Project-",
-    gradient: "from-[#0A0F1D] via-[#0E3A4B] to-[#062635]",
-    glowColor: "#06B6D4",
-    accentBorder: "rgba(6, 182, 212, 0.4)",
-  },
-  {
-    id: "webshield",
-    number: "03",
-    title: "WEBSHIELD — Security Telemetry & Threat ML",
-    category: "Random Forest • SecOps",
-    tagline:
-      "Security operations console ingesting telemetry streams and classifying threat severity with Random Forest ML.",
-    tags: ["Random Forest", "Scikit-learn", "Burp Suite", "Flask"],
-    githubUrl: "https://github.com/AMB-007/WEBSHIELD",
-    gradient: "from-[#18181B] via-[#3B0712] to-[#1C1917]",
-    glowColor: "#F43F5E",
-    accentBorder: "rgba(244, 63, 94, 0.4)",
-  },
-  {
-    id: "weathervista",
-    number: "04",
-    title: "WeatherVista — Atmospheric Telemetry",
-    category: "Geospatial • Three.js",
-    tagline:
-      "Meteorological telemetry platform with 7-day predictive curves, multi-pollutant AQI composite metrics, and 3D globe.",
-    tags: ["Three.js", "Open-Meteo", "Flask", "WebGL"],
-    githubUrl: "https://github.com/AMB-007/Weather-app",
-    gradient: "from-[#030712] via-[#1E1B4B] to-[#312E81]",
-    glowColor: "#818CF8",
-    accentBorder: "rgba(129, 140, 248, 0.4)",
-  },
-  {
-    id: "quiz-application",
-    number: "05",
-    title: "Interactive Assessment Engine & Relational DB",
-    category: "MySQL 8.x • Backend",
-    tagline:
-      "Role-based assessment portal with server-side grading algorithms and relational attempt tracking in MySQL.",
-    tags: ["MySQL 8.x", "Flask", "Relational DDL", "Python"],
-    githubUrl: "https://github.com/AMB-007/Quiz-App",
-    gradient: "from-[#0A0A0A] via-[#172554] to-[#1E3A8A]",
-    glowColor: "#3B82F6",
-    accentBorder: "rgba(59, 130, 246, 0.4)",
-  },
-  {
-    id: "chromalab",
-    number: "06",
-    title: "ChRoMALaB — Algorithmic Color Theory",
-    category: "Color Theory • WCAG",
-    tagline:
-      "14-tool color science engine calculating delta-E color distance, CVD simulations, and accessible contrast palettes.",
-    tags: ["Color Science", "Algorithms", "WCAG", "JavaScript"],
-    githubUrl: "https://github.com/AMB-007/ChRoMALaB",
-    gradient: "from-[#0A0A0A] via-[#14532D] to-[#064E3B]",
-    glowColor: "#C8F31D",
-    accentBorder: "rgba(200, 243, 29, 0.4)",
-  },
-];
-
 /**
  * ProjectFanDeck Component
- * An interactive fanned deck of glossy cards pivoting from bottom center with spring physics,
- * tactile hover intent swapping, parallax tilt, keyboard navigation, and touch swipe gestures.
+ * Built with real CSS 3D (perspective: 1400px, transform-style: preserve-3d)
+ * Pivots cards from bottom-center with spring physics, crisp selectable typography,
+ * single obsidian glass material, champagne gold glints, roving tabindex, and ARIA carousel semantics.
  *
  * @param {Object} props
- * @param {Function} [props.onSelectCaseStudy] - Callback when user clicks 'Case Study'
+ * @param {Function} props.onSelectProject - Emits the active project object when selected
  */
-export function ProjectFanDeck({ onSelectCaseStudy }) {
+export function ProjectFanDeck({ onSelectProject }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isReducedMotion, setIsReducedMotion] = useState(false);
@@ -114,7 +26,6 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
   const touchStartYRef = useRef(0);
   const deckRef = useRef(null);
 
-  // Check viewport width and motion preferences
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const mobileQuery = window.matchMedia("(max-width: 640px)");
@@ -134,7 +45,13 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
     };
   }, []);
 
-  // Intent delay for hover: avoid flickers when sweeping across cards
+  // Sync active project upward
+  useEffect(() => {
+    if (onSelectProject && FEATURED_PROJECTS[activeIndex]) {
+      onSelectProject(FEATURED_PROJECTS[activeIndex]);
+    }
+  }, [activeIndex, onSelectProject]);
+
   const handleCardHover = (index) => {
     if (index === activeIndex || isReducedMotion) return;
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
@@ -147,22 +64,20 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
   };
 
-  // Commit immediately on click or touch
   const handleCardClick = (index) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
     setActiveIndex(index);
   };
 
-  // Parallax tilt on active card
   const handleMouseMove = (e) => {
     if (isReducedMotion || isMobile) return;
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     setTilt({
-      x: -y * 4, // rotateX in degrees
-      y: x * 4,  // rotateY in degrees
+      x: -y * 5,
+      y: x * 5,
     });
   };
 
@@ -170,16 +85,15 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
     setTilt({ x: 0, y: 0 });
   };
 
-  // Navigate functions
   const nextCard = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % FAN_CARDS.length);
+    setActiveIndex((prev) => (prev + 1) % FEATURED_PROJECTS.length);
   }, []);
 
   const prevCard = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + FAN_CARDS.length) % FAN_CARDS.length);
+    setActiveIndex((prev) => (prev - 1 + FEATURED_PROJECTS.length) % FEATURED_PROJECTS.length);
   }, []);
 
-  // Keyboard navigation
+  // Keyboard navigation with roving tabindex
   const handleKeyDown = (e) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
@@ -192,11 +106,11 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
       setActiveIndex(0);
     } else if (e.key === "End") {
       e.preventDefault();
-      setActiveIndex(FAN_CARDS.length - 1);
+      setActiveIndex(FEATURED_PROJECTS.length - 1);
     }
   };
 
-  // Touch swipe handling
+  // Touch swipe support
   const handleTouchStart = (e) => {
     touchStartXRef.current = e.touches[0].clientX;
     touchStartYRef.current = e.touches[0].clientY;
@@ -205,17 +119,12 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
   const handleTouchEnd = (e) => {
     const deltaX = e.changedTouches[0].clientX - touchStartXRef.current;
     const deltaY = e.changedTouches[0].clientY - touchStartYRef.current;
-    // Horizontal swipe threshold
-    if (Math.abs(deltaX) > 40 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      if (deltaX < 0) {
-        nextCard();
-      } else {
-        prevCard();
-      }
+
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX < 0) nextCard();
+      else prevCard();
     }
   };
-
-  const activeProject = FAN_CARDS[activeIndex];
 
   return (
     <div
@@ -223,49 +132,73 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
       onKeyDown={handleKeyDown}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      tabIndex={0}
+      className="w-full flex flex-col items-center select-none"
       role="region"
       aria-roledescription="carousel"
-      aria-label="Interactive Project Fan Deck"
-      className="relative w-full flex flex-col items-center py-6 sm:py-10 select-none outline-none focus-visible:ring-1 focus-visible:ring-[#C8F31D]"
+      aria-label="Featured Projects 3D Deck"
     >
-      {/* Screen Reader Announcement */}
-      <div className="sr-only" aria-live="polite">
-        Showing project {activeIndex + 1} of {FAN_CARDS.length}: {activeProject.title}
-      </div>
+      {/* Deck Stage with Perspective (Defect e: 1400px perspective, preserve-3d) */}
+      <div
+        style={{ perspective: "1400px" }}
+        className="relative w-full max-w-[840px] h-[490px] sm:h-[530px] flex items-center justify-center overflow-visible preserve-3d"
+      >
+        {/* Reflective Ambient Floor Glow Underneath */}
+        <div
+          className="absolute bottom-4 w-3/4 h-16 rounded-full pointer-events-none blur-3xl opacity-20 bg-[#D6B979]"
+          aria-hidden="true"
+        />
 
-      {/* Fan Deck Stage Container */}
-      <div className="relative w-full max-w-4xl h-[480px] sm:h-[530px] flex items-center justify-center overflow-visible">
-        {FAN_CARDS.map((project, index) => {
+        {FEATURED_PROJECTS.map((project, index) => {
           const offset = index - activeIndex;
           const isActive = offset === 0;
 
-          // Responsive calculation
-          const rotationMultiplier = isMobile ? 4.5 : 8.5;
-          const translationMultiplier = isMobile ? 26 : 68;
+          // 3D positioning calculations based on card offset from active
+          let rotation = 0;
+          let translateX = 0;
+          let translateY = 0;
+          let translateZ = 0;
+          let rotateY = 0;
 
-          const rotation = isReducedMotion ? 0 : offset * rotationMultiplier;
-          const translateX = isReducedMotion ? offset * 20 : offset * translationMultiplier;
-          const translateY = isReducedMotion ? 0 : Math.abs(offset) * (isMobile ? 8 : 14);
+          if (!isReducedMotion) {
+            if (isMobile) {
+              rotation = offset * 5;
+              translateX = offset * 65;
+              translateY = Math.abs(offset) * 14;
+              translateZ = -Math.abs(offset) * 80;
+              rotateY = offset * -6;
+            } else {
+              rotation = offset * 7.5;
+              translateX = offset * 135;
+              translateY = Math.abs(offset) * 18;
+              translateZ = -Math.abs(offset) * 120;
+              rotateY = offset * -12;
+            }
+          } else {
+            translateX = offset * (isMobile ? 24 : 45);
+          }
+
           const zIndex = 50 - Math.abs(offset);
           const scale = isReducedMotion ? 1 : 1 - Math.abs(offset) * (isMobile ? 0.08 : 0.05);
-          const brightness = isReducedMotion ? 1 : Math.max(0.4, 1 - Math.abs(offset) * 0.16);
+          const brightness = isReducedMotion ? 1 : Math.max(0.45, 1 - Math.abs(offset) * 0.2);
 
           return (
             <motion.div
               key={project.id}
               onClick={() => handleCardClick(index)}
               onMouseEnter={() => handleCardHover(index)}
-              onMouseLeave={handleCardLeave}
+              onMouseLeave={() => {
+                handleCardLeave();
+                if (isActive) handleMouseLeaveTilt();
+              }}
               onMouseMove={isActive ? handleMouseMove : undefined}
-              onMouseLeaveCapture={isActive ? handleMouseLeaveTilt : undefined}
               initial={false}
               animate={{
                 x: translateX,
                 y: translateY,
+                z: translateZ,
                 rotateZ: rotation,
+                rotateY: isActive ? tilt.y : rotateY,
                 rotateX: isActive ? tilt.x : 0,
-                rotateY: isActive ? tilt.y : 0,
                 scale,
                 filter: `brightness(${brightness})`,
                 zIndex,
@@ -276,110 +209,94 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
                 willChange: "transform, filter",
               }}
               className={cn(
-                "absolute top-4 w-[280px] sm:w-[330px] md:w-[350px] h-[430px] sm:h-[460px] rounded-2xl p-6 flex flex-col justify-between cursor-pointer",
-                "bg-gradient-to-b border backdrop-blur-md transition-shadow duration-300",
-                project.gradient,
+                "absolute top-4 w-[285px] sm:w-[340px] md:w-[370px] h-[440px] sm:h-[480px] rounded-2xl p-6 sm:p-7 flex flex-col justify-between cursor-pointer overflow-hidden",
+                // Unified Obsidian Glass Material (Defect e)
+                "bg-[#0D0F14]/90 backdrop-blur-xl border transition-all duration-300",
                 isActive
-                  ? "border-white/30 dark:border-white/40 shadow-2xl shadow-black/80"
-                  : "border-white/10 dark:border-white/15 hover:border-white/25",
-                "focus:outline-none"
+                  ? "border-[#D6B979]/50 shadow-[0_24px_64px_rgba(0,0,0,0.8),0_0_32px_rgba(214,185,121,0.12)]"
+                  : "border-white/[0.08] hover:border-white/20 shadow-lg shadow-black/50",
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D6B979]"
               )}
               tabIndex={isActive ? 0 : -1}
               role="group"
               aria-roledescription="slide"
-              aria-label={`${project.title} (${index + 1} of ${FAN_CARDS.length})`}
+              aria-label={`${project.title} (${index + 1} of ${FEATURED_PROJECTS.length})`}
             >
-              {/* Soft Blurred Glow Orb in Top Corner */}
+              {/* Champagne Top Sheen Line */}
               <div
-                className="absolute -top-8 -right-8 w-36 h-36 rounded-full pointer-events-none blur-3xl opacity-35 transition-opacity duration-300"
-                style={{ backgroundColor: project.glowColor }}
-                aria-hidden="true"
-              />
-
-              {/* Glossy Top Sheen Line */}
-              <div
-                className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"
+                className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-[#D6B979]/40 to-transparent pointer-events-none"
                 aria-hidden="true"
               />
 
               {/* CARD HEADER */}
-              <div className="relative z-10 flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="relative z-10 flex items-center justify-between pb-3.5 border-b border-white/[0.08]">
                 <div className="flex items-center gap-2 font-mono">
-                  <span className="font-bold text-xs px-2 py-0.5 rounded-md bg-white/10 text-white border border-white/15">
+                  <span className="font-bold text-xs px-2.5 py-0.5 rounded-md bg-[#D6B979]/15 text-[#D6B979] border border-[#D6B979]/30">
                     // {project.number}
                   </span>
-                  <span className="text-[11px] uppercase tracking-wider text-white/70 font-semibold truncate max-w-[160px]">
+                  <span className="text-[11px] uppercase tracking-wider text-[#A8A59C] font-semibold truncate max-w-[170px]">
                     {project.category}
                   </span>
                 </div>
 
                 <div
-                  className="w-2 h-2 rounded-full"
-                  style={{ backgroundColor: project.glowColor }}
+                  className={cn(
+                    "w-2 h-2 rounded-full transition-all duration-300",
+                    isActive ? "bg-[#D6B979] shadow-[0_0_8px_#D6B979]" : "bg-white/20"
+                  )}
                 />
               </div>
 
-              {/* CARD BODY: Title & Description */}
-              <div className="relative z-10 space-y-3 my-auto">
-                <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white uppercase font-sans leading-tight">
+              {/* CARD BODY: Crisp Typography */}
+              <div className="relative z-10 space-y-3.5 my-auto">
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-[#F3EFE6] uppercase font-sans leading-tight">
                   {project.title}
                 </h3>
-                <p className="text-xs text-white/75 font-sans leading-relaxed line-clamp-3">
+                <p className="text-xs text-[#A8A59C] font-sans leading-relaxed line-clamp-3">
                   {project.tagline}
                 </p>
 
                 {/* Tech Tags */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  {project.tags.map((tag) => (
+                  {project.tags.slice(0, 4).map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 text-[10px] font-mono font-medium rounded-md bg-white/10 text-white/90 border border-white/15"
+                      className="px-2 py-0.5 text-[10px] font-mono font-medium rounded-md bg-white/[0.04] text-[#F3EFE6] border border-white/[0.08]"
                     >
                       {tag}
                     </span>
                   ))}
+                  {project.tags.length > 4 && (
+                    <span className="px-2 py-0.5 text-[10px] font-mono text-[#6E6C66]">
+                      +{project.tags.length - 4}
+                    </span>
+                  )}
                 </div>
               </div>
 
-              {/* CARD FOOTER: VIEW PROJECT CTA (Shown with emphasis on Active Card) */}
-              <div className="relative z-10 pt-3 border-t border-white/10">
+              {/* CARD FOOTER: Gold Action CTA for Active Card */}
+              <div className="relative z-10 pt-3.5 border-t border-white/[0.08]">
                 {isActive ? (
                   <motion.div
-                    initial={{ opacity: 0, y: 8 }}
+                    initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
                     className="flex items-center gap-2"
                   >
-                    {/* Primary Neon Lime CTA */}
                     <a
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#C8F31D] hover:bg-[#b5e012] text-black font-mono font-bold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#D6B979] hover:bg-[#F0DDA8] text-[#07080C] font-sans font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
                     >
                       <span>View Project</span>
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
-
-                    {/* Secondary Case Study Button */}
-                    {onSelectCaseStudy && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onSelectCaseStudy(project.id);
-                        }}
-                        title="Read Case Study & Methodology"
-                        aria-label={`Read case study for ${project.title}`}
-                        className="p-2.5 rounded-lg bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors cursor-pointer"
-                      >
-                        <BookOpen className="w-4 h-4" />
-                      </button>
-                    )}
                   </motion.div>
                 ) : (
-                  <div className="flex items-center justify-between text-[11px] font-mono text-white/50">
-                    <span>Click to bring forward</span>
-                    <Layers className="w-3.5 h-3.5" />
+                  <div className="flex items-center justify-between text-[11px] font-mono text-[#6E6C66]">
+                    <span>Click to Inspect</span>
+                    <span>#{project.number}</span>
                   </div>
                 )}
               </div>
@@ -388,43 +305,40 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
         })}
       </div>
 
-      {/* CONTROLS: Arrow Buttons & Dot Indicators */}
-      <div className="mt-6 flex items-center justify-between gap-6 w-full max-w-sm px-4">
-        {/* Previous Arrow */}
+      {/* Roving Indicators & Deck Controls */}
+      <div className="mt-4 flex items-center justify-between w-full max-w-[380px] px-4 font-mono text-xs">
         <button
           onClick={prevCard}
-          aria-label="Previous project"
-          className="p-2.5 rounded-full bg-black/60 dark:bg-white/10 text-white hover:bg-black dark:hover:bg-white/20 border border-white/20 transition-all cursor-pointer hover:scale-105 active:scale-95"
+          aria-label="Previous Project"
+          className="p-2 rounded-xl border border-white/[0.08] bg-[#0D0F14] text-[#A8A59C] hover:text-[#D6B979] hover:border-[#D6B979]/40 transition-colors cursor-pointer"
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
 
-        {/* Dot Indicators with Accessible Touch Targets */}
-        <div className="flex items-center gap-1">
-          {FAN_CARDS.map((card, idx) => (
-            <button
-              key={card.id}
-              onClick={() => setActiveIndex(idx)}
-              aria-label={`Jump to project ${idx + 1}: ${card.title}`}
-              className="p-2 cursor-pointer flex items-center justify-center min-w-[28px] min-h-[28px]"
-            >
-              <span
+        {/* Indicators */}
+        <div className="flex items-center gap-2" role="tablist" aria-label="Deck pagination">
+          {FEATURED_PROJECTS.map((proj, idx) => {
+            const isCur = idx === activeIndex;
+            return (
+              <button
+                key={proj.id}
+                role="tab"
+                aria-selected={isCur}
+                aria-label={`Slide ${idx + 1}`}
+                onClick={() => setActiveIndex(idx)}
                 className={cn(
-                  "transition-all duration-300 rounded-full block",
-                  idx === activeIndex
-                    ? "w-6 h-2 bg-[#C8F31D]"
-                    : "w-2 h-2 bg-white/30 hover:bg-white/60"
+                  "h-1.5 rounded-full transition-all duration-300 cursor-pointer",
+                  isCur ? "w-8 bg-[#D6B979]" : "w-2 bg-white/20 hover:bg-white/40"
                 )}
               />
-            </button>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Next Arrow */}
         <button
           onClick={nextCard}
-          aria-label="Next project"
-          className="p-2.5 rounded-full bg-black/60 dark:bg-white/10 text-white hover:bg-black dark:hover:bg-white/20 border border-white/20 transition-all cursor-pointer hover:scale-105 active:scale-95"
+          aria-label="Next Project"
+          className="p-2 rounded-xl border border-white/[0.08] bg-[#0D0F14] text-[#A8A59C] hover:text-[#D6B979] hover:border-[#D6B979]/40 transition-colors cursor-pointer"
         >
           <ArrowRight className="w-4 h-4" />
         </button>
@@ -434,4 +348,3 @@ export function ProjectFanDeck({ onSelectCaseStudy }) {
 }
 
 export default ProjectFanDeck;
-

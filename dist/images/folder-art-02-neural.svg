@@ -7,7 +7,7 @@
     </linearGradient>
     <linearGradient id="synapseGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stopColor="#FDA4AF"/>
-      <stop offset="100%" stopColor="#C8F31D"/>
+      <stop offset="100%" stopColor="#D6B979"/>
     </linearGradient>
     <linearGradient id="tensorGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stopColor="#FB923C"/>
@@ -53,15 +53,15 @@
 
   <!-- Hidden Layer 2 Nodes (Deep Latent Representations) -->
   <circle cx="310" cy="170" r="13" fill="#FFF" stroke="#FB7185" stroke-width="3"/>
-  <circle cx="310" cy="280" r="15" fill="#C8F31D" stroke="#000" stroke-width="3" filter="url(#neuralGlow)"/>
+  <circle cx="310" cy="280" r="15" fill="#D6B979" stroke="#000" stroke-width="3" filter="url(#neuralGlow)"/>
   <circle cx="310" cy="390" r="13" fill="#FFF" stroke="#FB7185" stroke-width="3"/>
 
   <!-- Dense Output Layer Nodes -->
   <circle cx="410" cy="220" r="12" fill="#FFE4E6" stroke="#BE123C" stroke-width="3"/>
   <circle cx="410" cy="340" r="12" fill="#FFE4E6" stroke="#BE123C" stroke-width="3"/>
 
-  <!-- Decision Output Node (Lime Activated) -->
-  <circle cx="480" cy="280" r="18" fill="#C8F31D" stroke="#FFF" stroke-width="4" filter="url(#neuralGlow)"/>
-  <circle cx="480" cy="280" r="28" fill="none" stroke="#C8F31D" stroke-width="2" stroke-dasharray="4 4"/>
+  <!-- Decision Output Node (Champagne Activated) -->
+  <circle cx="480" cy="280" r="18" fill="#D6B979" stroke="#FFF" stroke-width="4" filter="url(#neuralGlow)"/>
+  <circle cx="480" cy="280" r="28" fill="none" stroke="#D6B979" stroke-width="2" stroke-dasharray="4 4"/>
 </svg>
 

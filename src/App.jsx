@@ -13,7 +13,6 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 import { initSmoothScroll } from "@/lib/smoothScroll";
 
 // Code-split and lazy-load sections below the fold
-const FocusAreas = lazy(() => import("@/components/sections/FocusAreas"));
 const Skills = lazy(() => import("@/components/sections/Skills"));
 const Projects = lazy(() => import("@/components/sections/Projects"));
 const ProcessSection = lazy(() => import("@/components/sections/ProcessSection"));
@@ -26,7 +25,6 @@ const Contact = lazy(() => import("@/components/sections/Contact"));
 const SECTION_IDS = [
   "hero",
   "about",
-  "focus",
   "skills",
   "projects",
   "process",
@@ -55,17 +53,17 @@ export function App() {
       {/* Monogram Brand Preloader (Brief < 1.1s, session-cached, Esc skippable) */}
       <Preloader />
 
-      <div className="relative min-h-screen flex flex-col bg-[#060608] text-[#F4F4F5] selection:bg-[#C8F31D] selection:text-black">
+      <div className="relative min-h-screen flex flex-col bg-[#07080C] text-[#F3EFE6] selection:bg-[#D6B979] selection:text-[#07080C]">
         {/* Subtle Background Monochrome Dot Grid & Syntax */}
         <CodeBackground />
 
-        {/* Electric Lime Top Scroll Progress Bar */}
+        {/* Champagne Top Scroll Progress Bar */}
         <ScrollProgress />
 
         {/* Custom Circular Precision Cursor (Pointer: Fine only) */}
         <CustomCursor />
 
-        {/* Floating Glass Pill Navbar with Iridescent Conic Rings */}
+        {/* Floating Frosted Glass Navbar with Metallic Conic Rings */}
         <Navbar activeSection={activeSection} />
 
         {/* Main Content Sections with Accessibility Landmark */}
@@ -74,9 +72,8 @@ export function App() {
           <Hero />
           <About />
 
-          {/* Below the fold: Code-split and lazy-loaded */}
+          {/* Below the fold: Code-split and lazy-loaded (Zero duplication) */}
           <Suspense fallback={<div className="min-h-[200px]" aria-hidden="true" />}>
-            <FocusAreas />
             <Skills />
             <Projects />
             <ProcessSection />

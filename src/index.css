@@ -4,27 +4,31 @@
 
 @layer base {
   :root {
-    /* Precision & Intelligence Design System */
-    --bg: #070709;
-    --bg-secondary: #0D0D11;
-    --surface: #0E0E12;
-    --surface-elevated: #141418;
-    --surface-highlight: #1B1B22;
+    /* Obsidian & Champagne Design System Tokens */
+    --bg: #07080C;
+    --bg-secondary: #0D0F14;
+    --surface: #0D0F14;
+    --surface-elevated: #12151C;
+    --surface-highlight: #181C26;
 
-    --text-primary: #F4F4F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #8B8B93;
-    --text-subtle: #52525B;
+    --text-primary: #F3EFE6;
+    --text-secondary: #A8A59C;
+    --text-muted: #6E6C66;
+    --text-subtle: #4A4843;
 
-    --border: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.07);
     --border-light: rgba(255, 255, 255, 0.12);
-    --border-strong: rgba(255, 255, 255, 0.2);
+    --border-accent: rgba(214, 185, 121, 0.30);
 
-    --accent-lime: #C8F31D;
-    --accent-lime-glow: rgba(200, 243, 29, 0.3);
+    /* Champagne Signature Accent */
+    --accent: #D6B979;
+    --accent-highlight: #F0DDA8;
+    --accent-deep: #9C7F3F;
+    --accent-glow: rgba(214, 185, 121, 0.30);
+    --accent-secondary: #2B6F77;
 
-    --primary: #C8F31D;
-    --primary-contrast: #070709;
+    --primary: #D6B979;
+    --primary-contrast: #07080C;
 
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
@@ -32,26 +36,29 @@
 
   [data-theme="dark"],
   .dark {
-    --bg: #060608;
-    --bg-secondary: #0A0A0E;
-    --surface: #0E0E12;
-    --surface-elevated: #141418;
-    --surface-highlight: #1A1A22;
+    --bg: #07080C;
+    --bg-secondary: #0D0F14;
+    --surface: #0D0F14;
+    --surface-elevated: #12151C;
+    --surface-highlight: #181C26;
 
-    --text-primary: #F4F4F5;
-    --text-secondary: #D4D4D8;
-    --text-muted: #8B8B93;
-    --text-subtle: #52525B;
+    --text-primary: #F3EFE6;
+    --text-secondary: #A8A59C;
+    --text-muted: #6E6C66;
+    --text-subtle: #4A4843;
 
-    --border: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.07);
     --border-light: rgba(255, 255, 255, 0.12);
-    --border-strong: rgba(255, 255, 255, 0.2);
+    --border-accent: rgba(214, 185, 121, 0.30);
 
-    --accent-lime: #C8F31D;
-    --accent-lime-glow: rgba(200, 243, 29, 0.3);
+    --accent: #D6B979;
+    --accent-highlight: #F0DDA8;
+    --accent-deep: #9C7F3F;
+    --accent-glow: rgba(214, 185, 121, 0.30);
+    --accent-secondary: #2B6F77;
 
-    --primary: #C8F31D;
-    --primary-contrast: #060608;
+    --primary: #D6B979;
+    --primary-contrast: #07080C;
   }
 
   html {
@@ -59,6 +66,13 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg);
+    color: var(--text-primary);
+  }
+
+  /* Defect d: Ensure section headings are never obscured by floating navbar */
+  section {
+    scroll-margin-top: 6rem;
   }
 
   body {
@@ -69,23 +83,28 @@
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Monochrome Solid Scrollbar */
+  ::selection {
+    background-color: #D6B979;
+    color: #07080C;
+  }
+
+  /* Champagne & Obsidian Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: var(--bg);
+    background: #07080C;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 0px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
+    background: #D6B979;
   }
 }
 
@@ -105,27 +124,17 @@
   }
 }
 
-@keyframes nav-rotate-fallback {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-/* Iridescent Conic Ring Utilities */
+/* Metallic Champagne-to-Ivory Conic Ring Utilities */
 .nav-ring-conic {
   --nav-angle: 0deg;
   animation: nav-angle-spin 4s linear infinite;
   background: conic-gradient(
     from var(--nav-angle),
-    #3b82f6,
-    #f97316,
-    #22c55e,
-    #d946ef,
-    #e2e8f0,
-    #3b82f6
+    #D6B979,
+    #F3EFE6,
+    #9C7F3F,
+    #F0DDA8,
+    #D6B979
   );
   -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
   mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
@@ -138,16 +147,14 @@
 /* Fallback if @property is unsupported */
 @supports not (background: paint(something)) {
   .nav-ring-conic {
-    /* If @property is not animated, provide smooth transform spin on pseudo-element */
     animation: none;
     background: conic-gradient(
       from 0deg,
-      #3b82f6,
-      #f97316,
-      #22c55e,
-      #d946ef,
-      #e2e8f0,
-      #3b82f6
+      #D6B979,
+      #F3EFE6,
+      #9C7F3F,
+      #F0DDA8,
+      #D6B979
     );
   }
 }
@@ -192,8 +199,12 @@
     opacity: 1 !important;
   }
 
-  canvas {
+  .webgl-canvas-container canvas {
     display: none !important;
+  }
+
+  .webgl-fallback-poster {
+    display: block !important;
   }
 }
 
@@ -212,8 +223,12 @@
   opacity: 1 !important;
 }
 
-.reduce-motion canvas {
+.reduce-motion .webgl-canvas-container canvas {
   display: none !important;
+}
+
+.reduce-motion .webgl-fallback-poster {
+  display: block !important;
 }
 
 /* Lenis Smooth Scroll Recommended Styles */
@@ -237,25 +252,36 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Technical Blueprint Grid Pattern */
-.tech-grid-bg {
-  background-size: 32px 32px;
+/* Perspective Grid Floor Pattern */
+.perspective-grid-floor {
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(214, 185, 121, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214, 185, 121, 0.05) 1px, transparent 1px);
 }
 
-/* Glassmorphic Floating Panel */
+/* Solid Frosted Glass Floating Navbar (Defect d) */
 .glass-panel {
-  background: rgba(14, 14, 18, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(13, 15, 20, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .glass-panel-elevated {
-  background: rgba(20, 20, 24, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 21, 28, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(214, 185, 121, 0.25);
+}
+
+/* 3D Transform Utilities for Crisp Typography */
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }

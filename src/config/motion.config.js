@@ -1,24 +1,52 @@
 /**
  * motion.config.js
- * Centralized motion parameters, spring configurations, easings, and accent tokens.
- * All animation behaviors across the portfolio are tuned from this single file.
+ * Centralized motion parameters, spring configurations, easings, and Obsidian & Champagne tokens.
+ * All animation behaviors and color themes across the portfolio are tuned from this single file.
  */
 
-export const MOTION_THEME = {
-  // Primary interaction accent color (Neon / Lime Green)
-  accent: "#C8F31D",
-  accentGlow: "rgba(200, 243, 29, 0.3)",
-  accentSubtle: "rgba(200, 243, 29, 0.12)",
+export const THEME_TOKENS = {
+  // Obsidian & Champagne Palette
+  background: "#07080C",
+  surfacePrimary: "#0D0F14",
+  surfaceSecondary: "#12151C",
 
-  // Iridescent ring colors (blue, orange, green, magenta, silver)
-  iridescentGradient: [
-    "#3b82f6", // Blue
-    "#f97316", // Orange
-    "#22c55e", // Green
-    "#d946ef", // Magenta
-    "#e2e8f0", // Silver
-    "#3b82f6", // Seamless loop to Blue
+  // Text tokens (WCAG AA compliant)
+  textIvory: "#F3EFE6",
+  textSecondary: "#A8A59C",
+  textMuted: "#6E6C66",
+
+  // Champagne Gold Signature Accent
+  accent: "#D6B979",
+  accentHighlight: "#F0DDA8",
+  accentDeep: "#9C7F3F",
+  accentGlow: "rgba(214, 185, 121, 0.35)",
+  accentSubtle: "rgba(214, 185, 121, 0.12)",
+
+  // Swappable secondary accent token
+  accentSecondary: "#2B6F77", // Atmospheric Teal
+  indigoGlow: "rgba(59, 63, 158, 0.16)", // Atmospheric Indigo
+  tealGlow: "rgba(43, 111, 119, 0.10)",
+
+  // Hairlines & Borders
+  hairlineBorder: "rgba(255, 255, 255, 0.07)",
+  accentBorder: "rgba(214, 185, 121, 0.30)",
+
+  // Metallic Champagne-to-Ivory Gradient for rings, buttons, and card edges
+  metallicGradient: [
+    "#D6B979",
+    "#F3EFE6",
+    "#9C7F3F",
+    "#F0DDA8",
+    "#D6B979",
   ],
+};
+
+// Backward-compatible alias for existing imports
+export const MOTION_THEME = {
+  accent: THEME_TOKENS.accent,
+  accentGlow: THEME_TOKENS.accentGlow,
+  accentSubtle: THEME_TOKENS.accentSubtle,
+  iridescentGradient: THEME_TOKENS.metallicGradient,
 };
 
 // Default spring physics tuned for tactile responsiveness
@@ -58,28 +86,16 @@ export const EASINGS = {
 
 // Shared duration tokens (in milliseconds)
 export const DURATIONS = {
-  fast: 180,
-  standard: 240,
-  medium: 350,
-  slow: 600,
-  hoverIntentDelay: 80, // debounce / intent buffer for card deck swaps
+  micro: 180,
+  standard: 320,
+  medium: 450,
+  sectionReveal: 750,
+  stagger: 60,
+  hoverIntentDelay: 80,
 };
 
 // Timing for CSS @property animations
 export const RING_TIMINGS = {
-  idleDuration: "4s",
+  idleDuration: "4.5s",
   activeDuration: "2s",
 };
-
-// Fan Deck layout constants
-export const FAN_DECK_CONFIG = {
-  cardWidth: 320,
-  cardHeight: 460,
-  rotationStepDeg: 8.5,
-  translateXStepPx: 68,
-  translateYStepPx: 12,
-  scaleStep: 0.05,
-  brightnessStep: 0.14,
-  maxParallaxTiltDeg: 4,
-};
-

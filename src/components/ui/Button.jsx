@@ -3,8 +3,8 @@ import { cn } from "@/utils/helpers";
 
 export function Button({
   children,
-  variant = "primary", // "primary" | "secondary" | "outline" | "ghost"
-  size = "md", // "sm" | "md" | "lg"
+  variant = "primary",
+  size = "md",
   icon = null,
   iconPosition = "right",
   href,
@@ -17,23 +17,23 @@ export function Button({
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center font-mono font-semibold transition-all duration-200 cursor-pointer select-none rounded-none focus:outline-none disabled:opacity-40 disabled:pointer-events-none group border";
+    "inline-flex items-center justify-center font-sans font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer select-none rounded-xl focus:outline-none disabled:opacity-40 disabled:pointer-events-none group border";
 
   const sizeStyles = {
-    sm: "px-3 py-1.5 text-xs gap-1.5",
+    sm: "px-3.5 py-1.5 text-xs gap-1.5",
     md: "px-5 py-2.5 text-xs sm:text-sm gap-2",
-    lg: "px-7 py-3 text-sm gap-2.5",
+    lg: "px-6 py-3 text-sm sm:text-base gap-2.5",
   };
 
   const variantStyles = {
     primary:
-      "bg-black text-white border-black hover:bg-[#171717] dark:bg-white dark:text-black dark:border-white dark:hover:bg-[#E5E5E5] active:scale-[0.99]",
+      "bg-[#D6B979] text-[#07080C] border-[#D6B979] hover:bg-[#F0DDA8] active:scale-[0.98] shadow-sm",
     secondary:
-      "bg-white text-black border-black hover:bg-[#F5F5F5] dark:bg-black dark:text-white dark:border-white dark:hover:bg-[#171717] active:scale-[0.99]",
+      "bg-[#0D0F14] text-[#F3EFE6] border-white/[0.08] hover:border-[#D6B979]/40 hover:bg-[#12151C] active:scale-[0.98]",
     outline:
-      "bg-transparent text-black dark:text-white border-[#D4D4D4] dark:border-[#262626] hover:border-black dark:hover:border-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717]",
+      "bg-transparent text-[#F3EFE6] border-white/20 hover:border-[#D6B979] hover:text-[#D6B979] hover:bg-white/5",
     ghost:
-      "bg-transparent text-[#737373] border-transparent hover:text-black dark:hover:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#171717]",
+      "bg-transparent text-[#A8A59C] border-transparent hover:text-[#F3EFE6] hover:bg-white/5",
   };
 
   const combinedClasses = cn(
@@ -44,19 +44,19 @@ export function Button({
   );
 
   const content = (
-    <>
+    <span className="inline-flex items-center gap-2 whitespace-nowrap">
       {icon && iconPosition === "left" && (
-        <span className="shrink-0 transition-transform duration-200 group-hover:-translate-x-1">
+        <span className="shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5">
           {icon}
         </span>
       )}
       <span>{children}</span>
       {icon && iconPosition === "right" && (
-        <span className="shrink-0 transition-transform duration-200 group-hover:translate-x-1">
+        <span className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
           {icon}
         </span>
       )}
-    </>
+    </span>
   );
 
   if (href) {
@@ -64,9 +64,8 @@ export function Button({
       <a
         href={href}
         target={target}
-        rel={target === "_blank" ? rel || "noopener noreferrer" : rel}
+        rel={target === "_blank" ? "noopener noreferrer" : rel}
         className={combinedClasses}
-        onClick={onClick}
         {...props}
       >
         {content}
@@ -77,9 +76,9 @@ export function Button({
   return (
     <button
       type={type}
-      className={combinedClasses}
       onClick={onClick}
       disabled={disabled}
+      className={combinedClasses}
       {...props}
     >
       {content}

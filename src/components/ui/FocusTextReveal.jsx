@@ -6,7 +6,7 @@ import { cn } from "@/utils/helpers";
 /**
  * FocusTextReveal Component
  * Blurs text until interacted with. Hovering/focusing a word sharpens it and guides a single
- * spring-based neon lime (#C8F31D) viewfinder bracket around it.
+ * spring-based champagne gold (#D6B979) viewfinder bracket around it.
  *
  * @param {Object} props
  * @param {string} props.text - The sentence or phrase to reveal
@@ -204,7 +204,7 @@ export function FocusTextReveal({
               tabIndex={0}
               className={cn(
                 "focus-word inline-block cursor-default outline-none transition-[filter,opacity] duration-200 ease-out",
-                "focus-visible:ring-1 focus-visible:ring-[#C8F31D]/80"
+                "focus-visible:ring-1 focus-visible:ring-[#D6B979]/80"
               )}
               style={{
                 filter: blurAmount > 0 ? `blur(${blurAmount}px)` : "none",
@@ -222,7 +222,7 @@ export function FocusTextReveal({
       {/* ONE Single Spring Gliding Viewfinder Bracket */}
       <AnimatePresence>
         {!isReducedMotion && bracketRect && (
-          <motion.div
+          <motion.span
             initial={{
               opacity: 0,
               x: bracketRect.x,
@@ -239,16 +239,16 @@ export function FocusTextReveal({
             }}
             exit={{ opacity: 0, transition: { duration: 0.15 } }}
             transition={SPRINGS.default}
-            className="absolute top-0 left-0 pointer-events-none z-20"
+            className="absolute top-0 left-0 pointer-events-none z-20 inline-block"
             aria-hidden="true"
             style={{
-              filter: "drop-shadow(0 0 6px rgba(200, 243, 29, 0.45))",
+              filter: "drop-shadow(0 0 8px rgba(214, 185, 121, 0.45))",
             }}
           >
             {/* Top-Left Corner Bracket */}
             <span
               className={cn(
-                "absolute top-0 left-0 border-t border-l border-[#C8F31D]",
+                "absolute top-0 left-0 border-t border-l border-[#D6B979]",
                 cornerLength,
                 cornerBorder
               )}
@@ -256,7 +256,7 @@ export function FocusTextReveal({
             {/* Top-Right Corner Bracket */}
             <span
               className={cn(
-                "absolute top-0 right-0 border-t border-r border-[#C8F31D]",
+                "absolute top-0 right-0 border-t border-r border-[#D6B979]",
                 cornerLength,
                 cornerBorder
               )}
@@ -264,7 +264,7 @@ export function FocusTextReveal({
             {/* Bottom-Left Corner Bracket */}
             <span
               className={cn(
-                "absolute bottom-0 left-0 border-b border-l border-[#C8F31D]",
+                "absolute bottom-0 left-0 border-b border-l border-[#D6B979]",
                 cornerLength,
                 cornerBorder
               )}
@@ -272,12 +272,12 @@ export function FocusTextReveal({
             {/* Bottom-Right Corner Bracket */}
             <span
               className={cn(
-                "absolute bottom-0 right-0 border-b border-r border-[#C8F31D]",
+                "absolute bottom-0 right-0 border-b border-r border-[#D6B979]",
                 cornerLength,
                 cornerBorder
               )}
             />
-          </motion.div>
+          </motion.span>
         )}
       </AnimatePresence>
     </Component>

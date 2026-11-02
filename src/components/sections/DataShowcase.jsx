@@ -24,7 +24,6 @@ const CONFUSION_MATRIX_CLASSES = [
   "Quartzite",
 ];
 
-// Normalized true-positive and misclassification rates
 const CONFUSION_MATRIX_DATA = [
   [94, 2, 0, 1, 1, 2, 0, 0], // Granite
   [1, 91, 3, 0, 3, 2, 0, 0], // Limestone
@@ -55,14 +54,14 @@ const CORRELATION_MATRIX = [
 ];
 
 export function DataShowcase() {
-  const [activeTab, setActiveTab] = useState("shap"); // "shap" | "confusion" | "correlation" | "powerbi"
+  const [activeTab, setActiveTab] = useState("shap");
   const [matrixHover, setMatrixHover] = useState(null);
 
   return (
-    <section id="analytics" className="py-20 md:py-28 border-b border-[#D4D4D4] dark:border-[#171717] bg-[#F5F5F5]/40 dark:bg-[#0A0A0A]/40">
+    <section id="analytics" className="py-24 md:py-32 border-b border-white/[0.07] bg-[#07080C]">
       <div className="editorial-container">
         <SectionHeader
-          number="05"
+          number="06"
           tag="ANALYTICAL ARTIFACTS"
           title="Data Analysis &amp; Visualizations"
           description="Authentic analytical artifacts, feature importance distributions, confusion matrices, and data modeling blueprints derived from active project workflows."
@@ -70,74 +69,47 @@ export function DataShowcase() {
 
         {/* Tab Controls */}
         <div className="flex items-center gap-2 mb-8 overflow-x-auto pb-2 font-mono text-xs">
-          <button
-            onClick={() => setActiveTab("shap")}
-            className={cn(
-              "px-4 py-2 uppercase font-bold transition-colors cursor-pointer border flex items-center gap-1.5 whitespace-nowrap",
-              activeTab === "shap"
-                ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
-                : "bg-white text-[#737373] border-[#D4D4D4] dark:bg-[#111111] dark:border-[#262626] hover:text-black dark:hover:text-white"
-            )}
-          >
-            <BarChart3 className="w-3.5 h-3.5" />
-            <span>1. SHAP Feature Importance</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("confusion")}
-            className={cn(
-              "px-4 py-2 uppercase font-bold transition-colors cursor-pointer border flex items-center gap-1.5 whitespace-nowrap",
-              activeTab === "confusion"
-                ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
-                : "bg-white text-[#737373] border-[#D4D4D4] dark:bg-[#111111] dark:border-[#262626] hover:text-black dark:hover:text-white"
-            )}
-          >
-            <Grid3X3 className="w-3.5 h-3.5" />
-            <span>2. Confusion Matrix (CNN)</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("correlation")}
-            className={cn(
-              "px-4 py-2 uppercase font-bold transition-colors cursor-pointer border flex items-center gap-1.5 whitespace-nowrap",
-              activeTab === "correlation"
-                ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
-                : "bg-white text-[#737373] border-[#D4D4D4] dark:bg-[#111111] dark:border-[#262626] hover:text-black dark:hover:text-white"
-            )}
-          >
-            <Activity className="w-3.5 h-3.5" />
-            <span>3. EDA Correlation Heatmap</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab("powerbi")}
-            className={cn(
-              "px-4 py-2 uppercase font-bold transition-colors cursor-pointer border flex items-center gap-1.5 whitespace-nowrap",
-              activeTab === "powerbi"
-                ? "bg-black text-white border-black dark:bg-white dark:text-black dark:border-white"
-                : "bg-white text-[#737373] border-[#D4D4D4] dark:bg-[#111111] dark:border-[#262626] hover:text-black dark:hover:text-white"
-            )}
-          >
-            <Layers className="w-3.5 h-3.5" />
-            <span>4. Power BI Architecture</span>
-          </button>
+          {[
+            { id: "shap", label: "1. SHAP Feature Importance", icon: BarChart3 },
+            { id: "confusion", label: "2. Confusion Matrix (CNN)", icon: Grid3X3 },
+            { id: "correlation", label: "3. EDA Correlation Heatmap", icon: Activity },
+            { id: "powerbi", label: "4. Power BI Architecture", icon: Layers },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={cn(
+                  "px-4 py-2 uppercase font-bold transition-all duration-200 cursor-pointer rounded-xl border flex items-center gap-2 whitespace-nowrap",
+                  isActive
+                    ? "bg-[#D6B979] text-[#07080C] border-[#D6B979] shadow-sm"
+                    : "bg-[#0D0F14] text-[#A8A59C] border-white/[0.08] hover:text-[#F3EFE6] hover:border-white/20"
+                )}
+              >
+                <Icon className="w-3.5 h-3.5" />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Dynamic Display Panel */}
-        <div className="p-6 sm:p-8 bg-white dark:bg-[#0A0A0A] border border-[#D4D4D4] dark:border-[#171717]">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#0D0F14]/90 backdrop-blur-xl border border-white/[0.08] shadow-lg">
           {/* TAB 1: SHAP Feature Importance */}
           {activeTab === "shap" && (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/[0.08] gap-2">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
+                  <h3 className="text-base sm:text-lg font-bold text-[#F3EFE6] font-sans uppercase">
                     SHAP Feature Contribution Rankings (Ensemble ML)
                   </h3>
-                  <p className="text-xs text-[#737373] font-mono">
+                  <p className="text-xs text-[#A8A59C] font-mono">
                     Model: XGBoost / CatBoost Soft Voting • Target: Career Cluster Guidance Vector
                   </p>
                 </div>
-                <span className="font-mono text-xs px-2.5 py-1 bg-[#F5F5F5] dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#262626] text-black dark:text-white uppercase font-bold self-start sm:self-auto">
+                <span className="font-mono text-xs px-2.5 py-1 rounded bg-[#D6B979]/15 border border-[#D6B979]/30 text-[#D6B979] uppercase font-bold self-start sm:self-auto">
                   TreeExplainer | Mean |SHAP|
                 </span>
               </div>
@@ -147,18 +119,18 @@ export function DataShowcase() {
                 {SHAP_FEATURES.map((feat, idx) => (
                   <div key={feat.name} className="space-y-1.5 font-mono text-xs">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-black dark:text-white">
+                      <span className="font-semibold text-[#F3EFE6]">
                         0{idx + 1}. {feat.name}
                       </span>
                       <div className="flex items-center gap-3">
-                        <span className="text-[#737373] text-[11px] uppercase">{feat.category}</span>
-                        <span className="font-bold text-black dark:text-white">{feat.percentage}</span>
+                        <span className="text-[#6E6C66] text-[11px] uppercase">{feat.category}</span>
+                        <span className="font-bold text-[#D6B979]">{feat.percentage}</span>
                       </div>
                     </div>
-                    {/* Monochrome Bar */}
-                    <div className="w-full h-3 bg-[#F5F5F5] dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#262626] overflow-hidden">
+                    {/* Bar */}
+                    <div className="w-full h-3 rounded-full bg-[#12151C] border border-white/[0.06] overflow-hidden">
                       <div
-                        className="h-full bg-black dark:bg-white transition-all duration-500 ease-out"
+                        className="h-full bg-gradient-to-r from-[#9C7F3F] via-[#D6B979] to-[#F0DDA8] rounded-full transition-all duration-500 ease-out"
                         style={{ width: feat.percentage }}
                       />
                     </div>
@@ -166,8 +138,8 @@ export function DataShowcase() {
                 ))}
               </div>
 
-              <div className="pt-4 border-t border-[#D4D4D4] dark:border-[#171717] flex items-start gap-2 text-xs font-mono text-[#737373]">
-                <Info className="w-4 h-4 shrink-0 text-black dark:text-white mt-0.5" />
+              <div className="pt-4 border-t border-white/[0.08] flex items-start gap-2 text-xs font-mono text-[#A8A59C]">
+                <Info className="w-4 h-4 shrink-0 text-[#D6B979] mt-0.5" />
                 <span>
                   Interpretation: Shapley additive values calculate the marginal contribution of each assessment dimension towards career cluster predictions, ensuring transparent, interpretable guidance rationales for students.
                 </span>
@@ -178,16 +150,16 @@ export function DataShowcase() {
           {/* TAB 2: Multi-Class Confusion Matrix */}
           {activeTab === "confusion" && (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/[0.08] gap-2">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
+                  <h3 className="text-base sm:text-lg font-bold text-[#F3EFE6] font-sans uppercase">
                     CNN Confusion Matrix (Rock Identification Studio)
                   </h3>
-                  <p className="text-xs text-[#737373] font-mono">
+                  <p className="text-xs text-[#A8A59C] font-mono">
                     Evaluation: 8 Geological Test Classes • 64x64 Tensor Input • Softmax Density
                   </p>
                 </div>
-                <span className="font-mono text-xs px-2.5 py-1 bg-[#F5F5F5] dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#262626] text-black dark:text-white uppercase font-bold self-start sm:self-auto">
+                <span className="font-mono text-xs px-2.5 py-1 rounded bg-[#D6B979]/15 border border-[#D6B979]/30 text-[#D6B979] uppercase font-bold self-start sm:self-auto">
                   Overall Accuracy: 94.8%
                 </span>
               </div>
@@ -197,13 +169,13 @@ export function DataShowcase() {
                 <table className="w-full text-center font-mono text-xs border-collapse">
                   <thead>
                     <tr>
-                      <th className="p-2 text-left text-[#737373] text-[10px] uppercase border border-[#D4D4D4] dark:border-[#262626]">
+                      <th className="p-2 text-left text-[#6E6C66] text-[10px] uppercase border border-white/[0.08]">
                         True \ Pred
                       </th>
                       {CONFUSION_MATRIX_CLASSES.map((cls) => (
                         <th
                           key={cls}
-                          className="p-2 font-bold text-[10px] uppercase text-black dark:text-white border border-[#D4D4D4] dark:border-[#262626]"
+                          className="p-2 font-bold text-[10px] uppercase text-[#F3EFE6] border border-white/[0.08]"
                         >
                           {cls.slice(0, 4)}
                         </th>
@@ -213,7 +185,7 @@ export function DataShowcase() {
                   <tbody>
                     {CONFUSION_MATRIX_CLASSES.map((trueCls, rowIdx) => (
                       <tr key={trueCls}>
-                        <td className="p-2 text-left font-bold text-black dark:text-white border border-[#D4D4D4] dark:border-[#262626] text-[11px]">
+                        <td className="p-2 text-left font-bold text-[#F3EFE6] border border-white/[0.08] text-[11px]">
                           {trueCls}
                         </td>
                         {CONFUSION_MATRIX_DATA[rowIdx].map((val, colIdx) => {
@@ -230,12 +202,12 @@ export function DataShowcase() {
                               }
                               onMouseLeave={() => setMatrixHover(null)}
                               className={cn(
-                                "p-2 border border-[#D4D4D4] dark:border-[#262626] transition-colors cursor-pointer text-[11px]",
+                                "p-2 border border-white/[0.08] transition-colors cursor-pointer text-[11px]",
                                 isDiagonal
-                                  ? "bg-black text-white dark:bg-white dark:text-black font-bold"
+                                  ? "bg-[#D6B979] text-[#07080C] font-bold"
                                   : val > 0
-                                  ? "bg-[#E5E5E5] text-black dark:bg-[#222222] dark:text-[#E5E5E5]"
-                                  : "bg-transparent text-[#737373]"
+                                  ? "bg-white/[0.04] text-[#F3EFE6]"
+                                  : "bg-transparent text-[#6E6C66]"
                               )}
                             >
                               {val}%
@@ -248,54 +220,46 @@ export function DataShowcase() {
                 </table>
               </div>
 
-              {/* Interactive Inspection readout */}
-              <div className="p-3 bg-[#F5F5F5] dark:bg-[#141414] border border-[#D4D4D4] dark:border-[#262626] flex items-center justify-between text-xs font-mono">
-                {matrixHover ? (
-                  <span>
-                    True: <strong>{matrixHover.trueCls}</strong> → Predicted:{" "}
-                    <strong>{matrixHover.predCls}</strong> ({matrixHover.val}%)
+              {matrixHover && (
+                <div className="p-3 rounded-lg bg-[#12151C] border border-[#D6B979]/30 text-xs font-mono flex items-center justify-between">
+                  <span className="text-[#A8A59C]">
+                    Actual: <strong className="text-[#F3EFE6]">{matrixHover.trueCls}</strong> → Predicted:{" "}
+                    <strong className="text-[#F3EFE6]">{matrixHover.predCls}</strong>
                   </span>
-                ) : (
-                  <span className="text-[#737373]">
-                    Hover matrix cells to inspect class-wise prediction distributions
-                  </span>
-                )}
-                <span className="font-bold text-black dark:text-white uppercase text-[10px]">
-                  Diagonal = True Positives
-                </span>
-              </div>
+                  <span className="font-bold text-[#D6B979]">{matrixHover.val}% Confidence Rate</span>
+                </div>
+              )}
             </div>
           )}
 
           {/* TAB 3: EDA Correlation Heatmap */}
           {activeTab === "correlation" && (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/[0.08] gap-2">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
-                    Pairwise Cognitive Dimension Correlation (EDA)
+                  <h3 className="text-base sm:text-lg font-bold text-[#F3EFE6] font-sans uppercase">
+                    Aptitude Dimension Correlation Matrix (EDA)
                   </h3>
-                  <p className="text-xs text-[#737373] font-mono">
-                    Pearson Correlation Coefficient Matrix (-1.00 to +1.00)
+                  <p className="text-xs text-[#A8A59C] font-mono">
+                    Sample: 1,200+ Student Guidance Records • Pearson Correlation Coefficients
                   </p>
                 </div>
-                <span className="font-mono text-xs px-2.5 py-1 bg-[#F5F5F5] dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#262626] text-black dark:text-white uppercase font-bold self-start sm:self-auto">
-                  Feature Selection Validation
+                <span className="font-mono text-xs px-2.5 py-1 rounded bg-[#D6B979]/15 border border-[#D6B979]/30 text-[#D6B979] uppercase font-bold self-start sm:self-auto">
+                  Pearson r [-1, +1]
                 </span>
               </div>
 
-              {/* Heatmap Grid */}
               <div className="overflow-x-auto">
                 <table className="w-full text-center font-mono text-xs border-collapse">
                   <thead>
                     <tr>
-                      <th className="p-2 text-left text-[#737373] text-[10px] uppercase border border-[#D4D4D4] dark:border-[#262626]">
-                        Dimension
+                      <th className="p-2.5 text-left text-[#6E6C66] text-[10px] uppercase border border-white/[0.08]">
+                        Dim \ Dim
                       </th>
                       {CORRELATION_DIMENSIONS.map((dim) => (
                         <th
                           key={dim}
-                          className="p-2 font-bold text-black dark:text-white border border-[#D4D4D4] dark:border-[#262626] uppercase text-[11px]"
+                          className="p-2.5 font-bold text-[10px] uppercase text-[#F3EFE6] border border-white/[0.08]"
                         >
                           {dim}
                         </th>
@@ -303,27 +267,26 @@ export function DataShowcase() {
                     </tr>
                   </thead>
                   <tbody>
-                    {CORRELATION_DIMENSIONS.map((rowDim, rIdx) => (
+                    {CORRELATION_DIMENSIONS.map((rowDim, rowIdx) => (
                       <tr key={rowDim}>
-                        <td className="p-2 text-left font-bold text-black dark:text-white border border-[#D4D4D4] dark:border-[#262626] uppercase text-[11px]">
+                        <td className="p-2.5 text-left font-bold text-[#F3EFE6] border border-white/[0.08]">
                           {rowDim}
                         </td>
-                        {CORRELATION_MATRIX[rIdx].map((val, cIdx) => {
-                          const isOne = val === 1.0;
+                        {CORRELATION_MATRIX[rowIdx].map((val, colIdx) => {
+                          const isHigh = val >= 0.7 && val < 1.0;
+                          const isSelf = val === 1.0;
                           return (
                             <td
-                              key={cIdx}
+                              key={colIdx}
                               className={cn(
-                                "p-2 border border-[#D4D4D4] dark:border-[#262626] text-[11px] font-bold",
-                                isOne
-                                  ? "bg-black text-white dark:bg-white dark:text-black"
-                                  : val >= 0.7
-                                  ? "bg-[#666666] text-white dark:bg-[#999999] dark:text-black"
+                                "p-2.5 border border-white/[0.08] transition-colors text-[11px]",
+                                isSelf
+                                  ? "bg-[#D6B979] text-[#07080C] font-bold"
+                                  : isHigh
+                                  ? "bg-[#D6B979]/20 text-[#D6B979] font-bold"
                                   : val >= 0.5
-                                  ? "bg-[#A3A3A3] text-black dark:bg-[#666666] dark:text-white"
-                                  : val >= 0.3
-                                  ? "bg-[#D4D4D4] text-black dark:bg-[#333333] dark:text-[#E5E5E5]"
-                                  : "bg-[#F5F5F5] text-[#737373] dark:bg-[#171717]"
+                                  ? "bg-white/[0.04] text-[#F3EFE6]"
+                                  : "text-[#6E6C66]"
                               )}
                             >
                               {val.toFixed(2)}
@@ -336,85 +299,69 @@ export function DataShowcase() {
                 </table>
               </div>
 
-              <div className="pt-4 border-t border-[#D4D4D4] dark:border-[#171717] flex items-center justify-between text-xs font-mono text-[#737373]">
-                <span>Analysis confirms high co-linearity (+0.78) between Logic and Analytical thinking.</span>
-                <span className="font-bold text-black dark:text-white uppercase">Grayscale Gradient Scale</span>
+              <div className="pt-4 border-t border-white/[0.08] flex items-start gap-2 text-xs font-mono text-[#A8A59C]">
+                <Info className="w-4 h-4 shrink-0 text-[#D6B979] mt-0.5" />
+                <span>
+                  Observation: Strong positive collinearity (+0.78) was identified between Logical Reasoning and Analytical Thinking, validating the compound dimension weight strategy in our ensemble model.
+                </span>
               </div>
             </div>
           )}
 
-          {/* TAB 4: Power BI & Business Intelligence */}
+          {/* TAB 4: Power BI Architecture */}
           {activeTab === "powerbi" && (
             <div className="space-y-6">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#D4D4D4] dark:border-[#171717] gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/[0.08] gap-2">
                 <div>
-                  <h3 className="text-base sm:text-lg font-bold text-black dark:text-white font-sans uppercase">
-                    Power BI Dimensional Data Model &amp; DAX Measures
+                  <h3 className="text-base sm:text-lg font-bold text-[#F3EFE6] font-sans uppercase">
+                    Power BI Business Intelligence Architecture
                   </h3>
-                  <p className="text-xs text-[#737373] font-mono">
-                    Star Schema Architecture • Power Query Transformations • Time Intelligence
+                  <p className="text-xs text-[#A8A59C] font-mono">
+                    Star Schema Dimensional Modeling • DAX Analytical Measures
                   </p>
                 </div>
-                <span className="font-mono text-xs px-2.5 py-1 bg-[#F5F5F5] dark:bg-[#171717] border border-[#D4D4D4] dark:border-[#262626] text-black dark:text-white uppercase font-bold self-start sm:self-auto">
-                  Relational Star Schema
+                <span className="font-mono text-xs px-2.5 py-1 rounded bg-[#D6B979]/15 border border-[#D6B979]/30 text-[#D6B979] uppercase font-bold self-start sm:self-auto">
+                  Star Schema Relational DDL
                 </span>
               </div>
 
-              {/* Star Schema Structure Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
-                <div className="p-3 bg-[#F5F5F5] dark:bg-[#141414] border border-[#D4D4D4] dark:border-[#262626] space-y-1.5">
-                  <span className="font-bold text-black dark:text-white uppercase block">
-                    1. Central Fact Table
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="p-5 rounded-xl border border-white/[0.08] bg-[#07080C]/60 space-y-3">
+                  <span className="text-xs font-mono text-[#D6B979] font-bold uppercase block">
+                    // FACT TABLE
                   </span>
-                  <div className="text-[11px] text-[#737373] space-y-0.5">
-                    <div><strong>Fact_Assessments</strong></div>
-                    <div>• assessment_id (PK)</div>
-                    <div>• student_id (FK)</div>
-                    <div>• cluster_id (FK)</div>
-                    <div>• raw_score, normalized_score</div>
-                    <div>• assessment_date (FK)</div>
-                  </div>
+                  <h4 className="text-sm font-bold text-[#F3EFE6]">Fact_GuidanceAttempts</h4>
+                  <ul className="text-xs text-[#A8A59C] space-y-1 font-mono">
+                    <li>• AttemptID (PK)</li>
+                    <li>• StudentKey (FK)</li>
+                    <li>• DateKey (FK)</li>
+                    <li>• PredictedClusterID (FK)</li>
+                    <li>• TotalScore, Confidence</li>
+                  </ul>
                 </div>
 
-                <div className="p-3 bg-[#F5F5F5] dark:bg-[#141414] border border-[#D4D4D4] dark:border-[#262626] space-y-1.5">
-                  <span className="font-bold text-black dark:text-white uppercase block">
-                    2. Dimension Tables
+                <div className="p-5 rounded-xl border border-white/[0.08] bg-[#07080C]/60 space-y-3">
+                  <span className="text-xs font-mono text-[#D6B979] font-bold uppercase block">
+                    // DIMENSION TABLES
                   </span>
-                  <div className="text-[11px] text-[#737373] space-y-0.5">
-                    <div><strong>Dim_Students</strong> (Grade, Board, Stream)</div>
-                    <div><strong>Dim_CareerClusters</strong> (Domain, Industry)</div>
-                    <div><strong>Dim_Date</strong> (Year, Quarter, Month)</div>
-                    <div><strong>Dim_AssessmentTiers</strong> (Class 7-12, UG)</div>
-                  </div>
+                  <h4 className="text-sm font-bold text-[#F3EFE6]">Dim_Student &amp; Dim_Career</h4>
+                  <ul className="text-xs text-[#A8A59C] space-y-1 font-mono">
+                    <li>• Dim_Student (Tier, Stream)</li>
+                    <li>• Dim_Career (Cluster, Milestones)</li>
+                    <li>• Dim_Date (Calendar Hierarchy)</li>
+                  </ul>
                 </div>
 
-                <div className="p-3 bg-[#F5F5F5] dark:bg-[#141414] border border-[#D4D4D4] dark:border-[#262626] space-y-1.5">
-                  <span className="font-bold text-black dark:text-white uppercase block">
-                    3. Key DAX Measures
+                <div className="p-5 rounded-xl border border-white/[0.08] bg-[#07080C]/60 space-y-3">
+                  <span className="text-xs font-mono text-[#D6B979] font-bold uppercase block">
+                    // DAX MEASURES
                   </span>
-                  <div className="text-[11px] text-[#737373] space-y-0.5">
-                    <div>• Total Assessments = COUNTROWS(...)</div>
-                    <div>• Top-3 Alignment % = DIVIDE(...)</div>
-                    <div>• Avg Normalized Score = AVERAGE(...)</div>
-                    <div>• YoY Assessment Growth = CALCULATE(...)</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified DAX Formulas Box */}
-              <div className="p-4 bg-black text-white dark:bg-[#171717] dark:text-white font-mono text-xs space-y-2 border border-black dark:border-white">
-                <div className="text-[10px] text-[#A3A3A3] uppercase tracking-wider font-bold">
-                  // Core DAX Measure Calculations:
-                </div>
-                <div className="text-[11px] space-y-1.5 leading-relaxed text-[#D4D4D4]">
-                  <div>
-                    <span className="text-white font-bold">Completion Rate % =</span>{" "}
-                    DIVIDE(COUNTROWS(FILTER(Fact_Assessments, Fact_Assessments[status] = "Completed")), COUNTROWS(Fact_Assessments), 0)
-                  </div>
-                  <div>
-                    <span className="text-white font-bold">YoY Growth =</span>{" "}
-                    VAR CurrentYear = [Total Assessments] VAR PrevYear = CALCULATE([Total Assessments], SAMEPERIODLASTYEAR(Dim_Date[Date])) RETURN DIVIDE(CurrentYear - PrevYear, PrevYear)
-                  </div>
+                  <h4 className="text-sm font-bold text-[#F3EFE6]">Key Analytical Formulas</h4>
+                  <ul className="text-xs text-[#A8A59C] space-y-1 font-mono">
+                    <li>• Avg_Attribution_Score</li>
+                    <li>• Cluster_Concentration_Ratio</li>
+                    <li>• YearOverYear_Growth_%</li>
+                  </ul>
                 </div>
               </div>
             </div>
