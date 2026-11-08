@@ -1,97 +1,84 @@
-import React, { useEffect, Suspense, lazy } from "react";
-import { ThemeProvider } from "@/context/ThemeContext";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ScrollProgress } from "@/components/layout/ScrollProgress";
-import { CustomCursor } from "@/components/layout/CustomCursor";
-import { BackToTop } from "@/components/layout/BackToTop";
-import { Preloader } from "@/components/layout/Preloader";
-import { CodeBackground } from "@/components/ui/CodeBackground";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { Skills } from "@/components/sections/Skills";
+import { ModelPlayground } from "@/components/sections/ModelPlayground";
+import { Projects } from "@/components/sections/Projects";
+import { Experience } from "@/components/sections/Experience";
+import { Contact } from "@/components/sections/Contact";
+import { CommandMenu } from "@/components/ui/CommandMenu";
 import { useActiveSection } from "@/hooks/useActiveSection";
-import { initSmoothScroll } from "@/lib/smoothScroll";
-
-// Code-split and lazy-load sections below the fold
-const Skills = lazy(() => import("@/components/sections/Skills"));
-const Projects = lazy(() => import("@/components/sections/Projects"));
-const ProcessSection = lazy(() => import("@/components/sections/ProcessSection"));
-const DataShowcase = lazy(() => import("@/components/sections/DataShowcase"));
-const Education = lazy(() => import("@/components/sections/Education"));
-const Certifications = lazy(() => import("@/components/sections/Certifications"));
-const GitHubSection = lazy(() => import("@/components/sections/GitHubSection"));
-const Contact = lazy(() => import("@/components/sections/Contact"));
+import { useTheme } from "@/hooks/useTheme";
 
 const SECTION_IDS = [
   "hero",
   "about",
   "skills",
+  "interactive-demo",
   "projects",
-  "process",
-  "analytics",
-  "education",
-  "certifications",
-  "github",
+  "experience",
   "contact",
 ];
 
 export function App() {
-  const activeSection = useActiveSection(SECTION_IDS, 100);
+  const activeSection = useActiveSection(SECTION_IDS, 120);
+  const { isDark, toggleTheme } = useTheme();
+  const [commandMenuOpen, setCommandMenuOpen] = useState(false);
 
+  // Global Ctrl+K / Cmd+K listener to open Command Menu
   useEffect(() => {
-    // Initialize Lenis Smooth Scroll with GSAP ScrollTrigger Integration
-    const cleanupScroll = initSmoothScroll();
-    return () => {
-      if (typeof cleanupScroll === "function") {
-        cleanupScroll();
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setCommandMenuOpen((prev) => !prev);
       }
     };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   return (
-    <ThemeProvider>
-      {/* Monogram Brand Preloader (Brief < 1.1s, session-cached, Esc skippable) */}
-      <Preloader />
+    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text-primary)] antialiased transition-colors selection:bg-[var(--accent)] selection:text-[var(--accent-contrast)]">
+      {/* Skip to Main Content Link (Accessibility) */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[var(--accent)] text-[var(--accent-contrast)] rounded-md text-xs font-mono font-medium shadow-lg"
+      >
+        Skip to main content
+      </a>
 
-      <div className="relative min-h-screen flex flex-col bg-[#07080C] text-[#F3EFE6] selection:bg-[#D6B979] selection:text-[#07080C]">
-        {/* Subtle Background Monochrome Dot Grid & Syntax */}
-        <CodeBackground />
+      {/* Sticky Translucent Navbar */}
+      <Navbar
+        activeSection={activeSection}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
+        onOpenCommandMenu={() => setCommandMenuOpen(true)}
+      />
 
-        {/* Champagne Top Scroll Progress Bar */}
-        <ScrollProgress />
+      {/* Main Content Sections */}
+      <main id="main-content" tabIndex="-1" className="flex-1 outline-none">
+        <Hero />
+        <About />
+        <Skills />
+        <ModelPlayground />
+        <Projects />
+        <Experience />
+        <Contact />
+      </main>
 
-        {/* Custom Circular Precision Cursor (Pointer: Fine only) */}
-        <CustomCursor />
+      {/* Minimal Editorial Footer */}
+      <Footer />
 
-        {/* Floating Frosted Glass Navbar with Metallic Conic Rings */}
-        <Navbar activeSection={activeSection} />
-
-        {/* Main Content Sections with Accessibility Landmark */}
-        <main id="main-content" tabIndex="-1" className="flex-1 relative z-10 outline-none">
-          {/* Above the fold: Instantly interactive */}
-          <Hero />
-          <About />
-
-          {/* Below the fold: Code-split and lazy-loaded (Zero duplication) */}
-          <Suspense fallback={<div className="min-h-[200px]" aria-hidden="true" />}>
-            <Skills />
-            <Projects />
-            <ProcessSection />
-            <DataShowcase />
-            <Education />
-            <Certifications />
-            <GitHubSection />
-            <Contact />
-          </Suspense>
-        </main>
-
-        {/* Minimal Editorial Footer */}
-        <Footer />
-
-        {/* Floating Back To Top */}
-        <BackToTop />
-      </div>
-    </ThemeProvider>
+      {/* Accessible Command Palette (Cmd+K) */}
+      <CommandMenu
+        isOpen={commandMenuOpen}
+        onClose={() => setCommandMenuOpen(false)}
+        isDark={isDark}
+        onToggleTheme={toggleTheme}
+      />
+    </div>
   );
 }
 

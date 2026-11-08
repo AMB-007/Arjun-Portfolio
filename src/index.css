@@ -1,78 +1,69 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
-
 @layer base {
   :root {
-    /* Obsidian & Champagne Design System Tokens */
-    --bg: #07080C;
-    --bg-secondary: #0D0F14;
-    --surface: #0D0F14;
-    --surface-elevated: #12151C;
-    --surface-highlight: #181C26;
+    /* "Analyst's Notebook" — Light: Paper & Ink */
+    --bg: #F5F3EE;
+    --surface: #FFFFFF;
+    --surface-subtle: #EFEBE3;
+    --border: #E0DBD0;
+    --border-subtle: rgba(20, 22, 26, 0.08);
 
-    --text-primary: #F3EFE6;
-    --text-secondary: #A8A59C;
-    --text-muted: #6E6C66;
-    --text-subtle: #4A4843;
+    --text-primary: #14161A;
+    --text-secondary: #4A4F5A;
+    --text-muted: #7A7F8A;
 
-    --border: rgba(255, 255, 255, 0.07);
-    --border-light: rgba(255, 255, 255, 0.12);
-    --border-accent: rgba(214, 185, 121, 0.30);
+    --accent: #2446D6;
+    --accent-hover: #1C37B0;
+    --accent-contrast: #FFFFFF;
 
-    /* Champagne Signature Accent */
-    --accent: #D6B979;
-    --accent-highlight: #F0DDA8;
-    --accent-deep: #9C7F3F;
-    --accent-glow: rgba(214, 185, 121, 0.30);
-    --accent-secondary: #2B6F77;
+    --highlight-amber: #E0A526;
+    --chart-teal: #0F8B8D;
+    --chart-slate: #7A7F8A;
 
-    --primary: #D6B979;
-    --primary-contrast: #07080C;
-
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", serif;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   }
 
-  [data-theme="dark"],
-  .dark {
-    --bg: #07080C;
-    --bg-secondary: #0D0F14;
-    --surface: #0D0F14;
-    --surface-elevated: #12151C;
-    --surface-highlight: #181C26;
+  html.dark {
+    /* "Analyst's Notebook" — Dark: Graphite */
+    --bg: #0E1014;
+    --surface: #15181E;
+    --surface-subtle: #1C2028;
+    --border: #272C35;
+    --border-subtle: rgba(236, 238, 242, 0.08);
 
-    --text-primary: #F3EFE6;
-    --text-secondary: #A8A59C;
-    --text-muted: #6E6C66;
-    --text-subtle: #4A4843;
+    --text-primary: #ECEEF2;
+    --text-secondary: #A3AAB6;
+    --text-muted: #6F7683;
 
-    --border: rgba(255, 255, 255, 0.07);
-    --border-light: rgba(255, 255, 255, 0.12);
-    --border-accent: rgba(214, 185, 121, 0.30);
+    --accent: #7B93FF;
+    --accent-hover: #99ACFF;
+    --accent-contrast: #0E1014;
 
-    --accent: #D6B979;
-    --accent-highlight: #F0DDA8;
-    --accent-deep: #9C7F3F;
-    --accent-glow: rgba(214, 185, 121, 0.30);
-    --accent-secondary: #2B6F77;
+    --highlight-amber: #F2B84B;
+    --chart-teal: #2DD4BF;
+    --chart-slate: #6F7683;
+  }
 
-    --primary: #D6B979;
-    --primary-contrast: #07080C;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   html {
-    scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--bg);
     color: var(--text-primary);
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Defect d: Ensure section headings are never obscured by floating navbar */
   section {
-    scroll-margin-top: 6rem;
+    scroll-margin-top: 5.5rem;
   }
 
   body {
@@ -80,88 +71,34 @@
     overflow-x: hidden;
     background-color: var(--bg);
     color: var(--text-primary);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    line-height: 1.65;
   }
 
   ::selection {
-    background-color: #D6B979;
-    color: #07080C;
+    background-color: var(--accent);
+    color: var(--accent-contrast);
   }
 
-  /* Champagne & Obsidian Scrollbar */
+  /* Refined Editorial Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-
   ::-webkit-scrollbar-track {
-    background: #07080C;
+    background: var(--bg);
   }
-
   ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
+    background: var(--border);
     border-radius: 9999px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #D6B979;
+    background: var(--accent);
   }
 }
 
-/* @property Registration for Conic Gradient Angle Rotation */
-@property --nav-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes nav-angle-spin {
-  0% {
-    --nav-angle: 0deg;
-  }
-  100% {
-    --nav-angle: 360deg;
-  }
-}
-
-/* Metallic Champagne-to-Ivory Conic Ring Utilities */
-.nav-ring-conic {
-  --nav-angle: 0deg;
-  animation: nav-angle-spin 4s linear infinite;
-  background: conic-gradient(
-    from var(--nav-angle),
-    #D6B979,
-    #F3EFE6,
-    #9C7F3F,
-    #F0DDA8,
-    #D6B979
-  );
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
-  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 2px));
-}
-
-.nav-ring-conic-fast {
-  animation-duration: 2s !important;
-}
-
-/* Fallback if @property is unsupported */
-@supports not (background: paint(something)) {
-  .nav-ring-conic {
-    animation: none;
-    background: conic-gradient(
-      from 0deg,
-      #D6B979,
-      #F3EFE6,
-      #9C7F3F,
-      #F0DDA8,
-      #D6B979
-    );
-  }
-}
-
-/* Master Editorial Container (1280px–1360px max width) */
-.editorial-container {
-  max-width: 1320px;
+/* Editorial 12-Column Grid Container (~1180px Max Width) */
+.site-container {
+  max-width: 1180px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1.25rem;
@@ -169,20 +106,76 @@
 }
 
 @media (min-width: 640px) {
-  .editorial-container {
+  .site-container {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .editorial-container {
-    padding-left: 3.5rem;
-    padding-right: 3.5rem;
+  .site-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
   }
 }
 
-/* Reduced Motion Safety (Media Query + Manual Toggle Class) */
+/* Typography Utility Classes */
+.font-display {
+  font-family: var(--font-serif);
+}
+
+.font-mono-data {
+  font-family: var(--font-mono);
+}
+
+.editorial-measure {
+  max-width: 65ch;
+}
+
+/* Hairline Dividers */
+.hairline-border {
+  border-color: var(--border);
+}
+
+.hairline-divider {
+  border-bottom: 1px solid var(--border);
+}
+
+/* Amber Marker Underline */
+.marker-underline {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.marker-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.1em;
+  width: 100%;
+  height: 2px;
+  background-color: var(--highlight-amber);
+  border-radius: 1px;
+}
+
+/* Motion: Subtle Fade & Lift */
+@keyframes editorialFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-editorial-fade {
+  animation: editorialFadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Reduced Motion Safety */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,
@@ -191,97 +184,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-    filter: none !important;
   }
-
-  .focus-word {
-    filter: none !important;
-    opacity: 1 !important;
-  }
-
-  .webgl-canvas-container canvas {
-    display: none !important;
-  }
-
-  .webgl-fallback-poster {
-    display: block !important;
-  }
-}
-
-.reduce-motion *,
-.reduce-motion ::before,
-.reduce-motion ::after {
-  animation-duration: 0.01ms !important;
-  animation-iteration-count: 1 !important;
-  transition-duration: 0.01ms !important;
-  scroll-behavior: auto !important;
-  filter: none !important;
-}
-
-.reduce-motion .focus-word {
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-.reduce-motion .webgl-canvas-container canvas {
-  display: none !important;
-}
-
-.reduce-motion .webgl-fallback-poster {
-  display: block !important;
-}
-
-/* Lenis Smooth Scroll Recommended Styles */
-html.lenis, html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
-/* Perspective Grid Floor Pattern */
-.perspective-grid-floor {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(214, 185, 121, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(214, 185, 121, 0.05) 1px, transparent 1px);
-}
-
-/* Solid Frosted Glass Floating Navbar (Defect d) */
-.glass-panel {
-  background: rgba(13, 15, 20, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.glass-panel-elevated {
-  background: rgba(18, 21, 28, 0.92);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(214, 185, 121, 0.25);
-}
-
-/* 3D Transform Utilities for Crisp Typography */
-.preserve-3d {
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-}
-
-.backface-hidden {
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }

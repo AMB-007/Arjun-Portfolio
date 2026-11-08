@@ -17,23 +17,23 @@ export function Button({
   ...props
 }) {
   const baseStyles =
-    "inline-flex items-center justify-center font-sans font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer select-none rounded-xl focus:outline-none disabled:opacity-40 disabled:pointer-events-none group border";
+    "inline-flex items-center justify-center font-sans font-medium whitespace-nowrap transition-colors duration-150 cursor-pointer select-none rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EA8FF] disabled:opacity-50 disabled:pointer-events-none group border";
 
   const sizeStyles = {
-    sm: "px-3.5 py-1.5 text-xs gap-1.5",
-    md: "px-5 py-2.5 text-xs sm:text-sm gap-2",
-    lg: "px-6 py-3 text-sm sm:text-base gap-2.5",
+    sm: "px-3 py-1.5 text-xs gap-1.5",
+    md: "px-4 py-2.5 text-sm gap-2",
+    lg: "px-5 py-3 text-sm sm:text-base gap-2.5",
   };
 
   const variantStyles = {
     primary:
-      "bg-[#D6B979] text-[#07080C] border-[#D6B979] hover:bg-[#F0DDA8] active:scale-[0.98] shadow-sm",
+      "bg-[#2F6FEB] text-white border-transparent hover:bg-[#3B82F6] shadow-sm",
     secondary:
-      "bg-[#0D0F14] text-[#F3EFE6] border-white/[0.08] hover:border-[#D6B979]/40 hover:bg-[#12151C] active:scale-[0.98]",
+      "bg-[#101725] text-[#E8ECF3] border-slate-800 hover:border-slate-700 hover:bg-[#162033]",
     outline:
-      "bg-transparent text-[#F3EFE6] border-white/20 hover:border-[#D6B979] hover:text-[#D6B979] hover:bg-white/5",
+      "bg-transparent text-[#E8ECF3] border-slate-700 hover:border-[#6EA8FF] hover:text-[#6EA8FF]",
     ghost:
-      "bg-transparent text-[#A8A59C] border-transparent hover:text-[#F3EFE6] hover:bg-white/5",
+      "bg-transparent text-[#9AA7BA] border-transparent hover:text-[#E8ECF3] hover:bg-slate-800/40",
   };
 
   const combinedClasses = cn(
@@ -45,17 +45,9 @@ export function Button({
 
   const content = (
     <span className="inline-flex items-center gap-2 whitespace-nowrap">
-      {icon && iconPosition === "left" && (
-        <span className="shrink-0 transition-transform duration-200 group-hover:-translate-x-0.5">
-          {icon}
-        </span>
-      )}
+      {icon && iconPosition === "left" && <span className="shrink-0">{icon}</span>}
       <span>{children}</span>
-      {icon && iconPosition === "right" && (
-        <span className="shrink-0 transition-transform duration-200 group-hover:translate-x-0.5">
-          {icon}
-        </span>
-      )}
+      {icon && iconPosition === "right" && <span className="shrink-0">{icon}</span>}
     </span>
   );
 

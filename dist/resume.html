@@ -3,64 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arjun M Babu - Resume | Data Analyst &amp; Machine Learning Engineer</title>
-  <meta name="description" content="Resume of Arjun M Babu - B.Tech in CSE (Toc H Institute, 2022-2026). Skilled in Python, SQL, Power BI, data analysis, and machine learning.">
+  <title>Arjun M Babu - Resume | Data Analyst &amp; Machine Learning</title>
+  <meta name="description" content="Resume of Arjun M Babu - B.Tech in CSE (Toc H Institute, 2022-2026). Data Science Intern at Luminar Technolab. Skilled in Python, SQL, Power BI, EDA, and Machine Learning.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
     }
+    :root {
+      --bg: #0E1014;
+      --surface: #15181E;
+      --surface-subtle: #1C2028;
+      --border: #272C35;
+      --text-primary: #ECEEF2;
+      --text-secondary: #A3AAB6;
+      --text-muted: #6F7683;
+      --accent: #7B93FF;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #F5F3EE;
+        --surface: #FFFFFF;
+        --surface-subtle: #EFEBE3;
+        --border: #E0DBD0;
+        --text-primary: #14161A;
+        --text-secondary: #4A4F5A;
+        --text-muted: #7A7F8A;
+        --accent: #2446D6;
+      }
+    }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.5;
-      color: #F3EFE6;
-      background: #07080C;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg);
       margin: 0;
       padding: 32px 16px;
       -webkit-font-smoothing: antialiased;
       min-height: 100vh;
+      transition: background 0.2s, color 0.2s;
     }
 
     /* Screen Top Action Bar */
     .print-bar {
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto 20px auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 12px 20px;
-      background: #0D0F14;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
       font-size: 13px;
       font-family: 'JetBrains Mono', monospace;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
     .print-btn {
-      background: #D6B979;
-      color: #07080C;
-      border: 1px solid #F0DDA8;
+      background: var(--accent);
+      color: #FFFFFF;
+      border: none;
       padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 12.5px;
       font-family: 'Inter', sans-serif;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      transition: all 0.2s ease;
-      box-shadow: 0 0 16px rgba(214, 185, 121, 0.25);
+      transition: opacity 0.15s ease;
     }
     .print-btn:hover {
-      background: #F0DDA8;
-      transform: translateY(-1px);
-      box-shadow: 0 0 24px rgba(214, 185, 121, 0.4);
+      opacity: 0.9;
     }
     .back-link {
-      color: #A8A59C;
+      color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
       display: inline-flex;
@@ -69,150 +88,164 @@
       transition: color 0.15s ease;
     }
     .back-link:hover {
-      color: #D6B979;
+      color: var(--accent);
     }
 
     /* Main Resume Sheet */
     .resume-sheet {
-      max-width: 840px;
+      max-width: 860px;
       margin: 0 auto;
-      background: #0D0F14;
+      background: var(--surface);
       padding: 48px 56px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(214, 185, 121, 0.08);
-      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     }
     .header {
       text-align: center;
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
     }
     .candidate-name {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 38px;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 36px;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      margin: 0 0 8px 0;
-      color: #F3EFE6;
+      letter-spacing: -0.5px;
+      margin: 0 0 6px 0;
+      color: var(--text-primary);
+    }
+    .candidate-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent);
+      margin: 0 0 12px 0;
     }
     .contact-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 8px 16px;
+      gap: 8px 14px;
       font-size: 12.5px;
-      color: #A8A59C;
       font-family: 'JetBrains Mono', monospace;
+      color: var(--text-secondary);
     }
     .contact-item {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      text-decoration: none;
-      color: #A8A59C;
+      gap: 5px;
     }
     .contact-item a {
-      color: #D6B979;
+      color: var(--accent);
       text-decoration: none;
-      transition: color 0.15s;
     }
     .contact-item a:hover {
-      color: #F0DDA8;
       text-decoration: underline;
     }
     .divider-pipe {
-      color: rgba(255, 255, 255, 0.2);
+      color: var(--border);
     }
 
     h2 {
-      font-family: 'Crimson Pro', Georgia, serif;
-      font-size: 17px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: #D6B979;
-      border-bottom: 1px solid rgba(214, 185, 121, 0.3);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border);
       padding-bottom: 4px;
-      margin: 22px 0 12px 0;
+      margin: 24px 0 14px 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    h2 .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
     }
     p.summary-text {
-      font-size: 13px;
-      color: #F3EFE6;
+      font-size: 13.5px;
+      color: var(--text-secondary);
       margin: 0;
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .skills-block {
       font-size: 13px;
-      line-height: 1.7;
-      color: #F3EFE6;
+      line-height: 1.8;
+      color: var(--text-primary);
     }
     .skills-block strong {
-      color: #D6B979;
       font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
       font-size: 12px;
+      display: inline-block;
+      min-width: 140px;
     }
     .entry {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .entry-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       font-size: 14px;
-      font-weight: 700;
-      color: #F3EFE6;
+      font-weight: 600;
+      color: var(--text-primary);
     }
     .entry-header .title-link {
-      color: #D6B979;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 12px;
       font-family: 'JetBrains Mono', monospace;
-      padding: 2px 8px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 11.5px;
+      padding: 1px 7px;
       border-radius: 4px;
-      background: rgba(214, 185, 121, 0.1);
-      border: 1px solid rgba(214, 185, 121, 0.2);
-      transition: all 0.15s;
-    }
-    .entry-header .title-link:hover {
-      background: rgba(214, 185, 121, 0.2);
-      color: #F0DDA8;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
     }
     .entry-header .date {
-      font-weight: 500;
-      font-size: 12px;
-      color: #A8A59C;
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 11.5px;
+      color: var(--accent);
     }
     .entry-sub {
       font-size: 12.5px;
-      color: #A8A59C;
-      margin-bottom: 4px;
+      color: var(--text-secondary);
+      margin-bottom: 5px;
     }
     ul.bullet-list {
       margin: 4px 0 8px 18px;
       padding: 0;
-      font-size: 12.5px;
-      color: #F3EFE6;
+      font-size: 13px;
+      color: var(--text-secondary);
       line-height: 1.6;
     }
     ul.bullet-list li {
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
     .tech-inline {
-      font-weight: 600;
-      color: #D6B979;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
     }
 
-    /* Print Stylesheet: Crisp High-Contrast Black on White for Paper/PDF */
+    /* Print Stylesheet: Monochrome Paper & Ink */
     @media print {
       body {
         background: #ffffff !important;
         color: #111827 !important;
         padding: 0 !important;
+        font-size: 11pt !important;
       }
       .print-bar {
         display: none !important;
@@ -226,20 +259,23 @@
         color: #111827 !important;
       }
       .candidate-name {
-        color: #111827 !important;
+        color: #000000 !important;
       }
-      .contact-row, .contact-item {
+      .candidate-role, .contact-row, .contact-item {
         color: #374151 !important;
       }
       .contact-item a {
-        color: #1d4ed8 !important;
+        color: #111827 !important;
       }
       .divider-pipe {
         color: #9ca3af !important;
       }
       h2 {
-        color: #111827 !important;
+        color: #000000 !important;
         border-bottom: 1.5px solid #111827 !important;
+      }
+      h2 .section-num {
+        color: #4b5563 !important;
       }
       p.summary-text, .skills-block, ul.bullet-list, .entry-header {
         color: #1f2937 !important;
@@ -248,7 +284,7 @@
         color: #111827 !important;
       }
       .entry-header .title-link {
-        color: #1d4ed8 !important;
+        color: #111827 !important;
         background: none !important;
         border: none !important;
         padding: 0 !important;
@@ -257,7 +293,7 @@
         color: #4b5563 !important;
       }
       @page {
-        margin: 14mm 16mm;
+        margin: 12mm 14mm;
       }
     }
   </style>
@@ -266,9 +302,9 @@
 
   <!-- Screen Top Bar with Quick Print / Download -->
   <div class="print-bar">
-    <span>// ARJUN M BABU &bull; VERIFIED RESUME</span>
+    <span>Arjun M Babu &bull; Analyst's Notebook Resume</span>
     <div style="display: flex; gap: 14px; align-items: center;">
-      <a href="/" class="back-link">&larr; Return to Portfolio</a>
+      <a href="/" class="back-link">&larr; Return to portfolio</a>
       <button class="print-btn" onclick="window.print()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
         Download / Print PDF
@@ -280,6 +316,7 @@
     <!-- Header -->
     <header class="header">
       <h1 class="candidate-name">Arjun M Babu</h1>
+      <p class="candidate-role">Data Analyst &bull; Machine Learning</p>
       <div class="contact-row">
         <span class="contact-item">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
@@ -310,15 +347,21 @@
 
     <!-- Summary -->
     <section>
-      <h2>SUMMARY</h2>
+      <h2>
+        <span>SUMMARY</span>
+        <span class="section-num">01</span>
+      </h2>
       <p class="summary-text">
-        Computer Science graduate skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges. <a href="https://arjun-m-babu.vercel.app" target="_blank" rel="noopener" style="color: #D6B979; text-decoration: none; font-weight: 500;">Portfolio link</a>.
+        Computer Science graduate skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges.
       </p>
     </section>
 
     <!-- Skills -->
     <section>
-      <h2>SKILLS</h2>
+      <h2>
+        <span>TECHNICAL SKILLS</span>
+        <span class="section-num">02</span>
+      </h2>
       <div class="skills-block">
         <div><strong>Programming:</strong> Python, SQL</div>
         <div><strong>Data Analysis:</strong> EDA, Pandas, NumPy, Data Visualization</div>
@@ -330,18 +373,21 @@
 
     <!-- Projects -->
     <section>
-      <h2>PROJECTS</h2>
+      <h2>
+        <span>FEATURED PROJECTS</span>
+        <span class="section-num">03</span>
+      </h2>
       
       <!-- Project 1 -->
       <div class="entry">
         <div class="entry-header">
           <span>Personalized Career Recommendation System</span>
-          <a href="https://github.com/AMB-007/Personalized-Career-Recommendation-System-Using-Machine-Learning" target="_blank" rel="noopener" class="title-link">GitHub</a>
+          <a href="https://github.com/AMB-007/Personalized-Career-Recommendation-System-Using-Machine-Learning" target="_blank" rel="noopener" class="title-link">GitHub Repo</a>
         </div>
         <ul class="bullet-list">
-          <li>Built a machine learning-based career guidance platform that recommends suitable careers to students based on their interests, aptitude, and academic profile.</li>
-          <li>Trained and compared XGBoost and LightGBM classifiers, and used SHAP to explain which features drive each recommendation.</li>
-          <li>Integrated the prediction model with a Flask web application and MySQL database.</li>
+          <li>Built a machine learning-based career guidance platform that recommends suitable careers based on student interests, aptitude, and academic profiles.</li>
+          <li>Trained and compared XGBoost and LightGBM classifiers, achieving 90.6% test accuracy and 96.4% top-3 recommendation accuracy. Used SHAP to explain feature attribution.</li>
+          <li>Integrated the prediction model with a Flask web application and a normalized 19-table MySQL database.</li>
           <li><span class="tech-inline">Technologies:</span> Python, XGBoost, LightGBM, Scikit-learn, SHAP, Flask, MySQL.</li>
         </ul>
       </div>
@@ -350,7 +396,7 @@
       <div class="entry">
         <div class="entry-header">
           <span>WebShield</span>
-          <a href="https://github.com/AMB-007/WEBSHIELD" target="_blank" rel="noopener" class="title-link">GitHub</a>
+          <a href="https://github.com/AMB-007/WEBSHIELD" target="_blank" rel="noopener" class="title-link">GitHub Repo</a>
         </div>
         <ul class="bullet-list">
           <li>Designed a cybersecurity monitoring dashboard that logs and visualizes security events such as brute-force logins and SQL injection patterns.</li>
@@ -364,7 +410,7 @@
       <div class="entry">
         <div class="entry-header">
           <span>Quiz App</span>
-          <a href="https://github.com/AMB-007/Quiz-App" target="_blank" rel="noopener" class="title-link">GitHub</a>
+          <a href="https://github.com/AMB-007/Quiz-App" target="_blank" rel="noopener" class="title-link">GitHub Repo</a>
         </div>
         <ul class="bullet-list">
           <li>Implemented a full-stack quiz application with separate user and admin portals, role-based access, and quiz management features.</li>
@@ -374,39 +420,50 @@
       </div>
     </section>
 
-    <!-- Education -->
+    <!-- Experience & Education -->
     <section>
-      <h2>EDUCATION</h2>
+      <h2>
+        <span>EXPERIENCE &amp; EDUCATION</span>
+        <span class="section-num">04</span>
+      </h2>
+      
       <div class="entry">
         <div class="entry-header">
-          <span>B.Tech. in Computer Science and Engineering</span>
-          <span class="date">2022 &ndash; 2026</span>
+          <span>Data Science Intern &bull; Luminar Technolab</span>
+          <span class="date">2026 &mdash; Present</span>
         </div>
-        <div class="entry-sub">Toc H Institute of Science and Technology, Kerala, India</div>
+        <div class="entry-sub">Applied ML pipelines, exploratory data analysis (EDA), and predictive modeling with Python, SQL, and Power BI.</div>
       </div>
-      <div class="entry">
-        <div class="entry-header">
-          <span>Higher Secondary Education (Class XII)</span>
-          <span class="date">2020 &ndash; 2022</span>
-        </div>
-        <div class="entry-sub">Kerala, India</div>
-      </div>
-      <div class="entry">
-        <div class="entry-header">
-          <span>Secondary Education (Class X)</span>
-          <span class="date">2020</span>
-        </div>
-        <div class="entry-sub">Bappuji English Medium School, Kerala, India</div>
-      </div>
-    </section>
 
-    <!-- Experience & Certifications -->
-    <section>
-      <h2>EXPERIENCE &amp; CERTIFICATIONS</h2>
-      <ul class="bullet-list" style="margin-left: 18px;">
-        <li><strong>Data Science Intern</strong> &ndash; Luminar Technolab, 2026</li>
-        <li><strong>Front End Web Development &ndash; 60 Hours Training Program</strong>, &ndash; Aesthetix Edu-Tech, 2025</li>
-      </ul>
+      <div class="entry">
+        <div class="entry-header">
+          <span>B.Tech. in Computer Science and Engineering &bull; Toc H Institute of Science and Technology</span>
+          <span class="date">2022 &ndash; 2026 (Completed)</span>
+        </div>
+        <div class="entry-sub">Kerala, India. Coursework in Data Structures, Algorithms, Relational Databases (MySQL), and Machine Learning.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>Front End Web Development — 60 Hours Training Program &bull; Aesthetix Edu-Tech</span>
+          <span class="date">2025</span>
+        </div>
+        <div class="entry-sub">Intensive training in modern web standards, JavaScript, DOM architecture, and responsive design systems.</div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span>National Service Scheme (NSS) Volunteer &bull; Toc H Institute Unit</span>
+          <span class="date">2022 &ndash; Present</span>
+        </div>
+        <div class="entry-sub">Community welfare programs, public health drives, and environmental sustainability campaigns.</div>
+      </div>
+
+      <div class="entry" style="margin-top: 10px;">
+        <div class="entry-sub" style="font-size: 11.5px; color: var(--text-muted);">
+          Prior Education: Higher Secondary Education (Class XII, 2020–2022) &bull; Secondary Education (Class X, Bappuji English Medium School, 2020) &bull; Kerala, India.
+        </div>
+      </div>
     </section>
   </main>
 

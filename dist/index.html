@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -46,13 +46,13 @@
     <!-- Favicon & Brand Colors (Precision & Intelligence) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/favicon.svg" />
-    <meta name="theme-color" content="#060608" />
+    <meta name="theme-color" content="#0B0F17" />
 
-    <!-- Typography (Google Fonts: Inter & JetBrains Mono with font-display: swap) -->
+    <!-- Typography: Newsreader (Display Serif), Inter (UI Sans), JetBrains Mono (Data/Code) with font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..700&display=swap"
       rel="stylesheet"
     />
 
@@ -92,37 +92,35 @@
     }
     </script>
 
-    <!-- Anti-Flash Dark Bootstrap Script -->
+    <!-- Anti-Flash Theme Bootstrap Script (Defaults to system preference, persistent toggle) -->
     <script>
       (function () {
         try {
           var saved = localStorage.getItem("theme");
           var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          var theme = saved || "dark";
-          var effective = theme === "system" ? (prefersDark ? "dark" : "light") : theme;
+          var effective = saved ? (saved === "system" ? (prefersDark ? "dark" : "light") : saved) : (prefersDark ? "dark" : "light");
           document.documentElement.setAttribute("data-theme", effective);
-          document.documentElement.classList.add(effective);
-          
-          var motionSetting = localStorage.getItem("reduced-motion");
-          if (motionSetting === "true") {
-            document.documentElement.classList.add("reduce-motion");
+          if (effective === "dark") {
+            document.documentElement.classList.add("dark");
+            document.documentElement.classList.remove("light");
+          } else {
+            document.documentElement.classList.add("light");
+            document.documentElement.classList.remove("dark");
           }
         } catch (e) {
-          document.documentElement.setAttribute("data-theme", "dark");
           document.documentElement.classList.add("dark");
         }
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-zMixgXAC.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-motion-4M-5HAnn.js">
-    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-DxF0Sy4a.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-J9n57_JB.css">
+    <script type="module" crossorigin src="/assets/index-DEPb7_WC.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-BecUH0fw.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-C4YMonp6.css">
   </head>
-  <body class="font-sans antialiased min-h-screen bg-[#060608] text-[#F4F4F5] selection:bg-[#C8F31D] selection:text-black">
+  <body class="font-sans antialiased min-h-screen bg-[#0B0F17] text-[#E8ECF3] selection:bg-[#2F6FEB] selection:text-white">
     <!-- Accessible Skip to Content Link -->
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#C8F31D] focus:text-black focus:font-mono focus:font-bold focus:rounded-md focus:shadow-lg"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#2F6FEB] focus:text-white focus:font-sans focus:font-medium focus:rounded-md focus:shadow-lg"
     >
       Skip to content
     </a>

@@ -1,194 +1,99 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useInView } from "framer-motion";
-import { Check } from "lucide-react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
+import React from "react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
-import { cn } from "@/utils/helpers";
-
-function StatCounter({ value, label, suffix = "", description = "" }) {
-  const [displayValue, setDisplayValue] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-40px" });
-
-  useEffect(() => {
-    if (!isInView) return;
-    const numeric = parseInt(value.toString().replace(/\D/g, ""), 10) || 0;
-    const duration = 1200; // ms
-    let startTime = null;
-
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-      setDisplayValue(Math.floor(ease * numeric));
-
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        setDisplayValue(numeric);
-      }
-    };
-
-    const animId = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(animId);
-  }, [isInView, value]);
-
-  return (
-    <div
-      ref={ref}
-      className="p-5 rounded-2xl bg-[#0D0F14]/90 border border-white/[0.08] hover:border-[#D6B979]/40 transition-all duration-300 group shadow-md"
-    >
-      <div className="flex items-baseline gap-1">
-        <span className="text-3xl sm:text-4xl font-black font-mono text-[#D6B979] tracking-tight">
-          {displayValue}
-        </span>
-        <span className="text-2xl font-bold font-mono text-[#D6B979]">
-          {value.toString().includes("+") ? "+" : suffix}
-        </span>
-      </div>
-      <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#F3EFE6] mt-1">
-        {label}
-      </div>
-      {description && (
-        <p className="text-[11px] text-[#A8A59C] mt-1 font-sans">
-          {description}
-        </p>
-      )}
-    </div>
-  );
-}
 
 export function About() {
-  const highlights = [
-    "Computer Science Engineering student at Toc H Institute of Science and Technology (2022–2026).",
-    "Data Science Intern at Luminar Technolab (2026) focusing on Python, SQL, Power BI, EDA, and machine learning.",
-    "Front End Web Development (60 Hours Training Program) certified by Aesthetix Edu-Tech (2025).",
-    "Demonstrated repositories: Personalized Career Recommendation System (XGBoost, LightGBM, SHAP), WebShield (Random Forest), and Quiz App.",
-    "Technical skill matrix spanning EDA, Pandas, NumPy, Scikit-learn, Natural Language Processing, Generative AI, Power BI, and AWS.",
-  ];
-
-  const stats = PERSONAL_INFO.stats || [
-    { value: "6+", label: "Production Repos", desc: "Machine Learning, Analytics & Data Systems" },
-    { value: "18+", label: "Core Competencies", desc: "Python, SQL, Scikit-learn, Power BI, AWS" },
-    { value: "12+", label: "Models & Ensembles", desc: "XGBoost, LightGBM, Random Forest, CNN" },
-    { value: "3", label: "Years Specialized", suffix: "+", desc: "Dedicated computing & analytical development" },
-  ];
-
   return (
-    <section id="about" className="py-24 md:py-32 border-b border-white/[0.07] bg-[#07080C]">
-      <div className="editorial-container">
-        <SectionHeader
-          number="01"
-          tag="ACADEMIC BACKGROUND &amp; DISCIPLINE"
-          title="About Me"
-          description="Computer Science Engineering student skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges."
-        />
-
-        {/* 4-Stat Metric Row with Viewport Count-Ups */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {stats.map((s, idx) => (
-            <StatCounter
-              key={idx}
-              value={s.value}
-              label={s.label}
-              suffix={s.suffix || ""}
-              description={s.desc}
-            />
-          ))}
+    <section id="about" className="py-20 md:py-28 border-b border-[var(--border)]">
+      <div className="site-container">
+        {/* Numbered Section Header Bar */}
+        <div className="flex items-center gap-4 mb-12 sm:mb-16">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+            01 &bull; About
+          </span>
+          <div className="flex-1 h-px bg-[var(--border)]" />
         </div>
 
-        {/* 3-Column Bento Editorial Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          {/* Column 1: Index Label & Credentials */}
-          <div className="lg:col-span-3 space-y-4">
-            <div className="p-5 rounded-2xl bg-[#0D0F14]/90 border border-white/[0.08] space-y-3 shadow-md">
-              <span className="text-[11px] font-mono font-bold text-[#D6B979] uppercase tracking-wider block">
-                // ACADEMIC PROFILE
+        {/* 12-Column Editorial Grid: Left Narrative (7 cols) + Right Definition List (5 cols) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Sticky Editorial Heading & Narrative */}
+          <div className="lg:col-span-7 space-y-6 lg:sticky lg:top-24">
+            <h2 className="font-display text-3xl sm:text-4xl text-[var(--text-primary)] font-normal tracking-tight leading-snug">
+              Practical problem solver with an{" "}
+              <span className="italic font-serif marker-underline">
+                obsession for clean data.
               </span>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#F3EFE6] font-sans leading-tight uppercase">
-                Applied AI &amp; Analytics
-              </h3>
-              <p className="text-xs text-[#A8A59C] font-mono">
-                Toc H Institute of Science and Technology
+            </h2>
+
+            <div className="space-y-4 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
+              <p>
+                I am a Computer Science Engineering graduate from Kerala, India, specializing in data analysis, statistical evaluation, and machine learning pipelines.
               </p>
-              <div className="pt-2 border-t border-white/[0.08] text-xs font-mono text-[#D6B979] font-semibold">
-                B.Tech in CSE • 2022–2026
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl bg-[#0D0F14]/60 border border-white/[0.06] space-y-2 text-xs font-mono">
-              <span className="text-[#6E6C66] uppercase text-[10px] block">Location Status</span>
-              <span className="text-[#F3EFE6] font-bold block">{PERSONAL_INFO.location}</span>
-              <span className="text-[#A8A59C] block text-[11px] pt-1">Open to On-site, Hybrid &amp; Remote roles</span>
+              <p>
+                My work centers on converting raw, disparate telemetry into validated predictive systems—from multi-algorithm career recommendation engines with SHAP explainability to computer vision spec modeling and security threat triage.
+              </p>
+              <p>
+                Currently applying machine learning and business intelligence at Luminar Technolab, focusing on exploratory data analysis, structured feature engineering, and high-clarity Power BI decision models.
+              </p>
             </div>
           </div>
 
-          {/* Column 2: Structured Professional Narrative */}
-          <div className="lg:col-span-6 space-y-5 text-sm sm:text-base text-[#A8A59C] leading-relaxed font-sans">
-            <p>
-              I am a <strong className="text-[#F3EFE6]">Computer Science Engineering student</strong> at Toc H Institute of Science and Technology (2022–2026), skilled in Python, SQL, Power BI, data analysis, and machine learning. Seeking a Data Analyst role to apply analytical and problem-solving skills to real-world challenges.
-            </p>
-            <p>
-              My practical work centers around <strong className="text-[#F3EFE6]">Python, SQL, Power BI, and Machine Learning</strong>. Across demonstrable repositories, I have developed multi-model ensembles with SHAP explainability (<em>Personalized Career Recommendation System</em>), automated threat classification consoles (<em>WEBSHIELD</em>), and full-stack interactive testing environments (<em>Quiz App</em>). Each project emphasizes rigorous feature engineering, data cleaning, model evaluation, and normalized persistence.
-            </p>
-            <p>
-              Through comprehensive experience as a <strong>Data Science Intern at Luminar Technolab (2026)</strong> and front-end engineering training at Aesthetix Edu-Tech (2025), I actively explore exploratory data analysis (EDA), business intelligence dashboards, cloud computing on AWS, and predictive modeling for practical, real-world problems.
-            </p>
-
-            {/* Core Competencies Checklist */}
-            <div className="space-y-3 pt-5 border-t border-white/[0.08]">
-              <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#6E6C66] block">
-                Engineering Commitments
-              </span>
-              {highlights.map((item, idx) => (
-                <div key={idx} className="flex items-start gap-3 text-xs text-[#F3EFE6]">
-                  <span className="w-4 h-4 rounded bg-[#D6B979]/15 text-[#D6B979] border border-[#D6B979]/30 flex items-center justify-center shrink-0 mt-0.5 font-bold">
-                    <Check className="w-2.5 h-2.5 stroke-[3]" />
-                  </span>
-                  <span>{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Column 3: Compact Editorial Facts */}
-          <div className="lg:col-span-3 space-y-4 text-xs font-mono border-t lg:border-t-0 lg:border-l border-white/[0.08] pt-6 lg:pt-0 lg:pl-6">
-            <div className="pb-3 border-b border-white/[0.06]">
-              <span className="text-[#6E6C66] block text-[10px] uppercase tracking-wider">Education</span>
-              <span className="font-bold text-[#F3EFE6] mt-0.5 block">
-                B.Tech in CSE (2022–2026)
-              </span>
-              <span className="text-[11px] text-[#A8A59C]">Computer Science &amp; Engineering</span>
+          {/* Right Column: Clean Definition List with Hairlines (NOT boxed cards) */}
+          <div className="lg:col-span-5 font-mono text-xs divide-y divide-[var(--border)] border-y border-[var(--border)]">
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Status</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[var(--highlight-amber)]" />
+                Data Science Intern (Active)
+              </dd>
             </div>
 
-            <div className="pb-3 border-b border-white/[0.06]">
-              <span className="text-[#6E6C66] block text-[10px] uppercase tracking-wider">Target Domain</span>
-              <span className="font-bold text-[#D6B979] mt-0.5 block">
-                Data Analyst / Machine Learning
-              </span>
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Current Org</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                Luminar Technolab (2026 &ndash; Present)
+              </dd>
             </div>
 
-            <div className="pb-3 border-b border-white/[0.06]">
-              <span className="text-[#6E6C66] block text-[10px] uppercase tracking-wider">Core Tooling</span>
-              <span className="font-bold text-[#F3EFE6] mt-0.5 block">
-                Python • SQL • Power BI • AWS • Git
-              </span>
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Education</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                B.Tech in CSE &bull; Toc H (2022&ndash;2026, Completed)
+              </dd>
             </div>
 
-            <div className="pb-3 border-b border-white/[0.06]">
-              <span className="text-[#6E6C66] block text-[10px] uppercase tracking-wider">Location</span>
-              <span className="font-bold text-[#F3EFE6] mt-0.5 block">
-                {PERSONAL_INFO.location}
-              </span>
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Location</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                Kerala, India
+              </dd>
             </div>
 
-            <div>
-              <span className="text-[#6E6C66] block text-[10px] uppercase tracking-wider">Availability Status</span>
-              <span className="font-bold text-[#D6B979] mt-0.5 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D6B979] animate-pulse" />
-                Open for Data Analyst Roles
-              </span>
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Public Repos</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                6+ Open Source Repositories
+              </dd>
+            </div>
+
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Trained Ensembles</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                12+ ML Models &amp; Pipelines
+              </dd>
+            </div>
+
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Web Training</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                60-Hour Program &bull; Aesthetix Edu-Tech
+              </dd>
+            </div>
+
+            <div className="py-4 flex justify-between items-baseline gap-4">
+              <dt className="text-[var(--text-muted)] uppercase tracking-wider">Community</dt>
+              <dd className="text-[var(--text-primary)] font-medium text-right">
+                National Service Scheme (NSS) Volunteer
+              </dd>
             </div>
           </div>
         </div>

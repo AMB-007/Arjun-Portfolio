@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import { Mail, Copy, Check, Send, ExternalLink, ArrowRight, Sparkles } from "lucide-react";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { PERSONAL_INFO } from "@/data/portfolioData";
+import { Mail, Copy, Check, Send, MapPin, Clock } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
-import { copyToClipboard, cn } from "@/utils/helpers";
+import { PERSONAL_INFO } from "@/data/portfolioData";
+import { copyToClipboard } from "@/utils/helpers";
 
 export function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
-    _gotcha: "", // Honeypot spam defense
+    _gotcha: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -27,159 +25,172 @@ export function Contact() {
 
   const validate = () => {
     const errs = {};
-    if (!formData.name.trim()) errs.name = "Please enter your name";
+    if (!formData.name.trim()) errs.name = "Please enter your name.";
     if (!formData.email.trim()) {
-      errs.email = "Please enter your email";
+      errs.email = "Please enter your email.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errs.email = "Please enter a valid email address";
+      errs.email = "Please enter a valid email address.";
     }
-    if (!formData.subject.trim()) errs.subject = "Please enter a subject";
-    if (!formData.message.trim()) errs.message = "Please write a message";
+    if (!formData.message.trim()) errs.message = "Please write a message.";
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formData._gotcha) return; // Silent discard for bots
+    if (formData._gotcha) return; // Discard automated bots
     if (!validate()) return;
 
     setIsSubmitting(true);
     const mailtoUrl = `mailto:${PERSONAL_INFO.email}?subject=${encodeURIComponent(
-      `[Data Science Portfolio Inquiry] ${formData.subject}`
+      `Portfolio Inquiry from ${formData.name}`
     )}&body=${encodeURIComponent(
-      `Hi Arjun,\n\n${formData.message}\n\nFrom: ${formData.name} (${formData.email})`
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
 
     window.location.href = mailtoUrl;
+
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmittedSuccess(true);
-      setTimeout(() => setSubmittedSuccess(false), 5000);
-    }, 1000);
+      setFormData({ name: "", email: "", message: "", _gotcha: "" });
+      setTimeout(() => setSubmittedSuccess(false), 6000);
+    }, 800);
   };
 
   return (
-    <section id="contact" className="py-24 md:py-36 bg-[#07080C] border-b border-white/[0.07] relative overflow-hidden">
-      <div className="editorial-container relative z-10">
-        <SectionHeader
-          number="09"
-          tag="GET IN TOUCH"
-          title="Connect"
-          description="Available for Data Science, Machine Learning, and analytical engineering opportunities. Feel free to reach out directly."
-        />
+    <section id="contact" className="py-20 md:py-28">
+      <div className="site-container">
+        {/* Numbered Section Header Bar */}
+        <div className="flex items-center gap-4 mb-12 sm:mb-16">
+          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+            06 &bull; Contact
+          </span>
+          <div className="flex-1 h-px bg-[var(--border)]" />
+        </div>
 
-        {/* Large Editorial Headline & Status */}
-        <div className="mb-14 space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center gap-2 px-3 py-1 text-xs font-mono font-bold rounded-full bg-[#0D0F14] text-[#F3EFE6] border border-white/[0.07]">
-              <span className="w-2 h-2 rounded-full bg-[#D6B979] animate-pulse" />
-              <span>OPEN TO DATA ANALYST &amp; ML OPPORTUNITIES // B.TECH '26</span>
+        {/* Section Heading */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <h2 className="font-display text-4xl sm:text-5xl text-[var(--text-primary)] font-normal tracking-tight leading-snug">
+            Let's work{" "}
+            <span className="italic font-serif marker-underline">
+              together.
             </span>
-          </div>
-
-          <h3 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-[#F3EFE6] font-sans uppercase leading-tight">
-            LET&apos;S WORK WITH DATA.
-          </h3>
-          <p className="text-base sm:text-lg text-[#A8A59C] max-w-2xl font-sans">
-            Whether you have a machine learning challenge, dataset analysis requirement, or prospective role, I am glad to discuss how we can build impactful solutions together.
+          </h2>
+          <p className="mt-3 text-base text-[var(--text-secondary)] leading-relaxed">
+            I am currently open to Data Analyst, Machine Learning, and Business Intelligence opportunities.
+            Reach out via direct email or submit the inquiry brief below.
           </p>
         </div>
 
-        {/* 2-Column Editorial Contact Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* LEFT: Verified Direct Contact Channels */}
+        {/* 2-Column Clean Contact Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Direct Contact Info & Verification (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="space-y-4">
-              <span className="text-xs font-mono font-bold text-[#A8A59C] uppercase tracking-wider block pb-2 border-b border-white/[0.07] flex items-center justify-between">
-                <span>// VERIFIED CONTACT CHANNELS</span>
-                <span className="text-[#D6B979]">ENCRYPTED SSL</span>
-              </span>
-
-              {/* Direct Email Card */}
-              <div className="p-6 rounded-2xl bg-[#0D0F14] border border-white/[0.07] hover:border-[#D6B979]/40 transition-all duration-300 space-y-3 shadow-lg">
-                <div className="flex items-center justify-between text-xs font-mono text-[#A8A59C]">
-                  <span className="uppercase font-bold text-[#F3EFE6]">Professional Email</span>
-                  <button
-                    onClick={handleCopyEmail}
-                    className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-[#12151C] hover:bg-[#D6B979] hover:text-[#07080C] text-[#D6B979] transition-colors cursor-pointer text-[11px] font-bold"
-                  >
-                    {copiedEmail ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        <span>COPIED TO CLIPBOARD</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>COPY EMAIL</span>
-                      </>
-                    )}
-                  </button>
-                </div>
+            {/* Prominent Email Card with Copy Button */}
+            <div className="p-6 sm:p-7 rounded-xl bg-[var(--surface)] border border-[var(--border)] space-y-4">
+              <div>
+                <span className="text-xs font-mono font-medium text-[var(--accent)] uppercase tracking-wider block mb-1">
+                  Direct Inquiries
+                </span>
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="text-base sm:text-xl font-bold font-mono text-[#F3EFE6] hover:text-[#D6B979] transition-colors block break-all"
+                  className="font-display text-lg sm:text-xl font-bold text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors break-all"
                 >
                   {PERSONAL_INFO.email}
                 </a>
               </div>
 
-              {/* Social Channels */}
-              <div className="grid grid-cols-2 gap-3 font-mono text-xs">
-                {/* LinkedIn */}
-                <a
-                  href={PERSONAL_INFO.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-5 rounded-xl bg-[#0D0F14] border border-white/[0.07] hover:border-[#D6B979]/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <button
+                  onClick={handleCopyEmail}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--surface-subtle)] hover:bg-[var(--border)] text-xs font-mono text-[var(--text-primary)] border border-[var(--border)] transition-colors cursor-pointer"
                 >
-                  <div className="flex items-center justify-between">
-                    <LinkedinIcon className="w-4 h-4 text-[#F3EFE6]" />
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A59C] group-hover:text-[#D6B979] transition-colors" />
-                  </div>
-                  <div className="pt-4">
-                    <span className="font-bold text-[#F3EFE6] block uppercase">LinkedIn</span>
-                    <span className="text-[10px] text-[#A8A59C] block truncate">Arjun M Babu</span>
-                  </div>
-                </a>
+                  {copiedEmail ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-teal-500" />
+                      <span>Copied to clipboard</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 text-[var(--accent)]" />
+                      <span>Copy email</span>
+                    </>
+                  )}
+                </button>
 
-                {/* GitHub */}
                 <a
-                  href={PERSONAL_INFO.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-5 rounded-xl bg-[#0D0F14] border border-white/[0.07] hover:border-[#D6B979]/50 transition-all duration-200 flex flex-col justify-between group shadow-md"
+                  href={`mailto:${PERSONAL_INFO.email}`}
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--accent)] hover:opacity-90 text-xs font-mono font-semibold text-[var(--accent-contrast)] transition-opacity"
                 >
-                  <div className="flex items-center justify-between">
-                    <GithubIcon className="w-4 h-4 text-[#F3EFE6]" />
-                    <ExternalLink className="w-3.5 h-3.5 text-[#A8A59C] group-hover:text-[#D6B979] transition-colors" />
-                  </div>
-                  <div className="pt-4">
-                    <span className="font-bold text-[#F3EFE6] block uppercase">GitHub</span>
-                    <span className="text-[10px] text-[#A8A59C] block">@AMB-007</span>
-                  </div>
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Send email</span>
                 </a>
               </div>
             </div>
 
-            {/* Academic Footnote */}
-            <div className="p-5 rounded-xl bg-[#0D0F14]/70 border border-white/[0.07] text-xs font-mono text-[#A8A59C] space-y-1.5">
-              <span className="font-bold text-[#F3EFE6] uppercase block">Academic Affiliation &amp; Phone:</span>
-              <p className="text-[#F3EFE6]/80">Toc H Institute of Science and Technology • B.Tech in CSE (2022–2026)</p>
-              <p className="text-[11px] text-[#D6B979] font-mono font-bold">Direct Phone: +91 6235689805</p>
-              <p className="text-[11px] text-[#A8A59C]">Primary Hub: {PERSONAL_INFO.location}</p>
+            {/* Social Links Cards */}
+            <div className="grid grid-cols-2 gap-3">
+              <a
+                href={PERSONAL_INFO.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] flex items-center gap-3 transition-colors group"
+              >
+                <div className="w-9 h-9 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] shrink-0">
+                  <LinkedinIcon className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-xs font-semibold text-[var(--text-primary)] block group-hover:text-[var(--accent)] transition-colors">
+                    LinkedIn
+                  </span>
+                  <span className="text-[11px] font-mono text-[var(--text-muted)] truncate block">
+                    arjun-m-babu
+                  </span>
+                </div>
+              </a>
+
+              <a
+                href={PERSONAL_INFO.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] flex items-center gap-3 transition-colors group"
+              >
+                <div className="w-9 h-9 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] shrink-0">
+                  <GithubIcon className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <span className="text-xs font-semibold text-[var(--text-primary)] block group-hover:text-[var(--accent)] transition-colors">
+                    GitHub
+                  </span>
+                  <span className="text-[11px] font-mono text-[var(--text-muted)] truncate block">
+                    @AMB-007
+                  </span>
+                </div>
+              </a>
+            </div>
+
+            {/* Location & Response SLA */}
+            <div className="p-4 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] space-y-2 text-xs font-mono text-[var(--text-secondary)]">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[var(--accent)]" />
+                <span>Kerala, India &bull; Open to remote and relocation</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-3.5 h-3.5 text-[var(--accent)]" />
+                <span>Response SLA: Within 24 business hours</span>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT: Direct Message Composition Form */}
+          {/* Right Column: Clean 3-Field Message Form (7 cols) */}
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="p-6 sm:p-8 rounded-2xl bg-[#0D0F14] border border-white/[0.07] space-y-5 shadow-2xl"
+              className="p-6 sm:p-8 rounded-xl bg-[var(--surface)] border border-[var(--border)] space-y-4"
             >
-              {/* Hidden Honeypot Input */}
+              {/* Hidden Honeypot */}
               <input
                 type="text"
                 name="_gotcha"
@@ -191,116 +202,76 @@ export function Contact() {
                 aria-hidden="true"
               />
 
-              <div className="space-y-1 pb-3 border-b border-white/[0.07]">
-                <h4 className="font-mono text-xs font-bold uppercase text-[#F3EFE6] tracking-wider flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#D6B979]" />
-                  <span>// COMPOSE DIRECT MESSAGE</span>
-                </h4>
-                <p className="text-xs text-[#A8A59C] font-sans">
-                  Submitting directly prepares and launches your message via your system mail client.
-                </p>
-              </div>
-
               {submittedSuccess && (
-                <div className="p-3 rounded-lg bg-[#D6B979]/15 border border-[#D6B979]/40 text-xs font-mono text-[#D6B979] flex items-center gap-2">
+                <div className="p-3.5 rounded-lg bg-[var(--surface-subtle)] border border-[var(--accent)] text-xs font-mono text-[var(--accent)] flex items-center gap-2">
                   <Check className="w-4 h-4" />
-                  <span>Message client initiated. Thank you!</span>
+                  <span>Draft email initialized in your default client. Thank you!</span>
                 </div>
               )}
 
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5 font-mono text-xs">
-                  <label htmlFor="contact-name" className="font-bold text-[#F3EFE6] uppercase">
-                    Your Name *
+                <div className="space-y-1.5 text-left">
+                  <label htmlFor="contact-name" className="text-xs font-mono font-medium text-[var(--text-primary)]">
+                    Name <span className="text-[var(--accent)]">*</span>
                   </label>
                   <input
                     id="contact-name"
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Jane Doe"
-                    className={cn(
-                      "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors",
-                      errors.name
-                        ? "border-red-500 focus:border-red-500"
-                        : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
-                    )}
+                    placeholder="Alex Morgan"
+                    className={`w-full px-3.5 py-2.5 rounded-lg bg-[var(--surface-subtle)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none transition-colors ${
+                      errors.name ? "border-red-500" : "border-[var(--border)] focus:border-[var(--accent)]"
+                    }`}
                   />
-                  {errors.name && <p className="text-[10px] text-red-400 font-bold">{errors.name}</p>}
+                  {errors.name && <p className="text-xs font-mono text-red-500">{errors.name}</p>}
                 </div>
 
-                <div className="space-y-1.5 font-mono text-xs">
-                  <label htmlFor="contact-email" className="font-bold text-[#F3EFE6] uppercase">
-                    Your Email *
+                <div className="space-y-1.5 text-left">
+                  <label htmlFor="contact-email" className="text-xs font-mono font-medium text-[var(--text-primary)]">
+                    Email <span className="text-[var(--accent)]">*</span>
                   </label>
                   <input
                     id="contact-email"
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="jane@company.com"
-                    className={cn(
-                      "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors",
-                      errors.email
-                        ? "border-red-500 focus:border-red-500"
-                        : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
-                    )}
+                    placeholder="alex@company.com"
+                    className={`w-full px-3.5 py-2.5 rounded-lg bg-[var(--surface-subtle)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none transition-colors ${
+                      errors.email ? "border-red-500" : "border-[var(--border)] focus:border-[var(--accent)]"
+                    }`}
                   />
-                  {errors.email && <p className="text-[10px] text-red-400 font-bold">{errors.email}</p>}
+                  {errors.email && <p className="text-xs font-mono text-red-500">{errors.email}</p>}
                 </div>
               </div>
 
-              {/* Subject */}
-              <div className="space-y-1.5 font-mono text-xs">
-                <label htmlFor="contact-subject" className="font-bold text-[#F3EFE6] uppercase">
-                  Subject *
-                </label>
-                <input
-                  id="contact-subject"
-                  type="text"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  placeholder="Data Science Opportunity / Analytical Project"
-                  className={cn(
-                    "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors",
-                    errors.subject
-                      ? "border-red-500 focus:border-red-500"
-                      : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
-                  )}
-                />
-                {errors.subject && <p className="text-[10px] text-red-400 font-bold">{errors.subject}</p>}
-              </div>
-
               {/* Message */}
-              <div className="space-y-1.5 font-mono text-xs">
-                <label htmlFor="contact-message" className="font-bold text-[#F3EFE6] uppercase">
-                  Message *
+              <div className="space-y-1.5 text-left">
+                <label htmlFor="contact-message" className="text-xs font-mono font-medium text-[var(--text-primary)]">
+                  Message <span className="text-[var(--accent)]">*</span>
                 </label>
                 <textarea
                   id="contact-message"
-                  rows={5}
+                  rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Share details regarding your inquiry, technical challenge, or role..."
-                  className={cn(
-                    "w-full px-3.5 py-2.5 rounded-lg bg-[#12151C] border text-[#F3EFE6] outline-none transition-colors font-sans resize-none",
-                    errors.message
-                      ? "border-red-500 focus:border-red-500"
-                      : "border-white/[0.07] focus:border-[#D6B979] focus:ring-1 focus:ring-[#D6B979]"
-                  )}
+                  placeholder="Share details regarding your role, data challenge, or team opening..."
+                  className={`w-full px-3.5 py-2.5 rounded-lg bg-[var(--surface-subtle)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none transition-colors resize-none ${
+                    errors.message ? "border-red-500" : "border-[var(--border)] focus:border-[var(--accent)]"
+                  }`}
                 />
-                {errors.message && <p className="text-[10px] text-red-400 font-bold">{errors.message}</p>}
+                {errors.message && <p className="text-xs font-mono text-red-500">{errors.message}</p>}
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-3.5 rounded-lg bg-[#D6B979] hover:bg-[#F0DDA8] text-[#07080C] font-sans text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 shadow-[0_0_20px_rgba(214,185,121,0.25)]"
+                className="w-full py-3 rounded-lg bg-[var(--accent)] hover:opacity-90 text-[var(--accent-contrast)] font-mono font-medium text-xs sm:text-sm transition-opacity flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                <Send className="w-4 h-4 stroke-[2.5]" />
-                <span>Transmit Message via Mail Client</span>
+                <Send className="w-4 h-4 shrink-0" />
+                <span>Transmit inquiry</span>
               </button>
             </form>
           </div>
