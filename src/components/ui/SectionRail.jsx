@@ -4,10 +4,9 @@ const SECTIONS = [
   { id: "hero", label: "Overview", num: "00" },
   { id: "about", label: "About", num: "01" },
   { id: "skills", label: "Skills", num: "02" },
-  { id: "interactive-demo", label: "Demo", num: "03" },
-  { id: "projects", label: "Work", num: "04" },
-  { id: "experience", label: "Timeline", num: "05" },
-  { id: "contact", label: "Contact", num: "06" },
+  { id: "projects", label: "Work", num: "03" },
+  { id: "experience", label: "Timeline", num: "04" },
+  { id: "contact", label: "Contact", num: "05" },
 ];
 
 export function SectionRail({ activeSection = "hero" }) {

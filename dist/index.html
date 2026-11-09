@@ -95,11 +95,42 @@
     }
     </script>
 
-    <!-- Anti-Flash Theme Bootstrap Script (Defaults to system preference, persistent toggle) -->
+    <!-- Anti-Flash Theme Bootstrap Script & Critical Styling -->
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg-critical: #0A1020;
+        --text-critical: #F2EEE6;
+      }
+      html.light {
+        color-scheme: light;
+        --bg-critical: #F7F4EC;
+        --text-critical: #0E1626;
+      }
+      html, body {
+        background-color: var(--bg-critical);
+        color: var(--text-critical);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+      /* Screen-reader-only utility fallback to prevent Flash of Unstyled Content (FOUC) */
+      .sr-only {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border-width: 0 !important;
+      }
+    </style>
     <script>
       (function () {
         try {
-          var saved = localStorage.getItem("theme");
+          var saved = localStorage.getItem("portfolio-theme") || localStorage.getItem("theme");
           var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
           var effective = saved ? (saved === "system" ? (prefersDark ? "dark" : "light") : saved) : (prefersDark ? "dark" : "light");
           document.documentElement.setAttribute("data-theme", effective);
@@ -115,19 +146,11 @@
         }
       })();
     </script>
-    <script type="module" crossorigin src="/assets/index-CX4YeWn5.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-ticSM0wO.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-BERN1kQX.css">
+    <script type="module" crossorigin src="/assets/index-doMGh2Ie.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-icons-B7pktBPr.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-B6KK3r6o.css">
   </head>
-  <body class="font-sans antialiased min-h-screen bg-[#0B0F17] text-[#E8ECF3] selection:bg-[#2F6FEB] selection:text-white">
-    <!-- Accessible Skip to Content Link -->
-    <a
-      href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#2F6FEB] focus:text-white focus:font-sans focus:font-medium focus:rounded-md focus:shadow-lg"
-    >
-      Skip to content
-    </a>
-
+  <body class="font-sans antialiased min-h-screen bg-[var(--bg)] text-[var(--text-primary)] selection:bg-[var(--accent)] selection:text-[var(--accent-contrast)]">
     <!-- React Root Mount Point -->
     <div id="root"></div>
 
@@ -140,7 +163,7 @@
       <main id="noscript-content">
         <section>
           <h2>About Arjun M Babu</h2>
-          <p>Computer Science Engineering graduate/student at Toc H Institute of Science and Technology (2022–2026). Data Science Intern at Luminar Technolab (2026). Focused on exploratory data analysis, business intelligence dashboards, and predictive machine learning.</p>
+          <p>Computer Science Engineering graduate from Toc H Institute of Science and Technology. Data Science Intern at Luminar Technolab (2026). Focused on exploratory data analysis, business intelligence dashboards, and predictive machine learning.</p>
         </section>
         <section>
           <h2>Featured Machine Learning Projects</h2>

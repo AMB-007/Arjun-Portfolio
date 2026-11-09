@@ -26,7 +26,7 @@ const TIMELINE_ENTRIES = [
     period: "2022 — 2026",
     location: "Kerala, India",
     badge: "Completed",
-    badgeStyle: "bg-[var(--surface-subtle)] text-[var(--text-primary)] border-[var(--border)]",
+    badgeStyle: "bg-[var(--accent)]/15 text-[var(--accent)] border-[var(--accent)]/30 font-semibold",
     bullets: [
       "Completed comprehensive undergraduate engineering curriculum focused on computing foundations, algorithms, and applied AI.",
       "Core coursework: Data Structures, Algorithms, Relational Database Management Systems (MySQL), Operating Systems, Software Engineering.",
@@ -97,7 +97,7 @@ export function Experience() {
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
           <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
-            05 &bull; Experience
+            04 &bull; Experience
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
         </div>

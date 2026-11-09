@@ -227,7 +227,7 @@ export function HeroDataLattice({ isDark = true, palette = "navy", onPerformance
         targetGroupY = -0.7 - progress * 0.5;
         targetOpacity = 0.5 * (1.0 - progress);
       } else {
-        // Complete fade-out before Interactive Demo section
+        // Complete fade-out before Projects section
         targetOpacity = 0;
       }
     };
@@ -238,6 +238,7 @@ export function HeroDataLattice({ isDark = true, palette = "navy", onPerformance
     // 8. Performance Monitoring (Auto-disable if fps < 38 for 2 consecutive seconds)
     let lowFpsDuration = 0;
     let lastTime = performance.now();
+    const startTime = performance.now();
     let isVisible = true;
 
     const handleVisibility = () => {
@@ -247,7 +248,6 @@ export function HeroDataLattice({ isDark = true, palette = "navy", onPerformance
 
     // 9. Render & Animation Loop with Smooth Color Lerp
     let animationFrameId;
-    let clock = new THREE.Clock();
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
@@ -273,7 +273,7 @@ export function HeroDataLattice({ isDark = true, palette = "navy", onPerformance
         }
       }
 
-      const elapsedTime = clock.getElapsedTime();
+      const elapsedTime = (now - startTime) * 0.001;
 
       // Smooth color lerp to latest CSS theme tokens
       const latestColors = parseColors();

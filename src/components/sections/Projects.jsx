@@ -37,7 +37,7 @@ export function Projects() {
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
           <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
-            04 &bull; Work
+            03 &bull; Work
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
         </div>

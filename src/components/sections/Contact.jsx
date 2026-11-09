@@ -64,7 +64,7 @@ export function Contact() {
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
           <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
-            06 &bull; Contact
+            05 &bull; Contact
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
         </div>

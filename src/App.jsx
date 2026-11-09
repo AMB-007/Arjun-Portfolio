@@ -4,7 +4,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
-import { ModelPlayground } from "@/components/sections/ModelPlayground";
 import { Projects } from "@/components/sections/Projects";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
@@ -21,7 +20,6 @@ const SECTION_IDS = [
   "hero",
   "about",
   "skills",
-  "interactive-demo",
   "projects",
   "experience",
   "contact",
@@ -100,7 +98,6 @@ export function App() {
         <Hero />
         <About />
         <Skills />
-        <ModelPlayground />
         <Projects />
         <Experience />
         <Contact />

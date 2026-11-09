@@ -119,3 +119,4 @@ export function PaletteSwitcher({ palette = "navy", onSetPalette, isDark, onTogg
 }
 
 export default PaletteSwitcher;
+

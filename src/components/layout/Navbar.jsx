@@ -7,7 +7,6 @@ import { PaletteSwitcher } from "@/components/ui/PaletteSwitcher";
 const NAV_LINKS = [
   { label: "Work", href: "#projects" },
   { label: "Skills", href: "#skills" },
-  { label: "Demo", href: "#interactive-demo" },
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ];

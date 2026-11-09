@@ -54,15 +54,6 @@ export function CommandMenu({
       },
     },
     {
-      id: "demo",
-      label: "Jump to Interactive ML Simulator",
-      group: "Navigation",
-      perform: () => {
-        window.location.hash = "#interactive-demo";
-        onClose();
-      },
-    },
-    {
       id: "experience",
       label: "Jump to Career Timeline & Education",
       group: "Navigation",
