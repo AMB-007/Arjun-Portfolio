@@ -84,9 +84,9 @@ export function Skills() {
                     </p>
                   </div>
 
-                  {/* Skills Inline with subtle separators (8 cols) */}
+                  {/* Skills Inline with subtle separators (8 cols) — Inter Medium typography */}
                   <div className="md:col-span-8 space-y-3">
-                    <div className="flex flex-wrap items-center gap-y-2.5 gap-x-3 text-sm sm:text-base font-mono text-[var(--text-primary)]">
+                    <div className="flex flex-wrap items-center gap-y-2.5 gap-x-3 text-sm sm:text-base font-sans font-medium text-[var(--text-primary)]">
                       {row.skills.map((skill, sIdx) => (
                         <React.Fragment key={skill}>
                           <span className="hover:text-[var(--accent)] transition-colors">

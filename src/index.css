@@ -2,34 +2,42 @@
 
 @layer base {
   :root {
-    /* "Analyst's Notebook" — Light: Warm Paper */
-    --bg: #F6F4EF;
+    /* "Analyst's Notebook" — Light: Ink Navy & Brass */
+    --bg: #F7F4EC;
     --surface: #FFFFFF;
-    --surface-elevated: #FFFFFF;
-    --surface-subtle: #EEEAE1;
-    --border: #DDD7CA;
-    --border-subtle: rgba(18, 20, 26, 0.08);
+    --surface-elevated: #FBF9F4;
+    --surface-subtle: #EFEADF;
+    --border: #DDD5C4;
+    --border-strong: rgba(138, 106, 47, 0.4);
+    --border-accent: rgba(138, 106, 47, 0.18);
 
-    --text-primary: #12141A;
-    --text-secondary: #464B57;
-    --text-muted: #767C88;
+    --text-primary: #0E1626;
+    --text-secondary: #444C5E;
+    --text-muted: #5E6573;
 
-    --accent: #2B4BDB;
-    --accent-hover: #1E3BB8;
+    --accent: #8A6A2F;
+    --accent-hover: #725624;
+    --accent-deep: #5A431A;
     --accent-contrast: #FFFFFF;
-    --accent-rgb: 43, 75, 219;
+    --accent-rgb: 138, 106, 47;
 
-    --highlight-amber: #D99A1E;
-    --chart-teal: #0E8474;
-    --chart-slate: #767C88;
+    --button-primary-bg: #14233F;
+    --button-primary-hover: #1D3259;
+    --button-primary-text: #F2EEE6;
 
-    --accent-tier1: #2B4BDB;
-    --accent-tier2: #4564E6;
-    --accent-tier3: #6883F0;
-    --accent-tier4: #94A7F8;
+    --data-accent: #2F4B86;
+    --positive: #2E8B6E;
+    --negative: #B84A3E;
+    --highlight-amber: #8A6A2F;
 
-    --card-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.85);
-    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
+    --accent-tier1: #8A6A2F;
+    --accent-tier2: #A8833E;
+    --accent-tier3: #C49E55;
+    --accent-tier4: #DEBB73;
+
+    --card-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    --shadow-soft: 0 10px 30px -10px rgba(14, 22, 38, 0.08);
+    --portrait-overlay: rgba(247, 244, 236, 0.2);
 
     --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", serif;
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -37,34 +45,42 @@
   }
 
   html.dark {
-    /* "Analyst's Notebook" — Dark: Midnight Graphite */
-    --bg: #0A0C11;
-    --surface: #11141B;
-    --surface-elevated: #171B24;
-    --surface-subtle: #171B24;
-    --border: #232837;
-    --border-subtle: rgba(238, 240, 245, 0.08);
+    /* "Analyst's Notebook" — Dark: Ink Navy & Brass (DEFAULT) */
+    --bg: #0A1020;
+    --surface: #0F1729;
+    --surface-elevated: #151F36;
+    --surface-subtle: #17233D;
+    --border: #1F2A44;
+    --border-strong: rgba(201, 166, 107, 0.35);
+    --border-accent: rgba(201, 166, 107, 0.16);
 
-    --text-primary: #EEF0F5;
-    --text-secondary: #A6ADBB;
-    --text-muted: #727A8A;
+    --text-primary: #F2EEE6;
+    --text-secondary: #AEB6C6;
+    --text-muted: #7D879B;
 
-    --accent: #5B7CFA;
-    --accent-hover: #7C97FF;
-    --accent-contrast: #0A0C11;
-    --accent-rgb: 91, 124, 250;
+    --accent: #C9A66B;
+    --accent-hover: #DDBF86;
+    --accent-deep: #9A7B45;
+    --accent-contrast: #0A1020;
+    --accent-rgb: 201, 166, 107;
 
-    --highlight-amber: #E8B04B;
-    --chart-teal: #2FB8A6;
-    --chart-slate: #727A8A;
+    --button-primary-bg: #C9A66B;
+    --button-primary-hover: #DDBF86;
+    --button-primary-text: #0A1020;
 
-    --accent-tier1: #8FA5FF;
-    --accent-tier2: #5B7CFA;
-    --accent-tier3: #3D5FD9;
-    --accent-tier4: #243F9E;
+    --data-accent: #8FA8D8;
+    --positive: #5FBFA0;
+    --negative: #D9776B;
+    --highlight-amber: #C9A66B;
 
-    --card-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.05);
-    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --accent-tier1: #C9A66B;
+    --accent-tier2: #D8BA84;
+    --accent-tier3: #E6CE9F;
+    --accent-tier4: #F4E2BB;
+
+    --card-inner-highlight: inset 0 1px 0 rgba(242, 238, 230, 0.06);
+    --shadow-soft: 0 14px 34px -10px rgba(0, 0, 0, 0.55);
+    --portrait-overlay: rgba(10, 16, 32, 0.3);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -94,6 +110,28 @@
     color: var(--text-primary);
     overflow-x: hidden;
   }
+
+  /* Styled Scrollbars */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+  }
+
+  /* Styled Selection */
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-contrast);
+  }
 }
 
 /* Subtle 3% Grain Overlay */
@@ -106,17 +144,95 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Premium Card Depth & Finish */
+/* Premium "Lacquer" Card Depth & Finish */
 .notebook-card {
-  background-color: var(--surface);
-  border: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-elevated) 100%);
+  border: 1px solid var(--border-accent);
   box-shadow: var(--shadow-soft), var(--card-inner-highlight);
   border-radius: 1rem;
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .notebook-card:hover {
-  border-color: rgba(var(--accent-rgb), 0.4);
+  border-color: rgba(var(--accent-rgb), 0.38);
+}
+
+/* Primary Button with Sheen Sweep */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  background: var(--button-primary-bg);
+  color: var(--button-primary-text);
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  min-height: 44px;
+  padding: 0.625rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+
+.btn-primary:hover::after {
+  left: 200%;
+  transition: left 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-primary:hover {
+  opacity: 0.94;
+  transform: translateY(-1px);
+}
+
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+}
+
+/* Secondary Button with Hairline Outline */
+.btn-secondary {
+  min-height: 44px;
+  padding: 0.625rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 0.5rem;
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
 }
 
 /* Editorial Measure & Typography Utilities */
@@ -153,7 +269,7 @@
   max-width: 65ch;
 }
 
-/* Amber Highlight Underline */
+/* Thin Accent Underline for Italics */
 .marker-underline {
   position: relative;
   display: inline-block;
@@ -167,7 +283,7 @@
   bottom: 0.12em;
   width: 100%;
   height: 2px;
-  background-color: var(--highlight-amber);
+  background-color: var(--accent);
   border-radius: 1px;
 }
 

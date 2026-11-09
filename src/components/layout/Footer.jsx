@@ -47,7 +47,7 @@ export function Footer() {
 
         {/* Center: Live Time in IST & Location */}
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface)] border border-[var(--border)] text-[11px]">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[var(--positive)] animate-pulse" />
           <span className="text-[var(--text-primary)] font-medium">Kochi, IN</span>
           <span className="text-[var(--border)]">&bull;</span>
           <span className="text-[var(--accent)] font-semibold">{istTime || "14:30:00"} IST</span>

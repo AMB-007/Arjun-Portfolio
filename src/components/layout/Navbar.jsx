@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, FileText, Command } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { PaletteSwitcher } from "@/components/ui/PaletteSwitcher";
 
 const NAV_LINKS = [
   { label: "Work", href: "#projects" },
@@ -11,7 +12,14 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-export function Navbar({ activeSection = "hero", isDark, onToggleTheme, onOpenCommandMenu }) {
+export function Navbar({
+  activeSection = "hero",
+  isDark,
+  onToggleTheme,
+  palette = "navy",
+  onSetPalette,
+  onOpenCommandMenu,
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -44,7 +52,7 @@ export function Navbar({ activeSection = "hero", isDark, onToggleTheme, onOpenCo
           </span>
         </a>
 
-        {/* Desktop Navigation Links (5 links: Work, Skills, Demo, Experience, Contact) */}
+        {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Main Navigation">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.replace("#", "");
@@ -68,7 +76,15 @@ export function Navbar({ activeSection = "hero", isDark, onToggleTheme, onOpenCo
         </nav>
 
         {/* Right Action Utilities (Desktop) */}
-        <div className="hidden md:flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <div className="hidden md:flex items-center gap-2 sm:gap-2.5 shrink-0">
+          {/* Palette Switcher */}
+          <PaletteSwitcher
+            palette={palette}
+            onSetPalette={onSetPalette}
+            isDark={isDark}
+            onToggleTheme={onToggleTheme}
+          />
+
           {/* Command Menu Shortcut Button */}
           <button
             onClick={onOpenCommandMenu}
@@ -88,15 +104,21 @@ export function Navbar({ activeSection = "hero", isDark, onToggleTheme, onOpenCo
             href={PERSONAL_INFO.resumePath}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--accent)] hover:opacity-90 text-xs font-semibold text-[var(--accent-contrast)] transition-opacity"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--button-primary-bg)] hover:bg-[var(--button-primary-hover)] text-xs font-semibold text-[var(--button-primary-text)] transition-colors shadow-xs"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>Resume</span>
           </a>
         </div>
 
-        {/* Mobile Hamburger & Theme Toggle Controls */}
+        {/* Mobile Hamburger & Controls */}
         <div className="flex md:hidden items-center gap-2">
+          <PaletteSwitcher
+            palette={palette}
+            onSetPalette={onSetPalette}
+            isDark={isDark}
+            onToggleTheme={onToggleTheme}
+          />
           <ThemeToggle isDark={isDark} onToggle={onToggleTheme} />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -147,7 +169,7 @@ export function Navbar({ activeSection = "hero", isDark, onToggleTheme, onOpenCo
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full py-3 rounded-lg bg-[var(--accent)] text-[var(--accent-contrast)] font-medium text-sm flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-lg bg-[var(--button-primary-bg)] text-[var(--button-primary-text)] font-medium text-sm flex items-center justify-center gap-2"
             >
               <FileText className="w-4 h-4" />
               <span>View Resume (PDF)</span>

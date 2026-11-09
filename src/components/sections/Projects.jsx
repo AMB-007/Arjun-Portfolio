@@ -116,7 +116,7 @@ export function Projects() {
                     <div className="flex items-center gap-3.5 pt-2">
                       <button
                         onClick={() => setSelectedProject(leadProject)}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--accent-contrast)] text-xs font-semibold font-sans transition-all cursor-pointer shadow-xs hover:shadow-md"
+                        className="btn-primary text-xs font-sans"
                       >
                         <BookOpen className="w-3.5 h-3.5" />
                         <span>Case study</span>
@@ -231,17 +231,17 @@ export function Projects() {
                           {isWebShield ? "Threat Telemetry Triage" : "Specimen Classification"}
                         </span>
                         <span className="text-[var(--accent)] font-semibold">
-                          {isWebShield ? "4 Sapphire Tiers" : "13 Rock Classes"}
+                          {isWebShield ? "4 Severity Tiers" : "13 Rock Classes"}
                         </span>
                       </div>
                       {/* Visual meter bar */}
                       <div className="w-full h-2 rounded-full bg-[var(--surface)] border border-[var(--border)] overflow-hidden flex">
                         {isWebShield ? (
                           <>
-                            <div className="h-full bg-[var(--accent-tier1)] w-[25%]" title="Critical (Sapphire Tier 1)" />
-                            <div className="h-full bg-[var(--accent-tier2)] w-[30%]" title="High (Sapphire Tier 2)" />
-                            <div className="h-full bg-[var(--accent-tier3)] w-[25%]" title="Medium (Sapphire Tier 3)" />
-                            <div className="h-full bg-[var(--accent-tier4)] w-[20%]" title="Low (Sapphire Tier 4)" />
+                            <div className="h-full bg-[var(--accent-tier1)] w-[25%]" title="Critical (Tier 1)" />
+                            <div className="h-full bg-[var(--accent-tier2)] w-[30%]" title="High (Tier 2)" />
+                            <div className="h-full bg-[var(--accent-tier3)] w-[25%]" title="Medium (Tier 3)" />
+                            <div className="h-full bg-[var(--accent-tier4)] w-[20%]" title="Low (Tier 4)" />
                           </>
                         ) : (
                           <div className="h-full bg-[var(--accent)] w-[94.8%]" title="94.8% Confidence" />

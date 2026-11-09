@@ -108,7 +108,7 @@ export function Contact() {
                 >
                   {copiedEmail ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-teal-500" />
+                      <Check className="w-3.5 h-3.5 text-[var(--positive)]" />
                       <span>Copied to clipboard</span>
                     </>
                   ) : (
@@ -121,7 +121,7 @@ export function Contact() {
 
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--accent)] hover:opacity-90 text-xs sm:text-[13px] font-mono font-semibold text-[var(--accent-contrast)] transition-opacity"
+                  className="btn-primary text-xs sm:text-[13px] font-mono"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send email</span>
@@ -215,11 +215,11 @@ export function Contact() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Your Name or Organization"
                   className={`w-full px-4 py-2.5 rounded-lg bg-[var(--bg)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors ${
-                    errors.name ? "border-rose-500" : "border-[var(--border)]"
+                    errors.name ? "border-[var(--negative)]" : "border-[var(--border)]"
                   }`}
                 />
                 {errors.name && (
-                  <p className="mt-1.5 text-xs text-rose-500 font-mono">{errors.name}</p>
+                  <p className="mt-1.5 text-xs text-[var(--negative)] font-mono">{errors.name}</p>
                 )}
               </div>
 
@@ -237,11 +237,11 @@ export function Contact() {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   placeholder="name@company.com"
                   className={`w-full px-4 py-2.5 rounded-lg bg-[var(--bg)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors ${
-                    errors.email ? "border-rose-500" : "border-[var(--border)]"
+                    errors.email ? "border-[var(--negative)]" : "border-[var(--border)]"
                   }`}
                 />
                 {errors.email && (
-                  <p className="mt-1.5 text-xs text-rose-500 font-mono">{errors.email}</p>
+                  <p className="mt-1.5 text-xs text-[var(--negative)] font-mono">{errors.email}</p>
                 )}
               </div>
 
@@ -259,11 +259,11 @@ export function Contact() {
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Outline the role, analytics challenges, or project goals..."
                   className={`w-full px-4 py-2.5 rounded-lg bg-[var(--bg)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors resize-none ${
-                    errors.message ? "border-rose-500" : "border-[var(--border)]"
+                    errors.message ? "border-[var(--negative)]" : "border-[var(--border)]"
                   }`}
                 />
                 {errors.message && (
-                  <p className="mt-1.5 text-xs text-rose-500 font-mono">{errors.message}</p>
+                  <p className="mt-1.5 text-xs text-[var(--negative)] font-mono">{errors.message}</p>
                 )}
               </div>
 
@@ -271,14 +271,14 @@ export function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:opacity-90 disabled:opacity-50 text-xs sm:text-[13px] font-mono font-semibold text-[var(--accent-contrast)] transition-opacity cursor-pointer"
+                  className="btn-primary text-xs sm:text-[13px] font-mono px-6 py-3 cursor-pointer disabled:opacity-50"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>{isSubmitting ? "Drafting Mail..." : "Send Message"}</span>
                 </button>
 
                 {submittedSuccess && (
-                  <span className="text-xs font-mono text-[var(--chart-teal)] flex items-center gap-1.5 animate-fadeIn">
+                  <span className="text-xs font-mono text-[var(--positive)] flex items-center gap-1.5 animate-fadeIn">
                     <Check className="w-4 h-4" />
                     Mail client opened
                   </span>

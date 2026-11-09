@@ -68,7 +68,7 @@ export function TiltCard({
           className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-30"
           style={{
             opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(circle 320px at ${glarePosition.x}% ${glarePosition.y}%, rgba(255, 255, 255, ${glareOpacity}), transparent 70%)`,
+            background: `radial-gradient(circle 320px at ${glarePosition.x}% ${glarePosition.y}%, rgba(var(--accent-rgb), ${glareOpacity * 0.45}), rgba(255, 255, 255, ${glareOpacity * 0.65}) 40%, transparent 70%)`,
           }}
           aria-hidden="true"
         />

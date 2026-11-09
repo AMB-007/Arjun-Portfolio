@@ -61,19 +61,19 @@ export function ModelPlayground() {
   const threatPrediction = useMemo(() => {
     const riskScore = failedAuthRate * 0.4 + sqliTokens * 7.5 + scanRate * 0.8;
     let tier = "LOW";
-    let color = "text-[var(--chart-teal)]";
-    let border = "border-[var(--chart-teal)]/40";
+    let color = "text-[var(--accent-tier3)]";
+    let border = "border-[var(--accent-tier3)]/40";
     let desc = "Normal user traffic baseline. No anomalous patterns identified.";
 
     if (riskScore > 55) {
       tier = "CRITICAL";
-      color = "text-rose-600 dark:text-rose-400";
-      border = "border-rose-500/50";
+      color = "text-[var(--negative)]";
+      border = "border-[var(--negative)]/50";
       desc = "Active multi-vector attack detected (Brute-force + SQLi signatures). Automated mitigation protocol triggered.";
     } else if (riskScore > 25) {
       tier = "MEDIUM";
-      color = "text-[var(--highlight-amber)]";
-      border = "border-[var(--highlight-amber)]/50";
+      color = "text-[var(--accent-tier1)]";
+      border = "border-[var(--accent-tier1)]/50";
       desc = "Elevated suspicious telemetry. Rate-limiting challenge queued for origin IP.";
     }
 
@@ -297,7 +297,7 @@ export function ModelPlayground() {
                         <span>{s.feature}</span>
                         <span
                           className={`font-semibold ${
-                            s.positive ? "text-[var(--chart-teal)]" : "text-rose-600 dark:text-rose-400"
+                            s.positive ? "text-[var(--positive)]" : "text-[var(--negative)]"
                           }`}
                         >
                           {s.impact}

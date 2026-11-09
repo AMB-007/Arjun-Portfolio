@@ -33,8 +33,8 @@ export function App() {
     theme,
     isDark,
     toggleTheme,
-    accent,
-    setAccent,
+    palette,
+    setPalette,
     is3DEnabled,
     toggle3D,
     enable3DFlag,
@@ -56,15 +56,15 @@ export function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text-primary)] antialiased transition-colors selection:bg-[var(--accent)] selection:text-[var(--accent-contrast)] relative">
-      {/* Film Grain Texture Overlay (~3% opacity) */}
+      {/* Film Grain Texture Overlay (~3.5% opacity) */}
       <div className="grain-overlay" aria-hidden="true" />
 
-      {/* 3D Animated Layer or Fallback Poster */}
+      {/* 3D Volumetric Animated Layer or Static Fallback Poster */}
       {enable3DFlag && is3DEnabled ? (
         <Suspense fallback={<DataLatticePoster isDark={isDark} />}>
           <HeroDataLattice
             isDark={isDark}
-            accent={accent}
+            palette={palette}
             onPerformanceDrop={() => {
               toggle3D(false);
             }}
@@ -82,11 +82,13 @@ export function App() {
         Skip to main content
       </a>
 
-      {/* Sticky Translucent Navbar */}
+      {/* Sticky Translucent Navbar with Compact Palette & Theme Switcher */}
       <Navbar
         activeSection={activeSection}
         isDark={isDark}
         onToggleTheme={toggleTheme}
+        palette={palette}
+        onSetPalette={setPalette}
         onOpenCommandMenu={() => setCommandMenuOpen(true)}
       />
 
@@ -113,8 +115,8 @@ export function App() {
         onClose={() => setCommandMenuOpen(false)}
         isDark={isDark}
         onToggleTheme={toggleTheme}
-        accent={accent}
-        onSetAccent={setAccent}
+        palette={palette}
+        onSetPalette={setPalette}
         is3DEnabled={is3DEnabled}
         onToggle3D={toggle3D}
         enable3DFlag={enable3DFlag}

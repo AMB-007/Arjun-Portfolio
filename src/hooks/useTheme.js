@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { THEME_CONFIG, ACCENT_PRESETS, DEFAULT_ACCENT, ENABLE_3D } from "@/config/theme.config";
+import { PALETTES, DEFAULT_PALETTE, ENABLE_3D, getPaletteTokens } from "@/config/theme.config";
 
 export function useTheme() {
-  // 1. Theme State (light / dark / system)
+  // 1. Theme Mode (light / dark / system)
   const [theme, setThemeState] = useState(() => {
     if (typeof window === "undefined") return "system";
     return localStorage.getItem("portfolio-theme") || "system";
@@ -16,11 +16,11 @@ export function useTheme() {
     return window.matchMedia("(prefers-color-scheme: dark)").matches;
   });
 
-  // 2. Accent Preset State (sapphire / teal / emerald / violet)
-  const [accent, setAccentState] = useState(() => {
-    if (typeof window === "undefined") return DEFAULT_ACCENT;
-    const saved = localStorage.getItem("portfolio-accent");
-    return ACCENT_PRESETS[saved] ? saved : DEFAULT_ACCENT;
+  // 2. Palette Family (navy / forest / graphite)
+  const [palette, setPaletteState] = useState(() => {
+    if (typeof window === "undefined") return DEFAULT_PALETTE;
+    const saved = localStorage.getItem("portfolio-palette");
+    return PALETTES[saved] ? saved : DEFAULT_PALETTE;
   });
 
   // 3. 3D WebGL Feature State
@@ -34,22 +34,18 @@ export function useTheme() {
 
     // Auto-disable conditions
     try {
-      // a. Reduced motion
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return false;
       }
-      // b. Data saver
       if (navigator.connection && navigator.connection.saveData) {
         return false;
       }
-      // c. Hardware limits (low concurrency or low memory)
       if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) {
         return false;
       }
       if (navigator.deviceMemory && navigator.deviceMemory <= 4) {
         return false;
       }
-      // d. WebGL check
       const canvas = document.createElement("canvas");
       const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
       if (!gl) return false;
@@ -60,117 +56,140 @@ export function useTheme() {
     return true;
   });
 
-  // Apply CSS Variables to Document Root whenever theme or accent changes
-  const applyVariables = useCallback((currentDark, currentAccent) => {
+  // Helper to parse hex to RGB comma-separated string
+  const hexToRgb = (hex) => {
+    const c = hex.replace("#", "");
+    const bigint = parseInt(c.length === 3 ? c.split("").map(x => x + x).join("") : c, 16);
+    return `${(bigint >> 16) & 255}, ${(bigint >> 8) & 255}, ${bigint & 255}`;
+  };
+
+  // Apply CSS Variables to Document Root whenever theme or palette changes
+  const applyVariables = useCallback((currentDark, currentPalette) => {
     if (typeof document === "undefined") return;
     const root = document.documentElement;
-    const themeKey = currentDark ? "dark" : "light";
-    const colors = THEME_CONFIG[themeKey];
-    const accentObj = ACCENT_PRESETS[currentAccent] || ACCENT_PRESETS[DEFAULT_ACCENT];
+    const tokens = getPaletteTokens(currentPalette, currentDark);
 
-    // Surface & Typography Tokens
-    root.style.setProperty("--bg", colors.bg);
-    root.style.setProperty("--surface", colors.surface);
-    root.style.setProperty("--surface-elevated", colors.surfaceElevated);
-    root.style.setProperty("--surface-subtle", colors.surfaceSubtle);
-    root.style.setProperty("--border", colors.border);
-    root.style.setProperty("--border-subtle", colors.borderSubtle);
-    root.style.setProperty("--text-primary", colors.textPrimary);
-    root.style.setProperty("--text-secondary", colors.textSecondary);
-    root.style.setProperty("--text-muted", colors.textMuted);
-    root.style.setProperty("--highlight-amber", colors.highlightAmber);
-    root.style.setProperty("--chart-teal", colors.chartTeal);
-    root.style.setProperty("--chart-slate", colors.chartSlate);
-    root.style.setProperty("--card-inner-highlight", colors.cardInnerHighlight);
-    root.style.setProperty("--shadow-soft", colors.shadowSoft);
+    // Surfaces & Borders
+    root.style.setProperty("--bg", tokens.bg);
+    root.style.setProperty("--surface", tokens.surface);
+    root.style.setProperty("--surface-elevated", tokens.surfaceElevated);
+    root.style.setProperty("--surface-subtle", tokens.surfaceSubtle);
+    root.style.setProperty("--border", tokens.border);
+    root.style.setProperty("--border-strong", tokens.borderStrong);
+    root.style.setProperty("--border-accent", tokens.borderAccent);
 
-    // Accent Tokens
-    const activeAccentColor = currentDark ? accentObj.dark : accentObj.light;
-    const activeAccentHover = currentDark ? accentObj.darkHover : accentObj.lightHover;
-    const activeAccentContrast = currentDark ? accentObj.darkContrast : accentObj.lightContrast;
-    const activeAccentRgb = currentDark ? accentObj.darkRgb : accentObj.lightRgb;
+    // Typography
+    root.style.setProperty("--text-primary", tokens.textPrimary);
+    root.style.setProperty("--text-secondary", tokens.textSecondary);
+    root.style.setProperty("--text-muted", tokens.textMuted);
 
-    root.style.setProperty("--accent", activeAccentColor);
-    root.style.setProperty("--accent-hover", activeAccentHover);
-    root.style.setProperty("--accent-contrast", activeAccentContrast);
-    root.style.setProperty("--accent-rgb", activeAccentRgb);
+    // Primary Accent
+    root.style.setProperty("--accent", tokens.accent);
+    root.style.setProperty("--accent-hover", tokens.accentHover);
+    root.style.setProperty("--accent-deep", tokens.accentDeep);
+    root.style.setProperty("--accent-contrast", tokens.accentContrast);
+    root.style.setProperty("--accent-rgb", hexToRgb(tokens.accent));
 
-    // 4 Ordered Tiers for Data-Viz (Replaces traffic light)
-    const tiers = accentObj.tiers[themeKey];
-    root.style.setProperty("--accent-tier1", tiers[0]);
-    root.style.setProperty("--accent-tier2", tiers[1]);
-    root.style.setProperty("--accent-tier3", tiers[2]);
-    root.style.setProperty("--accent-tier4", tiers[3]);
+    // Primary Button
+    root.style.setProperty("--button-primary-bg", tokens.buttonPrimaryBg);
+    root.style.setProperty("--button-primary-hover", tokens.buttonPrimaryHover);
+    root.style.setProperty("--button-primary-text", tokens.buttonPrimaryText);
 
-    // Data-Theme & Class
-    root.setAttribute("data-theme", themeKey);
-    root.setAttribute("data-accent", currentAccent);
-    if (currentDark) {
-      root.classList.add("dark");
-      root.classList.remove("light");
-    } else {
-      root.classList.add("light");
-      root.classList.remove("dark");
+    // Functional & Data Accents
+    root.style.setProperty("--data-accent", tokens.dataAccent);
+    root.style.setProperty("--positive", tokens.positive);
+    root.style.setProperty("--negative", tokens.negative);
+    root.style.setProperty("--highlight-amber", tokens.highlightAmber);
+
+    // 4 Ordered Tiers for Data-Viz
+    root.style.setProperty("--accent-tier1", tokens.tiers.tier1);
+    root.style.setProperty("--accent-tier2", tokens.tiers.tier2);
+    root.style.setProperty("--accent-tier3", tokens.tiers.tier3);
+    root.style.setProperty("--accent-tier4", tokens.tiers.tier4);
+
+    // Finish & Overlays
+    root.style.setProperty("--card-inner-highlight", tokens.cardInnerHighlight);
+    root.style.setProperty("--shadow-soft", tokens.shadowSoft);
+    root.style.setProperty("--portrait-overlay", tokens.portraitOverlay);
+
+    // Update Meta Theme Color
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute("content", tokens.themeColor);
     }
   }, []);
 
-  // Theme synchronization effect
+  // Sync variables on state changes
   useEffect(() => {
+    applyVariables(isDark, palette);
+  }, [isDark, palette, applyVariables]);
+
+  // Handle system preference changes
+  useEffect(() => {
+    if (theme !== "system") return;
+
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-    const resolveDark = () => {
-      if (theme === "dark") return true;
-      if (theme === "light") return false;
-      return mediaQuery.matches;
+    const handleChange = (e) => {
+      setIsDark(e.matches);
     };
 
-    const currentDark = resolveDark();
-    setIsDark(currentDark);
-    applyVariables(currentDark, accent);
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [theme]);
 
-    const handleSystemChange = () => {
-      if (theme === "system") {
-        const nextDark = mediaQuery.matches;
-        setIsDark(nextDark);
-        applyVariables(nextDark, accent);
-      }
-    };
-
-    mediaQuery.addEventListener("change", handleSystemChange);
-    return () => mediaQuery.removeEventListener("change", handleSystemChange);
-  }, [theme, accent, applyVariables]);
-
-  const setTheme = (newTheme) => {
-    localStorage.setItem("portfolio-theme", newTheme);
+  // Set Theme Mode (dark / light / system)
+  const setTheme = useCallback((newTheme) => {
     setThemeState(newTheme);
-  };
+    localStorage.setItem("portfolio-theme", newTheme);
 
-  const toggleTheme = () => {
+    if (newTheme === "system") {
+      const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setIsDark(systemDark);
+      if (systemDark) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    } else {
+      const isDarkVal = newTheme === "dark";
+      setIsDark(isDarkVal);
+      if (isDarkVal) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    }
+  }, []);
+
+  const toggleTheme = useCallback(() => {
     const nextTheme = isDark ? "light" : "dark";
     setTheme(nextTheme);
-  };
+  }, [isDark, setTheme]);
 
-  const setAccent = (newAccent) => {
-    if (!ACCENT_PRESETS[newAccent]) return;
-    localStorage.setItem("portfolio-accent", newAccent);
-    setAccentState(newAccent);
-    applyVariables(isDark, newAccent);
-  };
+  // Set Palette Family
+  const setPalette = useCallback((newPalette) => {
+    if (!PALETTES[newPalette]) return;
+    setPaletteState(newPalette);
+    localStorage.setItem("portfolio-palette", newPalette);
+  }, []);
 
-  const toggle3D = () => {
-    if (!ENABLE_3D) return;
-    const nextVal = !is3DEnabled;
-    localStorage.setItem("portfolio-3d", String(nextVal));
-    setIs3DEnabledState(nextVal);
-  };
+  // 3D Toggle
+  const toggle3D = useCallback((forceVal) => {
+    setIs3DEnabledState((prev) => {
+      const next = typeof forceVal === "boolean" ? forceVal : !prev;
+      localStorage.setItem("portfolio-3d", String(next));
+      return next;
+    });
+  }, []);
 
   return {
     theme,
     isDark,
-    toggleTheme,
     setTheme,
-    accent,
-    setAccent,
+    toggleTheme,
+    palette,
+    setPalette,
+    palettes: PALETTES,
     is3DEnabled,
     toggle3D,
     enable3DFlag: ENABLE_3D,

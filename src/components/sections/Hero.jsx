@@ -25,7 +25,7 @@ export function Hero() {
             {/* 1. Staggered Entrance Item: Active Status Badge */}
             <div className="animate-editorial-fade [animation-delay:100ms]">
               <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-[var(--surface)] border border-[var(--border)] text-xs font-mono text-[var(--text-secondary)] shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[var(--highlight-amber)] animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-pulse" />
                 <span>Data Science Intern @ Luminar Technolab &bull; 2026</span>
               </div>
             </div>
@@ -55,7 +55,7 @@ export function Hero() {
             <div className="animate-editorial-fade [animation-delay:480ms] pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-[var(--accent-contrast)] font-sans font-medium text-sm transition-all whitespace-nowrap shadow-sm hover:shadow-md cursor-pointer group"
+                className="btn-primary"
               >
                 <span>View projects</span>
                 <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
@@ -65,7 +65,7 @@ export function Hero() {
                 href={PERSONAL_INFO.resumePath}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-subtle)] text-[var(--text-primary)] border border-[var(--border)] font-sans font-medium text-sm transition-all whitespace-nowrap shadow-xs hover:border-[var(--accent)] cursor-pointer"
+                className="btn-secondary"
               >
                 <FileText className="w-4 h-4 text-[var(--accent)] shrink-0" />
                 <span>View resume</span>
@@ -77,7 +77,7 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub Profile (@AMB-007)"
-                  className="w-11 h-11 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition-all shadow-xs"
+                  className="w-11 h-11 rounded-xl bg-[var(--surface-subtle)] hover:bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition-all shadow-xs"
                 >
                   <GithubIcon className="w-4 h-4" />
                 </a>
@@ -86,7 +86,7 @@ export function Hero() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn Profile"
-                  className="w-11 h-11 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition-all shadow-xs"
+                  className="w-11 h-11 rounded-xl bg-[var(--surface-subtle)] hover:bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--accent)] transition-all shadow-xs"
                 >
                   <LinkedinIcon className="w-4 h-4" />
                 </a>
@@ -101,16 +101,16 @@ export function Hero() {
               <ProfilePortrait />
             </div>
 
-            {/* 6. Staggered Entrance Item: Real Headline Metrics Notebook Card with CSS 3D Tilt */}
+            {/* 6. Staggered Entrance Item: Key Results Card with CSS 3D Tilt */}
             <div className="animate-editorial-fade [animation-delay:450ms] w-full sm:max-w-xs">
               <TiltCard
                 maxTilt={4}
-                glareOpacity={0.1}
-                className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-md space-y-3.5 font-mono text-xs notebook-card"
+                glareOpacity={0.12}
+                className="p-5 rounded-2xl bg-[var(--surface)] border border-[var(--border-accent)] shadow-md space-y-3.5 font-mono text-xs notebook-card"
               >
                 <div className="flex items-center justify-between border-b border-[var(--border)] pb-2.5 text-[11px] text-[var(--text-muted)] tracking-wider">
-                  <span>Verified Telemetry</span>
-                  <span className="text-[var(--accent)] font-semibold">Key Results</span>
+                  <span>Key Results</span>
+                  <span className="text-[var(--accent)] font-semibold">Production Metrics</span>
                 </div>
 
                 {/* Metric 1: Career Recommendation */}
@@ -121,12 +121,12 @@ export function Hero() {
                       <CountUp end={90.6} decimals={1} suffix="% Acc" />
                     </span>
                   </div>
-                  {/* 4-bar ensemble weight sparkline (35%, 30%, 20%, 15%) using 4 series colors */}
+                  {/* One-Hue Accent Tiers: 35%, 30%, 20%, 15% */}
                   <div className="flex items-center gap-1.5 h-1.5">
-                    <div className="h-full bg-[var(--accent)] rounded-xs" style={{ width: "35%" }} title="XGBoost (35%)" />
-                    <div className="h-full bg-[var(--highlight-amber)] rounded-xs" style={{ width: "30%" }} title="CatBoost (30%)" />
-                    <div className="h-full bg-[var(--chart-teal)] rounded-xs" style={{ width: "20%" }} title="LightGBM (20%)" />
-                    <div className="h-full bg-[var(--chart-slate)] rounded-xs" style={{ width: "15%" }} title="Random Forest (15%)" />
+                    <div className="h-full bg-[var(--accent-tier1)] rounded-xs" style={{ width: "35%" }} title="XGBoost (35%)" />
+                    <div className="h-full bg-[var(--accent-tier2)] rounded-xs" style={{ width: "30%" }} title="CatBoost (30%)" />
+                    <div className="h-full bg-[var(--accent-tier3)] rounded-xs" style={{ width: "20%" }} title="LightGBM (20%)" />
+                    <div className="h-full bg-[var(--accent-tier4)] rounded-xs" style={{ width: "15%" }} title="Random Forest (15%)" />
                   </div>
                 </div>
 
@@ -139,11 +139,11 @@ export function Hero() {
                     </span>
                   </div>
                   <div className="w-full bg-[var(--surface-subtle)] h-1.5 rounded-xs overflow-hidden">
-                    <div className="h-full bg-[var(--chart-teal)] rounded-xs transition-all duration-700" style={{ width: "94.8%" }} />
+                    <div className="h-full bg-[var(--accent)] rounded-xs transition-all duration-700" style={{ width: "94.8%" }} />
                   </div>
                 </div>
 
-                {/* Metric 3: WebShield ML (Sapphire tint, not warning yellow/red) */}
+                {/* Metric 3: WebShield ML (One-Hue Accent Tint) */}
                 <div className="space-y-1.5">
                   <div className="flex justify-between items-baseline">
                     <span className="text-[var(--text-secondary)]">WebShield SecOps</span>

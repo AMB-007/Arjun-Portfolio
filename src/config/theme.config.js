@@ -1,133 +1,235 @@
 /**
- * theme.config.js
- * "Analyst's Notebook" — Premium Design System Tokens
- *
- * Single Authoritative Source of Truth for:
- * 1. Color Palettes (Dark: "Midnight Graphite", Light: "Warm Paper")
- * 2. Accent Presets (Sapphire [default], Teal, Emerald, Violet)
- * 3. 4-Series Data-Viz Palette with Ordered Sapphire Tints
- * 4. Master ENABLE_3D flag
+ * Phase 2 Consolidated Theme & Palette Configuration
+ * Three palette families x Light/Dark with strict single-source tokens.
+ * Default: "navy" (Ink Navy, Ivory & Brass)
  */
 
-// Master flag: toggle true/false to include or completely strip the 3D WebGL layer
 export const ENABLE_3D = true;
+export const DEFAULT_PALETTE = "navy"; // "navy" | "forest" | "graphite"
+export const DEFAULT_MODE = "dark"; // "dark" | "light"
 
-// Default active accent preset
-export const DEFAULT_ACCENT = "sapphire";
+export const PALETTES = {
+  // A) Ink Navy, Ivory & Brass (DEFAULT)
+  navy: {
+    id: "navy",
+    name: "Ink Navy & Brass",
+    dark: {
+      bg: "#0A1020",
+      surface: "#0F1729",
+      surfaceElevated: "#151F36",
+      surfaceSubtle: "#17233D",
+      border: "#1F2A44",
+      borderStrong: "rgba(201, 166, 107, 0.35)",
+      borderAccent: "rgba(201, 166, 107, 0.16)",
+      textPrimary: "#F2EEE6",
+      textSecondary: "#AEB6C6",
+      textMuted: "#7D879B",
+      accent: "#C9A66B",
+      accentHover: "#DDBF86",
+      accentDeep: "#9A7B45",
+      accentContrast: "#0A1020",
+      buttonPrimaryBg: "#C9A66B",
+      buttonPrimaryHover: "#DDBF86",
+      buttonPrimaryText: "#0A1020",
+      dataAccent: "#8FA8D8",
+      positive: "#5FBFA0",
+      negative: "#D9776B",
+      highlightAmber: "#C9A66B",
+      tiers: {
+        tier1: "#C9A66B",
+        tier2: "#D8BA84",
+        tier3: "#E6CE9F",
+        tier4: "#F4E2BB",
+      },
+      cardInnerHighlight: "inset 0 1px 0 rgba(242, 238, 230, 0.06)",
+      shadowSoft: "0 14px 34px -10px rgba(0, 0, 0, 0.55)",
+      themeColor: "#0A1020",
+      portraitOverlay: "rgba(10, 16, 32, 0.3)",
+    },
+    light: {
+      bg: "#F7F4EC",
+      surface: "#FFFFFF",
+      surfaceElevated: "#FBF9F4",
+      surfaceSubtle: "#EFEADF",
+      border: "#DDD5C4",
+      borderStrong: "rgba(138, 106, 47, 0.4)",
+      borderAccent: "rgba(138, 106, 47, 0.18)",
+      textPrimary: "#0E1626",
+      textSecondary: "#444C5E",
+      textMuted: "#5E6573",
+      accent: "#8A6A2F",
+      accentHover: "#725624",
+      accentDeep: "#5A431A",
+      accentContrast: "#FFFFFF",
+      buttonPrimaryBg: "#14233F",
+      buttonPrimaryHover: "#1D3259",
+      buttonPrimaryText: "#F2EEE6",
+      dataAccent: "#2F4B86",
+      positive: "#2E8B6E",
+      negative: "#B84A3E",
+      highlightAmber: "#8A6A2F",
+      tiers: {
+        tier1: "#8A6A2F",
+        tier2: "#A8833E",
+        tier3: "#C49E55",
+        tier4: "#DEBB73",
+      },
+      cardInnerHighlight: "inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      shadowSoft: "0 10px 30px -10px rgba(14, 22, 38, 0.08)",
+      themeColor: "#F7F4EC",
+      portraitOverlay: "rgba(247, 244, 236, 0.2)",
+    },
+  },
 
-// Four accessible accent presets (All pass WCAG AA in both dark & light themes)
-export const ACCENT_PRESETS = {
-  sapphire: {
-    name: "Sapphire",
-    dark: "#5B7CFA",
-    darkHover: "#7C97FF",
-    darkContrast: "#0A0C11",
-    darkRgb: "91, 124, 250",
-    light: "#2B4BDB",
-    lightHover: "#1E3BB8",
-    lightContrast: "#FFFFFF",
-    lightRgb: "43, 75, 219",
-    // 4 ordered tiers for data visualization (replaces traffic-light bars)
-    tiers: {
-      dark: ["#8FA5FF", "#5B7CFA", "#3D5FD9", "#243F9E"],
-      light: ["#2B4BDB", "#4564E6", "#6883F0", "#94A7F8"],
+  // B) Forest & Copper
+  forest: {
+    id: "forest",
+    name: "Forest & Copper",
+    dark: {
+      bg: "#08140F",
+      surface: "#0D1D16",
+      surfaceElevated: "#12271E",
+      surfaceSubtle: "#183227",
+      border: "#1D3328",
+      borderStrong: "rgba(208, 138, 90, 0.35)",
+      borderAccent: "rgba(208, 138, 90, 0.16)",
+      textPrimary: "#EEF1E8",
+      textSecondary: "#A9B8AE",
+      textMuted: "#75857A",
+      accent: "#D08A5A",
+      accentHover: "#E09C6D",
+      accentDeep: "#9E5F34",
+      accentContrast: "#08140F",
+      buttonPrimaryBg: "#D08A5A",
+      buttonPrimaryHover: "#E09C6D",
+      buttonPrimaryText: "#08140F",
+      dataAccent: "#8DB8A3",
+      positive: "#5EBF98",
+      negative: "#D46B60",
+      highlightAmber: "#D08A5A",
+      tiers: {
+        tier1: "#D08A5A",
+        tier2: "#DDA27A",
+        tier3: "#EAB99A",
+        tier4: "#F5D1BB",
+      },
+      cardInnerHighlight: "inset 0 1px 0 rgba(238, 241, 232, 0.06)",
+      shadowSoft: "0 14px 34px -10px rgba(0, 0, 0, 0.55)",
+      themeColor: "#08140F",
+      portraitOverlay: "rgba(8, 20, 15, 0.3)",
+    },
+    light: {
+      bg: "#F4F3EC",
+      surface: "#FFFFFF",
+      surfaceElevated: "#F8F7F2",
+      surfaceSubtle: "#EAECE4",
+      border: "#D8DDD3",
+      borderStrong: "rgba(168, 88, 43, 0.4)",
+      borderAccent: "rgba(168, 88, 43, 0.18)",
+      textPrimary: "#0C1812",
+      textSecondary: "#434F47",
+      textMuted: "#5B6960",
+      accent: "#A8582B",
+      accentHover: "#8C4620",
+      accentDeep: "#703515",
+      accentContrast: "#FFFFFF",
+      buttonPrimaryBg: "#123226",
+      buttonPrimaryHover: "#1C4A39",
+      buttonPrimaryText: "#EEF1E8",
+      dataAccent: "#356550",
+      positive: "#278A62",
+      negative: "#B8473C",
+      highlightAmber: "#A8582B",
+      tiers: {
+        tier1: "#A8582B",
+        tier2: "#C27041",
+        tier3: "#D7895A",
+        tier4: "#E9A87B",
+      },
+      cardInnerHighlight: "inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      shadowSoft: "0 10px 30px -10px rgba(12, 24, 18, 0.08)",
+      themeColor: "#F4F3EC",
+      portraitOverlay: "rgba(244, 243, 236, 0.2)",
     },
   },
-  teal: {
-    name: "Teal",
-    dark: "#2FB8A6",
-    darkHover: "#45DFC9",
-    darkContrast: "#0A0C11",
-    darkRgb: "47, 184, 166",
-    light: "#0E8474",
-    lightHover: "#0A6659",
-    lightContrast: "#FFFFFF",
-    lightRgb: "14, 132, 116",
-    tiers: {
-      dark: ["#5EEAD4", "#2FB8A6", "#14B8A6", "#0F766E"],
-      light: ["#0E8474", "#14B8A6", "#2DD4BF", "#5EEAD4"],
+
+  // C) Graphite & Platinum
+  graphite: {
+    id: "graphite",
+    name: "Graphite & Platinum",
+    dark: {
+      bg: "#0B0C0F",
+      surface: "#121317",
+      surfaceElevated: "#191B21",
+      surfaceSubtle: "#20232B",
+      border: "#262932",
+      borderStrong: "rgba(201, 206, 216, 0.35)",
+      borderAccent: "rgba(201, 206, 216, 0.16)",
+      textPrimary: "#F1F2F4",
+      textSecondary: "#A5A8B2",
+      textMuted: "#727682",
+      accent: "#C9CED8",
+      accentHover: "#DFE3EB",
+      accentDeep: "#8A91A0",
+      accentContrast: "#0B0C0F",
+      buttonPrimaryBg: "#C9CED8",
+      buttonPrimaryHover: "#DFE3EB",
+      buttonPrimaryText: "#0B0C0F",
+      dataAccent: "#9AA7C0",
+      positive: "#5CB895",
+      negative: "#D36E67",
+      highlightAmber: "#C9CED8",
+      tiers: {
+        tier1: "#C9CED8",
+        tier2: "#D8DCE3",
+        tier3: "#E5E8EE",
+        tier4: "#F2F4F7",
+      },
+      cardInnerHighlight: "inset 0 1px 0 rgba(241, 242, 244, 0.06)",
+      shadowSoft: "0 14px 34px -10px rgba(0, 0, 0, 0.55)",
+      themeColor: "#0B0C0F",
+      portraitOverlay: "rgba(11, 12, 15, 0.3)",
     },
-  },
-  emerald: {
-    name: "Emerald",
-    dark: "#34D399",
-    darkHover: "#6EE7B7",
-    darkContrast: "#0A0C11",
-    darkRgb: "52, 211, 153",
-    light: "#059669",
-    lightHover: "#047857",
-    lightContrast: "#FFFFFF",
-    lightRgb: "5, 150, 105",
-    tiers: {
-      dark: ["#6EE7B7", "#34D399", "#10B981", "#047857"],
-      light: ["#059669", "#10B981", "#34D399", "#6EE7B7"],
-    },
-  },
-  violet: {
-    name: "Violet",
-    dark: "#A78BFA",
-    darkHover: "#C4B5FD",
-    darkContrast: "#0A0C11",
-    darkRgb: "167, 139, 250",
-    light: "#6D28D9",
-    lightHover: "#5B21B6",
-    lightContrast: "#FFFFFF",
-    lightRgb: "109, 40, 217",
-    tiers: {
-      dark: ["#C4B5FD", "#A78BFA", "#8B5CF6", "#6D28D9"],
-      light: ["#6D28D9", "#7C3AED", "#A78BFA", "#C4B5FD"],
+    light: {
+      bg: "#F4F4F2",
+      surface: "#FFFFFF",
+      surfaceElevated: "#F9F9F8",
+      surfaceSubtle: "#EBEBE8",
+      border: "#D7D7D2",
+      borderStrong: "rgba(59, 66, 82, 0.4)",
+      borderAccent: "rgba(59, 66, 82, 0.18)",
+      textPrimary: "#141518",
+      textSecondary: "#484B53",
+      textMuted: "#60646D",
+      accent: "#3B4252",
+      accentHover: "#2E3440",
+      accentDeep: "#1F232B",
+      accentContrast: "#FFFFFF",
+      buttonPrimaryBg: "#1F232B",
+      buttonPrimaryHover: "#2E3440",
+      buttonPrimaryText: "#F1F2F4",
+      dataAccent: "#4D576B",
+      positive: "#288560",
+      negative: "#B7463E",
+      highlightAmber: "#3B4252",
+      tiers: {
+        tier1: "#3B4252",
+        tier2: "#50586D",
+        tier3: "#6C758A",
+        tier4: "#8C95A8",
+      },
+      cardInnerHighlight: "inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+      shadowSoft: "0 10px 30px -10px rgba(20, 21, 24, 0.08)",
+      themeColor: "#F4F4F2",
+      portraitOverlay: "rgba(244, 244, 242, 0.2)",
     },
   },
 };
 
-// Base Surfaces and Neutrals
-export const THEME_CONFIG = {
-  dark: {
-    name: "Midnight Graphite",
-    bg: "#0A0C11",
-    surface: "#11141B",
-    surfaceElevated: "#171B24",
-    surfaceSubtle: "#171B24",
-    border: "#232837",
-    borderSubtle: "rgba(238, 240, 245, 0.08)",
-    textPrimary: "#EEF0F5",
-    textSecondary: "#A6ADBB",
-    textMuted: "#727A8A",
-    highlightAmber: "#E8B04B",
-    chartTeal: "#2FB8A6",
-    chartSlate: "#727A8A",
-    cardInnerHighlight: "inset 0 1px 0 rgba(255, 255, 255, 0.05)",
-    shadowSoft: "0 10px 30px -10px rgba(0, 0, 0, 0.5)",
-  },
-  light: {
-    name: "Warm Paper",
-    bg: "#F6F4EF",
-    surface: "#FFFFFF",
-    surfaceElevated: "#FFFFFF",
-    surfaceSubtle: "#EEEAE1",
-    border: "#DDD7CA",
-    borderSubtle: "rgba(18, 20, 26, 0.08)",
-    textPrimary: "#12141A",
-    textSecondary: "#464B57",
-    textMuted: "#767C88",
-    highlightAmber: "#D99A1E",
-    chartTeal: "#0E8474",
-    chartSlate: "#767C88",
-    cardInnerHighlight: "inset 0 1px 0 rgba(255, 255, 255, 0.85)",
-    shadowSoft: "0 10px 30px -10px rgba(0, 0, 0, 0.06)",
-  },
-};
-
-// Legacy compatibility export
-export const THEME = {
-  background: "var(--bg)",
-  surface: "var(--surface)",
-  surfaceElevated: "var(--surface-elevated)",
-  textPrimary: "var(--text-primary)",
-  textSecondary: "var(--text-secondary)",
-  textMuted: "var(--text-muted)",
-  accent: "var(--accent)",
-  accentHover: "var(--accent-hover)",
-  border: "var(--border)",
-  statusDot: "var(--highlight-amber)",
-};
+/**
+ * Returns the resolved theme token set given palette key and mode
+ */
+export function getPaletteTokens(paletteKey = DEFAULT_PALETTE, isDark = true) {
+  const palette = PALETTES[paletteKey] || PALETTES[DEFAULT_PALETTE];
+  return isDark ? palette.dark : palette.light;
+}

@@ -1,52 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
   <defs>
-    <radialGradient id="ogGlow" cx="20%" cy="20%" r="70%">
-      <stop offset="0%" stopColor="#2F6FEB" stopOpacity="0.12"/>
-      <stop offset="100%" stopColor="#0B0F17" stopOpacity="1"/>
+    <radialGradient id="ogGlow" cx="75%" cy="30%" r="65%">
+      <stop offset="0%" stopColor="#C9A66B" stopOpacity="0.18"/>
+      <stop offset="100%" stopColor="#0A1020" stopOpacity="0"/>
     </radialGradient>
   </defs>
 
-  <!-- Deep Midnight Slate Background -->
-  <rect width="1200" height="630" fill="#0B0F17"/>
+  <!-- Deep Ink Navy Background -->
+  <rect width="1200" height="630" fill="#0A1020"/>
   <rect width="1200" height="630" fill="url(#ogGlow)"/>
 
   <!-- Card Border -->
-  <rect x="40" y="40" width="1120" height="550" rx="20" stroke="rgba(148, 163, 184, 0.14)" stroke-width="1.5" fill="#101725" fill-opacity="0.4"/>
+  <rect x="44" y="44" width="1112" height="542" rx="24" stroke="rgba(201, 166, 107, 0.28)" stroke-width="1.5" fill="#0F1729" fill-opacity="0.6"/>
 
   <!-- Header Eyebrow -->
-  <g transform="translate(90, 110)">
-    <rect width="360" height="34" rx="17" fill="#162033" stroke="rgba(148, 163, 184, 0.2)" stroke-width="1"/>
-    <circle cx="20" cy="17" r="4.5" fill="#2DD4BF"/>
-    <text x="36" y="22" font-family="'Inter', sans-serif" font-size="12" font-weight="600" fill="#E8ECF3">Open to Data Analyst &amp; ML roles</text>
+  <g transform="translate(96, 105)">
+    <rect width="380" height="36" rx="18" fill="#151F36" stroke="rgba(201, 166, 107, 0.3)" stroke-width="1"/>
+    <circle cx="20" cy="18" r="4.5" fill="#C9A66B"/>
+    <text x="36" y="23" font-family="'JetBrains Mono', monospace, -apple-system" font-size="12" font-weight="600" fill="#F2EEE6">Open to Data Analyst &amp; ML roles &bull; 2026</text>
   </g>
 
   <!-- Headline -->
-  <text x="90" y="235" font-family="'Inter', sans-serif" font-size="64" font-weight="800" fill="#E8ECF3" letter-spacing="-1.5">
+  <text x="96" y="230" font-family="'Newsreader', Georgia, serif" font-size="68" font-weight="400" fill="#F2EEE6" letter-spacing="-1.5">
     Arjun M Babu
   </text>
-  <text x="90" y="305" font-family="'Inter', sans-serif" font-size="34" font-weight="600" fill="#6EA8FF" letter-spacing="-0.5">
-    Data Science &amp; Machine Learning
+  <text x="96" y="300" font-family="'Inter', sans-serif" font-size="32" font-weight="600" fill="#C9A66B" letter-spacing="-0.5">
+    Data Science &amp; Machine Learning Engineer
   </text>
 
   <!-- Subtitle -->
-  <text x="90" y="375" font-family="'Inter', sans-serif" font-size="20" font-weight="400" fill="#9AA7BA">
-    B.Tech in Computer Science and Engineering • Toc H Institute (2022–2026)
+  <text x="96" y="370" font-family="'Inter', sans-serif" font-size="20" font-weight="400" fill="#AEB6C6">
+    B.Tech in Computer Science and Engineering &bull; Toc H Institute (Completed)
   </text>
-  <text x="90" y="415" font-family="'Inter', sans-serif" font-size="20" font-weight="400" fill="#9AA7BA">
-    Python • SQL • Scikit-learn • XGBoost • LightGBM • Power BI • AWS
+  <text x="96" y="410" font-family="'JetBrains Mono', monospace" font-size="18" font-weight="500" fill="#C9A66B">
+    Python &bull; SQL &bull; Power BI &bull; Scikit-learn &bull; XGBoost &bull; AWS
   </text>
 
-  <!-- Footer Meta -->
-  <g transform="translate(90, 490)">
-    <rect width="280" height="42" rx="8" fill="#162033" stroke="rgba(148, 163, 184, 0.2)"/>
-    <text x="24" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#E8ECF3">
+  <!-- Footer Brand -->
+  <g transform="translate(96, 485)">
+    <rect width="280" height="42" rx="8" fill="#151F36" stroke="rgba(201, 166, 107, 0.25)"/>
+    <text x="24" y="26" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#F2EEE6">
       arjun-m-babu.vercel.app
     </text>
   </g>
 
   <!-- Location Badge -->
-  <g transform="translate(920, 490)">
-    <text x="0" y="26" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#9AA7BA">
+  <g transform="translate(940, 495)">
+    <text x="0" y="16" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="500" fill="#7D879B">
       Kerala, India
     </text>
   </g>
