@@ -31,11 +31,11 @@ export function Skills() {
   const [activeRow, setActiveRow] = useState(null);
 
   return (
-    <section id="skills" className="py-20 md:py-28 border-b border-[var(--border)]">
+    <section id="skills" className="py-24 md:py-32 border-b border-[var(--border)]">
       <div className="site-container">
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
-          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+          <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
             02 &bull; Skills
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
@@ -49,8 +49,8 @@ export function Skills() {
               verifiable intelligence.
             </span>
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-[var(--text-secondary)]">
-            Hover any category to inspect where each competency is actively deployed across production codebases.
+          <p className="mt-3 text-[17px] text-[var(--text-secondary)] leading-relaxed">
+            Hover or tap any category to inspect where each competency is actively deployed across production codebases.
           </p>
         </div>
 
@@ -66,27 +66,27 @@ export function Skills() {
                 tabIndex={0}
                 onFocus={() => setActiveRow(idx)}
                 onBlur={() => setActiveRow(null)}
-                className={`py-6 sm:py-8 px-2 sm:px-4 transition-colors cursor-default outline-none rounded-lg ${
-                  isHovered ? "bg-[var(--surface)] shadow-xs" : ""
+                className={`py-7 sm:py-9 px-3 sm:px-5 transition-all duration-200 cursor-default outline-none rounded-xl ${
+                  isHovered ? "bg-[var(--surface)] shadow-xs border border-[var(--border)]" : "border border-transparent"
                 }`}
               >
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-baseline">
                   {/* Category Name & Meta (4 cols) */}
-                  <div className="md:col-span-4 space-y-1">
-                    <span className="font-mono text-[11px] text-[var(--text-muted)] uppercase tracking-wider block">
+                  <div className="md:col-span-4 space-y-1.5">
+                    <span className="font-mono text-xs text-[var(--text-muted)] tracking-wide block">
                       Index 0{idx + 1}
                     </span>
-                    <h3 className="text-lg sm:text-xl font-display font-medium text-[var(--text-primary)]">
+                    <h3 className="text-xl sm:text-2xl font-display font-medium text-[var(--text-primary)]">
                       {row.category}
                     </h3>
-                    <p className="text-xs text-[var(--text-muted)] font-mono">
+                    <p className="text-xs sm:text-[13px] text-[var(--text-muted)] font-mono">
                       {row.description}
                     </p>
                   </div>
 
                   {/* Skills Inline with subtle separators (8 cols) */}
                   <div className="md:col-span-8 space-y-3">
-                    <div className="flex flex-wrap items-center gap-y-2 gap-x-3 text-sm sm:text-base font-mono text-[var(--text-primary)]">
+                    <div className="flex flex-wrap items-center gap-y-2.5 gap-x-3 text-sm sm:text-base font-mono text-[var(--text-primary)]">
                       {row.skills.map((skill, sIdx) => (
                         <React.Fragment key={skill}>
                           <span className="hover:text-[var(--accent)] transition-colors">
@@ -101,8 +101,8 @@ export function Skills() {
 
                     {/* Applied In footnote (Reveals on hover/focus) */}
                     <div
-                      className={`text-xs font-mono transition-opacity duration-200 ${
-                        isHovered ? "opacity-100 text-[var(--accent)]" : "opacity-0 select-none"
+                      className={`text-xs sm:text-[13px] font-mono transition-opacity duration-200 ${
+                        isHovered ? "opacity-100 text-[var(--accent)]" : "opacity-0 select-none pointer-events-none"
                       }`}
                     >
                       <span className="font-semibold text-[var(--text-primary)]">Verified in: </span>

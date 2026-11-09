@@ -1,15 +1,40 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Search, ArrowRight, Copy, Check, FileText, Sun, Moon, ExternalLink, X, CornerDownLeft } from "lucide-react";
+import {
+  Search,
+  ArrowRight,
+  Copy,
+  Check,
+  FileText,
+  Sun,
+  Moon,
+  ExternalLink,
+  X,
+  Palette,
+  Box,
+  CornerDownLeft,
+} from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { copyToClipboard } from "@/utils/helpers";
+import { ACCENT_PRESETS } from "@/config/theme.config";
 
-export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
+export function CommandMenu({
+  isOpen,
+  onClose,
+  isDark,
+  onToggleTheme,
+  accent = "sapphire",
+  onSetAccent,
+  is3DEnabled = true,
+  onToggle3D,
+  enable3DFlag = true,
+}) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const inputRef = useRef(null);
 
   const actions = [
+    // Navigation
     {
       id: "work",
       label: "Jump to Selected Work",
@@ -55,10 +80,51 @@ export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
         onClose();
       },
     },
+
+    // Theme & 3D Preferences
+    {
+      id: "theme",
+      label: `Switch to ${isDark ? "Light ('Warm Paper')" : "Dark ('Midnight Graphite')"} theme`,
+      group: "Appearance",
+      icon: isDark ? Sun : Moon,
+      perform: () => {
+        onToggleTheme();
+        onClose();
+      },
+    },
+    ...(enable3DFlag
+      ? [
+          {
+            id: "3d-toggle",
+            label: `3D Data Lattice: ${is3DEnabled ? "Turn OFF (Save GPU / Battery)" : "Turn ON (WebGL Animation)"}`,
+            group: "Appearance",
+            icon: Box,
+            perform: () => {
+              if (onToggle3D) onToggle3D();
+              onClose();
+            },
+          },
+        ]
+      : []),
+
+    // Accent Presets
+    ...Object.entries(ACCENT_PRESETS).map(([key, item]) => ({
+      id: `accent-${key}`,
+      label: `Set Accent Color: ${item.name} ${accent === key ? "(Active)" : ""}`,
+      group: "Color Presets",
+      icon: Palette,
+      perform: () => {
+        if (onSetAccent) onSetAccent(key);
+        onClose();
+      },
+    })),
+
+    // Quick Actions
     {
       id: "email",
       label: "Copy Email (arjunmbabu.ds@gmail.com)",
       group: "Actions",
+      icon: Copy,
       perform: () => {
         copyToClipboard(PERSONAL_INFO.email);
         setCopied(true);
@@ -70,26 +136,21 @@ export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
     },
     {
       id: "resume",
-      label: "Open Printable Resume",
+      label: "Open Printable Resume (PDF / Print)",
       group: "Actions",
+      icon: FileText,
       perform: () => {
         window.open(PERSONAL_INFO.resumePath, "_blank");
         onClose();
       },
     },
-    {
-      id: "theme",
-      label: `Switch to ${isDark ? "Light ('Paper & Ink')" : "Dark ('Graphite')"} theme`,
-      group: "Preferences",
-      perform: () => {
-        onToggleTheme();
-        onClose();
-      },
-    },
+
+    // External Profiles
     {
       id: "github",
       label: "Open GitHub Profile (@AMB-007)",
       group: "External Links",
+      icon: ExternalLink,
       perform: () => {
         window.open(PERSONAL_INFO.github, "_blank");
         onClose();
@@ -97,8 +158,9 @@ export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
     },
     {
       id: "linkedin",
-      label: "Open LinkedIn Profile",
+      label: "Open LinkedIn Profile (arjun-m-babu)",
       group: "External Links",
+      icon: ExternalLink,
       perform: () => {
         window.open(PERSONAL_INFO.linkedin, "_blank");
         onClose();
@@ -106,9 +168,10 @@ export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
     },
   ];
 
-  const filtered = actions.filter((a) =>
-    a.label.toLowerCase().includes(query.toLowerCase()) ||
-    a.group.toLowerCase().includes(query.toLowerCase())
+  const filtered = actions.filter(
+    (a) =>
+      a.label.toLowerCase().includes(query.toLowerCase()) ||
+      a.group.toLowerCase().includes(query.toLowerCase())
   );
 
   useEffect(() => {
@@ -155,8 +218,15 @@ export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
       aria-modal="true"
       aria-label="Command Menu"
       className="fixed inset-0 z-50 flex items-start justify-center pt-20 sm:pt-28 px-4 bg-black/60 backdrop-blur-sm animate-editorial-fade"
+      onClick={onClose}
     >
-      <div className="relative w-full max-w-xl rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] shadow-2xl overflow-hidden font-sans">
+      <div
+        className="relative w-full max-w-xl rounded-xl border border-[var(--border)] bg-[var(--surface)] text-[var(--text-primary)] shadow-2xl overflow-hidden font-sans"
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          boxShadow: "var(--shadow-soft), var(--card-inner-highlight)",
+        }}
+      >
         {/* Search Input Bar */}
         <div className="flex items-center px-4 border-b border-[var(--border)]">
           <Search className="w-4 h-4 text-[var(--text-muted)] shrink-0 mr-3" />
@@ -166,59 +236,69 @@ export function CommandMenu({ isOpen, onClose, isDark, onToggleTheme }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Type a command or search..."
-            className="w-full py-3.5 bg-transparent text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none"
+            placeholder="Type a command, section, or theme preset..."
+            className="w-full py-4 text-sm bg-transparent outline-none text-[var(--text-primary)] placeholder-[var(--text-muted)]"
           />
           <button
             onClick={onClose}
             aria-label="Close command menu"
-            className="p-1 rounded text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors cursor-pointer"
+            className="p-1 text-[var(--text-muted)] hover:text-[var(--text-primary)]"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Results List */}
-        <div className="max-h-80 overflow-y-auto p-2 space-y-1">
-          {filtered.length > 0 ? (
-            filtered.map((item, idx) => {
-              const isSelected = idx === selectedIndex;
+        <div className="max-h-[380px] overflow-y-auto p-2 divide-y divide-[var(--border)]">
+          {filtered.length === 0 ? (
+            <div className="py-8 text-center text-xs font-mono text-[var(--text-muted)]">
+              No matching commands found.
+            </div>
+          ) : (
+            filtered.map((item, index) => {
+              const isSelected = index === selectedIndex;
+              const Icon = item.icon || ArrowRight;
+
               return (
                 <button
                   key={item.id}
                   onClick={item.perform}
-                  onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-xs sm:text-sm font-medium transition-colors text-left cursor-pointer ${
+                  onMouseEnter={() => setSelectedIndex(index)}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-left text-xs transition-colors cursor-pointer ${
                     isSelected
-                      ? "bg-[var(--surface-subtle)] text-[var(--text-primary)] border border-[var(--border)]"
-                      : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
+                      ? "bg-[var(--accent)] text-[var(--accent-contrast)]"
+                      : "text-[var(--text-primary)] hover:bg-[var(--surface-subtle)]"
                   }`}
                 >
-                  <div className="flex items-center gap-2.5">
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)] px-1.5 py-0.5 rounded bg-[var(--surface-subtle)] border border-[var(--border)]">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span
+                      className={`text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border ${
+                        isSelected
+                          ? "border-[var(--accent-contrast)]/30 text-[var(--accent-contrast)]"
+                          : "border-[var(--border)] text-[var(--text-muted)]"
+                      }`}
+                    >
                       {item.group}
                     </span>
-                    <span>{item.label}</span>
+                    <span className="font-medium truncate">{item.label}</span>
                   </div>
-                  {copied && item.id === "email" ? (
-                    <span className="text-xs text-[var(--highlight-amber)] font-medium flex items-center gap-1">
-                      <Check className="w-3.5 h-3.5" /> Copied
-                    </span>
-                  ) : (
-                    <CornerDownLeft className={`w-3.5 h-3.5 text-[var(--text-muted)] ${isSelected ? "opacity-100" : "opacity-0"}`} />
-                  )}
+
+                  <div className="flex items-center gap-2 shrink-0 ml-2">
+                    {copied && item.id === "email" ? (
+                      <Check className="w-3.5 h-3.5 text-teal-400" />
+                    ) : (
+                      <Icon className="w-3.5 h-3.5 opacity-60" />
+                    )}
+                    {isSelected && <CornerDownLeft className="w-3 h-3 opacity-80" />}
+                  </div>
                 </button>
               );
             })
-          ) : (
-            <div className="py-8 text-center text-xs text-[var(--text-muted)]">
-              No matching commands found.
-            </div>
           )}
         </div>
 
-        {/* Keyboard Footer Tip */}
-        <div className="px-4 py-2 border-t border-[var(--border)] bg-[var(--surface-subtle)] flex items-center justify-between text-[11px] text-[var(--text-muted)] font-mono">
+        {/* Footer Hint Bar */}
+        <div className="flex items-center justify-between px-4 py-2.5 border-t border-[var(--border)] bg-[var(--surface-subtle)] text-[11px] font-mono text-[var(--text-muted)]">
           <span>Navigate with &uarr;&darr; &bull; Enter to select</span>
           <span>Esc to close</span>
         </div>

@@ -92,11 +92,11 @@ const TIMELINE_ENTRIES = [
 
 export function Experience() {
   return (
-    <section id="experience" className="py-20 md:py-28 border-b border-[var(--border)]">
+    <section id="experience" className="py-24 md:py-32 border-b border-[var(--border)]">
       <div className="site-container">
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
-          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+          <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
             05 &bull; Experience
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
@@ -110,7 +110,7 @@ export function Experience() {
               academic record.
             </span>
           </h2>
-          <p className="mt-3 text-base text-[var(--text-secondary)] leading-relaxed">
+          <p className="mt-3 text-[17px] text-[var(--text-secondary)] leading-relaxed">
             Practical data science internship experience, completed undergraduate degree in Computer Science,
             accredited technical training, and community service.
           </p>
@@ -119,38 +119,38 @@ export function Experience() {
         {/* Two-Column Editorial Timeline (Date on left, Details on right) */}
         <div className="divide-y divide-[var(--border)] border-t border-[var(--border)]">
           {TIMELINE_ENTRIES.map((entry, idx) => (
-            <article key={idx} className="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start">
+            <article key={idx} className="py-9 sm:py-12 grid grid-cols-1 md:grid-cols-12 gap-5 md:gap-8 items-start">
               {/* Left Column: Date & Meta */}
-              <div className="md:col-span-3 space-y-1">
-                <span className="font-mono text-xs font-bold text-[var(--accent)] tracking-wider block">
+              <div className="md:col-span-3 space-y-1.5">
+                <span className="font-mono text-xs sm:text-[13px] font-bold text-[var(--accent)] tracking-wider block">
                   {entry.period}
                 </span>
-                <span className="text-[11px] font-mono text-[var(--text-muted)] block">
+                <span className="text-xs font-mono text-[var(--text-muted)] block">
                   {entry.type} &bull; {entry.location}
                 </span>
               </div>
 
               {/* Right Column: Title, Org, Bullets, Skills */}
-              <div className="md:col-span-9 space-y-3">
-                <div className="flex flex-wrap items-center gap-2.5">
+              <div className="md:col-span-9 space-y-3.5">
+                <div className="flex flex-wrap items-center gap-3">
                   <h3 className="font-display text-xl sm:text-2xl font-semibold text-[var(--text-primary)] tracking-tight">
                     {entry.title}
                   </h3>
                   {entry.badge && (
-                    <span className={`text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full border ${entry.badgeStyle}`}>
+                    <span className={`inline-flex items-center text-xs font-mono font-medium px-2.5 py-0.5 rounded-full border whitespace-nowrap shrink-0 ${entry.badgeStyle}`}>
                       {entry.badge}
                     </span>
                   )}
                 </div>
 
-                <p className="text-xs sm:text-sm font-medium text-[var(--accent)]">
+                <p className="text-xs sm:text-sm font-medium text-[var(--accent)] font-mono">
                   {entry.organization}
                 </p>
 
                 {/* 2-3 Clean Bullet Lines */}
-                <ul className="space-y-1.5 pt-1 text-sm text-[var(--text-secondary)] leading-relaxed">
+                <ul className="space-y-2 pt-1 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
                   {entry.bullets.map((bullet, bIdx) => (
-                    <li key={bIdx} className="flex items-start gap-2">
+                    <li key={bIdx} className="flex items-start gap-2.5">
                       <span className="text-[var(--accent)] font-bold shrink-0 mt-0.5">&bull;</span>
                       <span>{bullet}</span>
                     </li>
@@ -162,7 +162,7 @@ export function Experience() {
                   {entry.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-2 py-0.5 text-xs rounded-md bg-[var(--surface-subtle)] text-[var(--text-secondary)] border border-[var(--border)] font-mono"
+                      className="px-2.5 py-1 text-xs rounded-md bg-[var(--surface-subtle)] text-[var(--text-secondary)] border border-[var(--border)] font-mono"
                     >
                       {skill}
                     </span>
@@ -174,7 +174,7 @@ export function Experience() {
         </div>
 
         {/* Prior Schooling Footnote Note */}
-        <div className="mt-8 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs font-mono text-[var(--text-muted)]">
+        <div className="mt-8 pt-6 border-t border-[var(--border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs sm:text-[13px] font-mono text-[var(--text-muted)]">
           <span>Prior Schooling: Higher Secondary (Class XII, 2020–2022) &bull; High School (Class X, 2020)</span>
           <span>Kerala, India</span>
         </div>

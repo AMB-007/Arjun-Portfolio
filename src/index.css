@@ -2,24 +2,34 @@
 
 @layer base {
   :root {
-    /* "Analyst's Notebook" — Light: Paper & Ink */
-    --bg: #F5F3EE;
+    /* "Analyst's Notebook" — Light: Warm Paper */
+    --bg: #F6F4EF;
     --surface: #FFFFFF;
-    --surface-subtle: #EFEBE3;
-    --border: #E0DBD0;
-    --border-subtle: rgba(20, 22, 26, 0.08);
+    --surface-elevated: #FFFFFF;
+    --surface-subtle: #EEEAE1;
+    --border: #DDD7CA;
+    --border-subtle: rgba(18, 20, 26, 0.08);
 
-    --text-primary: #14161A;
-    --text-secondary: #4A4F5A;
-    --text-muted: #7A7F8A;
+    --text-primary: #12141A;
+    --text-secondary: #464B57;
+    --text-muted: #767C88;
 
-    --accent: #2446D6;
-    --accent-hover: #1C37B0;
+    --accent: #2B4BDB;
+    --accent-hover: #1E3BB8;
     --accent-contrast: #FFFFFF;
+    --accent-rgb: 43, 75, 219;
 
-    --highlight-amber: #E0A526;
-    --chart-teal: #0F8B8D;
-    --chart-slate: #7A7F8A;
+    --highlight-amber: #D99A1E;
+    --chart-teal: #0E8474;
+    --chart-slate: #767C88;
+
+    --accent-tier1: #2B4BDB;
+    --accent-tier2: #4564E6;
+    --accent-tier3: #6883F0;
+    --accent-tier4: #94A7F8;
+
+    --card-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.06);
 
     --font-serif: "Newsreader", Georgia, Cambria, "Times New Roman", serif;
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -27,24 +37,34 @@
   }
 
   html.dark {
-    /* "Analyst's Notebook" — Dark: Graphite */
-    --bg: #0E1014;
-    --surface: #15181E;
-    --surface-subtle: #1C2028;
-    --border: #272C35;
-    --border-subtle: rgba(236, 238, 242, 0.08);
+    /* "Analyst's Notebook" — Dark: Midnight Graphite */
+    --bg: #0A0C11;
+    --surface: #11141B;
+    --surface-elevated: #171B24;
+    --surface-subtle: #171B24;
+    --border: #232837;
+    --border-subtle: rgba(238, 240, 245, 0.08);
 
-    --text-primary: #ECEEF2;
-    --text-secondary: #A3AAB6;
-    --text-muted: #6F7683;
+    --text-primary: #EEF0F5;
+    --text-secondary: #A6ADBB;
+    --text-muted: #727A8A;
 
-    --accent: #7B93FF;
-    --accent-hover: #99ACFF;
-    --accent-contrast: #0E1014;
+    --accent: #5B7CFA;
+    --accent-hover: #7C97FF;
+    --accent-contrast: #0A0C11;
+    --accent-rgb: 91, 124, 250;
 
-    --highlight-amber: #F2B84B;
-    --chart-teal: #2DD4BF;
-    --chart-slate: #6F7683;
+    --highlight-amber: #E8B04B;
+    --chart-teal: #2FB8A6;
+    --chart-slate: #727A8A;
+
+    --accent-tier1: #8FA5FF;
+    --accent-tier2: #5B7CFA;
+    --accent-tier3: #3D5FD9;
+    --accent-tier4: #243F9E;
+
+    --card-inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -59,7 +79,7 @@
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--bg);
     color: var(--text-primary);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
   }
 
   section {
@@ -68,36 +88,40 @@
 
   body {
     font-family: var(--font-sans);
-    overflow-x: hidden;
+    font-size: 1.0625rem; /* 17px body for refined editorial legibility */
+    line-height: 1.65;
     background-color: var(--bg);
     color: var(--text-primary);
-    line-height: 1.65;
-  }
-
-  ::selection {
-    background-color: var(--accent);
-    color: var(--accent-contrast);
-  }
-
-  /* Refined Editorial Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: var(--bg);
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--border);
-    border-radius: 9999px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent);
+    overflow-x: hidden;
   }
 }
 
-/* Editorial 12-Column Grid Container (~1180px Max Width) */
+/* Subtle 3% Grain Overlay */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Premium Card Depth & Finish */
+.notebook-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft), var(--card-inner-highlight);
+  border-radius: 1rem;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.notebook-card:hover {
+  border-color: rgba(var(--accent-rgb), 0.4);
+}
+
+/* Editorial Measure & Typography Utilities */
 .site-container {
+  width: 100%;
   max-width: 1180px;
   margin-left: auto;
   margin-right: auto;
@@ -107,41 +131,29 @@
 
 @media (min-width: 640px) {
   .site-container {
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.75rem;
+    padding-right: 1.75rem;
   }
 }
 
 @media (min-width: 1024px) {
   .site-container {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
-/* Typography Utility Classes */
 .font-display {
   font-family: var(--font-serif);
-}
-
-.font-mono-data {
-  font-family: var(--font-mono);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.02em;
 }
 
 .editorial-measure {
   max-width: 65ch;
 }
 
-/* Hairline Dividers */
-.hairline-border {
-  border-color: var(--border);
-}
-
-.hairline-divider {
-  border-bottom: 1px solid var(--border);
-}
-
-/* Amber Marker Underline */
+/* Amber Highlight Underline */
 .marker-underline {
   position: relative;
   display: inline-block;
@@ -152,14 +164,35 @@
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0.1em;
+  bottom: 0.12em;
   width: 100%;
   height: 2px;
   background-color: var(--highlight-amber);
   border-radius: 1px;
 }
 
-/* Motion: Subtle Fade & Lift */
+/* Motion: Staggered Line Masks & Reveals */
+.overflow-mask {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: top;
+}
+
+@keyframes editorialSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: editorialSlideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
 @keyframes editorialFadeUp {
   from {
     opacity: 0;

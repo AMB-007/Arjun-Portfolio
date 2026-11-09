@@ -59,11 +59,11 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28">
+    <section id="contact" className="py-24 md:py-32">
       <div className="site-container">
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
-          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+          <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
             06 &bull; Contact
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
@@ -77,7 +77,7 @@ export function Contact() {
               together.
             </span>
           </h2>
-          <p className="mt-3 text-base text-[var(--text-secondary)] leading-relaxed">
+          <p className="mt-3 text-[17px] text-[var(--text-secondary)] leading-relaxed">
             I am currently open to Data Analyst, Machine Learning, and Business Intelligence opportunities.
             Reach out via direct email or submit the inquiry brief below.
           </p>
@@ -88,9 +88,9 @@ export function Contact() {
           {/* Left Column: Direct Contact Info & Verification (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             {/* Prominent Email Card with Copy Button */}
-            <div className="p-6 sm:p-7 rounded-xl bg-[var(--surface)] border border-[var(--border)] space-y-4">
+            <div className="p-7 sm:p-8 rounded-2xl bg-[var(--surface)] border border-[var(--border)] space-y-5 notebook-card">
               <div>
-                <span className="text-xs font-mono font-medium text-[var(--accent)] uppercase tracking-wider block mb-1">
+                <span className="text-xs font-mono font-medium text-[var(--accent)] tracking-wide block mb-1.5">
                   Direct Inquiries
                 </span>
                 <a
@@ -104,7 +104,7 @@ export function Contact() {
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <button
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--surface-subtle)] hover:bg-[var(--border)] text-xs font-mono text-[var(--text-primary)] border border-[var(--border)] transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--surface-subtle)] hover:bg-[var(--border)] text-xs sm:text-[13px] font-mono text-[var(--text-primary)] border border-[var(--border)] transition-colors cursor-pointer"
                 >
                   {copiedEmail ? (
                     <>
@@ -121,7 +121,7 @@ export function Contact() {
 
                 <a
                   href={`mailto:${PERSONAL_INFO.email}`}
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--accent)] hover:opacity-90 text-xs font-mono font-semibold text-[var(--accent-contrast)] transition-opacity"
+                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[var(--accent)] hover:opacity-90 text-xs sm:text-[13px] font-mono font-semibold text-[var(--accent-contrast)] transition-opacity"
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Send email</span>
@@ -130,21 +130,21 @@ export function Contact() {
             </div>
 
             {/* Social Links Cards */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3.5">
               <a
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] flex items-center gap-3 transition-colors group"
+                className="p-4 sm:p-5 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] flex items-center gap-3 transition-colors group notebook-card"
               >
                 <div className="w-9 h-9 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] shrink-0">
                   <LinkedinIcon className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-xs font-semibold text-[var(--text-primary)] block group-hover:text-[var(--accent)] transition-colors">
+                  <span className="text-xs sm:text-[13px] font-semibold text-[var(--text-primary)] block group-hover:text-[var(--accent)] transition-colors">
                     LinkedIn
                   </span>
-                  <span className="text-[11px] font-mono text-[var(--text-muted)] truncate block">
+                  <span className="text-xs font-mono text-[var(--text-muted)] truncate block">
                     arjun-m-babu
                   </span>
                 </div>
@@ -154,43 +154,43 @@ export function Contact() {
                 href={PERSONAL_INFO.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-4 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] flex items-center gap-3 transition-colors group"
+                className="p-4 sm:p-5 rounded-xl bg-[var(--surface)] border border-[var(--border)] hover:border-[var(--accent)] flex items-center gap-3 transition-colors group notebook-card"
               >
                 <div className="w-9 h-9 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-center text-[var(--accent)] shrink-0">
                   <GithubIcon className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
-                  <span className="text-xs font-semibold text-[var(--text-primary)] block group-hover:text-[var(--accent)] transition-colors">
+                  <span className="text-xs sm:text-[13px] font-semibold text-[var(--text-primary)] block group-hover:text-[var(--accent)] transition-colors">
                     GitHub
                   </span>
-                  <span className="text-[11px] font-mono text-[var(--text-muted)] truncate block">
-                    @AMB-007
+                  <span className="text-xs font-mono text-[var(--text-muted)] truncate block">
+                    AMB-007
                   </span>
                 </div>
               </a>
             </div>
 
-            {/* Location & Response SLA */}
-            <div className="p-4 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] space-y-2 text-xs font-mono text-[var(--text-secondary)]">
+            {/* Location & Timezone Card */}
+            <div className="p-4 sm:p-5 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] flex items-center justify-between text-xs sm:text-[13px] font-mono text-[var(--text-secondary)]">
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <span>Kerala, India &bull; Open to remote and relocation</span>
+                <MapPin className="w-4 h-4 text-[var(--accent)]" />
+                <span>Kerala, India</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-3.5 h-3.5 text-[var(--accent)]" />
-                <span>Response SLA: Within 24 business hours</span>
+              <div className="flex items-center gap-2 text-[var(--text-muted)]">
+                <Clock className="w-4 h-4" />
+                <span>IST (UTC+5:30)</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Clean 3-Field Message Form (7 cols) */}
+          {/* Right Column: Direct Inquiry Brief Form (7 cols) */}
           <div className="lg:col-span-7">
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="p-6 sm:p-8 rounded-xl bg-[var(--surface)] border border-[var(--border)] space-y-4"
+              className="p-7 sm:p-9 rounded-2xl bg-[var(--surface)] border border-[var(--border)] space-y-5 notebook-card"
             >
-              {/* Hidden Honeypot */}
+              {/* Anti-spam honeypot */}
               <input
                 type="text"
                 name="_gotcha"
@@ -199,80 +199,91 @@ export function Contact() {
                 className="hidden"
                 tabIndex="-1"
                 autoComplete="off"
-                aria-hidden="true"
               />
 
-              {submittedSuccess && (
-                <div className="p-3.5 rounded-lg bg-[var(--surface-subtle)] border border-[var(--accent)] text-xs font-mono text-[var(--accent)] flex items-center gap-2">
-                  <Check className="w-4 h-4" />
-                  <span>Draft email initialized in your default client. Thank you!</span>
-                </div>
-              )}
-
-              {/* Name & Email Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5 text-left">
-                  <label htmlFor="contact-name" className="text-xs font-mono font-medium text-[var(--text-primary)]">
-                    Name <span className="text-[var(--accent)]">*</span>
-                  </label>
-                  <input
-                    id="contact-name"
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    placeholder="Alex Morgan"
-                    className={`w-full px-3.5 py-2.5 rounded-lg bg-[var(--surface-subtle)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none transition-colors ${
-                      errors.name ? "border-red-500" : "border-[var(--border)] focus:border-[var(--accent)]"
-                    }`}
-                  />
-                  {errors.name && <p className="text-xs font-mono text-red-500">{errors.name}</p>}
-                </div>
-
-                <div className="space-y-1.5 text-left">
-                  <label htmlFor="contact-email" className="text-xs font-mono font-medium text-[var(--text-primary)]">
-                    Email <span className="text-[var(--accent)]">*</span>
-                  </label>
-                  <input
-                    id="contact-email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="alex@company.com"
-                    className={`w-full px-3.5 py-2.5 rounded-lg bg-[var(--surface-subtle)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none transition-colors ${
-                      errors.email ? "border-red-500" : "border-[var(--border)] focus:border-[var(--accent)]"
-                    }`}
-                  />
-                  {errors.email && <p className="text-xs font-mono text-red-500">{errors.email}</p>}
-                </div>
+              <div>
+                <label
+                  htmlFor="contactName"
+                  className="block text-xs sm:text-[13px] font-mono font-medium text-[var(--text-primary)] mb-2"
+                >
+                  Name <span className="text-[var(--accent)]">*</span>
+                </label>
+                <input
+                  id="contactName"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Your Name or Organization"
+                  className={`w-full px-4 py-2.5 rounded-lg bg-[var(--bg)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors ${
+                    errors.name ? "border-rose-500" : "border-[var(--border)]"
+                  }`}
+                />
+                {errors.name && (
+                  <p className="mt-1.5 text-xs text-rose-500 font-mono">{errors.name}</p>
+                )}
               </div>
 
-              {/* Message */}
-              <div className="space-y-1.5 text-left">
-                <label htmlFor="contact-message" className="text-xs font-mono font-medium text-[var(--text-primary)]">
-                  Message <span className="text-[var(--accent)]">*</span>
+              <div>
+                <label
+                  htmlFor="contactEmail"
+                  className="block text-xs sm:text-[13px] font-mono font-medium text-[var(--text-primary)] mb-2"
+                >
+                  Email <span className="text-[var(--accent)]">*</span>
+                </label>
+                <input
+                  id="contactEmail"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="name@company.com"
+                  className={`w-full px-4 py-2.5 rounded-lg bg-[var(--bg)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors ${
+                    errors.email ? "border-rose-500" : "border-[var(--border)]"
+                  }`}
+                />
+                {errors.email && (
+                  <p className="mt-1.5 text-xs text-rose-500 font-mono">{errors.email}</p>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="contactMessage"
+                  className="block text-xs sm:text-[13px] font-mono font-medium text-[var(--text-primary)] mb-2"
+                >
+                  Project or Role Brief <span className="text-[var(--accent)]">*</span>
                 </label>
                 <textarea
-                  id="contact-message"
+                  id="contactMessage"
                   rows={4}
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Share details regarding your role, data challenge, or team opening..."
-                  className={`w-full px-3.5 py-2.5 rounded-lg bg-[var(--surface-subtle)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none transition-colors resize-none ${
-                    errors.message ? "border-red-500" : "border-[var(--border)] focus:border-[var(--accent)]"
+                  placeholder="Outline the role, analytics challenges, or project goals..."
+                  className={`w-full px-4 py-2.5 rounded-lg bg-[var(--bg)] border text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors resize-none ${
+                    errors.message ? "border-rose-500" : "border-[var(--border)]"
                   }`}
                 />
-                {errors.message && <p className="text-xs font-mono text-red-500">{errors.message}</p>}
+                {errors.message && (
+                  <p className="mt-1.5 text-xs text-rose-500 font-mono">{errors.message}</p>
+                )}
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3 rounded-lg bg-[var(--accent)] hover:opacity-90 text-[var(--accent-contrast)] font-mono font-medium text-xs sm:text-sm transition-opacity flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
-              >
-                <Send className="w-4 h-4 shrink-0" />
-                <span>Transmit inquiry</span>
-              </button>
+              <div className="pt-2 flex items-center justify-between">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[var(--accent)] hover:opacity-90 disabled:opacity-50 text-xs sm:text-[13px] font-mono font-semibold text-[var(--accent-contrast)] transition-opacity cursor-pointer"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>{isSubmitting ? "Drafting Mail..." : "Send Message"}</span>
+                </button>
+
+                {submittedSuccess && (
+                  <span className="text-xs font-mono text-[var(--chart-teal)] flex items-center gap-1.5 animate-fadeIn">
+                    <Check className="w-4 h-4" />
+                    Mail client opened
+                  </span>
+                )}
+              </div>
             </form>
           </div>
         </div>

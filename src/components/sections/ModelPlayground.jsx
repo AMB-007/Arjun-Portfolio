@@ -88,11 +88,11 @@ export function ModelPlayground() {
   }, [failedAuthRate, sqliTokens, scanRate]);
 
   return (
-    <section id="interactive-demo" className="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--surface-subtle)]/40">
+    <section id="interactive-demo" className="py-24 md:py-32 border-b border-[var(--border)] bg-[var(--surface-subtle)]/40">
       <div className="site-container">
         {/* Numbered Section Header Bar */}
         <div className="flex items-center gap-4 mb-12 sm:mb-16">
-          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[var(--accent)]">
+          <span className="font-mono text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
             03 &bull; Demo
           </span>
           <div className="flex-1 h-px bg-[var(--border)]" />
@@ -106,14 +106,14 @@ export function ModelPlayground() {
               inference simulator.
             </span>
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-[var(--text-secondary)]">
-            Adjust the normalized candidate vectors or test attack telemetry to inspect how the multi-model ensembles recalculate probabilities and SHAP attributions.
+          <p className="mt-3 text-[17px] text-[var(--text-secondary)] leading-relaxed">
+            Adjust the normalized candidate vectors or test attack telemetry to inspect how the multi-model ensembles recalculate probabilities and SHAP attributions in real time.
           </p>
         </div>
 
         {/* Model Switcher Tabs & Presets Bar */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2.5">
             <button
               onClick={() => setActiveModel("career")}
               className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-xs font-mono font-medium transition-all cursor-pointer ${
@@ -165,9 +165,9 @@ export function ModelPlayground() {
         </div>
 
         {/* Simulator Panel in "Analyst's Notebook" styling */}
-        <div className="p-6 sm:p-8 rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-xs">
+        <div className="p-6 sm:p-9 rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-xs notebook-card">
           {activeModel === "career" ? (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               {/* Left Column: Sliders (5 cols) */}
               <div className="lg:col-span-5 space-y-6">
                 <div>
@@ -182,7 +182,7 @@ export function ModelPlayground() {
 
                 <div className="space-y-5 pt-2">
                   <div>
-                    <label htmlFor="dataAnalysisInput" className="flex justify-between text-xs font-mono font-medium mb-1.5 text-[var(--text-primary)]">
+                    <label htmlFor="dataAnalysisInput" className="flex justify-between text-xs sm:text-[13px] font-mono font-medium mb-2 text-[var(--text-primary)]">
                       <span>Statistical &amp; Data Analysis</span>
                       <span className="text-[var(--accent)] font-bold">{dataAnalysis}%</span>
                     </label>
@@ -199,7 +199,7 @@ export function ModelPlayground() {
                   </div>
 
                   <div>
-                    <label htmlFor="mathLogicInput" className="flex justify-between text-xs font-mono font-medium mb-1.5 text-[var(--text-primary)]">
+                    <label htmlFor="mathLogicInput" className="flex justify-between text-xs sm:text-[13px] font-mono font-medium mb-2 text-[var(--text-primary)]">
                       <span>Mathematical &amp; Algorithmic Logic</span>
                       <span className="text-[var(--accent)] font-bold">{mathLogic}%</span>
                     </label>
@@ -216,7 +216,7 @@ export function ModelPlayground() {
                   </div>
 
                   <div>
-                    <label htmlFor="cyberSecurityInput" className="flex justify-between text-xs font-mono font-medium mb-1.5 text-[var(--text-primary)]">
+                    <label htmlFor="cyberSecurityInput" className="flex justify-between text-xs sm:text-[13px] font-mono font-medium mb-2 text-[var(--text-primary)]">
                       <span>Cybersecurity &amp; Network Infrastructure</span>
                       <span className="text-[var(--accent)] font-bold">{cyberSecurity}%</span>
                     </label>
@@ -233,7 +233,7 @@ export function ModelPlayground() {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] text-xs font-mono text-[var(--text-secondary)]">
+                <div className="p-4 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] text-xs sm:text-[13px] font-mono text-[var(--text-secondary)]">
                   <span className="font-semibold text-[var(--text-primary)]">Ensemble Model: </span>
                   XGBoost (35%) + CatBoost (30%) + LightGBM (20%) + Random Forest (15%).
                 </div>
@@ -254,13 +254,13 @@ export function ModelPlayground() {
                   {careerPrediction.clusters.map((cluster, i) => (
                     <div
                       key={cluster.role}
-                      className={`p-3.5 rounded-lg border transition-all ${
+                      className={`p-4 rounded-xl border transition-all ${
                         i === 0
                           ? "bg-[var(--surface-subtle)] border-[var(--accent)] shadow-xs"
                           : "bg-[var(--surface)] border-[var(--border)]"
                       }`}
                     >
-                      <div className="flex justify-between items-center mb-1.5 text-xs sm:text-sm">
+                      <div className="flex justify-between items-center mb-2 text-xs sm:text-sm">
                         <span className="font-medium text-[var(--text-primary)] flex items-center gap-2">
                           <span className="text-[11px] px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-primary)]">
                             0{i + 1}
@@ -284,14 +284,14 @@ export function ModelPlayground() {
                 </div>
 
                 {/* SHAP TreeExplainer Local Attribution Insight */}
-                <div className="p-4 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] font-mono">
-                  <div className="flex items-center justify-between mb-3 text-xs">
+                <div className="p-4 sm:p-5 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] font-mono">
+                  <div className="flex items-center justify-between mb-3 text-xs sm:text-[13px]">
                     <span className="font-semibold text-[var(--text-primary)]">
                       SHAP TreeExplainer Attributions
                     </span>
-                    <span className="text-[11px] text-[var(--highlight-amber)] font-medium">Local feature impact</span>
+                    <span className="text-[11px] sm:text-xs text-[var(--highlight-amber)] font-medium">Local feature impact</span>
                   </div>
-                  <div className="space-y-2 text-xs">
+                  <div className="space-y-2.5 text-xs sm:text-[13px]">
                     {careerPrediction.shap.map((s) => (
                       <div key={s.feature} className="flex justify-between items-center text-[var(--text-secondary)]">
                         <span>{s.feature}</span>
@@ -309,7 +309,7 @@ export function ModelPlayground() {
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
               {/* WebShield Left: Inputs (5 cols) */}
               <div className="lg:col-span-5 space-y-6">
                 <div>
@@ -324,7 +324,7 @@ export function ModelPlayground() {
 
                 <div className="space-y-5 pt-2">
                   <div>
-                    <label htmlFor="failedAuthInput" className="flex justify-between text-xs font-mono font-medium mb-1.5 text-[var(--text-primary)]">
+                    <label htmlFor="failedAuthInput" className="flex justify-between text-xs sm:text-[13px] font-mono font-medium mb-2 text-[var(--text-primary)]">
                       <span>Failed Auth Attempts / min</span>
                       <span className="text-[var(--accent)] font-bold">{failedAuthRate} req/m</span>
                     </label>
@@ -341,7 +341,7 @@ export function ModelPlayground() {
                   </div>
 
                   <div>
-                    <label htmlFor="sqliTokensInput" className="flex justify-between text-xs font-mono font-medium mb-1.5 text-[var(--text-primary)]">
+                    <label htmlFor="sqliTokensInput" className="flex justify-between text-xs sm:text-[13px] font-mono font-medium mb-2 text-[var(--text-primary)]">
                       <span>SQL Injection Tokens in Payload</span>
                       <span className="text-[var(--accent)] font-bold">{sqliTokens} keywords</span>
                     </label>
@@ -358,7 +358,7 @@ export function ModelPlayground() {
                   </div>
 
                   <div>
-                    <label htmlFor="scanRateInput" className="flex justify-between text-xs font-mono font-medium mb-1.5 text-[var(--text-primary)]">
+                    <label htmlFor="scanRateInput" className="flex justify-between text-xs sm:text-[13px] font-mono font-medium mb-2 text-[var(--text-primary)]">
                       <span>Port Scan Probe Concurrency</span>
                       <span className="text-[var(--accent)] font-bold">{scanRate} ports/s</span>
                     </label>
@@ -375,7 +375,7 @@ export function ModelPlayground() {
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)] text-xs font-mono text-[var(--text-secondary)]">
+                <div className="p-4 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)] text-xs sm:text-[13px] font-mono text-[var(--text-secondary)]">
                   <span className="font-semibold text-[var(--text-primary)]">Detection Model: </span>
                   Scikit-learn Random Forest Classifier trained on intrusion telemetry (89.4% triage accuracy).
                 </div>
@@ -392,8 +392,8 @@ export function ModelPlayground() {
                   </p>
                 </div>
 
-                <div className={`p-6 rounded-xl border ${threatPrediction.border} bg-[var(--surface-subtle)] space-y-3 font-mono`}>
-                  <div className="flex items-center justify-between text-xs text-[var(--text-muted)]">
+                <div className={`p-6 sm:p-7 rounded-2xl border ${threatPrediction.border} bg-[var(--surface-subtle)] space-y-3 font-mono`}>
+                  <div className="flex items-center justify-between text-xs sm:text-[13px] text-[var(--text-muted)]">
                     <span>Severity Tier</span>
                     <span>Confidence: {threatPrediction.confidence}%</span>
                   </div>
@@ -402,25 +402,25 @@ export function ModelPlayground() {
                     <span className={`text-3xl font-extrabold tracking-tight ${threatPrediction.color}`}>
                       {threatPrediction.tier}
                     </span>
-                    <span className="text-xs px-2.5 py-1 rounded bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)]">
+                    <span className="text-xs px-2.5 py-1 rounded-md bg-[var(--surface)] border border-[var(--border)] text-[var(--text-primary)]">
                       Risk Index: {threatPrediction.riskScore} / 100
                     </span>
                   </div>
 
-                  <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
                     {threatPrediction.desc}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 text-xs font-mono">
-                  <div className="p-3 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)]">
-                    <span className="text-[11px] text-[var(--accent)] block">API Gateway Route</span>
+                <div className="grid grid-cols-2 gap-3 text-xs sm:text-[13px] font-mono">
+                  <div className="p-3.5 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)]">
+                    <span className="text-[11px] sm:text-xs text-[var(--accent)] block">API Gateway Route</span>
                     <span className="font-medium text-[var(--text-primary)]">
                       {threatPrediction.tier === "CRITICAL" ? "IP Drop Rule Active" : "Telemetry Ingestion 200 OK"}
                     </span>
                   </div>
-                  <div className="p-3 rounded-lg bg-[var(--surface-subtle)] border border-[var(--border)]">
-                    <span className="text-[11px] text-[var(--accent)] block">Alert Dispatch</span>
+                  <div className="p-3.5 rounded-xl bg-[var(--surface-subtle)] border border-[var(--border)]">
+                    <span className="text-[11px] sm:text-xs text-[var(--accent)] block">Alert Dispatch</span>
                     <span className="font-medium text-[var(--text-primary)]">
                       {threatPrediction.tier === "CRITICAL" ? "Escalated to PagerDuty" : "Logged to Daily Audit"}
                     </span>
@@ -431,7 +431,7 @@ export function ModelPlayground() {
           )}
 
           {/* Honest Disclaimer Caption (as requested by user) */}
-          <div className="mt-8 pt-4 border-t border-[var(--border)] flex items-start sm:items-center gap-2 text-xs font-mono text-[var(--text-muted)]">
+          <div className="mt-8 pt-4 border-t border-[var(--border)] flex items-start sm:items-center gap-2 text-xs sm:text-[13px] font-mono text-[var(--text-muted)]">
             <AlertCircle className="w-4 h-4 text-[var(--highlight-amber)] shrink-0" />
             <span>
               Browser demo of the model's inference logic and SHAP TreeExplainer attributions. Not a live production database API.
