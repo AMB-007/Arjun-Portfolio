@@ -41,16 +41,16 @@ export function Footer() {
             {PERSONAL_INFO.name}
           </p>
           <p className="text-[11px] text-[var(--text-secondary)]">
-            Data Analyst &bull; Machine Learning Engineer
+            Full-Stack Developer &bull; Data Science &bull; Machine Learning &bull; AI
           </p>
         </div>
 
         {/* Center: Live Time in IST & Location */}
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[var(--surface)] border border-[var(--border)] text-[11px]">
-          <span className="w-2 h-2 rounded-full bg-[var(--positive)] animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-[var(--data-accent)] animate-pulse" />
           <span className="text-[var(--text-primary)] font-medium">Kochi, IN</span>
           <span className="text-[var(--border)]">&bull;</span>
-          <span className="text-[var(--accent)] font-semibold">{istTime || "14:30:00"} IST</span>
+          <span className="text-[var(--primary-accent)] font-semibold">{istTime || "14:30:00"} IST</span>
         </div>
 
         {/* Right: Copyright, Socials & Back to Top */}
@@ -61,7 +61,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
-              className="hover:text-[var(--accent)] transition-colors"
+              className="hover:text-[var(--primary-accent)] transition-colors"
             >
               <GithubIcon className="w-4 h-4" />
             </a>
@@ -70,14 +70,14 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
-              className="hover:text-[var(--accent)] transition-colors"
+              className="hover:text-[var(--primary-accent)] transition-colors"
             >
               <LinkedinIcon className="w-4 h-4" />
             </a>
             <a
               href={`mailto:${PERSONAL_INFO.email}`}
               aria-label="Direct Email"
-              className="hover:text-[var(--accent)] transition-colors"
+              className="hover:text-[var(--primary-accent)] transition-colors"
             >
               <Mail className="w-4 h-4" />
             </a>

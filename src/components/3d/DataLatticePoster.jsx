@@ -3,27 +3,17 @@ import React from "react";
 export function DataLatticePoster({ isDark = true }) {
   return (
     <div
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-45 transition-opacity duration-700"
+      className="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-35 transition-opacity duration-700"
       aria-hidden="true"
     >
       <svg
-        className="w-full h-full max-w-[1200px] mx-auto"
+        className="w-full h-full max-w-[1320px] mx-auto"
         viewBox="0 0 1000 700"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <defs>
-          <radialGradient id="latticeGlow" cx="68%" cy="35%" r="45%">
-            <stop offset="0%" stopColor="var(--accent)" stopOpacity={isDark ? "0.14" : "0.09"} />
-            <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-
-        {/* Ambient Volumetric Glow */}
-        <circle cx="680" cy="280" r="340" fill="url(#latticeGlow)" />
-
         {/* Connecting Lines */}
-        <g stroke="var(--accent)" strokeWidth="1.2" strokeOpacity={isDark ? "0.32" : "0.22"}>
+        <g stroke="var(--primary-accent)" strokeWidth="1.2" strokeOpacity={isDark ? "0.35" : "0.22"}>
           <line x1="620" y1="180" x2="710" y2="240" />
           <line x1="710" y1="240" x2="800" y2="190" />
           <line x1="710" y1="240" x2="680" y2="340" />

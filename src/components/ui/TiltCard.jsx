@@ -55,34 +55,13 @@ export function TiltCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden transition-transform duration-200 ease-out ${className}`}
+      className={`relative overflow-hidden transition-all duration-200 ease-out ${className}`}
       style={{
         transform: isHovered && !isTouchDevice ? transform : "none",
         transformStyle: "preserve-3d",
       }}
       {...props}
     >
-      {/* Dynamic Cursor-Following Specular Glare */}
-      {!isTouchDevice && (
-        <div
-          className="pointer-events-none absolute -inset-px rounded-[inherit] transition-opacity duration-300 z-30"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(circle 320px at ${glarePosition.x}% ${glarePosition.y}%, rgba(var(--accent-rgb), ${glareOpacity * 0.45}), rgba(255, 255, 255, ${glareOpacity * 0.65}) 40%, transparent 70%)`,
-          }}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* 1px Inner Highlight Border */}
-      <div
-        className="pointer-events-none absolute inset-0 rounded-[inherit] z-20"
-        style={{
-          boxShadow: "var(--card-inner-highlight)",
-        }}
-        aria-hidden="true"
-      />
-
       <div className="relative z-10 w-full h-full">{children}</div>
     </div>
   );

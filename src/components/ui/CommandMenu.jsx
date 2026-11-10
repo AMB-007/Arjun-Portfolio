@@ -2,31 +2,28 @@ import React, { useState, useEffect, useRef } from "react";
 import {
   Search,
   ArrowRight,
-  Copy,
-  Check,
   FileText,
+  Copy,
+  ExternalLink,
   Sun,
   Moon,
-  ExternalLink,
-  X,
-  Palette,
   Box,
-  CornerDownLeft,
+  Layers,
+  Cpu,
+  GraduationCap,
+  BookOpen,
 } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { copyToClipboard } from "@/utils/helpers";
-import { PALETTES } from "@/config/theme.config";
 
 export function CommandMenu({
   isOpen,
   onClose,
   isDark,
   onToggleTheme,
-  palette = "navy",
-  onSetPalette,
-  is3DEnabled = true,
+  is3DEnabled,
   onToggle3D,
-  enable3DFlag = true,
+  enable3DFlag,
 }) {
   const [query, setQuery] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -36,17 +33,35 @@ export function CommandMenu({
   const actions = [
     // Navigation
     {
-      id: "work",
-      label: "Jump to Selected Work",
+      id: "hero",
+      label: "Jump to Overview (Top)",
       group: "Navigation",
       perform: () => {
-        window.location.hash = "#projects";
+        window.location.hash = "#hero";
+        onClose();
+      },
+    },
+    {
+      id: "about",
+      label: "Jump to About Section",
+      group: "Navigation",
+      perform: () => {
+        window.location.hash = "#about";
+        onClose();
+      },
+    },
+    {
+      id: "capabilities",
+      label: "Jump to Capabilities",
+      group: "Navigation",
+      perform: () => {
+        window.location.hash = "#capabilities";
         onClose();
       },
     },
     {
       id: "skills",
-      label: "Jump to Toolbox Index",
+      label: "Jump to Technical Skills Matrix",
       group: "Navigation",
       perform: () => {
         window.location.hash = "#skills";
@@ -54,17 +69,35 @@ export function CommandMenu({
       },
     },
     {
-      id: "experience",
-      label: "Jump to Career Timeline & Education",
+      id: "projects",
+      label: "Jump to Selected Engineering Projects",
       group: "Navigation",
       perform: () => {
-        window.location.hash = "#experience";
+        window.location.hash = "#projects";
+        onClose();
+      },
+    },
+    {
+      id: "learning",
+      label: "Jump to Currently Learning Roadmap",
+      group: "Navigation",
+      perform: () => {
+        window.location.hash = "#learning";
+        onClose();
+      },
+    },
+    {
+      id: "education",
+      label: "Jump to Education & Certifications",
+      group: "Navigation",
+      perform: () => {
+        window.location.hash = "#education";
         onClose();
       },
     },
     {
       id: "contact",
-      label: "Jump to Contact Form",
+      label: "Jump to Contact Section",
       group: "Navigation",
       perform: () => {
         window.location.hash = "#contact";
@@ -75,7 +108,7 @@ export function CommandMenu({
     // Theme & 3D Preferences
     {
       id: "theme",
-      label: `Switch to ${isDark ? "Light ('Warm Paper')" : "Dark ('Ink Navy')"} mode`,
+      label: `Switch to ${isDark ? "Light ('Warm Paper')" : "Dark ('Layered Navy')"} mode`,
       group: "Appearance",
       icon: isDark ? Sun : Moon,
       perform: () => {
@@ -87,7 +120,7 @@ export function CommandMenu({
       ? [
           {
             id: "3d-toggle",
-            label: `3D Data Lattice: ${is3DEnabled ? "Turn OFF (Save GPU / Battery)" : "Turn ON (Volumetric 3D)"}`,
+            label: `3D Technology Network: ${is3DEnabled ? "Turn OFF" : "Turn ON"}`,
             group: "Appearance",
             icon: Box,
             perform: () => {
@@ -97,18 +130,6 @@ export function CommandMenu({
           },
         ]
       : []),
-
-    // Palette Family Presets
-    ...Object.entries(PALETTES).map(([key, item]) => ({
-      id: `palette-${key}`,
-      label: `Set Palette: ${item.name} ${palette === key ? "(Active)" : ""}`,
-      group: "Color Palettes",
-      icon: Palette,
-      perform: () => {
-        if (onSetPalette) onSetPalette(key);
-        onClose();
-      },
-    })),
 
     // Quick Actions
     {
@@ -204,92 +225,77 @@ export function CommandMenu({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label="Command Menu Palette"
+      aria-label="Command Palette"
       className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/60 backdrop-blur-sm animate-editorial-fade"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-xl rounded-2xl bg-[var(--surface)] border border-[var(--border)] shadow-2xl overflow-hidden notebook-card"
+        className="w-full max-w-xl rounded-xl bg-[var(--surface)] border border-[var(--border)] shadow-2xl overflow-hidden font-sans text-left"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Search Bar Input */}
+        {/* Search Input Bar */}
         <div className="flex items-center gap-3 px-4 py-3.5 border-b border-[var(--border)]">
-          <Search className="w-4 h-4 text-[var(--accent)] shrink-0" />
+          <Search className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
           <input
             ref={inputRef}
             type="text"
+            placeholder="Type a command or jump to section..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Type a command, navigate, or choose a palette..."
-            className="flex-1 bg-transparent text-sm font-sans text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none"
-            aria-label="Search commands"
+            className="w-full bg-transparent text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none font-sans"
           />
-          <button
-            onClick={onClose}
-            aria-label="Close command palette"
-            className="p-1 rounded-md text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-subtle)]"
-          >
-            <X className="w-4 h-4" />
-          </button>
+          <kbd className="hidden sm:inline-block px-1.5 py-0.5 rounded text-[10px] font-mono text-[var(--text-muted)] bg-[var(--surface-subtle)] border border-[var(--border)]">
+            ESC
+          </kbd>
         </div>
 
-        {/* Action Items List */}
-        <div className="max-h-80 overflow-y-auto p-2 divide-y divide-transparent">
-          {filteredActions.length === 0 ? (
-            <div className="p-8 text-center text-xs font-mono text-[var(--text-muted)]">
-              No actions matching "{query}"
-            </div>
-          ) : (
-            filteredActions.map((item, idx) => {
-              const isSelected = idx === selectedIndex;
-              const Icon = item.icon || ArrowRight;
+        {/* Results List */}
+        <div className="max-h-80 overflow-y-auto p-2 divide-y divide-[var(--border-subtle)]">
+          {filteredActions.length > 0 ? (
+            filteredActions.map((action, index) => {
+              const isSelected = index === selectedIndex;
+              const Icon = action.icon || ArrowRight;
 
               return (
                 <button
-                  key={item.id}
-                  onClick={item.perform}
-                  onMouseEnter={() => setSelectedIndex(idx)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-mono text-left transition-colors cursor-pointer ${
+                  key={action.id}
+                  onClick={() => action.perform()}
+                  onMouseEnter={() => setSelectedIndex(index)}
+                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors cursor-pointer outline-none ${
                     isSelected
-                      ? "bg-[var(--accent)] text-[var(--accent-contrast)]"
+                      ? "bg-[var(--primary-accent)] text-[var(--accent-contrast)]"
                       : "text-[var(--text-primary)] hover:bg-[var(--surface-subtle)]"
                   }`}
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span
-                      className={`text-[10px] font-mono uppercase tracking-wider px-1.5 py-0.5 rounded border ${
-                        isSelected
-                          ? "border-[var(--accent-contrast)]/30 text-[var(--accent-contrast)]"
-                          : "border-[var(--border)] text-[var(--text-muted)]"
-                      }`}
-                    >
-                      {item.group}
+                  <div className="flex items-center gap-3 truncate">
+                    <Icon className="w-4 h-4 shrink-0" />
+                    <span className="text-xs sm:text-[13px] font-sans font-medium truncate">
+                      {action.label}
                     </span>
-                    <span className="font-medium truncate">{item.label}</span>
                   </div>
-
-                  <div className="flex items-center gap-2 shrink-0 ml-2">
-                    {copied && item.id === "email" ? (
-                      <Check className="w-3.5 h-3.5 text-[var(--positive)]" />
-                    ) : (
-                      <Icon className="w-3.5 h-3.5 opacity-60" />
-                    )}
-                    {isSelected && <CornerDownLeft className="w-3 h-3 opacity-80" />}
-                  </div>
+                  <span
+                    className={`text-[10px] font-mono uppercase tracking-wider shrink-0 px-1.5 py-0.5 rounded ${
+                      isSelected
+                        ? "bg-[var(--accent-contrast)]/15 text-[var(--accent-contrast)]"
+                        : "text-[var(--text-muted)] bg-[var(--surface-subtle)]"
+                    }`}
+                  >
+                    {action.group}
+                  </span>
                 </button>
               );
             })
+          ) : (
+            <div className="p-8 text-center text-xs font-mono text-[var(--text-muted)]">
+              No matching commands found.
+            </div>
           )}
         </div>
 
-        {/* Footer Hint Bar */}
-        <div className="px-4 py-2 bg-[var(--surface-subtle)] border-t border-[var(--border)] flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
-          <div className="flex items-center gap-3">
-            <span>&uarr;&darr; Navigate</span>
-            <span>&crarr; Select</span>
-            <span>ESC Close</span>
-          </div>
-          <span>Analyst's Notebook</span>
+        {/* Footer Info */}
+        <div className="px-4 py-2 border-t border-[var(--border)] bg-[var(--surface-subtle)] flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
+          <span>Navigate with &uarr; &darr;</span>
+          <span>Select with &crarr;</span>
         </div>
       </div>
     </div>

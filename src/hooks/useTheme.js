@@ -1,29 +1,23 @@
 import { useState, useEffect, useCallback } from "react";
-import { PALETTES, DEFAULT_PALETTE, ENABLE_3D, getPaletteTokens } from "@/config/theme.config";
+import { THEME_TOKENS, DEFAULT_THEME, ENABLE_3D, getThemeTokens } from "@/config/theme.config";
 
 export function useTheme() {
   // 1. Theme Mode (light / dark / system)
   const [theme, setThemeState] = useState(() => {
-    if (typeof window === "undefined") return "system";
-    return localStorage.getItem("portfolio-theme") || "system";
+    if (typeof window === "undefined") return DEFAULT_THEME;
+    return localStorage.getItem("portfolio-theme") || DEFAULT_THEME;
   });
 
   const [isDark, setIsDark] = useState(() => {
-    if (typeof window === "undefined") return true;
+    if (typeof window === "undefined") return false;
     const saved = localStorage.getItem("portfolio-theme");
     if (saved === "dark") return true;
     if (saved === "light") return false;
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    // Default to light as primary recruiter-friendly presentation
+    return false;
   });
 
-  // 2. Palette Family (navy / forest / graphite)
-  const [palette, setPaletteState] = useState(() => {
-    if (typeof window === "undefined") return DEFAULT_PALETTE;
-    const saved = localStorage.getItem("portfolio-palette");
-    return PALETTES[saved] ? saved : DEFAULT_PALETTE;
-  });
-
-  // 3. 3D WebGL Feature State
+  // 2. 3D WebGL Feature State
   const [is3DEnabled, setIs3DEnabledState] = useState(() => {
     if (!ENABLE_3D) return false;
     if (typeof window === "undefined") return true;
@@ -58,23 +52,29 @@ export function useTheme() {
 
   // Helper to parse hex to RGB comma-separated string
   const hexToRgb = (hex) => {
+    if (!hex) return "27, 44, 193";
     const c = hex.replace("#", "");
     const bigint = parseInt(c.length === 3 ? c.split("").map(x => x + x).join("") : c, 16);
     return `${(bigint >> 16) & 255}, ${(bigint >> 8) & 255}, ${bigint & 255}`;
   };
 
-  // Apply CSS Variables to Document Root whenever theme or palette changes
-  const applyVariables = useCallback((currentDark, currentPalette) => {
+  // Apply CSS Variables to Document Root
+  const applyVariables = useCallback((currentDark) => {
     if (typeof document === "undefined") return;
     const root = document.documentElement;
-    const tokens = getPaletteTokens(currentPalette, currentDark);
+    const tokens = getThemeTokens(currentDark);
 
-    // Surfaces & Borders
+    // Surfaces & Backgrounds
     root.style.setProperty("--bg", tokens.bg);
+    root.style.setProperty("--bg-secondary", tokens.bgSecondary);
     root.style.setProperty("--surface", tokens.surface);
     root.style.setProperty("--surface-elevated", tokens.surfaceElevated);
+    root.style.setProperty("--surface-warm", tokens.surfaceWarm);
     root.style.setProperty("--surface-subtle", tokens.surfaceSubtle);
+
+    // Hairline Borders (Flat, No Gradients)
     root.style.setProperty("--border", tokens.border);
+    root.style.setProperty("--border-subtle", tokens.borderSubtle);
     root.style.setProperty("--border-strong", tokens.borderStrong);
     root.style.setProperty("--border-accent", tokens.borderAccent);
 
@@ -83,34 +83,30 @@ export function useTheme() {
     root.style.setProperty("--text-secondary", tokens.textSecondary);
     root.style.setProperty("--text-muted", tokens.textMuted);
 
-    // Primary Accent
-    root.style.setProperty("--accent", tokens.accent);
-    root.style.setProperty("--accent-hover", tokens.accentHover);
-    root.style.setProperty("--accent-deep", tokens.accentDeep);
-    root.style.setProperty("--accent-contrast", tokens.accentContrast);
-    root.style.setProperty("--accent-rgb", hexToRgb(tokens.accent));
+    // Accents
+    root.style.setProperty("--primary-accent", tokens.primaryAccent);
+    root.style.setProperty("--secondary-accent", tokens.secondaryAccent);
+    root.style.setProperty("--accent", tokens.primaryAccent);
+    root.style.setProperty("--accent-rgb", hexToRgb(tokens.primaryAccent));
+    root.style.setProperty("--soft-highlight", tokens.softHighlight);
+    root.style.setProperty("--data-accent", tokens.dataAccent);
+    root.style.setProperty("--technical-accent", tokens.technicalAccent);
+    root.style.setProperty("--warm-highlight", tokens.warmHighlight);
 
     // Primary Button
     root.style.setProperty("--button-primary-bg", tokens.buttonPrimaryBg);
     root.style.setProperty("--button-primary-hover", tokens.buttonPrimaryHover);
     root.style.setProperty("--button-primary-text", tokens.buttonPrimaryText);
 
-    // Functional & Data Accents
-    root.style.setProperty("--data-accent", tokens.dataAccent);
-    root.style.setProperty("--positive", tokens.positive);
-    root.style.setProperty("--negative", tokens.negative);
-    root.style.setProperty("--highlight-amber", tokens.highlightAmber);
+    // Secondary Button
+    root.style.setProperty("--button-secondary-bg", tokens.buttonSecondaryBg);
+    root.style.setProperty("--button-secondary-hover", tokens.buttonSecondaryHover);
+    root.style.setProperty("--button-secondary-text", tokens.buttonSecondaryText);
+    root.style.setProperty("--button-secondary-border", tokens.buttonSecondaryBorder);
 
-    // 4 Ordered Tiers for Data-Viz
-    root.style.setProperty("--accent-tier1", tokens.tiers.tier1);
-    root.style.setProperty("--accent-tier2", tokens.tiers.tier2);
-    root.style.setProperty("--accent-tier3", tokens.tiers.tier3);
-    root.style.setProperty("--accent-tier4", tokens.tiers.tier4);
-
-    // Finish & Overlays
-    root.style.setProperty("--card-inner-highlight", tokens.cardInnerHighlight);
-    root.style.setProperty("--shadow-soft", tokens.shadowSoft);
-    root.style.setProperty("--portrait-overlay", tokens.portraitOverlay);
+    // Cards
+    root.style.setProperty("--card-border", tokens.cardBorder);
+    root.style.setProperty("--card-hover-border", tokens.cardHoverBorder);
 
     // Update Meta Theme Color
     const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -121,8 +117,8 @@ export function useTheme() {
 
   // Sync variables on state changes
   useEffect(() => {
-    applyVariables(isDark, palette);
-  }, [isDark, palette, applyVariables]);
+    applyVariables(isDark);
+  }, [isDark, applyVariables]);
 
   // Handle system preference changes
   useEffect(() => {
@@ -147,7 +143,9 @@ export function useTheme() {
       setIsDark(systemDark);
       if (systemDark) {
         document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
       } else {
+        document.documentElement.classList.add("light");
         document.documentElement.classList.remove("dark");
       }
     } else {
@@ -155,7 +153,9 @@ export function useTheme() {
       setIsDark(isDarkVal);
       if (isDarkVal) {
         document.documentElement.classList.add("dark");
+        document.documentElement.classList.remove("light");
       } else {
+        document.documentElement.classList.add("light");
         document.documentElement.classList.remove("dark");
       }
     }
@@ -165,13 +165,6 @@ export function useTheme() {
     const nextTheme = isDark ? "light" : "dark";
     setTheme(nextTheme);
   }, [isDark, setTheme]);
-
-  // Set Palette Family
-  const setPalette = useCallback((newPalette) => {
-    if (!PALETTES[newPalette]) return;
-    setPaletteState(newPalette);
-    localStorage.setItem("portfolio-palette", newPalette);
-  }, []);
 
   // 3D Toggle
   const toggle3D = useCallback((forceVal) => {
@@ -187,9 +180,7 @@ export function useTheme() {
     isDark,
     setTheme,
     toggleTheme,
-    palette,
-    setPalette,
-    palettes: PALETTES,
+    tokens: getThemeTokens(isDark),
     is3DEnabled,
     toggle3D,
     enable3DFlag: ENABLE_3D,

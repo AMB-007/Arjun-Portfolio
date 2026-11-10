@@ -1,27 +1,29 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { Capabilities } from "@/components/sections/Capabilities";
 import { Skills } from "@/components/sections/Skills";
 import { Projects } from "@/components/sections/Projects";
+import { LearningJourney } from "@/components/sections/LearningJourney";
 import { Experience } from "@/components/sections/Experience";
 import { Contact } from "@/components/sections/Contact";
 import { CommandMenu } from "@/components/ui/CommandMenu";
 import { SectionRail } from "@/components/ui/SectionRail";
-import { DataLatticePoster } from "@/components/3d/DataLatticePoster";
+import { GitBranchVisual } from "@/components/ui/GitBranchVisual";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useTheme } from "@/hooks/useTheme";
-
-// Lazy load Three.js 3D lattice chunk for optimal initial paint (< 110 kB gzipped main bundle)
-const HeroDataLattice = lazy(() => import("@/components/3d/HeroDataLattice"));
 
 const SECTION_IDS = [
   "hero",
   "about",
+  "capabilities",
   "skills",
   "projects",
-  "experience",
+  "learning",
+  "education",
   "contact",
 ];
 
@@ -31,8 +33,6 @@ export function App() {
     theme,
     isDark,
     toggleTheme,
-    palette,
-    setPalette,
     is3DEnabled,
     toggle3D,
     enable3DFlag,
@@ -53,40 +53,23 @@ export function App() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text-primary)] antialiased transition-colors selection:bg-[var(--accent)] selection:text-[var(--accent-contrast)] relative">
-      {/* Film Grain Texture Overlay (~3.5% opacity) */}
-      <div className="grain-overlay" aria-hidden="true" />
-
-      {/* 3D Volumetric Animated Layer or Static Fallback Poster */}
-      {enable3DFlag && is3DEnabled ? (
-        <Suspense fallback={<DataLatticePoster isDark={isDark} />}>
-          <HeroDataLattice
-            isDark={isDark}
-            palette={palette}
-            onPerformanceDrop={() => {
-              toggle3D(false);
-            }}
-          />
-        </Suspense>
-      ) : (
-        <DataLatticePoster isDark={isDark} />
-      )}
+    <div className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text-primary)] antialiased transition-colors selection:bg-[var(--primary-accent)] selection:text-[var(--accent-contrast)] relative">
+      {/* Subtle Background Telemetry & Git Branch Detail (low opacity, 2-5%) */}
+      <GitBranchVisual />
 
       {/* Skip to Main Content Link (Accessibility) */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[var(--accent)] text-[var(--accent-contrast)] rounded-md text-xs font-mono font-medium shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-50 px-4 py-2 bg-[var(--primary-accent)] text-[var(--accent-contrast)] rounded-md text-xs font-mono font-medium shadow-lg"
       >
         Skip to main content
       </a>
 
-      {/* Sticky Translucent Navbar with Compact Palette & Theme Switcher */}
+      {/* Minimal Professional Navigation */}
       <Navbar
         activeSection={activeSection}
         isDark={isDark}
         onToggleTheme={toggleTheme}
-        palette={palette}
-        onSetPalette={setPalette}
         onOpenCommandMenu={() => setCommandMenuOpen(true)}
       />
 
@@ -95,12 +78,20 @@ export function App() {
 
       {/* Main Content Sections */}
       <main id="main-content" tabIndex="-1" className="flex-1 outline-none relative z-10">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
+        <ErrorBoundary>
+          <Hero
+            isDark={isDark}
+            is3DEnabled={is3DEnabled}
+            onPerformanceDrop={() => toggle3D(false)}
+          />
+          <About />
+          <Capabilities />
+          <Skills />
+          <Projects />
+          <LearningJourney />
+          <Experience />
+          <Contact />
+        </ErrorBoundary>
       </main>
 
       {/* Minimal Editorial Footer */}
@@ -112,8 +103,6 @@ export function App() {
         onClose={() => setCommandMenuOpen(false)}
         isDark={isDark}
         onToggleTheme={toggleTheme}
-        palette={palette}
-        onSetPalette={setPalette}
         is3DEnabled={is3DEnabled}
         onToggle3D={toggle3D}
         enable3DFlag={enable3DFlag}
